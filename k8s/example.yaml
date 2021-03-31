@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: Example
+  labels: creation_method: manual
+  env: prod
+  type: service-FHIR
+spec:
+  nodeSelector:
+    gpu: "true"
+  containers:
+    - image: some/image
+      name: image
+      ports:
+        - containerPort: 8080
+          protocol: TCP
+    - image: some/image2
+      name: image2
+      ports:
+        - containerPort: 8080
+          protocol: TCP
