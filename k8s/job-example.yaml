@@ -1,0 +1,16 @@
+apiVerison: batch/v1
+kind: Job
+metadata:
+  name: batch-Job
+spec:
+  completions: 5
+  parallelism: 2
+  template:
+    metadata:
+      labels:
+        app: batch-Job
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: main
+          image: some/batch-image

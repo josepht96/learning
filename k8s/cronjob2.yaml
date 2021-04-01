@@ -1,0 +1,18 @@
+apiVerison: batch/v1beta1
+kind: CronJob
+metadata: 
+  name: batch-job-every-15-matchExpressions
+spec:
+  #minute, hour, day of month, month, day of week
+  schedule: "0 0, 12 * * 1, 2, 3, 4, 5"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: periodic-batch-job
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: main
+              image: some/batch-image
