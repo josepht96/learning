@@ -1,0 +1,17 @@
+apiVerison: extensions/v1beta1
+kind: ingress
+metadata:
+  name: kubia
+spec:
+  rules:
+    - host: kubia.example.com
+      http:
+        paths:
+          - path: /kubia
+            backend:
+              serviceName: kubia-nodeport
+              servicePort: 80
+          - path: /foo
+            backend:
+              serviceName: foo-nodeport
+              servicePort: 80
