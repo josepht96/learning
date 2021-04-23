@@ -1,8 +1,20 @@
 package controllers
 
-import "fmt"
+import (
+	"fmt"
+	"net/http"
+	"time"
+)
 
-func Hello(name string) (string, error) {
-	message := fmt.Sprintf("Hello, %v!", name)
-	return message, nil
+func middleWareHandler(handler http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("Before handler; middleware startup")
+		start := time.Now()
+		handler.ServeHTTP(w, r)
+		fmt.Printf("Middleware finished; %v\n", time.Since(start))
+	})
+}
+func RegisterControllers() {
+	http.Handle("/foo", middleWareHandler(NewFooController()))
+	http.Handle("/foo/", middleWareHandler(NewFooController()))
 }
