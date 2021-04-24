@@ -14,6 +14,12 @@ func GetFoo() (Foo, error) {
 
 //GetAltFoo return modified Foo instance
 func GetAltFoo(id int) (Foo, error) {
-	f := &Foo{Name: "Default foo object", ID: id}
+	f := &Foo{Name: "New ID", ID: id}
 	return *f, nil
+}
+
+//PostFoo handles Foo posts
+func PostFoo(f Foo) (Foo, error) {
+	f.Name = "Name modifed by PostFoo"
+	return f, nil
 }

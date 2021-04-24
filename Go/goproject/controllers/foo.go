@@ -62,6 +62,7 @@ func (f *fooHandler) postFoo(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
+	fi, err = models.PostFoo(fi)
 	data, _ := json.Marshal(fi)
 	w.Write([]byte(data))
 }
