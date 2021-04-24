@@ -50,6 +50,6 @@ func (f *fooHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 }
-func NewFooController() *fooHandler {
+func newFooController() *fooHandler {
 	return &fooHandler{Message: "hello world"}
 }
