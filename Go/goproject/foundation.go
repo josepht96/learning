@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/josepht96/learning/go/goproject/controllers"
+	"github.com/josepht96/learning/go/goproject/foundation/controllers"
 )
 
 func main() {

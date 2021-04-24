@@ -3,7 +3,7 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/josepht96/learning/go/goproject/middleware"
+	"github.com/josepht96/learning/go/goproject/foundation/middleware"
 )
 
 //RegisterControllers lists routes
