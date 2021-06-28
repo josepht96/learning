@@ -1,0 +1,5 @@
+az group create -n group-name -l eastus
+az appservice plan create --name plan-name --resource-group group-name \
+--sku s1 --is-linux
+
+az webapp create -g group-name -p plan-name -n app-name --runtime "asp.net runtime"
