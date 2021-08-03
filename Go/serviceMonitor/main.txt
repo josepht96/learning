@@ -1,0 +1,15 @@
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	t := true
+	for t == true {
+		ti := time.Now()
+		fmt.Printf("Time: %s\n", ti.Format("2006-01-02 15:04:05.000000000"))
+		time.Sleep(2 * time.Second)
+	}
+}

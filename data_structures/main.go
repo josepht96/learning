@@ -1,8 +1,8 @@
 package main
 
-//array
-//linked list
-//stack
+//array +
+//linked list +
+//stack +
 //queue
 //maps
 //graphs
@@ -12,5 +12,7 @@ package main
 //self balancing tree
 
 func main() {
-	linkListStart()
+	//linkList()
+	//doubleLinkList()
+	//stackStart()
 }
