@@ -43,6 +43,7 @@ func main() {
 			case s := <-cacheCh:
 				fmt.Println("from cache")
 				fmt.Println(s)
+				//empty the db queue
 				<-dbCh
 			case s := <-dbCh:
 				fmt.Println("from database")
