@@ -1,4 +1,4 @@
-package log
+package logger
 
 import (
 	"fmt"
@@ -37,12 +37,12 @@ func RegisterHandlers() {
 			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
+		w.WriteHeader(http.StatusOK)
 		write(string(msg))
 	})
 }
 
 func write(message string) {
-	fmt.Println("in write")
 	fmt.Printf("%v\n", message)
 	log.Printf("%v\n", message)
 }

@@ -5,25 +5,24 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/josepht96/learning/go/serviceMonitor/logger"
+	"github.com/josepht96/learning/go/serviceMonitor/generator"
 	"github.com/josepht96/learning/go/serviceMonitor/registry"
 	"github.com/josepht96/learning/go/serviceMonitor/service"
 )
 
 func main() {
-	logger.Run("./cmd/logs/serviceMonitor.log")
-
-	host, port := "localhost", "4000"
+	host, port := "localhost", "4040"
 	serviceAddress := fmt.Sprintf("https://%v:%v", host, port)
 
 	//Create registry object
 	var reg registry.Registration
-	reg.ServiceName = registry.LogService
+	reg.ServiceName = registry.GeneratorService
 	reg.ServiceURL = serviceAddress
 	reg.Host = host
 	reg.Port = port
 
-	ctx, err := service.Start(context.Background(), reg, logger.RegisterHandlers)
+	//Start service server
+	ctx, err := service.Start(context.Background(), reg, generator.Test)
 	if err != nil {
 		log.Fatal(err)
 	}

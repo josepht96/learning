@@ -10,11 +10,11 @@ import (
 )
 
 //Start func
-func Start(ctx context.Context, reg registry.Registration, host, port string,
+func Start(ctx context.Context, reg registry.Registration,
 	registerHandlers func()) (context.Context, error) {
 	fmt.Println("in Start")
 	registerHandlers()
-	ctx = startService(ctx, reg.ServiceName, host, port)
+	ctx = startService(ctx, reg)
 	err := registry.RegisterService(reg)
 	if err != nil {
 		return ctx, err
@@ -22,24 +22,22 @@ func Start(ctx context.Context, reg registry.Registration, host, port string,
 	return ctx, nil
 }
 
-func startService(ctx context.Context, serviceName registry.ServiceName,
-	host, port string) context.Context {
+func startService(ctx context.Context, reg registry.Registration) context.Context {
 	fmt.Println("in startService")
 	ctx, cancel := context.WithCancel(ctx)
 
 	var server http.Server
-	server.Addr = ":" + port
-
+	server.Addr = fmt.Sprintf("%v:%v", reg.Host, reg.Port)
 	go func() {
 		log.Println(server.ListenAndServe())
 		cancel()
 	}()
 
 	go func() {
-		fmt.Printf("%v started. Press key to stop. \n", serviceName)
+		fmt.Printf("%v started. Press key to stop. \n", reg.ServiceURL)
 		var s string
 		fmt.Scanln(&s)
-		err := registry.ShutDownService(fmt.Sprintf("http://%v:%v", host, port))
+		err := registry.ShutDownService(fmt.Sprintf("%v", reg.ServiceURL))
 		if err != nil {
 
 		}

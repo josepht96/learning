@@ -1,5 +1,7 @@
 package registry
 
+//Sends registration to registry server
+
 import (
 	"bytes"
 	"encoding/json"

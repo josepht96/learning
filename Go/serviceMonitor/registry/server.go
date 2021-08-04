@@ -9,7 +9,10 @@ import (
 	"sync"
 )
 
+//ServerPort const
 const ServerPort = ":3000"
+
+//ServicesURL const
 const ServicesURL = "http://localhost" + ServerPort + "/services"
 
 type registry struct {
@@ -40,6 +43,7 @@ var r = registry{registrations: make([]Registration, 0),
 	mutex: new(sync.Mutex),
 }
 
+//RegistryService struct
 type RegistryService struct{}
 
 func (s RegistryService) ServeHTTP(w http.ResponseWriter, req *http.Request) {
@@ -49,6 +53,7 @@ func (s RegistryService) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 		dec := json.NewDecoder(req.Body)
 		var reg Registration
 		err := dec.Decode(&reg)
+		fmt.Printf("Incoming request values: %v\n", reg)
 		if err != nil {
 			log.Println(err)
 			w.WriteHeader(http.StatusBadRequest)

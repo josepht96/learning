@@ -13,7 +13,7 @@ func main() {
 	http.Handle("/services", &registry.RegistryService{})
 	ctx, cancel := context.WithCancel(context.Background())
 	var server http.Server
-	server.Addr = registry.ServerPort
+	server.Addr = fmt.Sprintf("localhost%v", registry.ServerPort)
 
 	go func() {
 		log.Println(server.ListenAndServe())
