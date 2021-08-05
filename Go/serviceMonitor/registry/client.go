@@ -18,7 +18,7 @@ func RegisterService(reg Registration) error {
 	if err != nil {
 		return err
 	}
-	res, err := http.Post(ServicesURL, "application/json", buffer)
+	res, err := http.Post(ExposeURL, "application/json", buffer)
 	if err != nil {
 		return err
 	}

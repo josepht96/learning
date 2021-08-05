@@ -16,17 +16,25 @@ func main() {
 	server.Addr = fmt.Sprintf("localhost%v", registry.ServerPort)
 
 	go func() {
+		fmt.Println("Starting registry service...")
 		log.Println(server.ListenAndServe())
 		cancel()
 	}()
 
-	go func() {
-		fmt.Printf("Registry service started. Press key to stop...\n")
-		var s string
-		fmt.Scanln(&s)
-		server.Shutdown(ctx)
-		cancel()
-	}()
+	// go func() {
+	// 	fmt.Printf("Registry service started. Press key to stop...\n")
+	// 	runnning := true
+	// 	for runnning == true {
+	// 		var s string
+	// 		fmt.Scanln(&s)
+	// 		if s != "" {
+	// 			server.Shutdown(ctx)
+	// 			cancel()
+	// 			runnning = false
+	// 		}
+	// 	}
+
+	// }()
 	<-ctx.Done()
 	fmt.Println("Shutting down the registry service...")
 

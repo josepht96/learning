@@ -15,6 +15,9 @@ const ServerPort = ":3000"
 //ServicesURL const
 const ServicesURL = "http://localhost" + ServerPort + "/services"
 
+//ExposeURL const
+const ExposeURL = "http://localhost:3000/services"
+
 type registry struct {
 	registrations []Registration
 	mutex         *sync.Mutex

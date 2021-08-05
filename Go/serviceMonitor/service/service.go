@@ -33,16 +33,17 @@ func startService(ctx context.Context, reg registry.Registration) context.Contex
 		cancel()
 	}()
 
-	go func() {
-		fmt.Printf("%v started. Press key to stop. \n", reg.ServiceURL)
-		var s string
-		fmt.Scanln(&s)
-		err := registry.ShutDownService(fmt.Sprintf("%v", reg.ServiceURL))
-		if err != nil {
+	// go func() {
+	// 	fmt.Printf("%v started. Press key to stop. \n", reg.ServiceURL)
+	// 	var s string
+	// 	fmt.Scanln(&s)
+	// 	println(s)
+	// 	err := registry.ShutDownService(fmt.Sprintf("%v", reg.ServiceURL))
+	// 	if err != nil {
 
-		}
-		server.Shutdown(ctx)
-		cancel()
-	}()
+	// 	}
+	// 	server.Shutdown(ctx)
+	// 	cancel()
+	// }()
 	return ctx
 }

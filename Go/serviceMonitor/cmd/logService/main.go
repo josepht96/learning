@@ -14,7 +14,7 @@ func main() {
 	logger.Run("./cmd/logs/serviceMonitor.log")
 
 	host, port := "localhost", "4000"
-	serviceAddress := fmt.Sprintf("https://%v:%v", host, port)
+	serviceAddress := fmt.Sprintf("http://%v:%v", host, port)
 
 	//Create registry object
 	var reg registry.Registration
