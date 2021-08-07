@@ -12,7 +12,7 @@ import (
 //Start func
 func Start(ctx context.Context, reg registry.Registration,
 	registerHandlers func()) (context.Context, error) {
-	fmt.Println("in Start")
+	fmt.Println("in Start!")
 	registerHandlers()
 	ctx = startService(ctx, reg)
 	err := registry.RegisterService(reg)
@@ -27,7 +27,7 @@ func startService(ctx context.Context, reg registry.Registration) context.Contex
 	ctx, cancel := context.WithCancel(ctx)
 
 	var server http.Server
-	server.Addr = fmt.Sprintf("%v:%v", reg.Host, reg.Port)
+	server.Addr = fmt.Sprintf(":%v", reg.Port)
 	go func() {
 		log.Println(server.ListenAndServe())
 		cancel()

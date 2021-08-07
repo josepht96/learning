@@ -13,3 +13,8 @@ func main() {
 		time.Sleep(2 * time.Second)
 	}
 }
+
+
+useful docker commands:
+sudo docker rm $(sudo docker ps --filter status=created -q)
+sudo docker rmi $(sudo docker image ls --filter "dangling=true")

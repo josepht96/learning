@@ -16,7 +16,7 @@ const ServerPort = ":3000"
 const ServicesURL = "http://localhost" + ServerPort + "/services"
 
 //ExposeURL const
-const ExposeURL = "http://localhost:3000/services"
+const ExposeURL = "http://172.17.0.1:8081/services"
 
 type registry struct {
 	registrations []Registration
@@ -39,7 +39,7 @@ func (r *registry) remove(url string) error {
 			return nil
 		}
 	}
-	return fmt.Errorf("Service at URL %v not found", url)
+	return fmt.Errorf("service at URL %v not found", url)
 }
 
 var r = registry{registrations: make([]Registration, 0),
@@ -52,6 +52,14 @@ type RegistryService struct{}
 func (s RegistryService) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	log.Println("Request received")
 	switch req.Method {
+
+	case http.MethodGet:
+		fmt.Println("Incoming Get request...")
+		_, err := w.Write([]byte("Request service"))
+		if err != nil {
+			log.Println(err)
+		}
+
 	case http.MethodPost:
 		dec := json.NewDecoder(req.Body)
 		var reg Registration
@@ -70,6 +78,7 @@ func (s RegistryService) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
+
 	case http.MethodDelete:
 		payload, err := ioutil.ReadAll(req.Body)
 		if err != nil {

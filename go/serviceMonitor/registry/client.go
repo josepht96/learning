@@ -20,11 +20,12 @@ func RegisterService(reg Registration) error {
 	}
 	res, err := http.Post(ExposeURL, "application/json", buffer)
 	if err != nil {
+		fmt.Printf("Error reaching: %v\n", ExposeURL)
 		return err
 	}
 
 	if res.StatusCode != http.StatusOK {
-		return fmt.Errorf("Failed to register service: %v", res.StatusCode)
+		return fmt.Errorf("failed to register service: %v", res.StatusCode)
 	}
 	return nil
 }
@@ -39,7 +40,7 @@ func ShutDownService(ServiceURL string) error {
 	req.Header.Add("Content-Type", "text/plain")
 	res, err := http.DefaultClient.Do(req)
 	if res.StatusCode != http.StatusOK {
-		return fmt.Errorf("Failed to deregister service: %v", res.StatusCode)
+		return fmt.Errorf("failed to deregister service: %v", res.StatusCode)
 	}
 	return err
 }
