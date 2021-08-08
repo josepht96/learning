@@ -16,7 +16,7 @@ const ServerPort = ":3000"
 const ServicesURL = "http://localhost" + ServerPort + "/services"
 
 //ExposeURL const
-const ExposeURL = "http://172.17.0.1:8081/services"
+const ExposeURL = "http://localhost:3000/services"
 
 type registry struct {
 	registrations []Registration

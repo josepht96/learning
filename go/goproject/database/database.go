@@ -1,6 +1,9 @@
 package database
 
-import "fmt"
+import (
+	"database/sql"
+	"fmt"
+)
 
 //DBConnection is db connection
 var DBConnection *sql.DB
