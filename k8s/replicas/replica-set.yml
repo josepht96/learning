@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myapp-replicaset
+  labels:
+    app: myapp
+    type: backend
+spec:
+  replicas: 4
+  selector: 
+  #needs to match at least one tag in template
+    matchLabels:
+      env: test
+  template:
+    metadata:
+      name: myapp-pod
+      labels:
+        env: test
+        type: pod
+    spec:
+      containers: 
+        - name: nginx
+          image: nginx
+
+  

@@ -19,7 +19,8 @@ func RegisterControllers() {
 	http.HandleFunc("/endpoint", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodGet:
-			w.Write([]byte("test endpoint reached\n"))
+			http.ServeFile(w, r, "../../media/moraine.jpg")
+			//w.Write([]byte("test endpoint reached\n"))
 		default:
 			w.WriteHeader(http.StatusNotImplemented)
 		}

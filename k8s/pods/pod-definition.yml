@@ -1,0 +1,25 @@
+#contained in all defs (required)
+#version of the k8s api to create the object
+#Pod: v1
+#Service: v1
+#ReplicaSet: apps/v1
+#Deployment: apps/v1
+apiVersion: v1
+#type of object we are trying to create -
+#Pod, Service, ReplicaSet, Deployment
+kind: Pod
+#dictionary
+#parent prop
+metadata:
+  #child prop
+  name: myapp-pod
+  #^ v sibling props
+  labels:
+    #child prop
+    app: myapp
+    type: front-end
+#depends on object, provides additional info pertaining to the object at hand
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx
