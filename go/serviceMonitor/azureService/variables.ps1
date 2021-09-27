@@ -1,0 +1,4 @@
+$env:AZURE_SUBSCRIPTION_ID = "eb9d0adb-298a-47ce-b4ec-67aa35eeed85"
+$env:AZURE_TENANT_ID = "ab8614a3-38fa-4410-81cc-2cff09afdee1"
+$env:AZURE_CLIENT_ID = "78516ede-4430-473c-9880-a784febb6e40"
+$env:AZURE_CLIENT_SECRET = "T75Vh2gQM~~5gjLiKVyQG7oFq7WrmszblE"

@@ -1,0 +1,7 @@
+POST https://apim-poh-bdservices-uat-qa.azure-api.net/user-preference/api/VisitList/v1/GetPinVisit HTTP/1.1
+Host: apim-poh-bdservices-uat-qa.azure-api.net
+Content-Type: application/json
+Ocp-Apim-Subscription-Key: ••••••••••••••••••••••••••••••••
+Ocp-Apim-Trace: true
+
+{"providerGuid":0,"ids":[0],"listName":"string"}
