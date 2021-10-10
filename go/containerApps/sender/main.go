@@ -10,10 +10,10 @@ import (
 
 func main() {
 	registerControllers()
-	fmt.Println("Listening at: http://localhost:80/")
+	fmt.Println("Listening at: http://localhost:4040/")
 	ctx, cancel := context.WithCancel(context.Background())
 	go func() {
-		err := http.ListenAndServe(":80", nil)
+		err := http.ListenAndServe(":4040", nil)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -36,7 +36,7 @@ func registerControllers() {
 }
 func getTime(w http.ResponseWriter, r *http.Request) {
 	t := time.Now().Format("2006-01-02 15:04:05.000000000")
-	tString := fmt.Sprintf("%s", t)
+	tString := fmt.Sprintf("container a: %s\n", t)
 	fmt.Printf("Sending response at: %s\n", tString)
 	w.Write([]byte(tString))
 }
