@@ -7,4 +7,4 @@ INSERT INTO public.users(
 
 $$;
 
-CALL insert_user(1, 'joe');
+CALL insert_user(3, 'jake');
