@@ -10,10 +10,10 @@ import (
 
 func main() {
 	registerControllers()
-	fmt.Println("Listening at: http://localhost:4040/")
+	fmt.Println("Listening on port :80/")
 	ctx, cancel := context.WithCancel(context.Background())
 	go func() {
-		err := http.ListenAndServe(":4040", nil)
+		err := http.ListenAndServe(":80", nil)
 		if err != nil {
 			log.Fatal(err)
 		}

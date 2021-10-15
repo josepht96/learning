@@ -11,7 +11,7 @@ func main() {
 	i := 0
 	for i < 1 {
 		time.Sleep(2 * time.Second)
-		resp, err := http.Get("http://52.224.82.108/")
+		resp, err := http.Get("http://sender-service:80/")
 		if err != nil {
 			fmt.Printf("There was an error: %v\n", err)
 			continue

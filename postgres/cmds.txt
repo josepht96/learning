@@ -1,0 +1,7 @@
+login to account:
+    psql -d postgres -U joe 
+
+psql -U joe -d postgres -f ./simple_table.sql 
+\dt
+\d
+\c database_name
