@@ -102,3 +102,15 @@ kubectl get pods -n kube-system
 
 # Networking
 Devices hace NIC (each has a unique MAC address) which communicate over a switch. A router connects two or more networks together (internet to local network in most cases). Router is just a device on the network. 0.0.0.0 in route table means the device doesnt require a gateway to access, ie its on the same network as the current device. 
+
+# Authentication
+The various services need their own tls/ssl configuration/certificates. 
+>Create CA cert
+1. create a private key `openssl genrsa -out ca.key 2048`
+2. create request `openssl req -new -key ca.key -subj "/CN=KUBERNETES-CA" -out ca.csr`
+3. sign certs `openssl x509 -req -in ca.csr -signkey ca.key -out ca.crt`
+>Create admin cert, sign with CA cert
+1. create a private key `openssl genrsa -out admin.key 2048`
+2. create request `openssl req -new -key admin.key -subj "/CN=kube-admin" -out admin.csr`
+3. 3. sign certs `openssl x509 -req -in admin.csr -CAkey ca.key -out admin.crt`
+Notice the difference in step 3
