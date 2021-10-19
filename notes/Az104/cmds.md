@@ -1,4 +1,4 @@
-#Creating new user
+# Creating new user
 Install-Module -Name AzureAD
 Connect-AzureAD
 
@@ -16,7 +16,7 @@ az ad user create --display-name "name" \
     --output table
 
 
-#Adding member to group
+# Adding member to group
 Install-Module -Name AzureAD
 Connect-AzureAD
 
@@ -30,7 +30,7 @@ az ad group member check --group Sales --member-id ""
 az ad 
 az ad group member add -group Sales --member-id ""
 
-#Adding VM login
+# Adding VM login
 az vm extension set \
  --publisher Microsoft.Azure.ActiveDirectory
  --name AADLoginForWindows \
@@ -38,7 +38,7 @@ az vm extension set \
  --vm-name ""
 
 
-#Bulk update users
+# Bulk update users
 Import-Module AzureAD
 Connect-AzureAD 
 
@@ -51,12 +51,12 @@ foreach ($u in $users)
     Set-AzureADUser -ObjectId $u.Mail -Department "<New Value to update here>"
 }
 
-#Assigning a role
+# Assigning a role
 New-AzRoleAssignment -SignInName "email" `
     -RoleDefinitionName "Reader"
     -ResourceGroupName "test"
 
-#Create new role
+# Create new role
 $role = Get-AzRoleDefinition "VM contributor"
 $role.id = $null
 $role.Name = "VM Reader"
