@@ -63,3 +63,11 @@ $role.Name = "VM Reader"
 $role.Actions.Add("Microsoft.Compute/*/read")
 $role.AssignableScopes.Add("sub/sdasd")
 New-AzRoleDefinition -Role $role
+
+# Set tag on resource group and sub resources
+Get-AzResource -ResourceGroupName "" | Set-AzResource Tag @{"" = ""}
+
+# Azure policy creation
+$rg = Get-AzResourceGroup -Name ""
+$definition = Get-AzPolicyDefinition | Where-Object { $_.Properties.DisplayName -eq ''}
+New-AzPolicyAssignment -Name "" -DisplayName "" -Scope $rg.ResourceId -PolicyDefinition $definition
