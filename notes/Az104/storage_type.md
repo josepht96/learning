@@ -37,7 +37,6 @@ Azure Table storage is now part of Azure Cosmos DB. In addition to the existing 
 > Storage for Virtual Machines. Virtual machine storage includes disks and files. Disks are persistent block storage for Azure IaaS virtual machines. Files are fully managed file shares in the cloud.
 > Unstructured Data. Unstructured data includes Blobs and Data Lake Store. Blobs are highly scalable, REST-based cloud object store. Data Lake Store is Hadoop Distributed File System (HDFS) as a service.
 > Structured Data. Structured data includes Tables, Cosmos DB, and Azure SQL DB. Tables are a key/value, autoscaling NoSQL store. Cosmos DB is a globally distributed database service. Azure SQL DB is a fully managed database-as-a-service built on SQL.
-
 # General purpose storage accounts have two tiers: Standard and Premium.
 Standard storage accounts are backed by magnetic drives (HDD) and provide the lowest cost per GB. Use Standard storage for applications that require bulk storage or where data is infrequently accessed.
 Premium storage accounts are backed by solid-state drives (SSD) and offer consistent low-latency performance. Use Premium storage for Azure virtual machine disks with I/O-intensive applications, like databases.
@@ -71,7 +70,6 @@ Block blob object replication copies:
 •	Blob metadata
 # Read-Access Geo-Zone-Redundant (RA-GZRS)
 Similar setup as above, except with additional resilience of having data replicate in distinct zones in the primary region. 
-
 # Security
 Azure Storage provides a comprehensive set of security capabilities that together enable developers to build secure applications.
 •	Encryption. All data written to Azure Storage is automatically encrypted using Storage Service Encryption (SSE).
@@ -97,16 +95,51 @@ Optionally, you can also:
 Azure Active Directory (Azure AD). Azure AD is Microsoft's cloud-based identity and access management service. With Azure AD, you can assign fine-grained access to users, groups, or applications via role-based access control (RBAC).
 # Anonymous access
 Anonymous access to containers and blobs. You can optionally make blob resources public at the container or blob level. A public container or blob is accessible to any user for anonymous read access. Read requests to public containers and blobs do not require authorization.
-
 # Roles
 Owner: can do everything
 Contributor: add things, work with things
 Reader: see whats inside
 Delegator: can delegate a storage account for something?
-
 # virtual network
 layered security
-Limit access by ip addresses, ip ranges, subnets.
+Limit access by ip addresses, ip ranges, subnets
+# Azure files
+Cloud based SMB or NFS file share. Accessible from W, Linux, Mac OS
+Clients use 445. Need to know requirements: performance, sizing, redundancy. GPV2 and FileStorage are best options generally. Main difference is performance and FileStorage not having Geo-redundancy
+Both go up to 100tb
+GPV2: lower performance, more resilience with LRS, GRS, ZRS, and GZRS options
+FileStorage (file share): higher performance, less resilient with LRS and ZRS options
+Can add soft delete features to recover deleted files. 
+# Tiers
+Tier of a storage account can be changed after creation. 
+Hot tier: Optimized for frequent file sharing and access. Cost of storage is higher but cost of access is lower.
+Cold tier: Optimal for infrequent access, cost of storage is low, cost of access is high
+Transcation optimized: High storage cost, lowest cost per access. Good for backend storage for applications (consistent throughput)
+
+# Azure file sync
+Allows users to sync azure file share with on-prem servers. Replication occurs between onprem datacenters and azure. Administrators can use with existing fileshare infrastructure.
+>Cloud endpoint: Azure file share thats being synced 
+>Server endpoint: windows server and its local file system path that syncs with azure file share
+>Sync group: defines relationship between cloud endpoint and server endpoint. Can only have 1 cloud endpoint per sync group, but multiple server endpoints.
+Steps:
+    1. Deploy the Storage Sync Service
+    2. Create a sync group and cloud endpoint
+    3. Install the Azure File Sync agent on Windows Servers
+    4. Register Windows Serv with the Storage Sync Service
+    5. Create server endpoint and wait for sync
+
+Azure File Sync agent. The Azure File Sync agent is a downloadable package that enables Windows Server to be synced with an Azure file share. The Azure File Sync agent has three main components:
+FileSyncSvc.exe: The background Windows service that is responsible for monitoring changes on server endpoints, and for initiating sync sessions to Azure.
+StorageSync.sys: The Azure File Sync file system filter, which is responsible for tiering files to Azure Files (when cloud tiering is enabled).
+PowerShell management cmdlets: PowerShell cmdlets that you use to interact with the Microsoft.StorageSync Azure resource provider. You can find these at the following (default) locations:
+C:\Program Files\Azure\StorageSyncAgent\StorageSync.Management.PowerShell.Cmdlets.dll
+C:\Program Files\Azure\StorageSyncAgent\StorageSync.Management.ServerCmdlets.dll
+Server endpoint. A server endpoint represents a specific location on a registered server, such as a folder on a server volume. Multiple server endpoints can exist on the same volume if their namespaces do not overlap (for example, F:\sync1 and F:\sync2). You can configure cloud tiering policies individually for each server endpoint. You can create a server endpoint via a mountpoint. Note, mountpoints within the server endpoint are skipped. You can create a server endpoint on the system volume but, there are two limitations if you do so:
+Cloud tiering cannot be enabled.
+Rapid namespace restore (where the system quickly brings down the entire namespace and then starts to recall content) is not performed.
+Cloud endpoint. A cloud endpoint is an Azure file share that is part of a sync group. The entire Azure file share syncs, and an Azure file share can be a member of only one cloud endpoint. Therefore, an Azure file share can be a member of only one sync group. If you add an Azure file share that has an existing set of files as a cloud endpoint to a sync group, the existing files are merged with any other files that are already on other endpoints in the sync group.
+
+# Azure blob storage
 Objects in Blob storage can be accessed from anywhere in the world via HTTP or HTTPS. Users or client applications can access blobs via URLs, the Azure Storage REST API, Azure PowerShell, Azure CLI, or an Azure Storage client library. The storage client libraries are available for multiple languages, including .NET, Java, Node.js, Python, PHP, and Ruby.
 Azure files
 Azure Files enables you to set up highly available network file shares that can be accessed by using the standard Server Message Block (SMB) protocol. That means that multiple VMs can share the same files with both read and write access. You can also read the files using the REST interface or the storage client libraries.
@@ -121,27 +154,4 @@ The Azure Queue service is used to store and retrieve messages. Queue messages c
 For example, if you want your customers to be able to upload pictures, and you want to create thumbnails for each picture. You could have your customer wait for you to create the thumbnails while uploading the pictures. An alternative would be to use a queue. When the customer finishes the upload, write a message to the queue. Then have an Azure Function retrieve the message from the queue and create the thumbnails. Each of the processing parts can be scaled separately, giving you more control when tuning it for your usage.
 Table storage
 Azure Table storage is now part of Azure Cosmos DB. In addition to the existing Azure Table storage service, there is a new Azure Cosmos DB Table API offering that provides throughput-optimized tables, global distribution, and automatic secondary indexes. Table storage is ideal for storing structured, non-relational data.
- 
 
-Storage Sync Service. The Storage Sync Service is the top-level Azure resource for Azure File Sync. The Storage Sync Service resource is a peer of the storage account resource, and can similarly be deployed to Azure resource groups. A distinct top-level resource from the storage account resource is required because the Storage Sync Service can create sync relationships with multiple storage accounts via multiple sync groups. A subscription can have multiple Storage Sync Service resources deployed.
-Sync group. A sync group defines the sync topology for a set of files. Endpoints within a sync group are kept in sync with each other. If for example, you have two distinct sets of files that you want to manage with Azure File Sync, you would create two sync groups and add different endpoints to each sync group. A Storage Sync Service can host as many sync groups as you need.
-Registered server. The registered server object represents a trust relationship between your server (or cluster) and the Storage Sync Service. You can register as many servers to a Storage Sync Service instance as you want. However, a server (or cluster) can be registered with only one Storage Sync Service at a time.
-Azure File Sync agent. The Azure File Sync agent is a downloadable package that enables Windows Server to be synced with an Azure file share. The Azure File Sync agent has three main components:
-•	FileSyncSvc.exe: The background Windows service that is responsible for monitoring changes on server endpoints, and for initiating sync sessions to Azure.
-•	StorageSync.sys: The Azure File Sync file system filter, which is responsible for tiering files to Azure Files (when cloud tiering is enabled).
-•	PowerShell management cmdlets: PowerShell cmdlets that you use to interact with the Microsoft.StorageSync Azure resource provider. You can find these at the following (default) locations:
-•	C:\Program Files\Azure\StorageSyncAgent\StorageSync.Management.PowerShell.Cmdlets.dll
-•	C:\Program Files\Azure\StorageSyncAgent\StorageSync.Management.ServerCmdlets.dll
-Server endpoint. A server endpoint represents a specific location on a registered server, such as a folder on a server volume. Multiple server endpoints can exist on the same volume if their namespaces do not overlap (for example, F:\sync1 and F:\sync2). You can configure cloud tiering policies individually for each server endpoint. You can create a server endpoint via a mountpoint. Note, mountpoints within the server endpoint are skipped. You can create a server endpoint on the system volume but, there are two limitations if you do so:
-•	Cloud tiering cannot be enabled.
-•	Rapid namespace restore (where the system quickly brings down the entire namespace and then starts to recall content) is not performed.
-Cloud endpoint. A cloud endpoint is an Azure file share that is part of a sync group. The entire Azure file share syncs, and an Azure file share can be a member of only one cloud endpoint. Therefore, an Azure file share can be a member of only one sync group. If you add an Azure file share that has an existing set of files as a cloud endpoint to a sync group, the existing files are merged with any other files that are already on other endpoints in the sync group.
-
-
-
-File Shares
-Cloud based SMB or NFS file share. Accessible from W, Linux, Mac OS
-Clients use 445. Need to know requirements: performance, sizing, redundancy. GPV2 and FileStorage are best options generally. Main difference is performance and FileStorage not having Geo-redundancy
-
-Azure file sync – sync files between azure and on-prem servers
-Sync group - 

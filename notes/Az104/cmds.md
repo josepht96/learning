@@ -71,3 +71,11 @@ Get-AzResource -ResourceGroupName "" | Set-AzResource Tag @{"" = ""}
 $rg = Get-AzResourceGroup -Name ""
 $definition = Get-AzPolicyDefinition | Where-Object { $_.Properties.DisplayName -eq ''}
 New-AzPolicyAssignment -Name "" -DisplayName "" -Scope $rg.ResourceId -PolicyDefinition $definition
+
+# File upload
+az storage file upload \ 
+    --account-name ""
+    --account-key ""
+    --share-name ""
+    --source "./test.jpg"
+    --path "testDest/test.jpg"
