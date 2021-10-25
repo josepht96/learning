@@ -155,3 +155,27 @@ For example, if you want your customers to be able to upload pictures, and you w
 Table storage
 Azure Table storage is now part of Azure Cosmos DB. In addition to the existing Azure Table storage service, there is a new Azure Cosmos DB Table API offering that provides throughput-optimized tables, global distribution, and automatic secondary indexes. Table storage is ideal for storing structured, non-relational data.
 
+# key things
+Create and configure Azure file shares
+Understand how file sync is deployed
+implement and configure azure blobs
+tiering options for Azure blobs, migrating
+Lifecycle managment
+why and how to implement blob replication
+get some hands on experience
+
+# Import & Export service
+Moving large amounts of data in and out of Azure blob storage.
+1. send data over the wire - good for small amounts of data. Large amounts of data can take a long time and be costly. 
+2. Ship data to datacenter (tbs of data)
+Azure import/export service, WAImpoirtExportTool, drives
+Prep drives with WAImportExportTool and Bitlocker
+Create import job in Azure portal
+Ship drives to azure datacenter
+# Managing data with Azure storage
+
+# AzCopy
+azcopy copy 'C:\data' 'https://someazureendpoint.net/2321' --recursive
+Blob storage access: SAS or AAD
+FileStorage: SAS only
+azcopy list uri/sastoken

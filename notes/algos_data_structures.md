@@ -193,3 +193,9 @@ Breadth-first search:
 Find all vertices that are reachable from a node, in O(V+E) time
 Look at nodes reachable in zero moves (root), then 1, then 2, etc…
 Careful to avoid duplicates, edges that point to the same vertices.
+
+
+# Lecture 23 - Computational Time
+P = {problems that can be solved in polynomial time}
+EXP = {problems that can be solved in exponential time, 2^n^c}
+R = {problems that can be solved in infinte time}
