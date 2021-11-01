@@ -26,6 +26,7 @@ minikube -
 	
 kubectl -
 	get pods
+	get pods -n kube-system
 	get deployments
 run nginx --image nginx (name can be anything, image needs to be existing image
 hosted somewhere)
