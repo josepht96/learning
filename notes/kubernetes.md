@@ -85,6 +85,34 @@ Every node has a kubelet - agent that listens for instructions for kube-apiserve
 periodically communicates with KAS for status updates
 Nodes also have kube-proxy service. Necessary rules on the nodes for the containers to communicate with each other if needed. 
 
+# Docker Networking
+>None
+Container cannot connect to the outside world. 
+>Host network
+Container is attached to the host network (port 80 on container maps to container 80 on host)
+>Bridge (docker0)
+Internal private network (default). All devices on the bridge network get their own IP
+ip addr: 4: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default 
+    link/ether 02:42:a4:41:07:e7 brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+       valid_lft forever preferred_lft forever
+Docker forwards traffic to a specifc container by:
+	ip tables -t nat -A PREROUTING -j DNAT --dport 8080 --to-destination 80
+# CNI (Container networking interface)
+Set of standards that defines how programs should be developed to solve networking problems. 
+Bridge is a plugin for CNI. 
+	Create network namespace for each container
+	Identify the network the container is attached to
+	Container runtime invokes Network Plugin when container is ADDed
+	Container runtime invokes Network Plugin when container is DELeted
+	JSON format for the network configuration
+
+	Must support ADD/DEL/CHECK cmds
+	Support params to containers
+	Manage IP addresses
+	Return results in specific format
+Docker does not inherently use CNI, but K8s can add Docker containers to a CNI network. 
+
 # ETCD
 Distributed key value store. Most dbs are tabular format, ETCD has to have unique key values that map to a value. Stores info about the cluster concerning any aspect of the cluster. add new nodes will trigger an update in ETCD server. Only once its updated in ETCD is the change complete. 
 
