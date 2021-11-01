@@ -142,3 +142,5 @@ The various services need their own tls/ssl configuration/certificates.
 2. create request `openssl req -new -key admin.key -subj "/CN=kube-admin" -out admin.csr`
 3. 3. sign certs `openssl x509 -req -in admin.csr -CAkey ca.key -out admin.crt`
 Notice the difference in step 3
+
+test
