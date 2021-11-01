@@ -14,10 +14,9 @@
 ------------------
 [SomeLink](https://google.com)
 ![alttext](./image.jpg)
-```
+```json
 {
-    "hello": "world"
+   "hello": "world"
 }
-
 ```
 ~~hello world~~ ~~
