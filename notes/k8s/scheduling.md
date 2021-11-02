@@ -39,3 +39,39 @@ Only used for restrictions, not for designation. Use node affinity if you want t
       value: blue
       effect: NoSchedule
 ```
+# Node selector
+set selector on resource file that matches a label on a node
+requiredDuringSchedulingIgnoreDuringExecution
+preferredDuringSchedulingIgnoreDuringExecution
+and 
+requiredDuringSchedulingRequiredDuringExecution
+preferredDuringSchedulingRequiredDuringExecution
+
+```yaml
+nodeSelector:
+    size: Large
+```
+# Node affinity
+```yaml
+affinity:
+    nodeAffinity:
+        requiredDuringSchedulingIgnoreDuringExecution:
+            nodeSelectorTerms:
+            - matchExpression:
+              - key: size
+                operator: In
+                values:
+                - Large
+                - Medium
+```
+```yaml
+affinity:
+    nodeAffinity:
+        requiredDuringSchedulingIgnoreDuringExecution:
+            nodeSelectorTerms:
+            - matchExpression:
+              - key: size
+                operator: NotIn
+                values:
+                - Small
+```

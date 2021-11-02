@@ -3,7 +3,7 @@ minikube -
 	start
 	ip
 	service <name> --url
-	
+
 kubectl -
 	get pods
 	get pods -n kube-system
@@ -31,3 +31,4 @@ kubectl -
 	rollout undo
     taint nodes <node-name> key=value:taint-effect - running it again with "-" on end removes the taint
     taint nodes node01 spray=blue:NoSchedule
+	label node node01 color=blue
