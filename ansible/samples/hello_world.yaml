@@ -1,0 +1,15 @@
+- hosts: localhost
+  gather_facts: true
+  connection: local
+
+  tasks:
+    - name: hello world
+      shell: echo 'hello world!'
+
+    - name: reeeeee
+      shell: echo 'hello world2'
+
+    - debug: 
+       msg: hello there
+    - debug:
+        var: ansible_facts

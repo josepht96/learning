@@ -17,21 +17,21 @@
         name: vnet-ansible-test
         address_prefixes: "10.0.0.0/16"
 
-    -name: Add subnet
+    - name: Add subnet
       azure_rm_subnet:
         resource_group: rg-ansible-test
         virtual_network: vnet-ansible-test
         name: snet-ansible-test
         address_prefixes: "10.0.1.0/24"
 
-    -name: Create public IP address
+    - name: Create public IP address
       azure_rm_publicipaddress:
         resource_group: rg-ansible-test
         allocation_method: Static
         name: pip-ansible-test
       register: output_ip_address
 
-    -name: Output public IP address
+    - name: Output public IP address
       debug:
         msg: "The public IP address is: {{ output_ip_address.state.ip_address }}"
 
