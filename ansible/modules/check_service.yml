@@ -1,0 +1,8 @@
+- hosts: web1
+  tasks:
+  - name: check service status
+    service: name=httpd state=started enabled=true #always run when server starts
+  - name: reload httpd
+    service:
+      name: httpd
+      state: reloaded
