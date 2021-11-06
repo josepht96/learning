@@ -1,0 +1,4 @@
+- name: create file
+  hosts: web1
+  tasks:
+  - file: path=/opt/data/perm.txt mode=0640 state=touch

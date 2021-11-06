@@ -1,0 +1,10 @@
+- name: firewall rule
+  hosts: web1
+  tasks:
+  - firewalld:
+     source: 172.20.1.2
+     service: https
+     zone: internal
+     state: enabled
+     permanent: yes
+  - service: name=firewalld state=reloaded
