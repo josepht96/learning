@@ -1,0 +1,4 @@
+- hosts: all
+  tasks:
+  - name: simple shell script
+    shell: echo 'hello'

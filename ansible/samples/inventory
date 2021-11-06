@@ -1,0 +1,7 @@
+# inventory sample
+
+[db_servers]
+some-db1 ansible_host=122.22.22.22 ansible_ssh_pass=password ansible_user=username
+
+[db_servers2]
+some-db2 ansible_host=122.22.22.22 ansible_ssh_pass=password ansible_user=username

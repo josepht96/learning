@@ -1,0 +1,6 @@
+- hosts: web1
+  tasks:
+  - name: install package
+    yum:
+     name: http://mirror.centos.org/centos/7/os/x86_64/Packages/wget-1.14-18.el7_6.1.x86_64.rpm
+     state: present
