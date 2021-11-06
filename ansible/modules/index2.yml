@@ -5,7 +5,7 @@
       owner: apache
       group: apache
       path: /var/www/html/index.html 
-      insertBefore: BOF
+      insertbefore: BOF
       block: |
        Welcome to KodeKloud!
        This is Ansible Lab.

@@ -1,0 +1,12 @@
+- name: replace value in file
+  hosts: web1
+  tasks:
+  - name: replace line
+    replace: 
+      path: /etc/httpd/conf/httpd.conf
+      regexp: 'Listen 80'
+      replace: 'Listen 8080'
+  - name: restart service
+    service:
+      name: httpd
+      state: restarted

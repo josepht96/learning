@@ -1,0 +1,6 @@
+- name: extract zip
+  hosts: web1
+  tasks:
+  - unarchive:
+      src: local.zip
+      dest: /tmp
