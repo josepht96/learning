@@ -63,6 +63,22 @@ sudo chown <user:grpoup> /etc/file/path
     state: latest
 
 ```
+# variables
+[web_servers:vars]
+some_variable=hellothere
+
+```yaml
+vars:
+    dns_server: 12.2.2.2
+```
+--extra-vars "dns_server-12.2.2.1" # highest priority
+host scope, play scope, global scope (--extra-vars)
+-v prints the results for commands that are run
+ansible -m setup -a 'filter=ansible_dist*' localhost
+> magic variables
+- debug:
+    msg: '{{ hostvars['web2'].dns_server}}'
+
 # Azure - bad
 Creating a virtual machine in Azure requires several different Azure resources; a resource group, virtual network, subnet, public ip address, network security group, network interface card, and the virtual machine itself. Each of these Azure resources can be managed and modified using an Ansible module. These Ansible modules allow you to codify your infrastructure in yaml files in the form of Ansible playbooks. 
 

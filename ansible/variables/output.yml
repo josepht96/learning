@@ -1,0 +1,7 @@
+- name: output
+  hosts: all
+  tasks:
+  - shell: cat /etc/hosts
+    register: some_var #scope to play
+  - debug:
+      var: some_var.stdout #some_var.rc

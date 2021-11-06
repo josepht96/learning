@@ -1,0 +1,5 @@
+- name: grab var from server
+  hosts: all
+  tasks:
+  - name: get var
+    shell: echo '{{hostvars['node01.host'].dns_server}}' > /tmp/variable.txt
