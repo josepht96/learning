@@ -104,6 +104,13 @@ free - each server runs its task independently of other servers
 serial # (included with linear) - execute tasks on specified # of servers at a time (still linear)
 By default anisble will create 5 forks at a time. Ie, if you have 10 hosts, by default only 5 will be modified at a time
 
+# Roles 
+logical groups for a sequence of tasks/playbooks
+
+# vault
+encrypt inventory file
+
+# dynamic inventory
 # Azure - bad
 Creating a virtual machine in Azure requires several different Azure resources; a resource group, virtual network, subnet, public ip address, network security group, network interface card, and the virtual machine itself. Each of these Azure resources can be managed and modified using an Ansible module. These Ansible modules allow you to codify your infrastructure in yaml files in the form of Ansible playbooks. 
 
