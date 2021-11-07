@@ -1,0 +1,1 @@
+dns_server: 1.1.1.2 #if this is defined you can remove the dns_server attribute from the other files

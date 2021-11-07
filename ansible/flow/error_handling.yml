@@ -1,0 +1,14 @@
+- name: error handling sample
+  hosts: all
+  max_fail_percentage: 30
+  any_errors_fatal: true
+  tasks: 
+  - name: unimportant tasks
+    shell: echo 'hello'
+    ignore_errors:
+
+  - command: cat /var/log/server.log
+    register: cmd_output
+    failed_when: ERROR in cmd_output.stdout #this might need quotes but editor is saying 
+                                            #there is an issue with using quotes there
+     

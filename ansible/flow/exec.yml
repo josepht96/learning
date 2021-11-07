@@ -1,0 +1,14 @@
+- name: make file executable
+  hosts: all
+  vars:
+    remote_dest: /usr/local/bin/report_status.sh
+  tasks:
+    - name: check executable status
+      stat: 
+        path: "{{ remote_dest }}"
+      register: exec_status
+    - shell: echo "File report_status.sh is not executable, making it executable..." > /tmp/change.log
+      when: file_status.stat.exists and file_status.stat.executable == false
+    - file:
+      path: "{{ remote_dest }}"
+      mode: 0775

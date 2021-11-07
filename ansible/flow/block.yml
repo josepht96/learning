@@ -1,0 +1,18 @@
+- name: block sample
+  hosts: all
+  tasks:
+  - block: 
+      - name: 1
+        shell: echo 'hello'
+      - name: 2
+        shell: echo 'hello'
+    become_user: sudo
+    when: ansible_distribution == "Ubuntu"
+    rescue:
+      - mail:
+        to: joe@joe.com
+        subject: failure notice
+        body: you failed
+    always:
+      - name:
+        shell: echo 'always echo this'

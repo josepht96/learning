@@ -1,0 +1,13 @@
+- name: check if missing
+  hosts: all
+  tasks:
+  - shell: dpkg -l git
+    register: check_output
+    ignore_errors: true
+  - debug: var=check_output
+  - shell: echo 'Oops, git is missing' > /tmp/is_git_installed.txt
+    when: check_output.rc != 0
+  - shell: git --version > /tmp/is_git_installed.txt
+    when: check_output.rc == 0
+
+    

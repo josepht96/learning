@@ -79,6 +79,31 @@ ansible -m setup -a 'filter=ansible_dist*' localhost
 - debug:
     msg: '{{ hostvars['web2'].dns_server}}'
 
+
+# control flow
+```yaml
+- name: some task
+  yum: name=httpd state=enabled
+  when: ansible_os_family == "debian" or/and
+        ansible_os_family == "SUSE"
+packages:
+    - name: a
+    - name: b
+    - name: c
+- name: some task to install "{{ item.name }}" 
+  yum: name=httpd state=enabled
+  when: ansible_os_family == "debian" or/and
+        ansible_os_family == "SUSE"
+  loop: "{{ packages }}"
+```
+# parallelism
+Ansible runs in parallel by default. Each task at a time, ansible waits for each task to complete on each machine
+before proceeding to the next task. 
+linear - default strategy ^^^
+free - each server runs its task independently of other servers
+serial # (included with linear) - execute tasks on specified # of servers at a time (still linear)
+By default anisble will create 5 forks at a time. Ie, if you have 10 hosts, by default only 5 will be modified at a time
+
 # Azure - bad
 Creating a virtual machine in Azure requires several different Azure resources; a resource group, virtual network, subnet, public ip address, network security group, network interface card, and the virtual machine itself. Each of these Azure resources can be managed and modified using an Ansible module. These Ansible modules allow you to codify your infrastructure in yaml files in the form of Ansible playbooks. 
 

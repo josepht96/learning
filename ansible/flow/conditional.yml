@@ -1,0 +1,10 @@
+- name: install stuff
+  hosts: all
+  gather_facts: true
+  tasks:
+  - name: install for ubuntu
+    package: name=apache2 status=present
+    when: ansible_distribution == "Ubuntu"
+  - name: install for centos
+    package: name=httpd status=present
+    when: ansible_distribution == "CentOS"
