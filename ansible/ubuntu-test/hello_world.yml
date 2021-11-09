@@ -1,0 +1,8 @@
+- hosts: [ubuntu_servers]
+  gather_facts: true
+  tasks:
+    - name: echo
+      shell: echo '{{dns_name}}' 
+      register: test
+    - debug:
+        var: test.cmd
