@@ -1,6 +1,5 @@
 # Computer Networking: A Top Down Approach
-> bookmarks
-60
+
 # chapter 1
 Different links can transmit data at different rates, with the transmission rate of a link measured in
 bits/second. When one end system has data to send to another end system, the sending end system
