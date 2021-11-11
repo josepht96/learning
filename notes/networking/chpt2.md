@@ -65,3 +65,31 @@ messages are passed between servers, how messages are passed between servers and
 and how the contents of message headers are to be interpreted. The principal application-layer protocol
 for electronic mail is SMTP (Simple Mail Transfer Protocol) [RFC 5321]. Thus, e-mail’s principal
 application-layer protocol, SMTP, is only one piece (albeit an important piece) of the e-mail application.
+
+# Cookies 
+When a browser used by a user first connects to a website, the website might create a unique identifer of that user.
+The identifier is returned to the browser and then included in every subsequent request to the server, thus allowing the
+server to keep track of a users history/actions. 
+
+# Cache
+
+
+
+# DNS
+1. The same user machine runs the client side of the DNS application.
+2. The browser extracts the hostname, www.someschool.edu , from the URL and passes the
+hostname to the client side of the DNS application.
+3. The DNS client sends a query containing the hostname to a DNS server.
+4. The DNS client eventually receives a reply, which includes the IP address for the hostname.
+5. Once the browser receives the IP address from DNS, it can initiate a TCP connection to the
+HTTP server process located at port 80 at that IP address.
+
+Load distribution. DNS is also used to perform load distribution among replicated servers, such as
+replicated Web servers. Busy sites, such as cnn.com , are replicated over multiple servers, with
+each server running on a different end system and each having a different IP address. For replicated
+Web servers, a set of IP addresses is thus associated with one canonical hostname. The DNS
+database contains this set of IP addresses. When clients make a DNS query for a name mapped to
+a set of addresses, the server responds with the entire set of IP addresses, but rotates the ordering
+of the addresses within each reply. Because a client typically sends its HTTP request message to
+the IP address that is listed first in the set, DNS rotation distributes the traffic among the replicated
+servers.
