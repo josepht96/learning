@@ -109,6 +109,7 @@ logical groups for a sequence of tasks/playbooks
 
 # vault
 encrypt inventory file
+>ansible-vault encrypt <filepath>
 
 # dynamic inventory
 # Azure - bad
