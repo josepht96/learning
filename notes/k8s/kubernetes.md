@@ -46,7 +46,7 @@ get pods -o wide
 	scale --replicas=6 replicaset myapp-replicaset (wont update file)
 	edit replicaset myapp-replicaset
 	get all (list all objects)
-	 kubectl rollout status deployment.apps/myapp-deployment
+	kubectl rollout status deployment.apps/myapp-deployment
 	rollout history
 	rollout undo
 
