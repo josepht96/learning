@@ -15,32 +15,43 @@ const (
 	dbname   = "postgres"
 )
 
+type DatabaseConnection struct {
+	connString string
+	conn *sql.DB
+}
+
 func Ping(db *sql.DB) {
 	err := db.Ping()
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("Successfully pinged server...")
+	fmt.Printf("Successfully pinged %v:%v...\n", host, port)
 }
 
 func Initialize() error {
-	fmt.Printf("Connecting to postgres server at %s:%d...\n", host, port)
-	psqlConn := fmt.Sprintf("host=%s port=%d user=%s "+
+	db := DatabaseConnection {
+		connString: "",
+		conn:nil,
+	}
+	var err error
+	fmt.Printf("Connecting to postgres server at: %s:%d...\n", host, port)
+	db.connString = fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s sslmode=disable",
 		host, port, user, password, dbname)
 
-	db, err := sql.Open("postgres", psqlConn)
+	db.conn, err = sql.Open("postgres", db.connString)
 	if err != nil {
 		panic(err)
 		return err
 	}
-	defer db.Close()
-	fmt.Println("Successfully connected...")
+	defer db.conn.Close()
+	fmt.Printf("Successfully connected to: %v:%v...\n", host, port)
 
-	return nil
+	
 
-	//ping(db)
+	//Ping(db)
 	//queries.SelectTenants(db)
 	//queries.SelectIdnTenants(db)
 	//insertTenant(db)
+	return nil
 }

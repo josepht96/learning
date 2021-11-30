@@ -18,8 +18,3 @@ func UpdateProject() {
 func CreateProject() {
 
 }
-
-//GetProjects returns project list
-func GetProjects() {
-
-}
