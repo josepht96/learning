@@ -8,7 +8,7 @@ import (
 	"github.com/josepht96/learning/projects/semver/api/middleware"
 )
 
-func testDefaultGet(t *testing.T) {
+func TestDefaultGet(t *testing.T) {
 	req, err := http.NewRequest("GET", "/", nil)
   
 	if err != nil {
@@ -24,7 +24,7 @@ func testDefaultGet(t *testing.T) {
 	}
 }
 
-func testProjectGet(t *testing.T) {
+func TestProjectGet(t *testing.T) {
 	req, err := http.NewRequest("GET", "/project/", nil)
   
 	if err != nil {
@@ -40,7 +40,7 @@ func testProjectGet(t *testing.T) {
 	}
 }
 
-func testProjectPut(t *testing.T) {
+func TestProjectPut(t *testing.T) {
 	req, err := http.NewRequest("PUT", "/project/", nil)
   
 	if err != nil {
@@ -56,7 +56,7 @@ func testProjectPut(t *testing.T) {
 	}
 }
 
-func testProjectPost(t *testing.T) {
+func TestProjectPost(t *testing.T) {
 	req, err := http.NewRequest("POST", "/project/", nil)
   
 	if err != nil {
@@ -72,7 +72,7 @@ func testProjectPost(t *testing.T) {
 	}
 }
 
-func testProjectsGet(t *testing.T) {
+func TestProjectsGet(t *testing.T) {
 	req, err := http.NewRequest("GET", "/projects", nil)
   
 	if err != nil {
@@ -89,7 +89,7 @@ func testProjectsGet(t *testing.T) {
 }
 
 
-func testUserGet(t *testing.T) {
+func TestUserGet(t *testing.T) {
 	req, err := http.NewRequest("GET", "/user/", nil)
   
 	if err != nil {
