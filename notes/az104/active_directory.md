@@ -8,6 +8,24 @@ Bulk AAD user creation: Upload a csv file with account data
 AAD groups: Security groups, MS365 groups. Types: owners, assigned membership, dynamic membership (AAD defined properties). Execute queries that select objects based on attributes to grant them permissions. Group-assigned roles and licenses (what we use).
 Administrative unit: Custom logically groups. PoH and SFM could have separate AUs with different users (and maybe some that overlap).
 
+# Azure tenant/directory. 
+A dedicated and trusted instance of Azure AD, a Tenant is automatically created when your organization signs up for a Microsoft cloud service subscription.
+
+More instances of Azure AD can be created.
+Azure AD is the underlying product providing the identity service.
+The term Tenant means a single instance of Azure AD representing a single organization.
+The terms Tenant and Directory are often used interchangeably.
+
+# Users and groups
+Typically, Azure AD defines users in three ways:
+
+Cloud identities. These users exist only in Azure AD. Examples are administrator accounts and users that you manage yourself. Cloud identities can be in Azure Active Directory or an external Azure Active Directory, if the user is defined in another Azure AD instance. When these accounts are removed from the primary directory, they are deleted.
+Directory-synchronized identities. These users exist in an on-premises Active Directory. A synchronization activity that occurs via Azure AD Connect brings these users in to Azure. Their source is Windows Server AD.
+Guest users. These users exist outside Azure. Examples are accounts from other cloud providers and Microsoft accounts such as an Xbox LIVE account. Their source is Invited user. This type of account is useful when external vendors or contractors need access to your Azure resources. Once their help is no longer necessary, you can remove the account and all of their access.
+
+# Subscriptions
+An Azure subscription is a logical unit of Azure services that is linked to an Azure account. Billing for Azure services is done on a per-subscription basis. If your account is the only account associated with a subscription, then you are responsible for billing.
+
 # AAD device: a system that can register with or join Azure AD and be managed with Azure MDM tools.
 
 MDM: Mobile device management.
@@ -16,6 +34,8 @@ Azure AD Joined: Company (tenant) owned devices
 Azure AD Sign-in to Azure VMs
 VMs need to be Windows Server 2019 or Windows 10, must have SAMI (system assigned managed identity). Need to be add to a specific role called Virtual Machine Admin login and VM login user.
 Microsoft Intune: System center configuration manager, windows autopilot. Covers MDM and MAM scenarios. Same thing as Microsoft endpoint manager.
+
+
 
 Single sign-on to any cloud or on-premises web app. Azure Active Directory provides secure single sign-on to cloud and on-premises applications. SSO includes Microsoft 365 and thousands of SaaS applications such as Salesforce, Workday, DocuSign, ServiceNow, and Box.
 Works with iOS, macOS, Android, and Windows devices. Users can launch applications from a personalized web-based access panel, mobile app, Microsoft 365, or custom company portals using their existing work credentials. The experience is the same on iOS, macOS, Android, and Windows devices.
