@@ -32,7 +32,6 @@ func (p *projectHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusNotImplemented)
 		}
 	}
-
 }
 
 func getProject(w http.ResponseWriter, r *http.Request) {

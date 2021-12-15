@@ -2,12 +2,12 @@ package models
 
 import (
 	//"fmt"
-	"github.com/josepht96/learning/projects/semver/api/db"
+	//"github.com/josepht96/learning/projects/semver/api/database"
 )
 
 //GetProject returns a project obj
 func GetProject() {
-	db.Initialize()
+	//db.Initialize()
 }
 //UpdateProject updates a project
 func UpdateProject() {

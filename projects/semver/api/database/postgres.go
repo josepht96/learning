@@ -1,9 +1,9 @@
-package db
+package database
 
 import (
 	"database/sql"
 	"fmt"
-
+	"log"
 	_ "github.com/lib/pq"
 )
 
@@ -16,8 +16,8 @@ const (
 )
 
 type DatabaseConnection struct {
-	connString string
-	conn *sql.DB
+	ConnString string
+	Conn *sql.DB
 }
 
 func Ping(db *sql.DB) {
@@ -28,30 +28,23 @@ func Ping(db *sql.DB) {
 	fmt.Printf("Successfully pinged %v:%v...\n", host, port)
 }
 
-func Initialize() error {
+func Initialize() (DatabaseConnection, error) {
 	db := DatabaseConnection {
-		connString: "",
-		conn:nil,
+		ConnString: "",
+		Conn:nil,
 	}
 	var err error
 	fmt.Printf("Connecting to postgres server at: %s:%d...\n", host, port)
-	db.connString = fmt.Sprintf("host=%s port=%d user=%s "+
+	db.ConnString = fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s sslmode=disable",
 		host, port, user, password, dbname)
 
-	db.conn, err = sql.Open("postgres", db.connString)
+	db.Conn, err = sql.Open("postgres", db.ConnString)
 	if err != nil {
-		panic(err)
-		return err
+		log.Fatal("Failed to execute query: ", err)
 	}
-	defer db.conn.Close()
+	//defer db.Conn.Close()
 	fmt.Printf("Successfully connected to: %v:%v...\n", host, port)
 
-	
-
-	//Ping(db)
-	//queries.SelectTenants(db)
-	//queries.SelectIdnTenants(db)
-	//insertTenant(db)
-	return nil
+	return db, nil
 }

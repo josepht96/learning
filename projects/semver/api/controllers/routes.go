@@ -12,4 +12,5 @@ func RegisterControllers() {
 	http.Handle("/user/", middleware.Handler(newUserHandler()))
 	http.Handle("/project/", middleware.Handler(newProjectHandler()))
 	http.Handle("/projects", middleware.Handler(newProjectsHandler()))
+	http.Handle("/projects/", middleware.Handler(newProjectsHandler()))
 }

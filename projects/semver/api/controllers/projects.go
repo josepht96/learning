@@ -13,7 +13,7 @@ type projectsHandler struct {
 }
 
 func (p *projectsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path == "/projects" {
+	if r.URL.Path == "/projects" || r.URL.Path == "/projects/" {
 		switch r.Method {
 		case http.MethodGet:
 			getProjects(w, r)
