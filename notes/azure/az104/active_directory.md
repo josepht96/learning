@@ -93,3 +93,6 @@ The main advantages of Azure policy are in the areas of enforcement and complian
 # Locks
 Put certain permissions of resources
 
+Only premium AAD accounts can add users to administrative unit
+Way to split org into more manageable blocks
+

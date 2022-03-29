@@ -176,6 +176,49 @@ Ship drives to azure datacenter
 
 # AzCopy
 azcopy copy 'C:\data' 'https://someazureendpoint.net/2321' --recursive
+copy data from storage accounts without using portal 
 Blob storage access: SAS or AAD
 FileStorage: SAS only
 azcopy list uri/sastoken
+
+
+Access keys give full ownership access
+SAS keys give specific permissions - have expiration dates
+
+
+# premium accounts
+Cost more, cheaper to retrieve data. No globally redundant storage
+For replication General Purpose V2 is better. 
+block blobs - high performance, low latency, good for lots of reads - LRS or ZRS
+file shares - file share for enterprise storage - LRS, ZRS
+page blobs - reads and writes, good for vhd or sql server files - LRS
+
+# CDN
+global resource
+Premium
+S1
+S2
+S3
+A Content Delivery Network allows you to improve performance by removing the burden of serving static, unchanging files from the main server to a network of servers around the globe; a CDN can reduce traffic to a server by 50% or more, which means you can serve more users or serve the same users faster.
+
+# Azure files
+Can use azure file sync to synchronize file shares across servers. Multiple on prem servers can all sync using Azure file sync agents. Data replication in azure and servers.
+
+# Azure backups
+Backup vault needs to be in the same region as the resources youre backing up. One backup vault for each region makes sense.
+Backup and site recovery
+can backup on prem and azure workloads
+# Azure resources that can be backed up
+VMs
+FileShare
+SQL Server
+
+# On prem resources that can be backed up
+Files and folders
+Hyper V vms
+VMware VMs
+SQL Server
+SharePoint
+Exchange
+System State
+Bare metal recovery
