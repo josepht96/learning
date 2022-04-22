@@ -24,3 +24,4 @@ Application gateway provides a WAF for inbound connections only for HTTP/S traff
 review the differences between azure backup, site recovery, managed snapchots, recovery services vault
 snapshots for database disks
 determine which ones support linux and non azure vms
+notes
