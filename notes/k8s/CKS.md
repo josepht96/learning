@@ -85,3 +85,25 @@ roleRef:
 # Cluster roles
 For nodes and cluster wide resources
 Can grant users/groups permissions to specific resources cluster wide
+
+# ssh
+Client use private key, server holds public client keys at ~/.ssh/authorized_keys
+Known hosts contains the IP addresses of server names:
+ A file associated with a specific account that contains one or more host keys. Each host key is associated with an SSH server address (IP or hostname) so that the server can be authenticated when a connection is initiated.
+The known_hosts file lets the client authenticate the server, to check that it isn't connecting to an impersonator. The authorized_keys file lets the server authenticate the user.  
+# System hardening
+User accounts - access to cluster, admins, devs
+Super user - root, UID=0, contorl over other users
+Systema accounts - created when nodes created, ssh, mail
+Remove users from node system, regular linux user management
+
+To add SSH key to node, add
+
+# cmds
+id <user>
+cat /etc/passwd
+userdel <user>
+usermod -s /usr/sbin/nologin himanshi
+useradd -d /opt/sam -s /bin/bash -G admin -u 2328 sam
+ssh-copy-id -i ~/.ssh/id_rsa.pub jim@node01
+# remove unwanted services

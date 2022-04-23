@@ -9,7 +9,6 @@ Same with scale sets
 
 # Scale sets
 An availability set consists of a set of discrete VMs which have their own names and individual properties, but are spread across fault domains, which means when you have more than one VM in a set it reduces the chances of losing all your VMs in event of a hardware failure in the host or rack.
-
 A scale set consists of a set of identically configured VMs, also spread across fault domains (in fact a scale set is an implicit availability set with 5 fault domains). The main difference is scale sets, being identical, make it very easy to add or remove VMs from the set while preserving high availability, which in turn makes it easy to implement autoscale, and to perform operations on the whole set or a subset of VMs. There are also API calls that support re-imaging and upgrading VMs, allowing you to roll out an update while keeping the service running. They are useful for cloud architectures which require deploying large numbers of similar VMs, or need to be elastic. A typical architecture might use a scale set for agent or worker nodes, and an availability set for master or control nodes. See https://azure.microsoft.com/en-us/services/virtual-machine-scale-sets/ for more detail.
 
 # Availability sets
