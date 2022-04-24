@@ -4,13 +4,50 @@
 Virtual Network (VNet) service endpoint provides secure and direct connectivity to Azure services over an optimized route over the Azure backbone network. Endpoints allow you to secure your critical Azure service resources to only your virtual networks. Service Endpoints enables private IP addresses in the VNet to reach the endpoint of an Azure service without needing a public IP address on the VNet.
 
 # dns record types
+The time to live, or TTL, specifies how long each record is cached by clients before being requeried. In the above example, the TTL is 3600 seconds or 1 hour.
+In Azure DNS, the TTL gets specified for the record set, not for each record, so the same value is used for all records within that record set. You can specify any TTL value between 1 and 2,147,483,647 seconds.
+
+# A, AAAA, CAA, CNAME, MX, NS, PTR, SOA, SRV, and TXT
+
+A/AAAA: A and AAAA records are equally important when it comes to resolving DNS. The difference lies in that A records is used to resolve a hostname which corresponds to an IPv4 address, while AAAA records are used to resolve a domain name which corresponds to an IPv6 address. Hostname to an IP address.
+
+CAA: CAA records allow domain owners to specify which Certificate Authorities (CAs) are authorized to issue certificates for their domain. This record allows CAs to avoid mis-issuing certificates in some circumstances.
+
+CNAME: mapping dns name to another dns name.
+
+MX: This is the system that, among other indicates to what specific IP address emails need to be sent. The MX-record contains the host name of the computer(s) that handle the emails for a domain and a prioritization code. The MX-record contains the host name of the computer(s) that handle the emails for a domain and a prioritization code.
+
+NS: This record set contains the names of the Azure DNS name servers assigned to the zone. You can add more name servers to this NS record set, to support cohosting domains with more than one DNS provider. 
+
+PTR: A pointer (PTR) record is a type of Domain Name System (DNS) record that resolves an IP address to a domain or host name, unlike an A record which points a domain name to an IP address.
+
+SOA: A SOA record set gets created automatically at the apex of each zone (name = '@'), and gets deleted automatically when the zone gets deleted. SOA records cannot be created or deleted separately.
+
+SPF: Sender policy framework (SPF) records are used to specify which email servers can send email on behalf of a domain name. Correct configuration of SPF records is important to prevent recipients from marking your email as junk.
+
+SRV: SRV records are used by various services to specify server locations.
+
+TXT: contains verification information for a domain. Publicly accessible
+
 # network monitoring
+# IP flow verify
+IP flow verify checks if a packet is allowed or denied to or from a virtual machine. The information consists of direction, protocol, local IP, remote IP, local port, and remote port. If the packet is denied by a security group, the name of the rule that denied the packet is returned. While any source or destination IP can be chosen, IP flow verify helps administrators quickly diagnose connectivity issues from or to the internet and from or to the on-premises environment.
+# Next hop
+Traffic from a virtual machine (VM) is sent to a destination based on the effective routes associated with a network interface (NIC). Next hop gets the next hop type and IP address of a packet from a specific VM and NIC. Knowing the next hop helps you determine if traffic is being directed to the intended destination, or whether the traffic is being sent nowhere. An improper configuration of routes, where traffic is directed to an on-premises location, or a virtual appliance, can lead to connectivity issues. 
+# packet capture
+Network Watcher variable packet capture allows you to create packet capture sessions to track traffic to and from a virtual machine. Packet capture helps to diagnose network anomalies both reactively and proactively. Other uses include gathering network statistics, gaining information on network intrusions, to debug client-server communications and much more.
+
 # VPN gateway
+VPN Gateway sends encrypted traffic between an Azure virtual network and an on-premises location over the public Internet. You can also use VPN Gateway to send encrypted traffic between Azure virtual networks over the Microsoft network. A VPN gateway is a specific type of virtual network gateway. Each virtual network can have only one VPN gateway. However, you can create multiple connections to the same VPN gateway. When you create multiple connections to the same VPN gateway, all VPN tunnels share the available gateway bandwidth.
+
 # WAN
 Virtual WAN: The virtualWAN resource represents a virtual overlay of your Azure network and is a collection of multiple resources. It contains links to all your virtual hubs that you would like to have within the virtual WAN. Virtual WAN resources are isolated from each other and can't contain a common hub. Virtual hubs across Virtual WAN don't communicate with each other.
 handle multiple s2s vpn or p2s, vnet peering. Central connection for managing most networking
 
 # Network rules
+defaults:
+inbound: allow vnet, loadbalancer, deny internet
+outbound: allow vnet, allow internet, deny rest
 
 # Azure firewall
 Azure Firewall is a cloud-native and intelligent network firewall security service that provides the best of breed threat protection for your cloud workloads running in Azure. It's a fully stateful, firewall as a service with built-in high availability and unrestricted cloud scalability. It provides both east-west and north-south traffic inspection.
@@ -24,6 +61,15 @@ Web Application Firewall (WAF) provides centralized protection of your web appli
 Azure WAF protects inbound traffic to the web workloads, and the Azure Firewall inspects inbound traffic for the other applications. The Azure Firewall will cover outbound flows from both workload types.
 
 # Disk encryption
+The main encryption-based disk protection technologies for Azure VMs are:
+
+Azure Storage Service Encryption (SSE)
+Azure Disk Encryption (ADE)
+SSE is performed on the physical disks in the data center. If someone were to directly access the physical disk, the data would be encrypted. When the data is accessed from the disk, it is decrypted and loaded into memory.
+
+ADE encrypts the virtual machine's virtual hard disks (VHDs). If VHD is protected with ADE, the disk image will only be accessible by the virtual machine that owns the disk.
+
+SSE is part of Azure itself, and there should be no noticeable performance impact on the VM disk IO when using SSE. Managed disks with SSE are now the default, and there should be no reason to change it. ADE makes use of VM operating system tools (BitLocker and DM-Crypt), so the VM itself has to do some work when encryption or decryption on VM disks is being performed. The impact of this additional VM CPU activity is typically negligible, except in certain situations. For instance, if you have a CPU-intensive application, there may be a case for leaving the OS disk unencrypted to maximize performance. In a situation such as this, you can store application data on a separate encrypted data disk, getting you the performance you need without compromising security.
 
 # kusto query language
 ```sql
