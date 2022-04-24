@@ -9,6 +9,8 @@ golang
 vim
 linux
 testing applications 
+caching
+redis
 
 # DSA 
 grokking
