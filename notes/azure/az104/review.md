@@ -3,6 +3,9 @@
 # vnet service endpoints
 Virtual Network (VNet) service endpoint provides secure and direct connectivity to Azure services over an optimized route over the Azure backbone network. Endpoints allow you to secure your critical Azure service resources to only your virtual networks. Service Endpoints enables private IP addresses in the VNet to reach the endpoint of an Azure service without needing a public IP address on the VNet.
 
+# private endpoints
+services with ips in a subnet, traffic does not need to leave the vnet to access the service
+
 # dns record types
 The time to live, or TTL, specifies how long each record is cached by clients before being requeried. In the above example, the TTL is 3600 seconds or 1 hour.
 In Azure DNS, the TTL gets specified for the record set, not for each record, so the same value is used for all records within that record set. You can specify any TTL value between 1 and 2,147,483,647 seconds.
