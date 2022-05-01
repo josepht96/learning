@@ -1,4 +1,10 @@
-# topics to cover ##############################################################
+# topics to cover 
+##############################################################
+ports to know: 80, 443, 53, 67, 3389, 22
+
+In AWS, NAT gateway allows resources without a public IP address (in a private subnet) to reach the internet, but internet traffic cannot be sent directly to the subnet. Public subnets are accessible from the internet if there is an internet gateway in the subnet and the resource has a public IP address associated with it.
+
+In azure, there are no private and public subnets, every subnet allows resources to be given a public IP address and be accessed from the internet via a NAT gateway. So nat gateway handles both outbound from private and public IPs, as well as inbound to public IPs.
 
 # vnet service endpoints
 Virtual Network (VNet) service endpoint provides secure and direct connectivity to Azure services over an optimized route over the Azure backbone network. Endpoints allow you to secure your critical Azure service resources to only your virtual networks. Service Endpoints enables private IP addresses in the VNet to reach the endpoint of an Azure service without needing a public IP address on the VNet.
@@ -101,7 +107,7 @@ accounts do not support lifecycle management.
 
 # Virtual Networking ###########################################################
 # NAT Rules
-For external connections to azure resources, like ssh and rdp. Non-http traffic
+For external connections to azure resources, like ssh and rdp. Non-http traffic. Translates private IPs to public IP ports (the same way your router works). Not zone redundant. its what allows 
 # Network Rules
 Similar to above, but allows traffic between resources within the virtual network. SQL database to web server or something.
 # Application Rules
