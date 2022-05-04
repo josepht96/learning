@@ -1,7 +1,5 @@
 one cert, one tech
 
-
-az104
 CKAD
 CKA
 CKS
@@ -24,7 +22,6 @@ google SRE book
 
 
 priorities
-Az104
 CKA
 CKAD
 CKS
