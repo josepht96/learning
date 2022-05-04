@@ -1,34 +1,42 @@
-one cert, one tech
+# schedule
+May - dsa, vim, bash, books, CKAD
+June - dsa, CKAD/CKA
+July - dsa, CKA
+August - dsa, books
+September - linux, CKS, books
+October - CKS, linux
+November - CKS
+December - whatever
 
-CKAD
-CKA
-CKS
-AWS SAA
 
-docker
-golang
-vim
-linux
-testing applications 
-caching
-redis
+# certs
+CKAD - 1
+CKA - 1
+CKS - 1
+AWS SAA - 3
+
+# tech
+docker - 2
+golang - 3
+vim - 1
+bash - 1
+linux - 2
+testing applications - 3
+caching - 3
+redis - 3
 
 # DSA 
 grokking
-
-# books
-system design
-google SRE book
-
-
-priorities
-CKA
-CKAD
-CKS
-
-system design
-
-DSA
+array - 3
+binary - 2
+dp - 2
+graph - 1
+interval - 1
+linked list - 2
+matrix - 2
+string - 2
+tree - 1
+heap - 3
 
 # Site Reliability Engineering (Google book)
 
