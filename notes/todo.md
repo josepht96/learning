@@ -6,7 +6,7 @@ August - dsa, books
 September - linux, CKS, books
 October - CKS, linux
 November - CKS
-December - whatever
+December - off
 
 
 # certs
