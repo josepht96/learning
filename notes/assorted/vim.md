@@ -6,3 +6,11 @@ escape shift :
 :%d
 :set number
 :1
+
+
+/<search query>
+v - select
+d - cut
+x - cut
+p - paste
+y - copy
