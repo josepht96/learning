@@ -6,6 +6,7 @@ September - linux, CKS, books
 October - CKS, linux  
 November - CKS  
 December - off  
+2023 - build an app
 
 ## certs
 CKAD - 1  
