@@ -6,13 +6,13 @@ September - linux, CKS, books
 October - CKS, linux  
 November - CKS  
 December - off  
-2023 - build an app
+
+security
 
 ## certs
 CKAD - 1  
 CKA - 1  
 CKS - 1  
-AWS SAA - 3  
 
 ## tech
 docker - 2  
