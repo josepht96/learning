@@ -10,6 +10,10 @@ shortestDistance (starts -1 or something
 to indicate it hasnt been visited) then replace shortestDistance
 Keep track of visited nodes. After checking each adjacent node,
 go to next node unless its been visited
+
+
+dijkstras algorithm jumps to next unvisited node if you hit a dead end,
+or if all edges from that node have been visited
 type WeightedGraph struct {
 	StatesMap map([string]State)
 	Routes []Route
