@@ -3,7 +3,7 @@ func min(x, y int) int {
         return y
     } else {
         return x
-    }
+    }J
 }
 
 func maxArea(height []int) int {
