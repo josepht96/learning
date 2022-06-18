@@ -21,7 +21,8 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(200, 0, 0);
+  min-height: 98vh;
 }
 
 .App-link {
@@ -32,7 +33,28 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.Navbar {
+  background-color: #191c24;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  padding: 20px;
+  min-height: 2vh
+}
+
+.Link {
+  color: rgb(255, 255, 255);
+  font-size: calc(10px + 1vmin);
+  text-decoration: none;
+  margin-right: 15px;
+  font-weight: bold;
+}
+
+.Link:hover {
+  color: rgb(171, 171, 171);
 }

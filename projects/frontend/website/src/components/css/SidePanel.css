@@ -1,0 +1,13 @@
+.SidePanel {
+    background-color: #3c4657;
+    width: 100%;
+    height: 100%;
+    color: rgb(255, 255, 255);
+    padding: 20px;
+}
+
+.SidePanel-element {
+    padding: 1px;
+    text-align: left;
+    margin-bottom: 8px;
+}
