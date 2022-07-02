@@ -16,10 +16,10 @@ const (
 	dbname   = "postgres"
 )
 
-var DBConn *sql.DB
+var DbConn *sql.DB
 
 func PingDatabase() {
-	err := DBConn.Ping()
+	err := DbConn.Ping()
 	if err != nil {
 		panic(err)
 	}
@@ -33,7 +33,7 @@ func Initialize() {
 		"password=%s dbname=%s sslmode=disable",
 		host, port, user, password, dbname)
 
-	DBConn, err = sql.Open("postgres", connString)
+	DbConn, err = sql.Open("postgres", connString)
 	if err != nil {
 		log.Fatal("Failed to execute query: ", err)
 	}

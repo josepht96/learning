@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"encoding/json"
 	"net/http"
 
 	"github.com/josepht96/learning/projects/backend/models"
@@ -27,8 +28,9 @@ func (i *inflationHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func getInflationData(w http.ResponseWriter, r *http.Request) {
-	models.GetInflation()
-	w.WriteHeader(http.StatusOK)
+	respObject := models.GetInflation()
+	respJson, _ := json.Marshal(respObject)
+	w.Write([]byte(respJson))
 }
 
 func newInflationHandler() *inflationHandler {
