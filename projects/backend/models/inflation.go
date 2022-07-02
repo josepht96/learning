@@ -5,5 +5,5 @@ import (
 )
 
 func GetInflation() {
-	
+	fmt.Println("inflation")
 }

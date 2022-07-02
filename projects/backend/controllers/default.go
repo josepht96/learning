@@ -31,6 +31,5 @@ func defaultResponse(w http.ResponseWriter, r *http.Request) {
 }
 
 func newDefaultHandler() *defaultHandler {
-	return &defaultHandler{
-	}
+	return &defaultHandler{}
 }
