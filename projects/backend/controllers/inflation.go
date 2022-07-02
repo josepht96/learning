@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/josepht96/learning/projects/backend/models"
@@ -30,11 +29,6 @@ func (i *inflationHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 func getInflationData(w http.ResponseWriter, r *http.Request) {
 	models.GetInflation()
 	w.WriteHeader(http.StatusOK)
-}
-
-func inflationResponse(w http.ResponseWriter, r *http.Request) {
-	rMsg := fmt.Sprintf("Accessing inflation controller\n")
-	w.Write([]byte(rMsg))
 }
 
 func newInflationHandler() *inflationHandler {
