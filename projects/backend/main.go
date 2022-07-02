@@ -5,13 +5,13 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/josepht96/learning/projects/backend/api/controllers"
+	"github.com/josepht96/learning/projects/backend/controllers"
 )
 
 func main() {
 	controllers.RegisterControllers()
-	fmt.Println("Listening at: http://localhost:5000")
-	err := http.ListenAndServe(":5000", nil)
+	fmt.Println("Listening at: http://localhost:8080")
+	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		log.Fatal(err)
 	}

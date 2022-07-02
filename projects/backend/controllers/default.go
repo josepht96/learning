@@ -26,7 +26,7 @@ func (d *defaultHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func defaultResponse(w http.ResponseWriter, r *http.Request) {
-	rMsg := fmt.Sprintf("Accessing the default route...\nRoutes are:\n /project\n /test\n")
+	rMsg := fmt.Sprintf("Accessing the default route...\nRoutes are:\n /inflation\n")
 	w.Write([]byte(rMsg))
 }
 
