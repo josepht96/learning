@@ -14,11 +14,11 @@ function App() {
       <BrowserRouter>
         <nav class="Navbar">
           <Link class="Link" to="/">Home</Link>
-          <Link class="Link" to="/about">About</Link>
+          {/* <Link class="Link" to="/about">About</Link> */}
         </nav>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="about" element={<About />} />
+          {/* <Route path="about" element={<About />} /> */}
         </Routes>
         <Outlet />
       </BrowserRouter>

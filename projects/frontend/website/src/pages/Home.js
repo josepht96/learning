@@ -5,9 +5,9 @@ import SidePanel from "../components/SidePanel";
 function Home() {
   return (
     <div className="Page">
-      <div className='SideBar'>
+      {/* <div className='SideBar'>
         <SidePanel />
-      </div>
+      </div> */}
       <header className="Page-header">
         <img src={logo} className="Page-logo" alt="logo" />
         <p>
