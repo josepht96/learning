@@ -15,16 +15,16 @@ CKA - 1
 CKS - 1  
 
 ## tech
-docker - 2  
-golang - 3  
-vim - 1  
-bash - 1  
-linux - 2  
+docker - 0 
+golang - 2  
+vim - 0  
+bash - 0  
+linux - 1  
 testing applications - 3  
 caching - 3  
 redis - 3  
 regex - 3  
-auth protocols, jwt, saml  
+auth protocols, jwt, oauth2.0, oidc  
 
 ## DSA 
 grokking  
