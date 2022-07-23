@@ -21,3 +21,6 @@ To access EKS over OIDC, a user must include a valid id token in their API reque
 4. Receive a code via an authorization response (HTTP redirect).
 5. Exchange the code and a token.
 6. Return the code. 
+
+When done via ROPC, service user credentials can be provided via enivironment variables and the authorization code stage is skipped. 
+client id, client secret, scope, and user credentials can be provided directly to the OIDC provider in exchange for access, refresh, and id tokens.
