@@ -42,6 +42,7 @@ kube-proxy maintains network rules on nodes. These network rules allow network c
 kube-proxy uses the operating system packet filtering layer if there is one and it's available. Otherwise, kube-proxy forwards the traffic itself.
 
 ## kubeadm
+
 provision machines
 designate nodes
 install container runtimes on all nodes
