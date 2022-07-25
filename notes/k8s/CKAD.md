@@ -57,6 +57,8 @@ Indicates whether the container is ready to respond to requests. If the readines
 **startupProbe**
 Indicates whether the application within the container is started. All other probes are disabled if a startup probe is provided, until it succeeds. If the startup probe fails, the kubelet kills the container, and the container is subjected to its restart policy. If a container does not provide a startup probe, the default state is Success.
 
+When a liveness probe fails, it signals to OpenShift that the probed container is dead and should be restarted. When a readiness probe fails, it indicates to OpenShift that the container being probed is not ready to receive incoming network traffic. The application might become ready in the future, but it should not receive traffic now.
+
 ### memory limits
 
 requests cannot exceed limits. Controller will terminate pod if it exceeds limits.
