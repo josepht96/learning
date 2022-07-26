@@ -136,3 +136,6 @@ spec:
 
 ```
 
+### Lifecycle events
+
+Kubernetes supports the postStart and preStop events. Kubernetes sends the postStart event immediately after a Container is started, and it sends the preStop event immediately before the Container is terminated. A Container may specify one handler per event. postStart runs after container initialization, after init containers. No guarantee it runs before container image entrypoint cmd.
