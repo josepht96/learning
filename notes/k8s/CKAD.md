@@ -139,3 +139,19 @@ spec:
 ### Lifecycle events
 
 Kubernetes supports the postStart and preStop events. Kubernetes sends the postStart event immediately after a Container is started, and it sends the preStop event immediately before the Container is terminated. A Container may specify one handler per event. postStart runs after container initialization, after init containers. No guarantee it runs before container image entrypoint cmd.
+
+### Annotations
+
+You can use either labels or annotations to attach metadata to Kubernetes objects. Labels can be used to select objects and to find collections of objects that satisfy certain conditions. In contrast, annotations are not used to identify and select objects. The metadata in an annotation can be small or large, structured or unstructured, and can include characters not permitted by labels.
+
+### Deployments
+
+`kubectl rollout history deployment/nginx-deployment --revision=2`
+`kubectl rollout undo deployment/nginx-deployment --to-revision=2`
+`kubectl scale deployment/nginx-deployment --replicas=10`
+s
+A Deployment's revision history is stored in the ReplicaSets it controls.
+
+.spec.revisionHistoryLimit is an optional field that specifies the number of old ReplicaSets to retain to allow rollback. These old ReplicaSets consume resources in etcd and crowd the output of kubectl get rs. The configuration of each Deployment revision is stored in its ReplicaSets; therefore, once an old ReplicaSet is deleted, you lose the ability to rollback to that revision of Deployment. By default, 10 old ReplicaSets will be kept, however its ideal value depends on the frequency and stability of new Deployments.
+
+More specifically, setting this field to zero means that all old ReplicaSets with 0 replicas will be cleaned up. In this case, a new Deployment rollout cannot be undone, since its revision history is cleaned up.
