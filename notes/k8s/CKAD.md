@@ -26,7 +26,7 @@ Deployment - manages deployment of multiple pods of the same spec
 Stateful set - manages deployment of multiple pods where state is important. Pods are not interchangable. Makes it easier to match PVs to specific pods.
 Daemon set - deploys pod to each node
 
-The Pod remains on that node until the Pod finishes execution, the Pod object is deleted, the Pod is evicted for lack of resources, or the node fails. 
+The Pod remains on that node until the Pod finishes execution, the Pod object is deleted, the Pod is evicted for lack of resources, or the node fails.
 Pod updates may not change fields other than spec.containers[*].image, spec.initContainers[*].image, spec.activeDeadlineSeconds or spec.tolerations. For spec.tolerations, you can only add new entries.
 
 Each Pod is assigned a unique IP address for each address family. Every container in a Pod shares the network namespace, including the IP address and network ports. Inside a Pod (and only then), the containers that belong to the Pod can communicate with one another using localhost. When containers in a Pod communicate with entities outside the Pod, they must coordinate how they use the shared network resources (such as ports). Within a Pod, containers share an IP address and port space, and can find each other via localhost. The containers in a Pod can also communicate with each other using standard inter-process communications like SystemV semaphores or POSIX shared memory. Containers in different Pods have distinct IP addresses and can not communicate by OS-level IPC without special configuration. Containers that want to interact with a container running in a different Pod can use IP networking to communicate.
@@ -169,3 +169,23 @@ When defining a pod- or namespace- based NetworkPolicy, you use a selector to sp
 
 Meanwhile, when IP based NetworkPolicies are created, we define policies based on IP blocks (CIDR ranges).
 
+### Monitoring
+
+kubectl top node
+kubectl top pod
+
+### Ingress resources
+
+An ingress controller acts as a reverse proxy and load balancer. It implements a Kubernetes Ingress. The ingress controller adds a layer of abstraction to traffic routing, accepting traffic from outside the Kubernetes platform and load balancing it to Pods running inside the platform. It converts configurations from Ingress resources into routing rules that reverse proxies can recognize and implement.
+
+### ClusterIP
+
+A ClusterIP Service is exposed on an internal cluster IP and is reachable from within the cluster. It is the default setting in Kubernetes.
+
+### NodePort
+
+A NodePort Service asks Kubernetes to open a static port in every cluster node on a high port between 30,000 and 32,767 (by default). It is exposed on the IP of each node and is automatically routed to a ClusterIP Service that it creates
+
+### LoadBalancer
+
+A load balancer (LB) exposes the Service externally using a cloud provider’s load balancer. Both NodePort and ClusterIP Services are automatically created, and the load balancer routes traffic to them. This option is expensive as it requires each Service to have its own IP address and cloud provider’s load balancer. The exception is if you are using MetalLB or kube-vip for an on-premise environment, or any on-prem hardware LB with a cloud controller (such as F5), which wouldn’t cost anything at all.
