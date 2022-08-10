@@ -51,3 +51,12 @@ initialize master server
 ensure network connectivity
 implement pod network
 join worker nodes to master nodes
+
+## Managing host OS
+
+When a node goes offline, control plane determines how long before evicting pods on that node. Pods will be replicated to new nodes, assuming theyre part of a deployment.
+kubeclt drain node-name, removes pods from a nod. Recreated on different node
+Node is cordoned which means no pods can be scheduled to it.
+Node must be uncordoned once node comes back.
+
+k get pods -o wide
