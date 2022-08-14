@@ -10,7 +10,7 @@ Pod design: 20%
 
 **Cluster Architecture, Install, Config: 25%**
 Workloads and Scheduling: 15%
-**Services and networking: 20%$**
+**Services and networking: 20%**
 **Storage: 10%**
 Troubleshooting: 30%
 

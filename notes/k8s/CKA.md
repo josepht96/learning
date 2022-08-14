@@ -60,3 +60,140 @@ Node is cordoned which means no pods can be scheduled to it.
 Node must be uncordoned once node comes back.
 
 k get pods -o wide
+
+## Cluster upgrade process
+
+kubeadm will install control plane components
+it will not install kubelet or kubectl
+kubelet is what actually creates containers on nodes
+kubectl is CLI
+
+### cmds
+
+```text
+k get nodes
+kubeadm upgrade plan
+kubectl -n kube-system get cm kubeadm-config -oyaml
+k drain *node*
+k cordon *node*
+k uncordon *node*
+apt update
+apt install kubeadm=1.20.0-00
+kubeadm upgrade apply v1.20.0
+apt install kubelet=1.20.0-00
+systemctl restart kubelet
+
+# kubeadm must be run on every node
+# for non controlplane nodes use:
+
+kubeadm upgrade node
+```
+
+### etcd upgrade
+
+etcd is a distributed database of key value stores. It can run as a single static
+pod, but can also be deployed in multiple pods for HA
+
+review more
+
+```text
+# take backup
+
+etcdctl --endpoints=https://127.0.0.1:2379 \
+--cacert=<trusted-ca-file> --cert=<cert-file> --key=<key-file> \
+snapshot save <backup-file-location>
+
+ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key snapshot save /opt/snapshot-pre-boot.db
+
+# restore
+
+ETCDCTL_API=3 etcdctl --endpoints 10.2.0.9:2379 snapshot restore snapshotdb
+
+1. Get etcdctl utility if it's not already present.
+go get github.com/coreos/etcd/etcdctl
+
+2. Backup
+ETCDCTL_API=3 etcdctl --endpoints=https://[127.0.0.1]:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+     --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key \
+          snapshot save /opt/snapshot-pre-boot.db
+
+          -----------------------------
+
+          Disaster Happens
+
+          -----------------------------
+3. Restore ETCD Snapshot to a new folder
+ETCDCTL_API=3 etcdctl --endpoints=https://[127.0.0.1]:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+     --name=master \
+     --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key \
+     --data-dir /var/lib/etcd-from-backup \
+     --initial-cluster=master=https://127.0.0.1:2380 \
+     --initial-cluster-token etcd-cluster-1 \
+     --initial-advertise-peer-urls=https://127.0.0.1:2380 \
+     snapshot restore /opt/snapshot-pre-boot.db
+
+ 4. Modify /etc/kubernetes/manifests/etcd.yaml
+ Update --data-dir to use new target location
+ --data-dir=/var/lib/etcd-from-backup
+
+ Update new initial-cluster-token to specify new cluster
+ --initial-cluster-token=etcd-cluster-1
+
+ Update volumes and volume mounts to point to new path
+      volumeMounts:
+          - mountPath: /var/lib/etcd-from-backup
+            name: etcd-data
+          - mountPath: /etc/kubernetes/pki/etcd
+            name: etcd-certs
+   hostNetwork: true
+   priorityClassName: system-cluster-critical
+   volumes:
+   - hostPath:
+       path: /var/lib/etcd-from-backup
+       type: DirectoryOrCreate
+     name: etcd-data
+   - hostPath:
+       path: /etc/kubernetes/pki/etcd
+       type: DirectoryOrCreate
+     name: etcd-certs
+
+```
+
+### kubeadm install components
+
+```text
+apt-get update && apt-get install -y apt-transport-https curl
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
+deb https://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+apt-get update
+```
+
+### kubeadm install latest
+
+```text
+apt-get update
+apt-get install -y kubelet kubeadm kubectl
+apt-mark hold kubelet kubeadm kubectl
+```
+
+### kubeadm install specific versions
+
+```text
+apt-get install \
+  kubelet=1.14.2-00 \
+  kubeadm=1.14.2-00 \
+  kubectl=1.14.2-00 \
+  kubernetes-cni=0.7.5-00
+apt-mark hold kubelet kubeadm kubectl
+```
+
+### kubeadm get versions and errors
+
+```text
+kubelet --version
+kubeadm version
+kubectl version
+dpkg --list |grep kubernetes-cni
+```
