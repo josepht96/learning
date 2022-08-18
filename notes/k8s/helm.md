@@ -1,23 +1,27 @@
 # Helm Charts
+
 Package manager for kubernetes
 Single file to declare all custom settings - values.yml
 
-## cmds 
+## cmds
+
 helm install <release name> <helm chart name>
 helm upgrade <release name>
 helm rollback <release name>
 helm uninstall <release name>
 
 ## values.yml
+
 Template deployment files by using values.yml file
 
-
 # Releases
+
 When a helm chart is installed on a cluster, a release is created
 
-
 # Structure
+
 A helm directory expects the following structure:
+
 ```
 wordpress/
   Chart.yaml          # A YAML file containing information about the chart

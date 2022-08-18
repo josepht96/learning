@@ -10,6 +10,7 @@ Control plane:
     kube-proxy
 
 # etcd
+
 Kubernetes uses etcd as a key-value database store. It stores the configuration of the Kubernetes cluster in etcd.
 
 It also stores the actual state of the system and the desired state of the system in etcd.
@@ -17,6 +18,7 @@ It also stores the actual state of the system and the desired state of the syste
 It then uses etcd’s watch functionality to monitor changes to either of these two things. If they diverge, Kubernetes makes changes to reconcile the actual state and the desired state.
 
 # kube-controller-manager
+
 Control plane component that runs controller processes.
 
 Logically, each controller is a separate process, but to reduce complexity, they are all compiled into a single binary and run in a single process.
@@ -28,13 +30,14 @@ Job controller: Watches for Job objects that represent one-off tasks, then creat
 Endpoints controller: Populates the Endpoints object (that is, joins Services & Pods).
 Service Account & Token controllers: Create default accounts and API access tokens for new namespaces.
 
+# kubelet
 
-# kubelet 
 An agent that runs on each node in the cluster. It makes sure that containers are running in a Pod.
 
 The kubelet takes a set of PodSpecs that are provided through various mechanisms and ensures that the containers described in those PodSpecs are running and healthy. The kubelet doesn't manage containers which were not created by Kubernetes.
 
 # kube-proxy
+
 kube-proxy is a network proxy that runs on each node in your cluster, implementing part of the Kubernetes Service concept.
 
 kube-proxy maintains network rules on nodes. These network rules allow network communication to your Pods from network sessions inside or outside of your cluster.
@@ -197,3 +200,19 @@ kubeadm version
 kubectl version
 dpkg --list |grep kubernetes-cni
 ```
+
+## Netowkring
+
+Kubernetes IP addresses exist at the Pod scope - containers within a Pod share their network namespaces - including their IP address and MAC address. This means that containers within a Pod can all reach each other's ports on localhost. This also means that containers within a Pod must coordinate port usage, but this is no different from processes in a VM. This is called the "IP-per-pod" model.
+
+Services and pods get DNS records. When a pod needs to reach service, look up the DNS record, return IP address and route network traffic to that IP address (using TCP I assume?)
+
+check ip/network interfaces
+ip a | grep -B2 1.2.3.4
+ip link show eth0
+arp node01
+ip route show default
+netstat -nplt
+netstat -anp | grep etcd
+ps -aux | grep <service>
+Look up CNI's - very confused

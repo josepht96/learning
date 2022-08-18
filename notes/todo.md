@@ -11,16 +11,19 @@ RHCSA - 3
 
 ## tech
 
-docker - 0
+docker - X
 golang - 2  
-vim - 0  
-bash - 0  
+vim - X
+bash - X  
 linux - 1  
 testing applications - 3  
 caching - 3  
 redis - 3  
 regex - 3  
-auth protocols, jwt, oauth2.0, oidc  
+grep - 1
+ip - 1
+netstat
+auth protocols, jwt, oauth2.0, oidc - X  
 
 ## DSA
 
@@ -54,3 +57,10 @@ Validate practical skills with a few certifications
 Security by Design (Manning book)
 Securing DevOps (Manning book)
 Container Security (O'Reilly book)
+
+## What areas do I see while actually working?
+
+networking - TCP/IP, HTTPS, TLS, routes, layer 4, layer 7
+linux
+curl
+regex
