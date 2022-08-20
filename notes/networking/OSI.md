@@ -22,7 +22,7 @@ The overarching function of the Data Link layer is to deliver packets from one N
 
 ## Network layer
 
-The network layer (layer 3 ) handles end to end communicatio between networks. It does this by using another addressing scheme that can **logically** identify every node connected to the Internet. This addressing scheme is known as the Internet Protocol address, or the IP Address.
+The network layer (layer 3 ) handles end to end communication between networks. It does this by using another addressing scheme that can **logically** identify every node connected to the Internet. This addressing scheme is known as the Internet Protocol address, or the IP Address.
 
 Routers are Network Devices that operate at Layer 3 of the OSI model. A Router’s primary responsibility is to facilitate communication between Networks. As such, a Router creates a boundary between two networks. In order to communicate with any device not directly in your network, a router must be used.
 Routers handle data frames that have IP addr, IP dest, and MAC addresses. Routers handle sending
