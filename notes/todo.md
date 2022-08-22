@@ -46,7 +46,8 @@ Building Secure & Reliable Systems (Google book)
 **Unix and Linux System Admin Handbook**
 Introduction to Computing Systems by Yale Platt - my prereq for TLPI below
 Systems Performance by Brendan Gregg
-The Linux Programming Interface (TLPI) by Kerrisk
+The Linux Programming Interface (TLPI) by Kerrisk 
+<https://sciencesoftcode.files.wordpress.com/2018/12/the-linux-programming-interface-michael-kerrisk-1.pdf>
 **System Design Primer (on GitHub)**
 Designing Distributed Systems by Brendan Burns
 Designing Data-Intensive Applications
