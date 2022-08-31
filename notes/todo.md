@@ -70,40 +70,6 @@ write out interview questions
 write out rm questions
 understanding of what is required for prod environments
 
-## Resource manager questions
-
-1. When should I start preparing for a different assignment?
-2. Can I go to a different offering?
-3. Best way to find projects with people I don't know
-4. Any way to ensure I get staffed on a project where I'll get the experience I want?
-5. General outlook?
-6. Maybe ask about salaries
-
-## Interview questions?
-
-1. What are the responsibilities of this role? What problems does Replica have that
-    this role will alleviate?
-2. What does the tech stack look like?
-3. How do customers interact with the product(s)?
-4. What is the 5 year outlook for the company?
-5. Talk about scenario of how the product would be useful?
-6. Could it be used for Royals stadium?
-7. What is the engineering culture?
-
-## Why SRE, DevOps
-
-Enjoy working across teams
-Debugging/problem solving
-Responsibility
-Essential roles but often overlooked
-Find how computers and systems work more interesting than say a JS framework
-Get to do a little bit of everything - not pigeon holed
-
-Weak areas:
-Monitoring - learning tooling (grafana, prometheus) to monitor k8s, ec2s
-incident response - learning how to safely respond to incidents
-Learning to support stable systems, replication, running multiple instances of the same application
-
 ## Testing
 
 Unit
