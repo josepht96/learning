@@ -1,5 +1,10 @@
 # ToDo
 
+stand up local kubernetes
+CKAD
+CKA
+CKS
+
 security
 
 ## certs
@@ -65,9 +70,6 @@ networking - TCP/IP, HTTPS, TLS, routes, layer 4, layer 7
 linux
 curl
 regex
-
-write out interview questions
-write out rm questions
 understanding of what is required for prod environments
 
 ## Testing
@@ -81,3 +83,4 @@ Regression tests
 Production tests
 Stress tests
 Canary tests
+

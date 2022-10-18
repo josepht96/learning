@@ -1,0 +1,72 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: create the 'k8s-user' user
+      user: name=k8s-user append=yes state=present createhome=yes shell=/bin/bash
+
+    - name: allow 'k8s-user' to have passwordless sudo
+      lineinfile:
+        dest: /etc/sudoers
+        line: 'k8s-user ALL=(ALL) NOPASSWD: ALL'
+        validate: 'visudo -cf %s'
+
+    - name: set up authorized keys for the k8s-user user
+      authorized_key: user=k8s-user key="{{item}}"
+      with_file:
+        - ~/.ssh/id_rsa.pub
+
+- hosts: all
+  become: yes
+  tasks:
+   - name: create Docker config directory
+     file: path=/etc/docker state=directory
+
+   - name: changing Docker to systemd driver
+     copy:
+      dest: "/etc/docker/daemon.json"
+      content: |
+        {
+        "exec-opts": ["native.cgroupdriver=systemd"]
+        }
+
+   - name: install Docker
+     apt:
+       name: docker.io
+       state: present
+       update_cache: true
+
+   - name: install APT Transport HTTPS
+     apt:
+       name: apt-transport-https
+       state: present
+
+   - name: add Kubernetes apt-key
+     apt_key:
+       url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+       state: present
+
+   - name: add Kubernetes' APT repository
+     apt_repository:
+      repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+      state: present
+      filename: 'kubernetes'
+
+   - name: install kubelet
+     apt:
+       name: kubelet={{ kubernetes_version }}
+       state: present
+       update_cache: true
+
+   - name: install kubeadm
+     apt:
+       name: kubeadm={{ kubernetes_version }}
+       state: present
+
+- hosts: control_plane
+  become: yes
+  tasks:
+   - name: install kubectl
+     apt:
+       name: kubectl={{ kubernetes_version }}
+       state: present
+       force: yes
