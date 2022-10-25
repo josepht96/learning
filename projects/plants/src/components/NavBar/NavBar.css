@@ -1,0 +1,19 @@
+.NavBar {
+    text-align: center;
+    width: 100%;
+    top: 0;
+    margin-bottom: 30px;
+    border-bottom:1px solid rgb(72, 72, 72);
+    border-bottom-style: groove;
+}
+
+.NavBar-body {
+  background-color: #ffffff;
+  height: 7vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: inherit;
+  color: rgb(0, 0, 0);
+}

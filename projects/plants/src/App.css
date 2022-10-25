@@ -1,0 +1,31 @@
+.App {
+  text-align: center;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  margin-left: 25%;
+  margin-right: 25%;
+  font-family: Courier New, monospace;
+  font-size: calc(6px + 2vmin);
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-image {
+  height: 60vmin;
+  pointer-events: none;
+
+}
+
+.App-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.App-link {
+  color: #61dafb;
+}
