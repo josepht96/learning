@@ -8,12 +8,38 @@
 }
 
 .NavBar-body {
-  background-color: #ffffff;
-  height: 7vh;
+  height: 12vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: inherit;
   color: rgb(0, 0, 0);
+}
+
+.NavBar-title-box {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  padding-top: 0px;
+}
+
+.NavBar-title {
+  height: 50%;
+  display: inline-flex;
+  margin: auto;
+  padding: 5px;
+}
+
+.NavBar-links-box {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  padding-top: 0px;
+}
+.NavBar-link {
+  height: 50%;
+  display: inline-flex;
+  margin: auto;
+  padding: 5px;
 }
