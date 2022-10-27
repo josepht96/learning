@@ -1,26 +1,45 @@
-.Home {}
-
-.SideBar {
-    width: 25%;
-    flex-direction: column;
-    float: left;
-    border-right:1px solid rgb(72, 72, 72);
-    border-right-style: dotted;
+.Home-box {
+    font-size: calc(3px + 2vmin);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15%;
+    margin-right: 15%;
+    vertical-align: top;
 }
 
+.SideBar {
+    border-right: 1px solid #eaded4;
+    border-right-style: solid;
+    padding: 5px;
+    height: 100vh;
+    width: 20%;
+}
+.SideBar-right {
+    /* border-left: 1px solid rgb(72, 72, 72);
+    border-left-style: dotted; */
+    padding: 5px;
+    height: 100vh;
+    width: 20%;
+}
+
+.SideBar-hidden-item {
+    content: '.';
+    visibility: hidden;
+}
 .SideBar-item {}
 
 .PlantPanel {
-    width: 74%;
+    width: 60%;
     height: 100vh;
-    float: right;
-    margin: auto;
+    float: center;
+    padding: 10px;
 }
 
 .PlantBox {
     margin-bottom: 30px;
-    border-bottom:1px solid rgb(72, 72, 72);
-    border-bottom-style: dotted;
+    border-bottom: 1px solid #eaded4;
+    border-bottom-style: solid;
 }
 
 .PlantText {

@@ -12,6 +12,7 @@ function App() {
   return (
     <div className="App">
       <NavBar />
+      <div className='App'>
         <Router>
           <Routes>
             <Route exact path="/" element={<Home />} />
@@ -19,6 +20,7 @@ function App() {
             <Route path="/*" element={<Home />} />
           </Routes>
         </Router>
+      </div>
     </div>
   );
 }

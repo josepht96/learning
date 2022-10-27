@@ -1,10 +1,9 @@
 .NavBar {
-    text-align: center;
-    width: 100%;
-    top: 0;
-    margin-bottom: 30px;
-    border-bottom:1px solid rgb(72, 72, 72);
-    border-bottom-style: groove;
+  text-align: center;
+  top: 0;
+  margin-bottom: 20px;
+  margin-left: 25%;
+  margin-right: 25%;
 }
 
 .NavBar-body {
@@ -36,7 +35,10 @@
   height: 50%;
   display: inline-flex;
   margin: auto;
+  border-bottom: 1px solid #eaded4;;
+  border-bottom-style: groove;
 }
+
 .NavBar-link {
   height: 50%;
   display: inline-flex;
@@ -45,10 +47,12 @@
   display: inline-flex;
   padding-top: 20px;
 }
+
 a {
   text-decoration: none;
   color: black;
 }
+
 a:hover {
   color: rgb(99, 99, 99);
 }
