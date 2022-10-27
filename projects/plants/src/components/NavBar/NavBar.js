@@ -4,21 +4,21 @@ function NavBar() {
     return (
         <div className="NavBar">
             <div className="NavBar-body">
-            <div className='NavBar-title-box'>
+                <div className='NavBar-title-box'>
                     <div className='NavBar-title'>
-                        Plants and stuff
+                        <a href="/">Plants</a>
                     </div>
                 </div>
                 <div className='NavBar-links-box'>
                     <div className='NavBar-link'>
-                        Home
+                        <a href="/">Home</a>
                     </div>
                     <div className='NavBar-link'>
-                        About
+                        <a href="/about">About</a>
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 
