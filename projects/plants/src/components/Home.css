@@ -1,26 +1,32 @@
-.Home {
-    display: flex;
-    margin: auto;
-}
+.Home {}
 
 .SideBar {
-    width: 30%;
+    width: 25%;
+    flex-direction: column;
     float: left;
-    height: 100%;
+    border-right:1px solid rgb(72, 72, 72);
+    border-right-style: dotted;
 }
 
 .SideBar-item {}
 
-.PlantBox {
+.PlantPanel {
+    width: 74%;
+    height: 100vh;
+    float: right;
     margin: auto;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+}
+
+.PlantBox {
+    margin-bottom: 30px;
+    border-bottom:1px solid rgb(72, 72, 72);
+    border-bottom-style: dotted;
 }
 
 .PlantText {
-    width: 100%;
+    margin-bottom: 10px;
 }
+
 .PlantImage {
     border-radius: 5px;
     height: 40vmin;

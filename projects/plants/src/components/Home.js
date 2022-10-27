@@ -12,15 +12,96 @@ function Home() {
         <div className="SideBar-item">
           <a href="/">Coral Bells</a>
         </div>
-      </div>
-      <div className="PlantBox">
-        <img src={testImage} className="PlantImage" alt="testImage" />
-        <div className="PlantText">
-          <p>
-            Home page
-          </p>
+        <div className="SideBar-item">
+          <a href="/">Coleus</a>
+        </div>
+        <div className="SideBar-item">
+          <a href="/">Coral Bells</a>
+        </div>
+        <div className="SideBar-item">
+          <a href="/">Coleus</a>
+        </div>
+        <div className="SideBar-item">
+          <a href="/">Coral Bells</a>
+        </div>
+        <div className="SideBar-item">
+          <a href="/">Coleus</a>
+        </div>
+        <div className="SideBar-item">
+          <a href="/">Coral Bells</a>
+        </div>
+        <div className="SideBar-item">
+          <a href="/">Coleus</a>
+        </div>
+        <div className="SideBar-item">
+          <a href="/">Coral Bells</a>
+        </div>
+        <div className="SideBar-item">
+          <a href="/">Coleus</a>
+        </div>
+        <div className="SideBar-item">
+          <a href="/">Coral Bells</a>
+        </div>
+        <div className="SideBar-item">
+          <a href="/">Coleus</a>
+        </div>
+        <div className="SideBar-item">
+          <a href="/">Coral Bells</a>
+        </div>
+        <div className="SideBar-item">
+          <a href="/">Coleus</a>
+        </div>
+        <div className="SideBar-item">
+          <a href="/">Coral Bells</a>
+        </div>
+        <div className="SideBar-item">
+          <a href="/">Coleus</a>
+        </div>
+        <div className="SideBar-item">
+          <a href="/">Coral Bells</a>
+        </div>
+        <div className="SideBar-item">
+          <a href="/">Coleus</a>
+        </div>
+        <div className="SideBar-item">
+          <a href="/">Coral Bells</a>
+        </div>
+        <div className="SideBar-item">
+          <a href="/">Coleus</a>
+        </div>
+        <div className="SideBar-item">
+          <a href="/">Coral Bells</a>
+        </div>
+        <div className="SideBar-item">
+          <a href="/">Coleus</a>
+        </div>
+        <div className="SideBar-item">
+          <a href="/">Coral Bells</a>
         </div>
       </div>
+      <div className='PlantPanel'>
+        <div className="PlantBox">
+          <img src={testImage} className="PlantImage" alt="testImage" />
+          <div className="PlantText">
+              Whole bunch of text about stuff
+              Whole bunch of text about stuff
+              Whole bunch of text about stuff
+              Whole bunch of text about stuff
+              Whole bunch of text about stuff
+          </div>
+        </div>
+        <div className="PlantBox">
+          <img src={testImage} className="PlantImage" alt="testImage" />
+          <div className="PlantText">
+              Whole bunch of text about stuff
+              Whole bunch of text about stuff
+              Whole bunch of text about stuff
+              Whole bunch of text about stuff
+              Whole bunch of text about stuff
+          </div>
+        </div>
+      </div>
+
     </div>
   );
 }
