@@ -4,11 +4,11 @@ function NavBar() {
     return (
         <div className="NavBar">
             <div className="NavBar-body">
-                <div className='NavBar-title-box'>
+                {/* <div className='NavBar-title-box'>
                     <div className='NavBar-title'>
                         <a href="/">Plants</a>
                     </div>
-                </div>
+                </div> */}
                 <div className='NavBar-links-box'>
                     <div className='NavBar-link'>
                         <a href="/">Home</a>

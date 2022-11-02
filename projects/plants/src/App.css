@@ -1,9 +1,8 @@
 .App {
   text-align: center;
-  background-color: #fff1e5;
-  color: rgb(0, 0, 0);
-  font-family: Courier New, monospace;
+  font-family: Camphor,"Open Sans","Segoe UI",sans-serif;
   font-size: calc(6px + 2vmin);
+  color: black;
 }
 
 .App-logo {
@@ -26,4 +25,13 @@
 
 .App-link {
   color: #61dafb;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: rgb(99, 99, 99);
 }

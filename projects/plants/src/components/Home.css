@@ -6,6 +6,8 @@
     margin-left: 15%;
     margin-right: 15%;
     vertical-align: top;
+    height: 100%;
+    display: flex;
 }
 
 .SideBar {
@@ -13,21 +15,27 @@
     border-right-style: solid;
     padding: 5px;
     height: 100vh;
-    width: 20%;
+    width: 15%;
+    text-align: left;
+    font-size: calc(5px + 1.5vmin);
 }
+
 .SideBar-right {
     /* border-left: 1px solid rgb(72, 72, 72);
     border-left-style: dotted; */
     padding: 5px;
     height: 100vh;
-    width: 20%;
+    width: 15%;
 }
 
 .SideBar-hidden-item {
     content: '.';
     visibility: hidden;
 }
-.SideBar-item {}
+
+.SideBar-item {
+    margin-bottom: 5px;
+}
 
 .PlantPanel {
     width: 60%;
@@ -50,13 +58,4 @@
     border-radius: 5px;
     height: 40vmin;
     pointer-events: none;
-}
-
-a {
-    text-decoration: none;
-    color: black;
-}
-
-a:hover {
-    color: rgb(99, 99, 99);
 }
