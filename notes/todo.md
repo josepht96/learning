@@ -84,3 +84,11 @@ Production tests
 Stress tests
 Canary tests
 
+## all
+
+certs
+books
+go repos
+lc
+system design
+actual projects

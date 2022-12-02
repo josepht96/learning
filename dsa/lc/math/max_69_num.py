@@ -5,7 +5,7 @@ class Solution:
         while factor >= 0:
             digit = self.get_digit(num, factor)
             if digit == 6:
-                newNum = 3 * (10**(factor)) + num
+                newNum = num + 3 * (10**(factor))
                 if newNum > max:
                     max = newNum
             factor -=1
