@@ -30,7 +30,7 @@ func registerControllers() {
 		case http.MethodGet:
 			getTime(w, r)
 		default:
-			w.WriteHeader(http.StatusNotImplemented)
+			w.WriteHeader(http.StatusO)
 		}
 	})
 }

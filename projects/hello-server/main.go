@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"sync"
 	"time"
 )
 
@@ -36,6 +37,15 @@ func main() {
 		fmt.Println(data)
 		json.NewEncoder(w).Encode(data)
 	})
-	log.Printf("server is listening at %s", "http://localhost:8080")
-	http.ListenAndServe(":8080", nil)
+	var wg sync.WaitGroup
+	wg.Add(1)
+	go func() {
+		log.Printf("server is listening at %s", "http://localhost:8080")
+		http.ListenAndServe(":8080", nil)
+	}()
+	go func() {
+		log.Printf("server is listening at %s", "http://localhost:8081")
+		http.ListenAndServe(":8081", nil)
+	}()
+	wg.Wait()
 }
