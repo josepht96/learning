@@ -70,7 +70,6 @@ networking - TCP/IP, HTTPS, TLS, routes, layer 4, layer 7
 linux
 curl
 regex
-understanding of what is required for prod environments
 
 ## Testing
 

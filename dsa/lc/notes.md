@@ -1,1 +1,0 @@
-think about how youd solve the problem clearly before implementation
