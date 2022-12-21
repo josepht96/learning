@@ -17,4 +17,3 @@ class Solution:
             return root2
         else:
             return None
-        
