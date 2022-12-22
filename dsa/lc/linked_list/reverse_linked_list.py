@@ -7,11 +7,6 @@ class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         # new head is going to be the original tail of the LL
         # think about how you start and end...
-        if head == None:
-            return None
-        if head.next == None:
-            return head
-
         next_node = None
         prev_node = None
         while head != None:
