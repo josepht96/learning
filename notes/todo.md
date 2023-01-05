@@ -1,6 +1,5 @@
 # ToDo
 
-stand up local kubernetes
 CKAD
 CKA
 CKS
