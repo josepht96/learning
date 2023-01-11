@@ -2,9 +2,7 @@
 
 week 1: study
 week 2: practice test/study
-week 3: study
-week 4: practice test/study
-week 5: take test
+week 3: take test
 
 ## Architecture
 

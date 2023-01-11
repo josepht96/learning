@@ -1,0 +1,38 @@
+# liveness probe is used to determine is a container is stuck and
+# needs to be restarted
+# readiness probe determines if a has started up correctly as
+# is performing as needed
+# startup probes determines when a container has started correctly
+# used to delay other probes until completion
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: nginx
+  name: nginx
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+
+    startupProbe:
+      httpGet:
+        path: /
+        port: 80
+      failureThreshold: 5
+      periodSeconds: 5
+
+    readinessProbe:
+      httpGet:
+        path: /test
+        port: 80
+      initialDelaySeconds: 0
+      periodSeconds: 5
+
+    livenessProbe:
+      httpGet:
+        path: /
+        port: 80
+      initialDelaySeconds: 0
+      periodSeconds: 5
+    
