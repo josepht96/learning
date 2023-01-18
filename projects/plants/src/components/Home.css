@@ -1,17 +1,16 @@
 .Home-box {
+    margin-top: 30px;
     font-size: calc(3px + 2vmin);
     display: flex;
     align-items: center;
     justify-content: center;
     margin-left: 15%;
     margin-right: 15%;
-    vertical-align: top;
-    height: 100%;
     display: flex;
 }
 
 .SideBar {
-    border-right: 1px solid #eaded4;
+    border-right: 1px solid #dddddd;
     border-right-style: solid;
     padding: 5px;
     height: 100vh;
@@ -40,14 +39,12 @@
 .PlantPanel {
     width: 60%;
     height: 100vh;
-    float: center;
+    float: left;
     padding: 10px;
 }
 
 .PlantBox {
     margin-bottom: 30px;
-    border-bottom: 1px solid #eaded4;
-    border-bottom-style: solid;
 }
 
 .PlantText {

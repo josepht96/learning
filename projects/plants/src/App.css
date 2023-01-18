@@ -1,8 +1,8 @@
 .App {
   text-align: center;
-  font-family: Camphor,"Open Sans","Segoe UI",sans-serif;
+  font-family: Monospace;
   font-size: calc(6px + 2vmin);
-  color: black;
+  color: rgb(0, 0, 0);
 }
 
 .App-logo {
@@ -29,9 +29,60 @@
 
 a {
   text-decoration: none;
-  color: black;
+  color: rgb(0, 0, 0);
+  margin: auto;
 }
 
 a:hover {
   color: rgb(99, 99, 99);
+  text-align: center;
+  vertical-align: center;
+}
+
+.NavBar {
+  margin: auto;
+  height: 7vh;
+  overflow: hidden;
+  position: fixed; /* Set the navbar to fixed position */
+  width: 100%; /* Full width */
+  top: 0;
+  background-color: rgb(255, 255, 255);
+  border-bottom: 1px solid #bdbdbd;
+  border-bottom-style: solid;
+}
+
+/* .NavBar-body {
+  height: 12vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: inherit;
+} */
+
+.NavBar-title-box {
+  float: left;
+  display: inline-flex;
+  font-size: x-large;
+  height: 100%;
+  text-align: center;
+  margin-right: 5%;
+  margin-left: 15%;
+  font-size: 25px;
+}
+.NavBar-links-box {
+  display: inline-flex;
+  float: left;
+  height: 100%;
+}
+
+.NavBar-link {
+  margin: 15px;
+  /* border-right: 1px solid #000000;
+  border-right-style: solid; */
+}
+
+.main {
+  margin-top: 7vh;
 }

@@ -1,10 +1,4 @@
-# ToDo
-
-CKAD
-CKA
-CKS
-
-security
+# Todo
 
 ## certs
 
@@ -15,10 +9,7 @@ RHCSA - 3
 
 ## tech
 
-docker - X
 golang - 2  
-vim - X
-bash - X  
 linux - 1  
 testing applications - 3  
 caching - 3  
@@ -27,21 +18,10 @@ regex - 3
 grep - 1
 ip - 1
 netstat
-auth protocols, jwt, oauth2.0, oidc - X  
 
 ## DSA
 
 grokking - 3
-array - 3  
-binary - 2  
-dp - 2  
-graph - 1  
-interval - 1  
-linked list - 2  
-matrix - 2  
-string - 2  
-tree - 1  
-heap - 3  
 
 ## books
 
