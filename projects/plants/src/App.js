@@ -13,7 +13,7 @@ function App() {
     <div className="App">
       <div className="NavBar">
         <div className="NavBar-title-box">
-            <a href="/">Joe Thomas</a>
+            <a href="/">Joe</a>
         </div>
         <div className='NavBar-links-box'>
           <div className='NavBar-link'>
@@ -25,6 +25,8 @@ function App() {
           <div className='NavBar-link'>
             <a href="/contact">Contact</a>
           </div>
+        </div>
+        <div className="NavBar-title-box">
         </div>
       </div >
       <div className="main">

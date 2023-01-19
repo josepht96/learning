@@ -14,7 +14,10 @@ function Home() {
         </div>
       </div>
       <div className='PlantPanel'>
-        {/* <div className="PlantBox">
+        <p>
+          Coleus
+        </p>
+        <div className="PlantBox">
           <img src={testImage} className="PlantImage" alt="testImage" />
           <div className="PlantText">
             Whole bunch of text about stuff
@@ -23,7 +26,7 @@ function Home() {
             Whole bunch of text about stuff
             Whole bunch of text about stuff
           </div>
-        </div> */}
+        </div>
       </div>
       <div className="SideBar-right">
         <div className="SideBar-hidden-item">

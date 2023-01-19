@@ -1,7 +1,7 @@
 .App {
   text-align: center;
-  font-family: Monospace;
   font-size: calc(6px + 2vmin);
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
 }
 
 .App-logo {
@@ -28,7 +28,7 @@
 
 a {
   text-decoration: none;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   margin: auto;
 }
 
@@ -45,9 +45,7 @@ a:hover {
   position: fixed; /* Set the navbar to fixed position */
   width: 100%; /* Full width */
   top: 0;
-  background-color: rgb(22, 23, 24);
-  border-bottom: 1px solid #949494;
-  border-bottom-style: solid;
+  background-image: linear-gradient(to right, rgb(207, 222, 250) , rgb(246, 212, 231));
 }
 
 /* .NavBar-body {
@@ -66,22 +64,33 @@ a:hover {
   font-size: x-large;
   height: 100%;
   text-align: center;
-  margin-right: 5%;
-  margin-left: 15%;
   font-size: 25px;
+  width: 35%;
+}
+.NavBar-title-box-right {
+  float: right;
+  display: inline-flex;
+  font-size: x-large;
+  height: 100%;
+  text-align: center;
+  font-size: 25px;
+  width: 35%;
 }
 .NavBar-links-box {
   display: inline-flex;
   float: left;
   height: 100%;
+  width: 30%;
+  padding: auto;
 }
 
 .NavBar-link {
-  margin: 15px;
+  margin: auto;
   /* border-right: 1px solid #000000;
   border-right-style: solid; */
 }
 
 .main {
   margin-top: 7vh;
+  height: 93vh;
 }
