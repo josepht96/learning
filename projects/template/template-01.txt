@@ -1,0 +1,4 @@
+Hello {{.}}
+
+You are doing great. Keep learning.
+Do not stop {{.}}

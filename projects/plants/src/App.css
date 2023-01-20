@@ -38,27 +38,19 @@ a:hover {
   vertical-align: center;
 }
 
-.NavBar {
+.navbar {
   margin: auto;
   height: 7vh;
   overflow: hidden;
-  position: fixed; /* Set the navbar to fixed position */
-  width: 100%; /* Full width */
+  position: fixed;
+  /* Set the navbar to fixed position */
+  width: 100%;
+  /* Full width */
   top: 0;
-  background-image: linear-gradient(to right, rgb(207, 222, 250) , rgb(246, 212, 231));
+  background-image: linear-gradient(to right, rgb(255, 255, 255), rgb(218, 218, 218));
 }
 
-/* .NavBar-body {
-  height: 12vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: inherit;
-} */
-
-.NavBar-title-box {
+.navbar .title-box {
   float: left;
   display: inline-flex;
   font-size: x-large;
@@ -67,30 +59,33 @@ a:hover {
   font-size: 25px;
   width: 35%;
 }
-.NavBar-title-box-right {
-  float: right;
-  display: inline-flex;
-  font-size: x-large;
-  height: 100%;
-  text-align: center;
-  font-size: 25px;
-  width: 35%;
-}
-.NavBar-links-box {
+
+.navbar .link-box {
   display: inline-flex;
   float: left;
   height: 100%;
   width: 30%;
-  padding: auto;
 }
 
-.NavBar-link {
+.navbar .link {
   margin: auto;
-  /* border-right: 1px solid #000000;
-  border-right-style: solid; */
+}
+
+.divider {
+  display: inline-flex;
+  width: 2px;
+  color: #cdcdcd;
+  height: 100%;
+  padding-top: 2vh;
 }
 
 .main {
   margin-top: 7vh;
-  height: 93vh;
+  font-size: calc(3px + 2vmin);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 15%;
+  margin-right: 15%;
+  display: flex;
 }

@@ -11,22 +11,24 @@ import {
 function App() {
   return (
     <div className="App">
-      <div className="NavBar">
-        <div className="NavBar-title-box">
+      <div className="navbar">
+        <div className="title-box">
             <a href="/">Joe</a>
         </div>
-        <div className='NavBar-links-box'>
-          <div className='NavBar-link'>
+        <div className='link-box'>
+          <div className='link'>
             <a href="/">Home</a>
           </div>
-          <div className='NavBar-link'>
+          <div className='divider'>|</div>
+          <div className='link'>
             <a href="/about">About</a>
           </div>
-          <div className='NavBar-link'>
+          <div className='divider'>|</div>
+          <div className='link'>
             <a href="/contact">Contact</a>
           </div>
         </div>
-        <div className="NavBar-title-box">
+        <div className="title-box">
         </div>
       </div >
       <div className="main">

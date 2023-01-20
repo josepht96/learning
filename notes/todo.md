@@ -2,7 +2,6 @@
 
 ## certs
 
-CKAD - 1  
 CKA - 1  
 CKS - 1
 RHCSA - 3
@@ -38,7 +37,6 @@ Designing Data-Intensive Applications
 The Illustrated Network
 TCP/IP Illustrated by Stevens
 Distributed Tracing in Practice
-Validate practical skills with a few certifications
 Security by Design (Manning book)
 Securing DevOps (Manning book)
 Container Security (O'Reilly book)
