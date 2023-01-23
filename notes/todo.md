@@ -17,6 +17,9 @@ regex - 3
 grep - 1
 ip - 1
 netstat
+drivers
+compilers
+netcode
 
 ## DSA
 
