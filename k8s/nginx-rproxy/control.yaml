@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: control
+  name: control
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: control
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: control
+    spec:
+      containers:
+      - image: nginx:latest
+        name: control
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: control
+  name: control
+spec:
+  ports:
+  - name: 8080-80
+    port: 8080
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: control
+  type: ClusterIP
+status:
+  loadBalancer: {}

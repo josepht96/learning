@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 	"time"
 )
 
@@ -15,12 +16,21 @@ func main() {
 	if url == "" {
 		log.Fatal("error: environment var 'URL' not set")
 	}
+	_interval := os.Getenv("INTERVAL")
+	if _interval == "" {
+		_interval = "5"
+	}
+	interval, err := strconv.Atoi(_interval)
+	if err != nil {
+		log.Fatal(err)
+	}
 	for {
 		go func() {
 			start := time.Now()
 			resp, err := http.Get(url)
 			if err != nil {
-				log.Fatal(err)
+				fmt.Println(err)
+				return
 			}
 			defer resp.Body.Close()
 			duration := time.Since(start)
@@ -42,6 +52,6 @@ func main() {
 			fmt.Printf("\t%v\n", resp.Body)
 			fmt.Println(line)
 		}()
-		time.Sleep(5 * time.Second)
+		time.Sleep(time.Duration(interval) * time.Second)
 	}
 }
