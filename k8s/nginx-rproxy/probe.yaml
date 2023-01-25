@@ -13,4 +13,4 @@ spec:
       - name: URL
         value: "http://nginx:8080"
       - name: INTERVAL
-        value: "1"
+        value: "5"

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -45,11 +46,11 @@ func main() {
 			}
 			// print response body
 			fmt.Printf("body:\n")
-			// body, err := io.ReadAll(resp.Body)
-			// if err != nil {
-			// 	log.Fatalln(err)
-			// }
-			fmt.Printf("\t%v\n", resp.Body)
+			body, err := io.ReadAll(resp.Body)
+			if err != nil {
+				log.Fatalln(err)
+			}
+			fmt.Printf("%s\n", body)
 			fmt.Println(line)
 		}()
 		time.Sleep(time.Duration(interval) * time.Second)
