@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/josepht96/learning/oauth/pkg"
 	"golang.org/x/oauth2"
 )
 
@@ -74,7 +73,7 @@ func (h *authHandler) callback(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	targetToken = token
-	pkg.ParseJWT(token.AccessToken)
+	//pkg.ParseJWT(token.AccessToken)
 	http.Redirect(w, r, "http://localhost:8080/target/", http.StatusPermanentRedirect)
 }
 

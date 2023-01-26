@@ -37,7 +37,6 @@ func (h *TargetHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusNotImplemented)
 		}
 	}
-	fmt.Println("returning")
 }
 
 func (h *TargetHandler) response(w http.ResponseWriter, r *http.Request) {
@@ -47,7 +46,7 @@ func (h *TargetHandler) response(w http.ResponseWriter, r *http.Request) {
 		headers := []pkg.Header{}
 		authHeader := pkg.Header{
 			Key:   "Authorization",
-			Value: fmt.Sprintf("Bearer %s", targetToken),
+			Value: fmt.Sprintf("Bearer %s", targetToken.AccessToken),
 		}
 		headers = append(headers, authHeader)
 		body, err := pkg.Probe("http://localhost:30001", headers)
@@ -61,6 +60,7 @@ func (h *TargetHandler) response(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Fatal(err)
 		}
+		targetToken.AccessToken = ""
 	}
 }
 

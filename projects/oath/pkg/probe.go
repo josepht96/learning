@@ -26,6 +26,7 @@ func sendRequest(url string, headers []Header) (string, error) {
 	for _, h := range headers {
 		req.Header.Add(h.Key, h.Value)
 	}
+	fmt.Println(req)
 	resp, err := client.Do(req)
 	if err != nil {
 		fmt.Println(err)
