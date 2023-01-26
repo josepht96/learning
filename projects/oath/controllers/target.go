@@ -3,15 +3,21 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"time"
 
+	"github.com/josepht96/learning/oauth/pkg"
 	"golang.org/x/oauth2"
 )
 
 var login_url = "http://localhost:8080/auth/"
 var targetToken = &oauth2.Token{}
 
+type ResponseObject struct {
+	Token *oauth2.Token
+	Body  string
+}
 type TargetHandler struct {
 }
 
@@ -31,15 +37,30 @@ func (h *TargetHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusNotImplemented)
 		}
 	}
+	fmt.Println("returning")
 }
 
 func (h *TargetHandler) response(w http.ResponseWriter, r *http.Request) {
 	if targetToken.AccessToken == "" {
 		http.Redirect(w, r, login_url, http.StatusTemporaryRedirect)
 	} else {
+		headers := []pkg.Header{}
+		authHeader := pkg.Header{
+			Key:   "Authorization",
+			Value: fmt.Sprintf("Bearer %s", targetToken),
+		}
+		headers = append(headers, authHeader)
+		body, err := pkg.Probe("http://localhost:30001", headers)
+		resp := ResponseObject{
+			Token: targetToken,
+			Body:  body,
+		}
 		e := json.NewEncoder(w)
 		e.SetIndent("", "  ")
-		e.Encode(targetToken)
+		e.Encode(resp)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 }
 

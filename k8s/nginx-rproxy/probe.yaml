@@ -9,7 +9,7 @@ spec:
     - name: probe
       image: josepht96/probe:latest
       imagePullPolicy: Always
-      env:
+      env: 
       - name: URL
         value: "http://nginx:8080"
       - name: INTERVAL
