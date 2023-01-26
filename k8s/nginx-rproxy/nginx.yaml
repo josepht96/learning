@@ -16,16 +16,16 @@ spec:
       labels:
         app: nginx
     spec:
-      volumes:
-      - name: nginx-conf-volume
-        configMap:
-          name: nginx-conf
+      # volumes:
+      # - name: nginx-conf-volume
+      #   configMap:
+      #     name: nginx-conf
       containers:
       - image: nginx:latest
         name: nginx
-        volumeMounts:
-        - name: nginx-conf-volume
-          mountPath: /etc/nginx/
+        # volumeMounts:
+        # - name: nginx-conf-volume
+        #   mountPath: /etc/nginx/
         ports:
         - containerPort: 80
 ---
@@ -41,8 +41,9 @@ spec:
     port: 8080
     protocol: TCP
     targetPort: 80
+    nodePort: 30001
   selector:
     app: nginx
-  type: ClusterIP
+  type: NodePort
 status:
   loadBalancer: {}
