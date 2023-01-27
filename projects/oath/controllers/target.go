@@ -15,8 +15,8 @@ var login_url = "http://localhost:8080/auth/"
 var targetToken = &oauth2.Token{}
 
 type ResponseObject struct {
-	Token *oauth2.Token
-	Body  string
+	Token      *oauth2.Token
+	TargetBody string
 }
 type TargetHandler struct {
 }
@@ -51,8 +51,8 @@ func (h *TargetHandler) response(w http.ResponseWriter, r *http.Request) {
 		headers = append(headers, authHeader)
 		body, err := pkg.Probe("http://localhost:30001", headers)
 		resp := ResponseObject{
-			Token: targetToken,
-			Body:  body,
+			Token:      targetToken,
+			TargetBody: body,
 		}
 		e := json.NewEncoder(w)
 		e.SetIndent("", "  ")
