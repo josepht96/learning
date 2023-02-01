@@ -1,7 +1,7 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: myvolume
+  name: host-path-volume
 spec:
   storageClassName: standard
   capacity:
@@ -36,13 +36,12 @@ spec:
     name: nginx
     resources: {}
     volumeMounts:
-    - name: test-pvc
+    - name: pvc-test
       mountPath: /test
   volumes:
-  - name: test-pvc
-    hostPath:
-     path: /tmp/test
-     type: Directory
+    - name: pvc-test
+      persistentVolumeClaim:
+        claimName: mypvc
   dnsPolicy: ClusterFirst
   restartPolicy: Always
 status: {}

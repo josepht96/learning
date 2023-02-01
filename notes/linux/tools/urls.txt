@@ -1,0 +1,4 @@
+google.com
+yahoo.com
+nytimes.com
+facebook.com
