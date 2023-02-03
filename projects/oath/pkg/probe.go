@@ -18,7 +18,7 @@ type Header struct {
 func sendRequest(url string, headers []Header) (string, error) {
 	start := time.Now()
 	client := &http.Client{}
-	req, err := http.NewRequest("GET", "http://localhost:30001", nil)
+	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		fmt.Println(err)
 		return "", err

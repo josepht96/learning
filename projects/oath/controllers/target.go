@@ -49,7 +49,7 @@ func (h *TargetHandler) response(w http.ResponseWriter, r *http.Request) {
 			Value: fmt.Sprintf("Bearer %s", targetToken.AccessToken),
 		}
 		headers = append(headers, authHeader)
-		body, err := pkg.Probe("http://localhost:30001", headers)
+		body, err := pkg.Probe("http://localhost:8082", headers)
 		resp := ResponseObject{
 			Token:      targetToken,
 			TargetBody: body,
