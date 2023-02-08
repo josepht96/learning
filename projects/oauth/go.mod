@@ -1,4 +1,4 @@
-module github.com/josepht96/learning/oauth
+module github.com/josepht96/learning/projects/oauth
 
 go 1.18
 

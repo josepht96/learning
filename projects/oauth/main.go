@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"sync"
 
-	"github.com/josepht96/learning/oauth/controllers"
+	"github.com/josepht96/learning/projects/oauth/controllers"
 )
 
 var Port = 8080
