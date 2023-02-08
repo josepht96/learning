@@ -8,7 +8,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/josepht96/learning/oauth/pkg"
+	"github.com/josepht96/learning/projects/oauth/pkg"
 	"golang.org/x/oauth2"
 )
 
