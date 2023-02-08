@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/josepht96/learning/oauth/pkg"
@@ -49,7 +50,7 @@ func (h *TargetHandler) response(w http.ResponseWriter, r *http.Request) {
 			Value: fmt.Sprintf("Bearer %s", targetToken.AccessToken),
 		}
 		headers = append(headers, authHeader)
-		body, err := pkg.Probe("http://localhost:8082", headers)
+		body, err := pkg.Probe(os.Getenv("TARGET_URL"), headers)
 		resp := ResponseObject{
 			Token:      targetToken,
 			TargetBody: body,

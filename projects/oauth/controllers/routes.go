@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/josepht96/learning/projects/oauth/middleware"
+	"github.com/josepht96/learning/oauth/middleware"
 )
 
 //RegisterControllers lists routes

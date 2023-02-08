@@ -5,19 +5,20 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 	"time"
 
 	"golang.org/x/oauth2"
 )
 
 var endpoint = &oauth2.Endpoint{
-	AuthURL:  "http://localhost:30000/realms/master/protocol/openid-connect/auth",
-	TokenURL: "http://localhost:30000/realms/master/protocol/openid-connect/token",
+	AuthURL:  os.Getenv("AUTH_URL"),
+	TokenURL: os.Getenv("TOKEN_URL"),
 }
 var config = &oauth2.Config{
-	RedirectURL:  "http://localhost:8080/auth/callback/",
-	ClientID:     "test-auth",
-	ClientSecret: "h3D6fHOvPjPRhp0NN3YHGcQrFTZIBIIw",
+	RedirectURL:  os.Getenv("REDIRECT_URL"),
+	ClientID:     os.Getenv("CLIENT_ID"),
+	ClientSecret: os.Getenv("CLIENT_SECRET"),
 	Endpoint:     *endpoint,
 }
 

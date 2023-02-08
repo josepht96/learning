@@ -5,11 +5,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"strings"
 	"sync"
 	"time"
-
-	"github.com/golang-jwt/jwt/v4"
 )
 
 type Response struct {
@@ -23,42 +20,16 @@ type Message struct {
 	Time    string `json:"time"`
 }
 
+var port = 8081
+
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		// Parse takes the token string and a function for looking up the key. The latter is especially
-		// useful if you use multiple keys for your application.  The standard is to use 'kid' in the
-		// head of the token to identify which key to use, but the parsed token (head and claims) is provided
-		// to the callback, providing flexibility.
-
-		tokenString := r.Header.Get("Authorization")
-		splitToken := strings.Split(tokenString, "Bearer ")
-		tokenString = splitToken[1]
-
-		// Parse takes the token string and a function for looking up the key. The latter is especially
-		// useful if you use multiple keys for your application.  The standard is to use 'kid' in the
-		// head of the token to identify which key to use, but the parsed token (head and claims) is provided
-		// to the callback, providing flexibility.
-		token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
-			// Don't forget to validate the alg is what you expect:
-			parts := strings.Split(tokenString, ".")
-			method := jwt.GetSigningMethod("RS256")
-			err := method.Verify(strings.Join(parts[0:2], "."), parts[2], key)
-			if data.valid && err != nil {
-				t.Errorf("[%v] Error while verifying key: %v", data.name, err)
+		for name, values := range r.Header {
+			// Loop over all values for the name.
+			for _, value := range values {
+				fmt.Println(name, value)
 			}
-			if !data.valid && err == nil {
-				t.Errorf("[%v] Invalid key passed validation", data.name)
-			}
-		})
-		if err != nil {
-			log.Fatal(err)
 		}
-		fmt.Println(token)
-		// if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
-		// 	fmt.Println(claims["sub"])
-		// } else {
-		// 	fmt.Println(err)
-		// }
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 
@@ -67,18 +38,19 @@ func main() {
 			Status:     "OK",
 			StatusCode: 200,
 			Body: Message{
-				Message: "hello from test-server",
+				Message: "hello from hello-server",
 				Time:    dt.String(),
 			},
 		}
 		fmt.Println(data)
 		json.NewEncoder(w).Encode(data)
+		fmt.Println("---------------------------------------------------------")
 	})
 	var wg sync.WaitGroup
 	wg.Add(1)
 	go func() {
-		log.Printf("server is listening at %s", "http://localhost:8082")
-		http.ListenAndServe(":8082", nil)
+		log.Printf("server is listening at http://localhost:%d", port)
+		http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
 	}()
 	wg.Wait()
 }

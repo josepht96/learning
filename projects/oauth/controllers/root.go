@@ -45,7 +45,7 @@ func (h *rootHandler) defaultResponse(w http.ResponseWriter, r *http.Request) {
 		Status:     "OK",
 		StatusCode: 200,
 		Body: message{
-			Message: "hello from test-server",
+			Message: "hello from client-server",
 			Time:    dt.String(),
 		},
 	}
