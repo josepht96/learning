@@ -21,11 +21,12 @@ spec:
         configMap:
           name: nginx-conf
       containers:
-      - image: nginx:latest
+      - image: josepht96/jwt-nginx:v1
         name: nginx
         volumeMounts:
         - name: nginx-conf-volume
-          mountPath: /etc/nginx/
+          mountPath: /etc/nginx/test.conf
+          subPath: nginx.conf
         ports:
         - containerPort: 80
 ---
@@ -41,9 +42,8 @@ spec:
     port: 8080
     protocol: TCP
     targetPort: 80
-    nodePort: 30001
   selector:
     app: nginx
-  type: NodePort
+  type: ClusterIP
 status:
   loadBalancer: {}
