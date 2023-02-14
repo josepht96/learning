@@ -7,6 +7,8 @@ import (
 	"net/http"
 	"sync"
 	"time"
+
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 type Response struct {
@@ -23,6 +25,7 @@ type Message struct {
 var port = 8081
 
 func main() {
+	http.Handle("/metrics", promhttp.Handler())
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		for name, values := range r.Header {
 			// Loop over all values for the name.
