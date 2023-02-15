@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
+	"time"
 
 	"github.com/camunda/zeebe/clients/go/v8/pkg/entities"
 	"github.com/camunda/zeebe/clients/go/v8/pkg/worker"
@@ -12,8 +14,6 @@ import (
 )
 
 const ZeebeAddr = "0.0.0.0:26500"
-
-var readyClose = make(chan struct{})
 
 /*
 Sample application that connects to a cluster on Camunda Cloud, or a locally deployed cluster.
@@ -32,24 +32,36 @@ to download a file with the lines above filled out for you.
 When connecting to a local cluster or node, this application assumes default port and no
 authentication or encryption enabled.
 */
+
 func main() {
 	gatewayAddr := os.Getenv("ZEEBE_ADDRESS")
-	var plainText bool
+	plainText := true
 
 	if gatewayAddr == "" {
 		gatewayAddr = ZeebeAddr
 		plainText = true
 	}
+
+	if os.Getenv("ZEEBE_CLIENT_ID") == "" {
+		log.Fatal("ZEEBE_CLIENT_ID not set")
+	}
+	if os.Getenv("ZEEBE_CLIENT_SECRET") == "" {
+		log.Fatal("ZEEBE_CLIENT_SECRET not set")
+	}
+	if os.Getenv("ZEEBE_AUTHORIZATION_SERVER_URL") == "" {
+		log.Fatal("ZEEBE_AUTHORIZATION_SERVER_URL not set")
+	}
+
 	credsProvider, err := zbc.NewOAuthCredentialsProvider(&zbc.OAuthProviderConfig{
-		ClientID:               "test-auth",
-		ClientSecret:           "d6apt9pQkI6666bC17YiH3Jjp8mBEy6w",
+		ClientID:               os.Getenv("ZEEBE_CLIENT_ID"),
+		ClientSecret:           os.Getenv("ZEEBE_CLIENT_SECRET"),
 		Audience:               ZeebeAddr,
-		AuthorizationServerURL: "http://localhost:30000/realms/master/protocol/openid-connect/token",
+		AuthorizationServerURL: os.Getenv("ZEEBE_AUTHORIZATION_SERVER_URL"),
 	})
 	if err != nil {
 		panic(err)
 	}
-
+	fmt.Println(os.Getenv("ZEEBE_ADDRESS"))
 	zbClient, err := zbc.NewClient(&zbc.ClientConfig{
 		GatewayAddress:         gatewayAddr,
 		UsePlaintextConnection: plainText,
@@ -69,27 +81,27 @@ func main() {
 
 	fmt.Println(response.String())
 
+	zbClient.NewJobWorker().JobType("payment-service").Handler(handleJob).Open()
+
 	// create a new workflow instance
 	variables := make(map[string]interface{})
-	variables["orderId"] = "31243"
-
-	request, err := zbClient.NewCreateInstanceCommand().BPMNProcessId("order-process-4").LatestVersion().VariablesFromMap(variables)
-	if err != nil {
-		panic(err)
+	i := 0
+	for {
+		fmt.Println("Creating new instance...")
+		i++
+		variables["orderId"] = strconv.Itoa(i)
+		request, err := zbClient.NewCreateInstanceCommand().BPMNProcessId("order-process-4").LatestVersion().VariablesFromMap(variables)
+		if err != nil {
+			panic(err)
+		}
+		result, err := request.Send(ctx)
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println(result.String())
+		fmt.Println("Sleeping...")
+		time.Sleep(5 * time.Second)
 	}
-
-	result, err := request.Send(ctx)
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Println(result.String())
-
-	jobWorker := zbClient.NewJobWorker().JobType("payment-service").Handler(handleJob).Open()
-
-	<-readyClose
-	jobWorker.Close()
-	jobWorker.AwaitClose()
 }
 
 func handleJob(client worker.JobClient, job entities.Job) {
@@ -118,7 +130,6 @@ func handleJob(client worker.JobClient, job entities.Job) {
 	}
 
 	log.Println("Complete job", jobKey, "of type", job.Type)
-	log.Println("Processing order:", variables["orderId"])
 	log.Println("Collect money using payment method:", headers["method"])
 
 	ctx := context.Background()
@@ -128,7 +139,6 @@ func handleJob(client worker.JobClient, job entities.Job) {
 	}
 
 	log.Println("Successfully completed job")
-	close(readyClose)
 }
 
 func failJob(client worker.JobClient, job entities.Job) {
