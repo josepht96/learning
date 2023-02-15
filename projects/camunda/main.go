@@ -13,7 +13,7 @@ import (
 	"github.com/camunda/zeebe/clients/go/v8/pkg/zbc"
 )
 
-const ZeebeAddr = "0.0.0.0:26500"
+const ZeebeAddr = "zeebe.camunda.svc.cluster.local:26500"
 
 /*
 Sample application that connects to a cluster on Camunda Cloud, or a locally deployed cluster.
@@ -55,13 +55,13 @@ func main() {
 	credsProvider, err := zbc.NewOAuthCredentialsProvider(&zbc.OAuthProviderConfig{
 		ClientID:               os.Getenv("ZEEBE_CLIENT_ID"),
 		ClientSecret:           os.Getenv("ZEEBE_CLIENT_SECRET"),
-		Audience:               ZeebeAddr,
+		Audience:               gatewayAddr,
 		AuthorizationServerURL: os.Getenv("ZEEBE_AUTHORIZATION_SERVER_URL"),
 	})
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(os.Getenv("ZEEBE_ADDRESS"))
+	fmt.Println(gatewayAddr)
 	zbClient, err := zbc.NewClient(&zbc.ClientConfig{
 		GatewayAddress:         gatewayAddr,
 		UsePlaintextConnection: plainText,

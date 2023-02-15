@@ -10,6 +10,6 @@ RUN go mod download
 
 COPY . ./
 
-RUN go build -o /app
+RUN go build -o /zeebe-worker
 
-CMD [ "/app" ]
+CMD [ "/zeebe-worker" ]
