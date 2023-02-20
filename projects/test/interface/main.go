@@ -36,7 +36,7 @@ func main() {
 		MedSchool: "Tufts Med",
 	}
 	lawyer1 := &lawyerStruct{
-		Name:      "Joe T",
+		Name:      "Joe Z",
 		LawSchool: "Tufts Law",
 	}
 	printNameInterface(doctor1)
