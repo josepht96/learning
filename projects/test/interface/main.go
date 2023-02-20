@@ -14,12 +14,12 @@ type lawyerStruct struct {
 
 func (d *doctorStruct) PrintName() string {
 	fmt.Println(d.MedSchool)
-	return "kek"
+	return "string"
 }
 
 func (l *lawyerStruct) PrintName() string {
 	fmt.Println(l.LawSchool)
-	return "kek"
+	return "string"
 }
 
 type employeeInterface interface {
