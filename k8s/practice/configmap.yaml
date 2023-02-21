@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: env-config
+data:
+  ZEEBE_CLIENT_ID: very
+  ZEEBE_CLIENT_SECRET: charm
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: nginx
+  name: nginx
+spec:
+  volumes:
+  - name: env-config
+    configMap:
+      name: env-config
+  containers:
+  - image: nginx
+    name: nginx
+    resources: {}
+    envFrom:
+    - configMapRef:
+        name: env-config
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+
+
