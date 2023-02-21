@@ -1,0 +1,24 @@
+{{ range $k, $v := .Values.pods }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $v.name }}-pod
+  labels: 
+    app: {{ $k }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ $v.name }}
+  template:
+    metadata:
+      name: {{ $v.name }}
+      labels:
+        app: {{ $v.name }}
+      annotations: {{ toYaml $.Values.podAnnotations | nindent 9}}
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+---
+{{ end }}
