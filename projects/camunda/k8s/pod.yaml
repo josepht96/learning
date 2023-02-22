@@ -8,6 +8,7 @@ spec:
   - name: zeebe-worker
     image: josepht96/zeebe-worker:latest
     imagePullPolicy: Always
+    resources: {}
     env:
     - name: ZEEBE_ADDRESS
       value: "zeebe.camunda.svc.cluster.local:26500"

@@ -1,10 +1,10 @@
-{{ range $k, $v := .Values.pods }}
+{{ range $v := .Values.pods }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ $v.name }}-pod
   labels: 
-    app: {{ $k }}
+    app: {{ $v.name }}
 spec:
   replicas: 1
   selector:
