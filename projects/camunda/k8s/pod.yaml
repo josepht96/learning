@@ -6,19 +6,19 @@ spec:
   restartPolicy: Always
   containers:
   - name: zeebe-worker
-    image: josepht96/zeebe-worker:latest
+    image: josepht96/zeebe-worker:v1
     imagePullPolicy: Always
     resources: {}
     env:
     - name: ZEEBE_ADDRESS
-      value: "zeebe.camunda.svc.cluster.local:26500"
+      value: "camunda-zeebe-gateway.camunda.svc.cluster.local:26500"
     - name: ZEEBE_HOST
-      value: "zeebe.camunda.svc.cluster.local"
+      value: "camunda-zeebe-gateway.camunda.svc.cluster.local"
     - name: ZEEBE_PORT
       value: "26500"
     - name: ZEEBE_CLIENT_ID
-      value: "test-auth"
+      value: "zeebe-worker"
     - name: ZEEBE_CLIENT_SECRET
-      value: "d6apt9pQkI6666bC17YiH3Jjp8mBEy6w"
+      value: "fVrvBxv5nGkHxpZR6gsSpVDRyAzdL07M"
     - name: ZEEBE_AUTHORIZATION_SERVER_URL
-      value: "http://keycloak.default.svc.cluster.local:8080/realms/master/protocol/openid-connect/token"
+      value: "http://camunda-keycloak.camunda.svc.cluster.local:80/auth/realms/camunda-platform/protocol/openid-connect/token"

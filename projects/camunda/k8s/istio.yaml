@@ -5,10 +5,10 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: zeebe
+      app: camunda-platform
   jwtRules:
-  - issuer: "http://keycloak.default.svc.cluster.local:8080/realms/master"
-    jwksUri: "http://keycloak.default.svc.cluster.local:8080/realms/master/protocol/openid-connect/certs"
+  - issuer: "http://camunda-keycloak.camunda.svc.cluster.local:80/auth/realms/camunda-platform"
+    jwksUri: "http://camunda-keycloak.camunda.svc.cluster.local:80/auth/realms/camunda-platform/protocol/openid-connect/certs"
 
 ---
 apiVersion: security.istio.io/v1beta1
@@ -18,7 +18,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: zeebe
+      app: camunda-platform
   rules:
   - from:
     - source:

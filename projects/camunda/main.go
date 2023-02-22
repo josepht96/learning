@@ -13,7 +13,7 @@ import (
 	"github.com/camunda/zeebe/clients/go/v8/pkg/zbc"
 )
 
-const ZeebeAddr = "zeebe.camunda.svc.cluster.local:26500"
+const ZeebeAddr = "camunda-zeebe-gateway.camunda.svc.cluster.local:26500"
 
 func main() {
 	gatewayAddr := os.Getenv("ZEEBE_ADDRESS")
@@ -63,7 +63,8 @@ func main() {
 
 	fmt.Println(response.String())
 
-	zbClient.NewJobWorker().JobType("payment-service").Handler(handleJob).Open()
+	zbClient.NewJobWorker().JobType("payment-service").Handler(handleJobPayment).Open()
+	zbClient.NewJobWorker().JobType("shipment-service").Handler(handleJobShipment).Open()
 
 	// create a new workflow instance
 	variables := make(map[string]interface{})
@@ -71,7 +72,7 @@ func main() {
 	for {
 		fmt.Println("Creating new instance...")
 		variables["orderId"] = strconv.Itoa(i)
-		request, err := zbClient.NewCreateInstanceCommand().BPMNProcessId("order-process-4").LatestVersion().VariablesFromMap(variables)
+		request, err := zbClient.NewCreateInstanceCommand().BPMNProcessId("order-process-4-manual").LatestVersion().VariablesFromMap(variables)
 		if err != nil {
 			panic(err)
 		}
@@ -82,11 +83,11 @@ func main() {
 		fmt.Println(result.String())
 		i++
 		fmt.Println("Sleeping...")
-		time.Sleep(5 * time.Second)
+		time.Sleep(15 * time.Second)
 	}
 }
 
-func handleJob(client worker.JobClient, job entities.Job) {
+func handleJobPayment(client worker.JobClient, job entities.Job) {
 	jobKey := job.GetKey()
 
 	headers, err := job.GetCustomHeadersAsMap()
@@ -112,7 +113,7 @@ func handleJob(client worker.JobClient, job entities.Job) {
 	}
 
 	log.Println("Complete job", jobKey, "of type", job.Type)
-	log.Println("Collect money using payment method:", headers["method"])
+	log.Println("Payment processed:", headers["method"])
 
 	ctx := context.Background()
 	_, err = request.Send(ctx)
@@ -123,6 +124,43 @@ func handleJob(client worker.JobClient, job entities.Job) {
 	log.Println("Successfully completed job")
 }
 
+func handleJobShipment(client worker.JobClient, job entities.Job) {
+	time.Sleep(15 * time.Second)
+	jobKey := job.GetKey()
+
+	headers, err := job.GetCustomHeadersAsMap()
+	if err != nil {
+		// failed to handle job as we require the custom job headers
+		failJob(client, job)
+		return
+	}
+
+	variables, err := job.GetVariablesAsMap()
+	if err != nil {
+		// failed to handle job as we require the variables
+		failJob(client, job)
+		return
+	}
+
+	variables["totalPrice"] = 46.50
+	request, err := client.NewCompleteJobCommand().JobKey(jobKey).VariablesFromMap(variables)
+	if err != nil {
+		// failed to set the updated variables
+		failJob(client, job)
+		return
+	}
+
+	log.Println("Complete job", jobKey, "of type", job.Type)
+	log.Println("Shipment processed:", headers["method"])
+
+	ctx := context.Background()
+	_, err = request.Send(ctx)
+	if err != nil {
+		panic(err)
+	}
+
+	log.Println("Successfully completed job")
+}
 func failJob(client worker.JobClient, job entities.Job) {
 	log.Println("Failed to complete job", job.GetKey())
 
