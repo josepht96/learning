@@ -5,10 +5,13 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: camunda-platform
+      app.kubernetes.io/component: zeebe-gateway
+  # ISSUER HAS TO MATCH
   jwtRules:
-  - issuer: "http://camunda-keycloak.camunda.svc.cluster.local:80/auth/realms/camunda-platform"
-    jwksUri: "http://camunda-keycloak.camunda.svc.cluster.local:80/auth/realms/camunda-platform/protocol/openid-connect/certs"
+  - issuer: "http://camunda-keycloak:80/auth/realms/camunda-platform"
+    forwardOriginalToken: true
+    jwks: |
+      {"keys":[{"kid":"CT7XSGjtb4hFODueLRqEwvSzZpibafpCAoeXcCiMLes","kty":"RSA","alg":"RS256","use":"enc","n":"mZETZlLx73k69vcaHB0sR52AvtbON70cJnuHTRB19UzCBj4sBzIPJzkgGQCBVvlkgn3rplc-fRmg3r6W3WTUzicuUrm5xaNoL09axtmYqx2SyehHXP_8dpP91uFFGc7OzgISqX_xQM-j0CD_w543pEOKpQBURUsOpPpVFQLYDq4u1GJ7vZuyyi6coXG6Tk7o0ZrEV18dBd3Br-ohJvQ8eEESVcSYDhtaodwT72matFHDkdFe-Da4zaly-Cuv9PGq75P9EjVfYYLo0Jfx2a2pwZUgNDejtC0EDN66Y0SHabmIhFF0sVScvuT9XRyhggKq99qQWoTVL5CP_1v2Yjf5zQ","e":"AQAB","x5c":["MIICrzCCAZcCBgGGe+/OVzANBgkqhkiG9w0BAQsFADAbMRkwFwYDVQQDDBBjYW11bmRhLXBsYXRmb3JtMB4XDTIzMDIyMzAxNDA1OFoXDTMzMDIyMzAxNDIzOFowGzEZMBcGA1UEAwwQY2FtdW5kYS1wbGF0Zm9ybTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJmRE2ZS8e95Ovb3GhwdLEedgL7Wzje9HCZ7h00QdfVMwgY+LAcyDyc5IBkAgVb5ZIJ966ZXPn0ZoN6+lt1k1M4nLlK5ucWjaC9PWsbZmKsdksnoR1z//HaT/dbhRRnOzs4CEql/8UDPo9Ag/8OeN6RDiqUAVEVLDqT6VRUC2A6uLtRie72bssounKFxuk5O6NGaxFdfHQXdwa/qISb0PHhBElXEmA4bWqHcE+9pmrRRw5HRXvg2uM2pcvgrr/Txqu+T/RI1X2GC6NCX8dmtqcGVIDQ3o7QtBAzeumNEh2m5iIRRdLFUnL7k/V0coYICqvfakFqE1S+Qj/9b9mI3+c0CAwEAATANBgkqhkiG9w0BAQsFAAOCAQEAO5JScLQ8wXcGEBW5sIjRCkn1KRzYZkwlQ5ywNm5hBKxuLne7UIop46xwx63lxzMqGCLGlgJrvG0A0oRfmQruDXWtk2t8QO3au3Yv8TwU/+81EGVNw5fCuWT39Kk0Ed23IfB1eC3sml5Ub2hnrI6+pe4wNO9hCR7w/Rc1MTr1EZ9i+Im8l3mQ1i3EVWk3oeOUvDqhXvjYT9mQI3jpZsTtAb+9F6bnUAOkmDvUK+vYFiQ/n8r7r93jLPpb7lHtApspgnKXDwO9CfwPL5hYuENKOt1WC0h4KxcRY0RpPCMlxgcf6SE48fMAmFFdMbshFukaK9alvAQ0UKSvpW+3lQhhCw=="],"x5t":"e3aro-0RTBoKu470RJuEYSpExXA","x5t#S256":"w4vq7zbzTr1RZpwIJkrwU5WdZZFzC5StalX7zdS2QM4"},{"kid":"Vznf41Zhh9aGgtGJCEUw3yJwRIAUFcGgAM2WRVB-xt0","kty":"RSA","alg":"RS256","use":"sig","n":"ln0k49qTyKJOy7IQ5QdzGTowKWkQCRFnWCXfwTws6yvoL-glecAeKai_yn0-Ja7B8L_nZ5AB620jf2pc1rq50sd42rw_Ht0j7NV_y1pHi3Ds2N6L1_SyXG2hWrf2w1VnEIKFziKDIiEv4lczKaDWfWj3a5MxivUoky81ZuQIDEMLF_dpkOsWTlJIQAz8q9gDeeKq35R9ypZQBSBQM78NhAUArU-rGSA0Mcy62Qhoxr_t71X8Xu2l3sEoIVE5EUxQXj4Gi2J314UTDaRzoDb3VE5jbL7QNkpdWjESayNWOw3LTm3rhMZsiX-zE2cct1n1P2U1b2f-uBIGDPf66NdqcQ","e":"AQAB","x5c":["MIICrzCCAZcCBgGGe+/OhTANBgkqhkiG9w0BAQsFADAbMRkwFwYDVQQDDBBjYW11bmRhLXBsYXRmb3JtMB4XDTIzMDIyMzAxNDA1OFoXDTMzMDIyMzAxNDIzOFowGzEZMBcGA1UEAwwQY2FtdW5kYS1wbGF0Zm9ybTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJZ9JOPak8iiTsuyEOUHcxk6MClpEAkRZ1gl38E8LOsr6C/oJXnAHimov8p9PiWuwfC/52eQAettI39qXNa6udLHeNq8Px7dI+zVf8taR4tw7Njei9f0slxtoVq39sNVZxCChc4igyIhL+JXMymg1n1o92uTMYr1KJMvNWbkCAxDCxf3aZDrFk5SSEAM/KvYA3niqt+UfcqWUAUgUDO/DYQFAK1PqxkgNDHMutkIaMa/7e9V/F7tpd7BKCFRORFMUF4+Botid9eFEw2kc6A291ROY2y+0DZKXVoxEmsjVjsNy05t64TGbIl/sxNnHLdZ9T9lNW9n/rgSBgz3+ujXanECAwEAATANBgkqhkiG9w0BAQsFAAOCAQEAJpUSqisi3YFMm234Gb8L1dT51pIU8KQvWEK5sY0U8jBK01+Ci7U+wRkQp6z3/deWWem8UU0PFCAFLBdbZRNOBYEIalQ668t7zCorSoLw90WFB6YS2UYUPgrR0llfuygmgHkY0Af4VKC4jTYVysOCnt3rWmZJBcE1Tm5KFlXHU444UmNeQdJ5TIndAJFxsH7/nN7Lj67SvnW1qCnYwaAHzMS8GpXg5MKLIuzwxEXnC+g6ErVyDLXFNK5SJPHy/9kfXJOP4Pz7YdzXfdx5aVQk76/6r3B0tej9LK5a44+o+nXAYpzddjkNsAJx4lD13Sa88MB8Z391Br+GKIU7b6ctXw=="],"x5t":"67TD-o5tukxy1PeA1P615tX17SQ","x5t#S256":"lCs3yP7fYYWVllleke2cGv8x_9vdFDE64ukJLJ93PeI"}]}
 
 ---
 apiVersion: security.istio.io/v1beta1
@@ -18,8 +21,51 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: camunda-platform
+      app.kubernetes.io/component: zeebe-gateway
+  action: ALLOW
   rules:
   - from:
     - source:
         requestPrincipals: ["*"]
+  - from:
+    - source:
+        namespaces: ["camunda"]
+---
+
+# kind: AuthorizationPolicy
+# apiVersion: security.istio.io/v1beta1
+# metadata:
+#   name: ext-authz-oauth2-allow
+#   namespace: camunda
+# spec:
+#   selector:
+#     matchLabels:
+#       app.kubernetes.io/component: zeebe-gateway
+#   action: ALLOW
+#   rules:
+#   - from:
+#       - source:
+#           requestPrincipals: ["*"]
+#     to:
+#       - operation:
+#           hosts: ["camunda-zeebe-gateway:26500"]
+#           notPaths: ["/auth/*","/identity/*"]
+# ---
+# kind: AuthorizationPolicy
+# apiVersion: security.istio.io/v1beta1
+# metadata:
+#   name: zeebe-ap-deny-all
+#   namespace: camunda
+# spec:
+#   selector:
+#     matchLabels:
+#       app.kubernetes.io/component: zeebe-gateway
+#   action: DENY
+#   rules:
+#     - from:
+#         - source:
+#             # if validation fails, principal will be empty, so it wont match "*"
+#             notRequestPrincipals: ["*"]
+#       to:
+#         - operation:
+#             hosts: ["camunda-zeebe-gateway:26500"]

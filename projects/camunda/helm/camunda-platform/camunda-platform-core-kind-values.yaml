@@ -47,4 +47,4 @@ elasticsearch:
     storageClassName: "standard"
     resources:
       requests:
-        storage: 2Gi
+        storage: 30Gi
