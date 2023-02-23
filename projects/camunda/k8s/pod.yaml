@@ -22,3 +22,13 @@ spec:
       value: "wUAp2AHTZujebgM6KNmOvAZ1rab2yTVc"
     - name: ZEEBE_AUTHORIZATION_SERVER_URL
       value: "http://camunda-keycloak.camunda.svc.cluster.local:80/auth/realms/camunda-platform/protocol/openid-connect/token"
+
+
+    - name: ZEEBE_ADDRESS
+      value: "camunda-zeebe-gateway.camunda.svc.cluster.local:26500"
+    - name: ZEEBE_CLIENT_ID
+      value: "tasklist"
+    - name: ZEEBE_CLIENT_SECRET
+      value: "R482mQsmG9"
+    - name: ZEEBE_AUTHORIZATION_SERVER_URL
+      value: "http://camunda-keycloak.camunda.svc.cluster.local:80/auth/realms/camunda-platform/protocol/openid-connect/token"

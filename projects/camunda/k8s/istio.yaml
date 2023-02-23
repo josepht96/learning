@@ -31,8 +31,8 @@ spec:
   - from:
     - source:
         requestPrincipals: ["*"]
-    # - source:
-    #     namespaces: ["camunda"]
+    - source:
+        namespaces: ["camunda"]
 ---
 
 kind: AuthorizationPolicy
