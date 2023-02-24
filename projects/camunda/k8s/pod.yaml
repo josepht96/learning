@@ -10,10 +10,26 @@ spec:
     imagePullPolicy: Always
     resources: {}
     env:
+    # - name: ZEEBE_ADDRESS
+    #   value: "camunda-zeebe-gateway.camunda.svc.cluster.local:26500"
+    # - name: ZEEBE_HOST
+    #   value: "camunda-zeebe-gateway.camunda.svc.cluster.local"
+    # - name: ZEEBE_PORT
+    #   value: "26500"
+    # - name: ZEEBE_CLIENT_ID
+    #   value: "zw"
+    # - name: ZEEBE_CLIENT_SECRET
+    #   value: "hcH7uQjy3XzXuTc7Zd7Zjp5vBaRcgR38"
+    # - name: ZEEBE_AUTHORIZATION_SERVER_URL
+    #   value: "http://camunda-keycloak.camunda.svc.cluster.local:80/auth/realms/camunda-platform/protocol/openid-connect/token"
+    # - name: ZEEBE_INSECURE_CONNECTION
+    #   value: "true"
+
+
     - name: ZEEBE_ADDRESS
-      value: "camunda-zeebe-gateway.camunda.svc.cluster.local:26500"
+      value: "camunda-zeebe-gateway:26500"
     - name: ZEEBE_HOST
-      value: "camunda-zeebe-gateway.camunda.svc.cluster.local"
+      value: "camunda-zeebe-gateway"
     - name: ZEEBE_PORT
       value: "26500"
     - name: ZEEBE_CLIENT_ID
@@ -21,16 +37,4 @@ spec:
     - name: ZEEBE_CLIENT_SECRET
       value: "hcH7uQjy3XzXuTc7Zd7Zjp5vBaRcgR38"
     - name: ZEEBE_AUTHORIZATION_SERVER_URL
-      value: "http://camunda-keycloak.camunda.svc.cluster.local:80/auth/realms/camunda-platform/protocol/openid-connect/token"
-    - name: ZEEBE_INSECURE_CONNECTION
-      value: "true"
-
-
-    - name: ZEEBE_ADDRESS
-      value: "camunda-zeebe-gateway.camunda.svc.cluster.local:26500"
-    - name: ZEEBE_CLIENT_ID
-      value: "tasklist"
-    - name: ZEEBE_CLIENT_SECRET
-      value: "zI8G8VzcJ9"
-    - name: ZEEBE_AUTHORIZATION_SERVER_URL
-      value: "http://camunda-keycloak.camunda.svc.cluster.local:80/auth/realms/camunda-platform/protocol/openid-connect/token"
+      value: "http://camunda-keycloak:80/auth/realms/camunda-platform/protocol/openid-connect/token"

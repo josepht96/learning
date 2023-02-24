@@ -1,0 +1,38 @@
+{
+    "exp": 1677254677,
+    "iat": 1677254377,
+    "jti": "818fe6ba-71fc-4e90-bdb0-2660abde4354",
+    "iss": "http://camunda-keycloak/auth/realms/camunda-platform",
+    "aud": "account",
+    "sub": "61517046-6f42-4ba8-bad1-f52c5ae32686",
+    "typ": "Bearer",
+    "azp": "zw",
+    "acr": "1",
+    "realm_access": {
+      "roles": [
+        "Default user role"
+      ]
+    },
+    "resource_access": {
+      "account": {
+        "roles": [
+          "manage-account",
+          "manage-account-links",
+          "view-profile"
+        ]
+      }
+    },
+    "scope": "email profile",
+    "email_verified": false,
+    "clientId": "zw",
+    "clientHost": "127.0.0.6",
+    "permissions": {
+      "account": [
+        "manage-account",
+        "manage-account-links",
+        "view-profile"
+      ]
+    },
+    "preferred_username": "service-account-zw",
+    "clientAddress": "127.0.0.6"
+  }
