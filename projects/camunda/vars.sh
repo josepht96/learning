@@ -1,4 +1,4 @@
-export ZEEBE_ADDRESS="0.0.0.0:30001"
-export ZEEBE_CLIENT_ID="test-auth"
-export ZEEBE_CLIENT_SECRET="d6apt9pQkI6666bC17YiH3Jjp8mBEy6w"
-export ZEEBE_AUTHORIZATION_SERVER_URL="http://localhost:30000/realms/master/protocol/openid-connect/token"
+export ZEEBE_ADDRESS="localhost:8083"
+export ZEEBE_CLIENT_ID="zeebe-worker"
+export ZEEBE_CLIENT_SECRET="wUAp2AHTZujebgM6KNmOvAZ1rab2yTVc"
+export ZEEBE_AUTHORIZATION_SERVER_URL="http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token"
