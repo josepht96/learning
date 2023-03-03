@@ -19,11 +19,9 @@ spec:
     - name: ZEEBE_CLIENT_ID
       value: "zw"
     - name: ZEEBE_CLIENT_SECRET
-      value: "hcH7uQjy3XzXuTc7Zd7Zjp5vBaRcgR38"
+      value: "ONlq8QDsZyoSB7rvcUOriygNGlFZV4l6"
     - name: ZEEBE_AUTHORIZATION_SERVER_URL
       value: "http://camunda-keycloak.camunda.svc.cluster.local/auth/realms/camunda-platform/protocol/openid-connect/token"
-    - name: ZEEBE_INSECURE_CONNECTION
-      value: "true"
 
 
     # - name: ZEEBE_CLIENT_CONFIG_PATH
