@@ -1,10 +1,10 @@
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
+networking:
+  disableDefaultCNI: true # disable kindnet
+  podSubnet: 192.168.0.0/16 # set to Calico's default subnet
 nodes:
 - role: control-plane
-  extraMounts:
-  - hostPath: /mnt/kubernetes-storage
-    containerPath: /mnt/kubernetes-storage
   extraPortMappings:
   - containerPort: 30000
     hostPort: 30000
@@ -37,3 +37,6 @@ nodes:
     hostPort: 30009
     protocol: TCP
 - role: worker
+  extraMounts:
+  - hostPath: /mnt/kubernetes-storage
+    containerPath: /mnt/kubernetes-storage

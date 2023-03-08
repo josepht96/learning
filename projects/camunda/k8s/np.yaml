@@ -1,0 +1,35 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: network-policy-1
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/component: zeebe-broker
+  policyTypes:
+    - Ingress
+  ingress:
+  - from:
+      - namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: camunda
+        podSelector:
+          matchLabels:
+            app.kubernetes.io/component: zeebe-gateway
+    ports:
+      - protocol: TCP
+        port: 9600
+      - protocol: TCP
+        port: 26501
+      - protocol: TCP
+        port: 26502
+---
+
+# apiVersion: networking.k8s.io/v1
+# kind: NetworkPolicy
+# metadata:
+#   name: default-deny-ingress
+# spec:
+#   podSelector: {}
+#   policyTypes:
+#   - Egress
