@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: zeebe-worker
+  labels:
+    app: zeebe-worker
 spec:
   restartPolicy: Always
   containers:
@@ -9,6 +11,8 @@ spec:
     image: josepht96/zeebe-worker:v1
     imagePullPolicy: Always
     resources: {}
+    ports:
+    - containerPort: 8080
     env:
     - name: ZEEBE_ADDRESS
       value: "camunda-zeebe-gateway.camunda.svc.cluster.local:26500"
@@ -23,6 +27,22 @@ spec:
     - name: ZEEBE_AUTHORIZATION_SERVER_URL
       value: "http://camunda-keycloak.camunda.svc.cluster.local/auth/realms/camunda-platform/protocol/openid-connect/token"
 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: zw
+  name: zw
+spec:
+  ports:
+  - name: TCP
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: zeebe-worker
+  type: ClusterIP
 
     # - name: ZEEBE_CLIENT_CONFIG_PATH
     #   value: /tmp/credentials
