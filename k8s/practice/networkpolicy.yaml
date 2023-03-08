@@ -11,3 +11,10 @@ spec:
     - podSelector: # from pods
         matchLabels: # with this label
           access: granted
+      namespaceSelector:
+        matchLabels:
+         kubernetes.io/metadata.name: default
+
+    ports:
+    - protocol: TCP
+      port: 9700
