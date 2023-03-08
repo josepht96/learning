@@ -1,7 +1,13 @@
 apiVersion: v1
 kind: Pod
 metadata:
+<<<<<<< HEAD
   name: nginx
+=======
+  name: zeebe-worker
+  annotations:
+    istio: test
+>>>>>>> 3fcf752a91ec3d1b649c0f5607af3e8764267e13
 spec:
   # volumes:
   #   - name: kubernetes-storage

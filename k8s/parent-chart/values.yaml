@@ -9,3 +9,6 @@ pods:
     name: test2
   pod3:
     name: test3
+labels:
+  i: am
+  so: tired

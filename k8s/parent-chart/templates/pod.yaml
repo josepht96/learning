@@ -5,6 +5,7 @@ metadata:
   name: {{ $v.name }}-pod
   labels: 
     app: {{ $v.name }}
+    {{ toYaml $.Values.labels | nindent 4 }}
 spec:
   replicas: 1
   selector:
