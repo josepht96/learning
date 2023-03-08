@@ -36,7 +36,7 @@ metadata:
   name: zw
 spec:
   ports:
-  - name: TCP
+  - name: tcp
     port: 8080
     protocol: TCP
     targetPort: 8080
