@@ -22,11 +22,8 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: default-deny-ingress
-  namespace: dest
 spec:
-  podSelector:
-    matchLabels:
-      app: dest
+  podSelector: {}
   policyTypes:
   - Ingress
 ---
