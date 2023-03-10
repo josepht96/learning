@@ -24,7 +24,9 @@ metadata:
   name: default-deny-ingress
   namespace: dest
 spec:
-  podSelector: {}
+  podSelector:
+    matchLabels:
+      app: dest
   policyTypes:
   - Ingress
 ---
