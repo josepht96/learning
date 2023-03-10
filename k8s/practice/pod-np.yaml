@@ -11,6 +11,9 @@ spec:
     - Ingress
   ingress:
   - from:
+      - namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: src
       - podSelector:
           matchLabels:
             app: src
@@ -33,7 +36,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: dest
+  name: nginx
   labels: 
     app: nginx
   namespace: dest
