@@ -1,0 +1,25 @@
+apiVersion: monitoring.coreos.com/v1 
+kind: ServiceMonitor 
+metadata:
+  name: zw-metrics
+  namespace: istio-system # namespace where prometheus is running
+  labels:
+    app: zeebe-worker
+    release: prom  # name of the release 
+    # ( VERY IMPORTANT: You need to know the correct release name by viewing 
+    # the servicemonitor of Prometheus itself: Without the correct name, 
+    #  Prometheus cannot identify the metrics of the Flask app as the target.)
+spec:
+  selector:
+    matchLabels:
+      # Target app service
+      app: flask-app # same as above
+      release: prom # same as above
+  namespaceSelector:
+    matchNames:
+    - cw # namespace where the app is running
+  endpoints:
+  - interval: 15s # scrape interval
+    path: /metrics # path to scrape
+    port: http # named port in target app
+  

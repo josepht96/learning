@@ -11,5 +11,6 @@ RUN go mod download
 COPY . ./
 
 RUN go build -o /zeebe-worker
+EXPOSE 8080
 
 CMD [ "/zeebe-worker" ]
