@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: network-policy-1
+  namespace: dest
 spec:
   podSelector:
     matchLabels:
@@ -10,6 +11,9 @@ spec:
     - Ingress
   ingress:
   - from:
+      - namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: src
       - podSelector:
           matchLabels:
             app: src
@@ -32,7 +36,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: dest
+  name: nginx
   labels: 
     app: nginx
   namespace: dest
