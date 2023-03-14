@@ -12,12 +12,12 @@ When calls to a user database are requested, frontend applications request an ac
 The frontend-client client_id and client_secret are passed to the Keycloak token endpoint. Notice this endpoint is not specific to
 the frontend-client client.
 
+```bash
 CLIENT_ID=zeebe-worker-client
 CLIENT_SECRET=KCZ0aIkCGq5OEq9svkidknJ7pPVTuevk # client secret is created when authorization is enabled on the client
 GRANT_TYPE=client_credentials
 KEYCLOAK_TOKEN_ENDPOINT=http://localhost:30000/realms/master/protocol/openid-connect/token
 
-```bash
 curl -X POST $KEYCLOAK_TOKEN_ENDPOINT \
     -H "Content-Type: application/x-www-form-urlencoded" \
     -d "client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&grant_type=$GRANT_TYPE"
