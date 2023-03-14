@@ -17,9 +17,11 @@ CLIENT_SECRET=KCZ0aIkCGq5OEq9svkidknJ7pPVTuevk # client secret is created when a
 GRANT_TYPE=client_credentials
 KEYCLOAK_TOKEN_ENDPOINT=http://localhost:30000/realms/master/protocol/openid-connect/token
 
+```bash
 curl -X POST $KEYCLOAK_TOKEN_ENDPOINT \
     -H "Content-Type: application/x-www-form-urlencoded" \
     -d "client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&grant_type=$GRANT_TYPE"
+```
 
 ```json
 {
