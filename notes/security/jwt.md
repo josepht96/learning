@@ -13,6 +13,28 @@ The frontend-client client_id and client_secret are passed to the Keycloak token
 the frontend-client client.
 
 ```bash
+CLIENT_ID=zeebe-worker-client
+CLIENT_SECRET=KCZ0aIkCGq5OEq9svkidknJ7pPVTuevk # client secret is created when authorization is enabled on the client
+GRANT_TYPE=client_credentials
+KEYCLOAK_TOKEN_ENDPOINT=http://localhost:30000/realms/master/protocol/openid-connect/token
+
+curl -X POST $KEYCLOAK_TOKEN_ENDPOINT \
+    -H "Content-Type: application/x-www-form-urlencoded" \
+    -d "client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&grant_type=$GRANT_TYPE"
+```
+
+```json
+{
+  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJfdzhqY1IwUENYVlZUclY2VHVoMzNlMERDcThNVGh0a0daNlFjSHBteU1NIn0.eyJleHAiOjE2Nzg4Mjc1NTgsImlhdCI6MTY3ODgyNzQ5OCwianRpIjoiNWNiZTY4NmMtOGRmMy00ZTZiLTllZTMtMTAzNzE4NmUzNjIwIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDozMDAwMC9yZWFsbXMvbWFzdGVyIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjU4NzZlZmZiLTJkYTItNGYwZC1hMzYyLWU1MTFhNGQzZDg5OCIsInR5cCI6IkJlYXJlciIsImF6cCI6InplZWJlLXdvcmtlci1jbGllbnQiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtbWFzdGVyIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7InplZWJlLXdvcmtlci1jbGllbnQiOnsicm9sZXMiOlsidW1hX3Byb3RlY3Rpb24iXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiY2xpZW50SG9zdCI6IjE3Mi4xOC4wLjIiLCJjbGllbnRJZCI6InplZWJlLXdvcmtlci1jbGllbnQiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzZXJ2aWNlLWFjY291bnQtemVlYmUtd29ya2VyLWNsaWVudCIsImNsaWVudEFkZHJlc3MiOiIxNzIuMTguMC4yIn0.sonl5S9l4K-4cYJtc2uGtF-orkHfAKS7L31Ho1GrbVeJ8muRWxL6J95zD4-O2L_C__cGI6Iz5zPYx0Xqk4JJTOrXVeqXJrNRbfrxJZVh3UxIVRDiIzhfUjoTARA0_Qa3FRS-ooPT7HYhcNtEXjd0G4ydmEHrAhy2d6yjUdQrBmH7mg9d5v5kS3CWf8bZZCkrLdv6mkvJCxn9B7w0ars0YSs2gGoT4tGyxq8_-DMyZey1p8Gh7gs9TWbZ0oyHewc6zL4iIqe5opBJTh7QJIrh9OTh0K7FkTNS2ixB7XJUyH4KK-WSGBYAfXokpxz92mSFjvjrMdoKoanKcdv_1OevQg",
+  "expires_in": 60,
+  "refresh_expires_in": 0,
+  "token_type": "Bearer",
+  "not-before-policy": 0,
+  "scope": "email profile"
+}
+```
+
+```bash
 CLIENT_ID=frontend-client
 CLIENT_SECRET=IlMU8goi3qcDMA7HkDIY5Vo7ZBbK3Guj # client secret is created when authorization is enabled on the client
 GRANT_TYPE=client_credentials
