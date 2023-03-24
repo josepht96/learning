@@ -4,8 +4,8 @@ metadata:
   name: external-svc-mongocluster
 spec:
   hosts:
-  - mymongodb.somedomain # not used
+  - nginx.svc.local # not used
   ports:
-  - number: 27018
+  - number: 27019
     name: mongodb
     protocol: HTTPS

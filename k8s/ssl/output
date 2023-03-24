@@ -1,0 +1,4 @@
+ADDRESS       PORT MATCH                                DESTINATION
+0.0.0.0       9200 Trans: raw_buffer; App: http/1.1,h2c Route: 9200
+0.0.0.0       9200 ALL                                  PassthroughCluster
+10.96.155.174 9200 ALL                                  Cluster: outbound|9200||nginx.dest.svc.cluster.local
