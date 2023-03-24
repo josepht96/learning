@@ -23,10 +23,7 @@ spec:
       containers:
       - image: josepht96/jwt-nginx:v1
         name: nginx
-        volumeMounts:
-        - name: nginx-conf-volume
-          mountPath: /etc/nginx/test.conf
-          subPath: nginx.conf
+        resources: {}
         ports:
         - containerPort: 80
 ---

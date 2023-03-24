@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: istio-gateway
+spec:
+  selector:
+    app: istio-ingressgateway
+  servers:
+  - hosts:
+    - "nginx.dest.svc.cluster.local"
+    port:
+      number: 443
+      name: http
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE # enables HTTPS on this port
+      credentialName: client-credential # fetches certs from Kubernetes secret

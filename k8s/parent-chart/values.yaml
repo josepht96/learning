@@ -5,10 +5,8 @@ podName: nginx-parent
 pods:
   pod1:
     name: test1
-  pod2:
-    name: test2
-  pod3:
-    name: test3
 labels:
   i: am
   so: tired
+
+runAsNonRoot: true

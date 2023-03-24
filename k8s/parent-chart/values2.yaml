@@ -1,3 +1,12 @@
-labels: {
-  so: test3
-}
+sub-chart:
+  podName: nginx-sub-2
+
+podName: nginx-parent
+pods:
+  pod1:
+    name: test1
+labels:
+  i: am
+  so: tired
+
+runAsNonRoot: false

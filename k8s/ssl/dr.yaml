@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: dr
+spec:
+  host: nginx.dest.svc.cluster.local
+  workloadSelector:
+    matchLabels:
+      app: nginx
+  trafficPolicy:
+    portLevelSettings:
+    - port:
+        number: 443
+      tls:
+        mode: SIMPLE
+        credentialName: client-credential
