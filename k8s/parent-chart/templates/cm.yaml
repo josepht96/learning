@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test
+data:
+  ZEEBE_CLIENT_ID: cool
+  ZEEBE_CLIENT_SECRET: configmap

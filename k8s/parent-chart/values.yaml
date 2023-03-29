@@ -9,4 +9,4 @@ labels:
   i: am
   so: tired
 
-runAsNonRoot: true
+runAsNonRoot: false

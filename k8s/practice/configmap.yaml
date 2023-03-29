@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: env-config
+  name: test
 data:
   ZEEBE_CLIENT_ID: very
   ZEEBE_CLIENT_SECRET: charm
