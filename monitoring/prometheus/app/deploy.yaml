@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: metricz
+  name: metricz
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: metricz
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        # prometheus.io/scrape: "true"
+        # prometheus.io/path: /metrics
+        # prometheus.io/port: "8081"
+      labels:
+        app: metricz
+    spec:
+      containers:
+      - image: josepht96/metrics
+        name: metricz
+        resources: {}
+        ports:
+        - containerPort: 8081
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: metricz
+  labels: 
+    app: metricz
+spec:
+  selector:
+    app: metricz
+  ports:
+    - port: 80
+      targetPort: 8081
+      name: http
+      protocol: TCP

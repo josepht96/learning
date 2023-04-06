@@ -1,0 +1,9 @@
+istio_requests_total{response_code="404"}
+promhttp_metric_handler_requests_total{code="200"}
+container_memory_working_set_bytes{namespace="metrics",image=~".+proxyv2:1.16.2|.+josepht96.+",pod=~"metricz.+"}
+container_cpu_usage_seconds_total[1m]
+avg((avg (container_memory_working_set_bytes{pod="<pod name>"}) by (container_name , pod ))/ on (container_name , pod)(avg (container_spec_memory_limit_bytes>0 ) by (container_name, pod))*100)
+sum (container_memory_working_set_bytes{namespace="metrics",image=~".+proxyv2:1.16.2|.+josepht96.+",pod=~"metricz.+"}) by (pod)
+sum (rate(container_cpu_usage_seconds_total{namespace="metrics",image=~".+proxyv2:1.16.2|.+josepht96.+",pod=~"metricz.+"}[1m])) by (pod) / sum (machine_cpu_cores{}) * 100
+
+sum by (pod) (rate(container_cpu_usage_seconds_total{pod=~"metricz.+"}[1m])) / on() group_left() sum(machine_cpu_cores{})

@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY go.mod ./
 RUN go mod download
-
+RUN go get github.com/prometheus/client_golang/prometheus/promhttp
 COPY *.go ./
 
 RUN go build -o /hello-server
