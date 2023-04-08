@@ -1,0 +1,24 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: EnvoyFilter
+metadata:
+  name: wasm-service
+spec:
+  workloadSelector:
+    labels:
+      app: nginx
+  configPatches:
+  - applyTo: NETWORK_FILTER # http connection manager is a filter in Envoy
+    match:
+        # context omitted so that this applies to both sidecars and gateways
+        listener:
+          filterChain:
+            destinationPort: 80
+            transportProtocol: "tls"
+    patch:
+        operation: MERGE
+        value:
+          name: "envoy.filters.network.http_connection_manager"
+          typed_config:
+            "@type": "type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager"
+            common_http_protocol_options:
+              idle_timeout: 37s
