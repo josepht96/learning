@@ -5,7 +5,7 @@ metadata:
 spec:
   workloadSelector:
     labels:
-      app: nginx
+      app: test-pod
   configPatches:
   - applyTo: FILTER_CHAIN # http connection manager is a filter in Envoy
     match:
@@ -17,7 +17,7 @@ spec:
         value: 
           {
           "filterChainMatch": {
-              "destinationPort": 87,
+              "destinationPort": 80,
               "transportProtocol": "tls",
               "applicationProtocols": [
                   "istio",
@@ -63,7 +63,7 @@ spec:
                                               }
                                           },
                                           "decorator": {
-                                              "operation": "nginx.dest.svc.cluster.local:8080/*"
+                                              "operation": "test-pod.dest.svc.cluster.local:8080/*"
                                           }
                                       }
                                   ]
@@ -351,7 +351,7 @@ spec:
                               {
                                   "tag": "istio.canonical_service",
                                   "literal": {
-                                      "value": "nginx"
+                                      "value": "test-pod"
                                   }
                               },
                               {
@@ -467,5 +467,5 @@ spec:
                   "requireClientCertificate": true
               }
           },
-          "name": "0.0.0.0_87"
+          "name": "0.0.0.0_80"
         } 
