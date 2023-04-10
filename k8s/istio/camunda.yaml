@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: nginx
+      app.kubernetes.io/name: zeebe-gateway
   jwtRules:
   - issuer: "http://localhost:30000/realms/master"
     jwks: |
@@ -21,7 +21,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: nginx
+      app.kubernetes.io/name: zeebe-gateway
   rules:
   - from:
     - source:

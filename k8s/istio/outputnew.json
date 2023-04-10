@@ -146,6 +146,13 @@
                                                     "inlineString": "{\"keys\":[{\"kid\":\"mq62g7U4fiYFMPshyxlghbQR1FVe4x2BuL4HCgnHciU\",\"kty\":\"RSA\",\"alg\":\"RSA-OAEP\",\"use\":\"enc\",\"n\":\"w0I1BzJJgkT8MtXKCgi2i7XaCdu7aiHkIub9WqY3Ti3D1PGZMsUJgI_t6_A2iwSbbHEcbpr70Hb5gRsIX6SLuk8vBX5rpuqTy5spX9Mraj0Ky1G2RWivXAzi5cLhu-Gv-Pk_Ed90iNVqPwKuUxiGLYKBcBNF_3J-cAtgLsIquUnFKZKC1qAC4au7bkBkZVUmMXlNqSf_wC5uOl7lL0-4T6mc-0BfFAr5J5TRs-EDQx5h59qd2Y8VXZjzGq3gwd7wHGJzUmHoUdwZF20l7QmOyG2KK02gZGzMiZJLXAkpSCO2X7uKNdtj9aO4-jfHASC9Y3oeu7ReAzB4vHq_S7FA6w\",\"e\":\"AQAB\",\"x5c\":[\"MIICmzCCAYMCBgGHSDhrWDANBgkqhkiG9w0BAQsFADARMQ8wDQYDVQQDDAZtYXN0ZXIwHhcNMjMwNDAzMTc0MjQ5WhcNMzMwNDAzMTc0NDI5WjARMQ8wDQYDVQQDDAZtYXN0ZXIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDDQjUHMkmCRPwy1coKCLaLtdoJ27tqIeQi5v1apjdOLcPU8ZkyxQmAj+3r8DaLBJtscRxumvvQdvmBGwhfpIu6Ty8Ffmum6pPLmylf0ytqPQrLUbZFaK9cDOLlwuG74a/4+T8R33SI1Wo/Aq5TGIYtgoFwE0X/cn5wC2Auwiq5ScUpkoLWoALhq7tuQGRlVSYxeU2pJ//ALm46XuUvT7hPqZz7QF8UCvknlNGz4QNDHmHn2p3ZjxVdmPMareDB3vAcYnNSYehR3BkXbSXtCY7IbYorTaBkbMyJkktcCSlII7Zfu4o122P1o7j6N8cBIL1jeh67tF4DMHi8er9LsUDrAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAHC0ZA47PeG38FV6qq5OMySMWGWx20z9Aw1etvmm6y9MalE8aP2SBmJIIYR3LEkCr+sdpOk7UyAWICGc71HbFaSYjaTon45ZRjVVY+6wR34VttPB5KrVSMlGBYnybRcDCGhH7EBw0LQkPIet8dmAh7lhWR5Ea+o8RfwnqTyd+RkWfwWLOPd7YXtvQLDi2AI7sO7yzRGI5JoTeM5p/P0+QkvULY4MCGgaiRyxptiGK4E+xELYawGBDBtcoHAuUi/RMgojplABHUnYyDc7cRUzbBlA3nIUL0W4N+AtV27QX9e2U1xJY65AvIlxIq/rJe9Hdm42T7raS/edkGp+FLo+Wuo=\"],\"x5t\":\"w6-0zbfu3_l7wdDiemA41cXjBvY\",\"x5t#S256\":\"P0jxvEHcb034lgeZGsaX18LG3NdoU5v8tTQvjakLbgA\"},{\"kid\":\"sl-VyAHicwZv_AJ564PBWdvy8KQ-fmxbAV6QVG2nEwA\",\"kty\":\"RSA\",\"alg\":\"RS256\",\"use\":\"sig\",\"n\":\"o52Q9NbsCCy_l5JA_vBmKf7IG-08tsHrQtfrJWfgJrhi6I2B4K2dbsGW5IV5oFa3LjVt3ZAL4gyeUJbzXl_vIvYDu8kG8OLv0H4_gQsXIthNlTjLBXkIoo0L69RdFbTi1jnU1aepYM-_irQegAFC0TF5HQfTAh34WmYYeM_C44wxppBn64odLjiCwNt_B4rSg-TpXlXxJ1va0XCcLwuXnI3nYVWf0HInts_D2FwyDZMpHWMJKFT3fc5Jtdl4Ttc1nvv63PiDtkA1h4Ar59TOhNepQ0Db50-mjGblQBSlTI4DnQkmK0pZwRXQ84HfDwQJ5X8xC5blMHTRZbPYDA0G_w\",\"e\":\"AQAB\",\"x5c\":[\"MIICmzCCAYMCBgGHSDhqbTANBgkqhkiG9w0BAQsFADARMQ8wDQYDVQQDDAZtYXN0ZXIwHhcNMjMwNDAzMTc0MjQ5WhcNMzMwNDAzMTc0NDI5WjARMQ8wDQYDVQQDDAZtYXN0ZXIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCjnZD01uwILL+XkkD+8GYp/sgb7Ty2wetC1+slZ+AmuGLojYHgrZ1uwZbkhXmgVrcuNW3dkAviDJ5QlvNeX+8i9gO7yQbw4u/Qfj+BCxci2E2VOMsFeQiijQvr1F0VtOLWOdTVp6lgz7+KtB6AAULRMXkdB9MCHfhaZhh4z8LjjDGmkGfrih0uOILA238HitKD5OleVfEnW9rRcJwvC5ecjedhVZ/Qcie2z8PYXDINkykdYwkoVPd9zkm12XhO1zWe+/rc+IO2QDWHgCvn1M6E16lDQNvnT6aMZuVAFKVMjgOdCSYrSlnBFdDzgd8PBAnlfzELluUwdNFls9gMDQb/AgMBAAEwDQYJKoZIhvcNAQELBQADggEBADqWPUbYDWVqFC8Bxp899hqtepLVUrPLNho2DkYVwT8XX78GbVLPmtCE/IM9daoVpYyEps7383cSIoiipPF28hLRcVMGwGzpmeOYiaqPWBmhoMpPa0D7dqob95Gvhp4dOaIfy56SUh3OFoxBps+xMdFo6meInOOZikNpKtqxG+OigQkhXup9/4xcEcqT+jSQiSE3pHlNE05Met15DM2em/myQ13c7jo7L1nrc23pulUC23j2QHQrEZNZ1ARDaHwCcGM6ubT65NhVFpnloy3T2XTWsDdO3HWNP7QFBq365PX4inkDUqk4njulcuzqT1bUoJ4XMPHjZ6HV0CwAl3jglPo=\"],\"x5t\":\"rMBYaFft4lMl9cLWiWJ-DxprYlA\",\"x5t#S256\":\"fvEopt8EQ7SGRRnzDWICPXrGfoq6kdiqgSMx5HHc6oo\"}]}\n"
                                                 },
                                                 "payloadInMetadata": "http://localhost:30000/realms/master"
+                                            },
+                                            "origins-1": {
+                                                "issuer": "http://localhost:30000/realms/master",
+                                                "localJwks": {
+                                                    "inlineString": "{\"keys\":[{\"kid\":\"mq62g7U4fiYFMPshyxlghbQR1FVe4x2BuL4HCgnHciU\",\"kty\":\"RSA\",\"alg\":\"RSA-OAEP\",\"use\":\"enc\",\"n\":\"w0I1BzJJgkT8MtXKCgi2i7XaCdu7aiHkIub9WqY3Ti3D1PGZMsUJgI_t6_A2iwSbbHEcbpr70Hb5gRsIX6SLuk8vBX5rpuqTy5spX9Mraj0Ky1G2RWivXAzi5cLhu-Gv-Pk_Ed90iNVqPwKuUxiGLYKBcBNF_3J-cAtgLsIquUnFKZKC1qAC4au7bkBkZVUmMXlNqSf_wC5uOl7lL0-4T6mc-0BfFAr5J5TRs-EDQx5h59qd2Y8VXZjzGq3gwd7wHGJzUmHoUdwZF20l7QmOyG2KK02gZGzMiZJLXAkpSCO2X7uKNdtj9aO4-jfHASC9Y3oeu7ReAzB4vHq_S7FA6w\",\"e\":\"AQAB\",\"x5c\":[\"MIICmzCCAYMCBgGHSDhrWDANBgkqhkiG9w0BAQsFADARMQ8wDQYDVQQDDAZtYXN0ZXIwHhcNMjMwNDAzMTc0MjQ5WhcNMzMwNDAzMTc0NDI5WjARMQ8wDQYDVQQDDAZtYXN0ZXIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDDQjUHMkmCRPwy1coKCLaLtdoJ27tqIeQi5v1apjdOLcPU8ZkyxQmAj+3r8DaLBJtscRxumvvQdvmBGwhfpIu6Ty8Ffmum6pPLmylf0ytqPQrLUbZFaK9cDOLlwuG74a/4+T8R33SI1Wo/Aq5TGIYtgoFwE0X/cn5wC2Auwiq5ScUpkoLWoALhq7tuQGRlVSYxeU2pJ//ALm46XuUvT7hPqZz7QF8UCvknlNGz4QNDHmHn2p3ZjxVdmPMareDB3vAcYnNSYehR3BkXbSXtCY7IbYorTaBkbMyJkktcCSlII7Zfu4o122P1o7j6N8cBIL1jeh67tF4DMHi8er9LsUDrAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAHC0ZA47PeG38FV6qq5OMySMWGWx20z9Aw1etvmm6y9MalE8aP2SBmJIIYR3LEkCr+sdpOk7UyAWICGc71HbFaSYjaTon45ZRjVVY+6wR34VttPB5KrVSMlGBYnybRcDCGhH7EBw0LQkPIet8dmAh7lhWR5Ea+o8RfwnqTyd+RkWfwWLOPd7YXtvQLDi2AI7sO7yzRGI5JoTeM5p/P0+QkvULY4MCGgaiRyxptiGK4E+xELYawGBDBtcoHAuUi/RMgojplABHUnYyDc7cRUzbBlA3nIUL0W4N+AtV27QX9e2U1xJY65AvIlxIq/rJe9Hdm42T7raS/edkGp+FLo+Wuo=\"],\"x5t\":\"w6-0zbfu3_l7wdDiemA41cXjBvY\",\"x5t#S256\":\"P0jxvEHcb034lgeZGsaX18LG3NdoU5v8tTQvjakLbgA\"},{\"kid\":\"sl-VyAHicwZv_AJ564PBWdvy8KQ-fmxbAV6QVG2nEwA\",\"kty\":\"RSA\",\"alg\":\"RS256\",\"use\":\"sig\",\"n\":\"o52Q9NbsCCy_l5JA_vBmKf7IG-08tsHrQtfrJWfgJrhi6I2B4K2dbsGW5IV5oFa3LjVt3ZAL4gyeUJbzXl_vIvYDu8kG8OLv0H4_gQsXIthNlTjLBXkIoo0L69RdFbTi1jnU1aepYM-_irQegAFC0TF5HQfTAh34WmYYeM_C44wxppBn64odLjiCwNt_B4rSg-TpXlXxJ1va0XCcLwuXnI3nYVWf0HInts_D2FwyDZMpHWMJKFT3fc5Jtdl4Ttc1nvv63PiDtkA1h4Ar59TOhNepQ0Db50-mjGblQBSlTI4DnQkmK0pZwRXQ84HfDwQJ5X8xC5blMHTRZbPYDA0G_w\",\"e\":\"AQAB\",\"x5c\":[\"MIICmzCCAYMCBgGHSDhqbTANBgkqhkiG9w0BAQsFADARMQ8wDQYDVQQDDAZtYXN0ZXIwHhcNMjMwNDAzMTc0MjQ5WhcNMzMwNDAzMTc0NDI5WjARMQ8wDQYDVQQDDAZtYXN0ZXIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCjnZD01uwILL+XkkD+8GYp/sgb7Ty2wetC1+slZ+AmuGLojYHgrZ1uwZbkhXmgVrcuNW3dkAviDJ5QlvNeX+8i9gO7yQbw4u/Qfj+BCxci2E2VOMsFeQiijQvr1F0VtOLWOdTVp6lgz7+KtB6AAULRMXkdB9MCHfhaZhh4z8LjjDGmkGfrih0uOILA238HitKD5OleVfEnW9rRcJwvC5ecjedhVZ/Qcie2z8PYXDINkykdYwkoVPd9zkm12XhO1zWe+/rc+IO2QDWHgCvn1M6E16lDQNvnT6aMZuVAFKVMjgOdCSYrSlnBFdDzgd8PBAnlfzELluUwdNFls9gMDQb/AgMBAAEwDQYJKoZIhvcNAQELBQADggEBADqWPUbYDWVqFC8Bxp899hqtepLVUrPLNho2DkYVwT8XX78GbVLPmtCE/IM9daoVpYyEps7383cSIoiipPF28hLRcVMGwGzpmeOYiaqPWBmhoMpPa0D7dqob95Gvhp4dOaIfy56SUh3OFoxBps+xMdFo6meInOOZikNpKtqxG+OigQkhXup9/4xcEcqT+jSQiSE3pHlNE05Met15DM2em/myQ13c7jo7L1nrc23pulUC23j2QHQrEZNZ1ARDaHwCcGM6ubT65NhVFpnloy3T2XTWsDdO3HWNP7QFBq365PX4inkDUqk4njulcuzqT1bUoJ4XMPHjZ6HV0CwAl3jglPo=\"],\"x5t\":\"rMBYaFft4lMl9cLWiWJ-DxprYlA\",\"x5t#S256\":\"fvEopt8EQ7SGRRnzDWICPXrGfoq6kdiqgSMx5HHc6oo\"}]}"
+                                                },
+                                                "payloadInMetadata": "http://localhost:30000/realms/master"
                                             }
                                         },
                                         "rules": [
@@ -160,7 +167,37 @@
                                                                 "providerName": "origins-0"
                                                             },
                                                             {
-                                                                "allowMissing": {}
+                                                                "providerName": "origins-1"
+                                                            },
+                                                            {
+                                                                "requiresAll": {
+                                                                    "requirements": [
+                                                                        {
+                                                                            "requiresAny": {
+                                                                                "requirements": [
+                                                                                    {
+                                                                                        "providerName": "origins-0"
+                                                                                    },
+                                                                                    {
+                                                                                        "allowMissing": {}
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "requiresAny": {
+                                                                                "requirements": [
+                                                                                    {
+                                                                                        "providerName": "origins-1"
+                                                                                    },
+                                                                                    {
+                                                                                        "allowMissing": {}
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        }
+                                                                    ]
+                                                                }
                                                             }
                                                         ]
                                                     }
@@ -176,6 +213,11 @@
                                         "@type": "type.googleapis.com/istio.envoy.config.filter.http.authn.v2alpha1.FilterConfig",
                                         "policy": {
                                             "origins": [
+                                                {
+                                                    "jwt": {
+                                                        "issuer": "http://localhost:30000/realms/master"
+                                                    }
+                                                },
                                                 {
                                                     "jwt": {
                                                         "issuer": "http://localhost:30000/realms/master"
@@ -602,6 +644,13 @@
                                                     "inlineString": "{\"keys\":[{\"kid\":\"mq62g7U4fiYFMPshyxlghbQR1FVe4x2BuL4HCgnHciU\",\"kty\":\"RSA\",\"alg\":\"RSA-OAEP\",\"use\":\"enc\",\"n\":\"w0I1BzJJgkT8MtXKCgi2i7XaCdu7aiHkIub9WqY3Ti3D1PGZMsUJgI_t6_A2iwSbbHEcbpr70Hb5gRsIX6SLuk8vBX5rpuqTy5spX9Mraj0Ky1G2RWivXAzi5cLhu-Gv-Pk_Ed90iNVqPwKuUxiGLYKBcBNF_3J-cAtgLsIquUnFKZKC1qAC4au7bkBkZVUmMXlNqSf_wC5uOl7lL0-4T6mc-0BfFAr5J5TRs-EDQx5h59qd2Y8VXZjzGq3gwd7wHGJzUmHoUdwZF20l7QmOyG2KK02gZGzMiZJLXAkpSCO2X7uKNdtj9aO4-jfHASC9Y3oeu7ReAzB4vHq_S7FA6w\",\"e\":\"AQAB\",\"x5c\":[\"MIICmzCCAYMCBgGHSDhrWDANBgkqhkiG9w0BAQsFADARMQ8wDQYDVQQDDAZtYXN0ZXIwHhcNMjMwNDAzMTc0MjQ5WhcNMzMwNDAzMTc0NDI5WjARMQ8wDQYDVQQDDAZtYXN0ZXIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDDQjUHMkmCRPwy1coKCLaLtdoJ27tqIeQi5v1apjdOLcPU8ZkyxQmAj+3r8DaLBJtscRxumvvQdvmBGwhfpIu6Ty8Ffmum6pPLmylf0ytqPQrLUbZFaK9cDOLlwuG74a/4+T8R33SI1Wo/Aq5TGIYtgoFwE0X/cn5wC2Auwiq5ScUpkoLWoALhq7tuQGRlVSYxeU2pJ//ALm46XuUvT7hPqZz7QF8UCvknlNGz4QNDHmHn2p3ZjxVdmPMareDB3vAcYnNSYehR3BkXbSXtCY7IbYorTaBkbMyJkktcCSlII7Zfu4o122P1o7j6N8cBIL1jeh67tF4DMHi8er9LsUDrAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAHC0ZA47PeG38FV6qq5OMySMWGWx20z9Aw1etvmm6y9MalE8aP2SBmJIIYR3LEkCr+sdpOk7UyAWICGc71HbFaSYjaTon45ZRjVVY+6wR34VttPB5KrVSMlGBYnybRcDCGhH7EBw0LQkPIet8dmAh7lhWR5Ea+o8RfwnqTyd+RkWfwWLOPd7YXtvQLDi2AI7sO7yzRGI5JoTeM5p/P0+QkvULY4MCGgaiRyxptiGK4E+xELYawGBDBtcoHAuUi/RMgojplABHUnYyDc7cRUzbBlA3nIUL0W4N+AtV27QX9e2U1xJY65AvIlxIq/rJe9Hdm42T7raS/edkGp+FLo+Wuo=\"],\"x5t\":\"w6-0zbfu3_l7wdDiemA41cXjBvY\",\"x5t#S256\":\"P0jxvEHcb034lgeZGsaX18LG3NdoU5v8tTQvjakLbgA\"},{\"kid\":\"sl-VyAHicwZv_AJ564PBWdvy8KQ-fmxbAV6QVG2nEwA\",\"kty\":\"RSA\",\"alg\":\"RS256\",\"use\":\"sig\",\"n\":\"o52Q9NbsCCy_l5JA_vBmKf7IG-08tsHrQtfrJWfgJrhi6I2B4K2dbsGW5IV5oFa3LjVt3ZAL4gyeUJbzXl_vIvYDu8kG8OLv0H4_gQsXIthNlTjLBXkIoo0L69RdFbTi1jnU1aepYM-_irQegAFC0TF5HQfTAh34WmYYeM_C44wxppBn64odLjiCwNt_B4rSg-TpXlXxJ1va0XCcLwuXnI3nYVWf0HInts_D2FwyDZMpHWMJKFT3fc5Jtdl4Ttc1nvv63PiDtkA1h4Ar59TOhNepQ0Db50-mjGblQBSlTI4DnQkmK0pZwRXQ84HfDwQJ5X8xC5blMHTRZbPYDA0G_w\",\"e\":\"AQAB\",\"x5c\":[\"MIICmzCCAYMCBgGHSDhqbTANBgkqhkiG9w0BAQsFADARMQ8wDQYDVQQDDAZtYXN0ZXIwHhcNMjMwNDAzMTc0MjQ5WhcNMzMwNDAzMTc0NDI5WjARMQ8wDQYDVQQDDAZtYXN0ZXIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCjnZD01uwILL+XkkD+8GYp/sgb7Ty2wetC1+slZ+AmuGLojYHgrZ1uwZbkhXmgVrcuNW3dkAviDJ5QlvNeX+8i9gO7yQbw4u/Qfj+BCxci2E2VOMsFeQiijQvr1F0VtOLWOdTVp6lgz7+KtB6AAULRMXkdB9MCHfhaZhh4z8LjjDGmkGfrih0uOILA238HitKD5OleVfEnW9rRcJwvC5ecjedhVZ/Qcie2z8PYXDINkykdYwkoVPd9zkm12XhO1zWe+/rc+IO2QDWHgCvn1M6E16lDQNvnT6aMZuVAFKVMjgOdCSYrSlnBFdDzgd8PBAnlfzELluUwdNFls9gMDQb/AgMBAAEwDQYJKoZIhvcNAQELBQADggEBADqWPUbYDWVqFC8Bxp899hqtepLVUrPLNho2DkYVwT8XX78GbVLPmtCE/IM9daoVpYyEps7383cSIoiipPF28hLRcVMGwGzpmeOYiaqPWBmhoMpPa0D7dqob95Gvhp4dOaIfy56SUh3OFoxBps+xMdFo6meInOOZikNpKtqxG+OigQkhXup9/4xcEcqT+jSQiSE3pHlNE05Met15DM2em/myQ13c7jo7L1nrc23pulUC23j2QHQrEZNZ1ARDaHwCcGM6ubT65NhVFpnloy3T2XTWsDdO3HWNP7QFBq365PX4inkDUqk4njulcuzqT1bUoJ4XMPHjZ6HV0CwAl3jglPo=\"],\"x5t\":\"rMBYaFft4lMl9cLWiWJ-DxprYlA\",\"x5t#S256\":\"fvEopt8EQ7SGRRnzDWICPXrGfoq6kdiqgSMx5HHc6oo\"}]}\n"
                                                 },
                                                 "payloadInMetadata": "http://localhost:30000/realms/master"
+                                            },
+                                            "origins-1": {
+                                                "issuer": "http://localhost:30000/realms/master",
+                                                "localJwks": {
+                                                    "inlineString": "{\"keys\":[{\"kid\":\"mq62g7U4fiYFMPshyxlghbQR1FVe4x2BuL4HCgnHciU\",\"kty\":\"RSA\",\"alg\":\"RSA-OAEP\",\"use\":\"enc\",\"n\":\"w0I1BzJJgkT8MtXKCgi2i7XaCdu7aiHkIub9WqY3Ti3D1PGZMsUJgI_t6_A2iwSbbHEcbpr70Hb5gRsIX6SLuk8vBX5rpuqTy5spX9Mraj0Ky1G2RWivXAzi5cLhu-Gv-Pk_Ed90iNVqPwKuUxiGLYKBcBNF_3J-cAtgLsIquUnFKZKC1qAC4au7bkBkZVUmMXlNqSf_wC5uOl7lL0-4T6mc-0BfFAr5J5TRs-EDQx5h59qd2Y8VXZjzGq3gwd7wHGJzUmHoUdwZF20l7QmOyG2KK02gZGzMiZJLXAkpSCO2X7uKNdtj9aO4-jfHASC9Y3oeu7ReAzB4vHq_S7FA6w\",\"e\":\"AQAB\",\"x5c\":[\"MIICmzCCAYMCBgGHSDhrWDANBgkqhkiG9w0BAQsFADARMQ8wDQYDVQQDDAZtYXN0ZXIwHhcNMjMwNDAzMTc0MjQ5WhcNMzMwNDAzMTc0NDI5WjARMQ8wDQYDVQQDDAZtYXN0ZXIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDDQjUHMkmCRPwy1coKCLaLtdoJ27tqIeQi5v1apjdOLcPU8ZkyxQmAj+3r8DaLBJtscRxumvvQdvmBGwhfpIu6Ty8Ffmum6pPLmylf0ytqPQrLUbZFaK9cDOLlwuG74a/4+T8R33SI1Wo/Aq5TGIYtgoFwE0X/cn5wC2Auwiq5ScUpkoLWoALhq7tuQGRlVSYxeU2pJ//ALm46XuUvT7hPqZz7QF8UCvknlNGz4QNDHmHn2p3ZjxVdmPMareDB3vAcYnNSYehR3BkXbSXtCY7IbYorTaBkbMyJkktcCSlII7Zfu4o122P1o7j6N8cBIL1jeh67tF4DMHi8er9LsUDrAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAHC0ZA47PeG38FV6qq5OMySMWGWx20z9Aw1etvmm6y9MalE8aP2SBmJIIYR3LEkCr+sdpOk7UyAWICGc71HbFaSYjaTon45ZRjVVY+6wR34VttPB5KrVSMlGBYnybRcDCGhH7EBw0LQkPIet8dmAh7lhWR5Ea+o8RfwnqTyd+RkWfwWLOPd7YXtvQLDi2AI7sO7yzRGI5JoTeM5p/P0+QkvULY4MCGgaiRyxptiGK4E+xELYawGBDBtcoHAuUi/RMgojplABHUnYyDc7cRUzbBlA3nIUL0W4N+AtV27QX9e2U1xJY65AvIlxIq/rJe9Hdm42T7raS/edkGp+FLo+Wuo=\"],\"x5t\":\"w6-0zbfu3_l7wdDiemA41cXjBvY\",\"x5t#S256\":\"P0jxvEHcb034lgeZGsaX18LG3NdoU5v8tTQvjakLbgA\"},{\"kid\":\"sl-VyAHicwZv_AJ564PBWdvy8KQ-fmxbAV6QVG2nEwA\",\"kty\":\"RSA\",\"alg\":\"RS256\",\"use\":\"sig\",\"n\":\"o52Q9NbsCCy_l5JA_vBmKf7IG-08tsHrQtfrJWfgJrhi6I2B4K2dbsGW5IV5oFa3LjVt3ZAL4gyeUJbzXl_vIvYDu8kG8OLv0H4_gQsXIthNlTjLBXkIoo0L69RdFbTi1jnU1aepYM-_irQegAFC0TF5HQfTAh34WmYYeM_C44wxppBn64odLjiCwNt_B4rSg-TpXlXxJ1va0XCcLwuXnI3nYVWf0HInts_D2FwyDZMpHWMJKFT3fc5Jtdl4Ttc1nvv63PiDtkA1h4Ar59TOhNepQ0Db50-mjGblQBSlTI4DnQkmK0pZwRXQ84HfDwQJ5X8xC5blMHTRZbPYDA0G_w\",\"e\":\"AQAB\",\"x5c\":[\"MIICmzCCAYMCBgGHSDhqbTANBgkqhkiG9w0BAQsFADARMQ8wDQYDVQQDDAZtYXN0ZXIwHhcNMjMwNDAzMTc0MjQ5WhcNMzMwNDAzMTc0NDI5WjARMQ8wDQYDVQQDDAZtYXN0ZXIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCjnZD01uwILL+XkkD+8GYp/sgb7Ty2wetC1+slZ+AmuGLojYHgrZ1uwZbkhXmgVrcuNW3dkAviDJ5QlvNeX+8i9gO7yQbw4u/Qfj+BCxci2E2VOMsFeQiijQvr1F0VtOLWOdTVp6lgz7+KtB6AAULRMXkdB9MCHfhaZhh4z8LjjDGmkGfrih0uOILA238HitKD5OleVfEnW9rRcJwvC5ecjedhVZ/Qcie2z8PYXDINkykdYwkoVPd9zkm12XhO1zWe+/rc+IO2QDWHgCvn1M6E16lDQNvnT6aMZuVAFKVMjgOdCSYrSlnBFdDzgd8PBAnlfzELluUwdNFls9gMDQb/AgMBAAEwDQYJKoZIhvcNAQELBQADggEBADqWPUbYDWVqFC8Bxp899hqtepLVUrPLNho2DkYVwT8XX78GbVLPmtCE/IM9daoVpYyEps7383cSIoiipPF28hLRcVMGwGzpmeOYiaqPWBmhoMpPa0D7dqob95Gvhp4dOaIfy56SUh3OFoxBps+xMdFo6meInOOZikNpKtqxG+OigQkhXup9/4xcEcqT+jSQiSE3pHlNE05Met15DM2em/myQ13c7jo7L1nrc23pulUC23j2QHQrEZNZ1ARDaHwCcGM6ubT65NhVFpnloy3T2XTWsDdO3HWNP7QFBq365PX4inkDUqk4njulcuzqT1bUoJ4XMPHjZ6HV0CwAl3jglPo=\"],\"x5t\":\"rMBYaFft4lMl9cLWiWJ-DxprYlA\",\"x5t#S256\":\"fvEopt8EQ7SGRRnzDWICPXrGfoq6kdiqgSMx5HHc6oo\"}]}"
+                                                },
+                                                "payloadInMetadata": "http://localhost:30000/realms/master"
                                             }
                                         },
                                         "rules": [
@@ -616,7 +665,37 @@
                                                                 "providerName": "origins-0"
                                                             },
                                                             {
-                                                                "allowMissing": {}
+                                                                "providerName": "origins-1"
+                                                            },
+                                                            {
+                                                                "requiresAll": {
+                                                                    "requirements": [
+                                                                        {
+                                                                            "requiresAny": {
+                                                                                "requirements": [
+                                                                                    {
+                                                                                        "providerName": "origins-0"
+                                                                                    },
+                                                                                    {
+                                                                                        "allowMissing": {}
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "requiresAny": {
+                                                                                "requirements": [
+                                                                                    {
+                                                                                        "providerName": "origins-1"
+                                                                                    },
+                                                                                    {
+                                                                                        "allowMissing": {}
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        }
+                                                                    ]
+                                                                }
                                                             }
                                                         ]
                                                     }
@@ -632,6 +711,11 @@
                                         "@type": "type.googleapis.com/istio.envoy.config.filter.http.authn.v2alpha1.FilterConfig",
                                         "policy": {
                                             "origins": [
+                                                {
+                                                    "jwt": {
+                                                        "issuer": "http://localhost:30000/realms/master"
+                                                    }
+                                                },
                                                 {
                                                     "jwt": {
                                                         "issuer": "http://localhost:30000/realms/master"
@@ -1250,6 +1334,13 @@
                                                     "inlineString": "{\"keys\":[{\"kid\":\"mq62g7U4fiYFMPshyxlghbQR1FVe4x2BuL4HCgnHciU\",\"kty\":\"RSA\",\"alg\":\"RSA-OAEP\",\"use\":\"enc\",\"n\":\"w0I1BzJJgkT8MtXKCgi2i7XaCdu7aiHkIub9WqY3Ti3D1PGZMsUJgI_t6_A2iwSbbHEcbpr70Hb5gRsIX6SLuk8vBX5rpuqTy5spX9Mraj0Ky1G2RWivXAzi5cLhu-Gv-Pk_Ed90iNVqPwKuUxiGLYKBcBNF_3J-cAtgLsIquUnFKZKC1qAC4au7bkBkZVUmMXlNqSf_wC5uOl7lL0-4T6mc-0BfFAr5J5TRs-EDQx5h59qd2Y8VXZjzGq3gwd7wHGJzUmHoUdwZF20l7QmOyG2KK02gZGzMiZJLXAkpSCO2X7uKNdtj9aO4-jfHASC9Y3oeu7ReAzB4vHq_S7FA6w\",\"e\":\"AQAB\",\"x5c\":[\"MIICmzCCAYMCBgGHSDhrWDANBgkqhkiG9w0BAQsFADARMQ8wDQYDVQQDDAZtYXN0ZXIwHhcNMjMwNDAzMTc0MjQ5WhcNMzMwNDAzMTc0NDI5WjARMQ8wDQYDVQQDDAZtYXN0ZXIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDDQjUHMkmCRPwy1coKCLaLtdoJ27tqIeQi5v1apjdOLcPU8ZkyxQmAj+3r8DaLBJtscRxumvvQdvmBGwhfpIu6Ty8Ffmum6pPLmylf0ytqPQrLUbZFaK9cDOLlwuG74a/4+T8R33SI1Wo/Aq5TGIYtgoFwE0X/cn5wC2Auwiq5ScUpkoLWoALhq7tuQGRlVSYxeU2pJ//ALm46XuUvT7hPqZz7QF8UCvknlNGz4QNDHmHn2p3ZjxVdmPMareDB3vAcYnNSYehR3BkXbSXtCY7IbYorTaBkbMyJkktcCSlII7Zfu4o122P1o7j6N8cBIL1jeh67tF4DMHi8er9LsUDrAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAHC0ZA47PeG38FV6qq5OMySMWGWx20z9Aw1etvmm6y9MalE8aP2SBmJIIYR3LEkCr+sdpOk7UyAWICGc71HbFaSYjaTon45ZRjVVY+6wR34VttPB5KrVSMlGBYnybRcDCGhH7EBw0LQkPIet8dmAh7lhWR5Ea+o8RfwnqTyd+RkWfwWLOPd7YXtvQLDi2AI7sO7yzRGI5JoTeM5p/P0+QkvULY4MCGgaiRyxptiGK4E+xELYawGBDBtcoHAuUi/RMgojplABHUnYyDc7cRUzbBlA3nIUL0W4N+AtV27QX9e2U1xJY65AvIlxIq/rJe9Hdm42T7raS/edkGp+FLo+Wuo=\"],\"x5t\":\"w6-0zbfu3_l7wdDiemA41cXjBvY\",\"x5t#S256\":\"P0jxvEHcb034lgeZGsaX18LG3NdoU5v8tTQvjakLbgA\"},{\"kid\":\"sl-VyAHicwZv_AJ564PBWdvy8KQ-fmxbAV6QVG2nEwA\",\"kty\":\"RSA\",\"alg\":\"RS256\",\"use\":\"sig\",\"n\":\"o52Q9NbsCCy_l5JA_vBmKf7IG-08tsHrQtfrJWfgJrhi6I2B4K2dbsGW5IV5oFa3LjVt3ZAL4gyeUJbzXl_vIvYDu8kG8OLv0H4_gQsXIthNlTjLBXkIoo0L69RdFbTi1jnU1aepYM-_irQegAFC0TF5HQfTAh34WmYYeM_C44wxppBn64odLjiCwNt_B4rSg-TpXlXxJ1va0XCcLwuXnI3nYVWf0HInts_D2FwyDZMpHWMJKFT3fc5Jtdl4Ttc1nvv63PiDtkA1h4Ar59TOhNepQ0Db50-mjGblQBSlTI4DnQkmK0pZwRXQ84HfDwQJ5X8xC5blMHTRZbPYDA0G_w\",\"e\":\"AQAB\",\"x5c\":[\"MIICmzCCAYMCBgGHSDhqbTANBgkqhkiG9w0BAQsFADARMQ8wDQYDVQQDDAZtYXN0ZXIwHhcNMjMwNDAzMTc0MjQ5WhcNMzMwNDAzMTc0NDI5WjARMQ8wDQYDVQQDDAZtYXN0ZXIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCjnZD01uwILL+XkkD+8GYp/sgb7Ty2wetC1+slZ+AmuGLojYHgrZ1uwZbkhXmgVrcuNW3dkAviDJ5QlvNeX+8i9gO7yQbw4u/Qfj+BCxci2E2VOMsFeQiijQvr1F0VtOLWOdTVp6lgz7+KtB6AAULRMXkdB9MCHfhaZhh4z8LjjDGmkGfrih0uOILA238HitKD5OleVfEnW9rRcJwvC5ecjedhVZ/Qcie2z8PYXDINkykdYwkoVPd9zkm12XhO1zWe+/rc+IO2QDWHgCvn1M6E16lDQNvnT6aMZuVAFKVMjgOdCSYrSlnBFdDzgd8PBAnlfzELluUwdNFls9gMDQb/AgMBAAEwDQYJKoZIhvcNAQELBQADggEBADqWPUbYDWVqFC8Bxp899hqtepLVUrPLNho2DkYVwT8XX78GbVLPmtCE/IM9daoVpYyEps7383cSIoiipPF28hLRcVMGwGzpmeOYiaqPWBmhoMpPa0D7dqob95Gvhp4dOaIfy56SUh3OFoxBps+xMdFo6meInOOZikNpKtqxG+OigQkhXup9/4xcEcqT+jSQiSE3pHlNE05Met15DM2em/myQ13c7jo7L1nrc23pulUC23j2QHQrEZNZ1ARDaHwCcGM6ubT65NhVFpnloy3T2XTWsDdO3HWNP7QFBq365PX4inkDUqk4njulcuzqT1bUoJ4XMPHjZ6HV0CwAl3jglPo=\"],\"x5t\":\"rMBYaFft4lMl9cLWiWJ-DxprYlA\",\"x5t#S256\":\"fvEopt8EQ7SGRRnzDWICPXrGfoq6kdiqgSMx5HHc6oo\"}]}\n"
                                                 },
                                                 "payloadInMetadata": "http://localhost:30000/realms/master"
+                                            },
+                                            "origins-1": {
+                                                "issuer": "http://localhost:30000/realms/master",
+                                                "localJwks": {
+                                                    "inlineString": "{\"keys\":[{\"kid\":\"mq62g7U4fiYFMPshyxlghbQR1FVe4x2BuL4HCgnHciU\",\"kty\":\"RSA\",\"alg\":\"RSA-OAEP\",\"use\":\"enc\",\"n\":\"w0I1BzJJgkT8MtXKCgi2i7XaCdu7aiHkIub9WqY3Ti3D1PGZMsUJgI_t6_A2iwSbbHEcbpr70Hb5gRsIX6SLuk8vBX5rpuqTy5spX9Mraj0Ky1G2RWivXAzi5cLhu-Gv-Pk_Ed90iNVqPwKuUxiGLYKBcBNF_3J-cAtgLsIquUnFKZKC1qAC4au7bkBkZVUmMXlNqSf_wC5uOl7lL0-4T6mc-0BfFAr5J5TRs-EDQx5h59qd2Y8VXZjzGq3gwd7wHGJzUmHoUdwZF20l7QmOyG2KK02gZGzMiZJLXAkpSCO2X7uKNdtj9aO4-jfHASC9Y3oeu7ReAzB4vHq_S7FA6w\",\"e\":\"AQAB\",\"x5c\":[\"MIICmzCCAYMCBgGHSDhrWDANBgkqhkiG9w0BAQsFADARMQ8wDQYDVQQDDAZtYXN0ZXIwHhcNMjMwNDAzMTc0MjQ5WhcNMzMwNDAzMTc0NDI5WjARMQ8wDQYDVQQDDAZtYXN0ZXIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDDQjUHMkmCRPwy1coKCLaLtdoJ27tqIeQi5v1apjdOLcPU8ZkyxQmAj+3r8DaLBJtscRxumvvQdvmBGwhfpIu6Ty8Ffmum6pPLmylf0ytqPQrLUbZFaK9cDOLlwuG74a/4+T8R33SI1Wo/Aq5TGIYtgoFwE0X/cn5wC2Auwiq5ScUpkoLWoALhq7tuQGRlVSYxeU2pJ//ALm46XuUvT7hPqZz7QF8UCvknlNGz4QNDHmHn2p3ZjxVdmPMareDB3vAcYnNSYehR3BkXbSXtCY7IbYorTaBkbMyJkktcCSlII7Zfu4o122P1o7j6N8cBIL1jeh67tF4DMHi8er9LsUDrAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAHC0ZA47PeG38FV6qq5OMySMWGWx20z9Aw1etvmm6y9MalE8aP2SBmJIIYR3LEkCr+sdpOk7UyAWICGc71HbFaSYjaTon45ZRjVVY+6wR34VttPB5KrVSMlGBYnybRcDCGhH7EBw0LQkPIet8dmAh7lhWR5Ea+o8RfwnqTyd+RkWfwWLOPd7YXtvQLDi2AI7sO7yzRGI5JoTeM5p/P0+QkvULY4MCGgaiRyxptiGK4E+xELYawGBDBtcoHAuUi/RMgojplABHUnYyDc7cRUzbBlA3nIUL0W4N+AtV27QX9e2U1xJY65AvIlxIq/rJe9Hdm42T7raS/edkGp+FLo+Wuo=\"],\"x5t\":\"w6-0zbfu3_l7wdDiemA41cXjBvY\",\"x5t#S256\":\"P0jxvEHcb034lgeZGsaX18LG3NdoU5v8tTQvjakLbgA\"},{\"kid\":\"sl-VyAHicwZv_AJ564PBWdvy8KQ-fmxbAV6QVG2nEwA\",\"kty\":\"RSA\",\"alg\":\"RS256\",\"use\":\"sig\",\"n\":\"o52Q9NbsCCy_l5JA_vBmKf7IG-08tsHrQtfrJWfgJrhi6I2B4K2dbsGW5IV5oFa3LjVt3ZAL4gyeUJbzXl_vIvYDu8kG8OLv0H4_gQsXIthNlTjLBXkIoo0L69RdFbTi1jnU1aepYM-_irQegAFC0TF5HQfTAh34WmYYeM_C44wxppBn64odLjiCwNt_B4rSg-TpXlXxJ1va0XCcLwuXnI3nYVWf0HInts_D2FwyDZMpHWMJKFT3fc5Jtdl4Ttc1nvv63PiDtkA1h4Ar59TOhNepQ0Db50-mjGblQBSlTI4DnQkmK0pZwRXQ84HfDwQJ5X8xC5blMHTRZbPYDA0G_w\",\"e\":\"AQAB\",\"x5c\":[\"MIICmzCCAYMCBgGHSDhqbTANBgkqhkiG9w0BAQsFADARMQ8wDQYDVQQDDAZtYXN0ZXIwHhcNMjMwNDAzMTc0MjQ5WhcNMzMwNDAzMTc0NDI5WjARMQ8wDQYDVQQDDAZtYXN0ZXIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCjnZD01uwILL+XkkD+8GYp/sgb7Ty2wetC1+slZ+AmuGLojYHgrZ1uwZbkhXmgVrcuNW3dkAviDJ5QlvNeX+8i9gO7yQbw4u/Qfj+BCxci2E2VOMsFeQiijQvr1F0VtOLWOdTVp6lgz7+KtB6AAULRMXkdB9MCHfhaZhh4z8LjjDGmkGfrih0uOILA238HitKD5OleVfEnW9rRcJwvC5ecjedhVZ/Qcie2z8PYXDINkykdYwkoVPd9zkm12XhO1zWe+/rc+IO2QDWHgCvn1M6E16lDQNvnT6aMZuVAFKVMjgOdCSYrSlnBFdDzgd8PBAnlfzELluUwdNFls9gMDQb/AgMBAAEwDQYJKoZIhvcNAQELBQADggEBADqWPUbYDWVqFC8Bxp899hqtepLVUrPLNho2DkYVwT8XX78GbVLPmtCE/IM9daoVpYyEps7383cSIoiipPF28hLRcVMGwGzpmeOYiaqPWBmhoMpPa0D7dqob95Gvhp4dOaIfy56SUh3OFoxBps+xMdFo6meInOOZikNpKtqxG+OigQkhXup9/4xcEcqT+jSQiSE3pHlNE05Met15DM2em/myQ13c7jo7L1nrc23pulUC23j2QHQrEZNZ1ARDaHwCcGM6ubT65NhVFpnloy3T2XTWsDdO3HWNP7QFBq365PX4inkDUqk4njulcuzqT1bUoJ4XMPHjZ6HV0CwAl3jglPo=\"],\"x5t\":\"rMBYaFft4lMl9cLWiWJ-DxprYlA\",\"x5t#S256\":\"fvEopt8EQ7SGRRnzDWICPXrGfoq6kdiqgSMx5HHc6oo\"}]}"
+                                                },
+                                                "payloadInMetadata": "http://localhost:30000/realms/master"
                                             }
                                         },
                                         "rules": [
@@ -1264,7 +1355,37 @@
                                                                 "providerName": "origins-0"
                                                             },
                                                             {
-                                                                "allowMissing": {}
+                                                                "providerName": "origins-1"
+                                                            },
+                                                            {
+                                                                "requiresAll": {
+                                                                    "requirements": [
+                                                                        {
+                                                                            "requiresAny": {
+                                                                                "requirements": [
+                                                                                    {
+                                                                                        "providerName": "origins-0"
+                                                                                    },
+                                                                                    {
+                                                                                        "allowMissing": {}
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "requiresAny": {
+                                                                                "requirements": [
+                                                                                    {
+                                                                                        "providerName": "origins-1"
+                                                                                    },
+                                                                                    {
+                                                                                        "allowMissing": {}
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        }
+                                                                    ]
+                                                                }
                                                             }
                                                         ]
                                                     }
@@ -1280,6 +1401,11 @@
                                         "@type": "type.googleapis.com/istio.envoy.config.filter.http.authn.v2alpha1.FilterConfig",
                                         "policy": {
                                             "origins": [
+                                                {
+                                                    "jwt": {
+                                                        "issuer": "http://localhost:30000/realms/master"
+                                                    }
+                                                },
                                                 {
                                                     "jwt": {
                                                         "issuer": "http://localhost:30000/realms/master"
@@ -1697,6 +1823,13 @@
                                                     "inlineString": "{\"keys\":[{\"kid\":\"mq62g7U4fiYFMPshyxlghbQR1FVe4x2BuL4HCgnHciU\",\"kty\":\"RSA\",\"alg\":\"RSA-OAEP\",\"use\":\"enc\",\"n\":\"w0I1BzJJgkT8MtXKCgi2i7XaCdu7aiHkIub9WqY3Ti3D1PGZMsUJgI_t6_A2iwSbbHEcbpr70Hb5gRsIX6SLuk8vBX5rpuqTy5spX9Mraj0Ky1G2RWivXAzi5cLhu-Gv-Pk_Ed90iNVqPwKuUxiGLYKBcBNF_3J-cAtgLsIquUnFKZKC1qAC4au7bkBkZVUmMXlNqSf_wC5uOl7lL0-4T6mc-0BfFAr5J5TRs-EDQx5h59qd2Y8VXZjzGq3gwd7wHGJzUmHoUdwZF20l7QmOyG2KK02gZGzMiZJLXAkpSCO2X7uKNdtj9aO4-jfHASC9Y3oeu7ReAzB4vHq_S7FA6w\",\"e\":\"AQAB\",\"x5c\":[\"MIICmzCCAYMCBgGHSDhrWDANBgkqhkiG9w0BAQsFADARMQ8wDQYDVQQDDAZtYXN0ZXIwHhcNMjMwNDAzMTc0MjQ5WhcNMzMwNDAzMTc0NDI5WjARMQ8wDQYDVQQDDAZtYXN0ZXIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDDQjUHMkmCRPwy1coKCLaLtdoJ27tqIeQi5v1apjdOLcPU8ZkyxQmAj+3r8DaLBJtscRxumvvQdvmBGwhfpIu6Ty8Ffmum6pPLmylf0ytqPQrLUbZFaK9cDOLlwuG74a/4+T8R33SI1Wo/Aq5TGIYtgoFwE0X/cn5wC2Auwiq5ScUpkoLWoALhq7tuQGRlVSYxeU2pJ//ALm46XuUvT7hPqZz7QF8UCvknlNGz4QNDHmHn2p3ZjxVdmPMareDB3vAcYnNSYehR3BkXbSXtCY7IbYorTaBkbMyJkktcCSlII7Zfu4o122P1o7j6N8cBIL1jeh67tF4DMHi8er9LsUDrAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAHC0ZA47PeG38FV6qq5OMySMWGWx20z9Aw1etvmm6y9MalE8aP2SBmJIIYR3LEkCr+sdpOk7UyAWICGc71HbFaSYjaTon45ZRjVVY+6wR34VttPB5KrVSMlGBYnybRcDCGhH7EBw0LQkPIet8dmAh7lhWR5Ea+o8RfwnqTyd+RkWfwWLOPd7YXtvQLDi2AI7sO7yzRGI5JoTeM5p/P0+QkvULY4MCGgaiRyxptiGK4E+xELYawGBDBtcoHAuUi/RMgojplABHUnYyDc7cRUzbBlA3nIUL0W4N+AtV27QX9e2U1xJY65AvIlxIq/rJe9Hdm42T7raS/edkGp+FLo+Wuo=\"],\"x5t\":\"w6-0zbfu3_l7wdDiemA41cXjBvY\",\"x5t#S256\":\"P0jxvEHcb034lgeZGsaX18LG3NdoU5v8tTQvjakLbgA\"},{\"kid\":\"sl-VyAHicwZv_AJ564PBWdvy8KQ-fmxbAV6QVG2nEwA\",\"kty\":\"RSA\",\"alg\":\"RS256\",\"use\":\"sig\",\"n\":\"o52Q9NbsCCy_l5JA_vBmKf7IG-08tsHrQtfrJWfgJrhi6I2B4K2dbsGW5IV5oFa3LjVt3ZAL4gyeUJbzXl_vIvYDu8kG8OLv0H4_gQsXIthNlTjLBXkIoo0L69RdFbTi1jnU1aepYM-_irQegAFC0TF5HQfTAh34WmYYeM_C44wxppBn64odLjiCwNt_B4rSg-TpXlXxJ1va0XCcLwuXnI3nYVWf0HInts_D2FwyDZMpHWMJKFT3fc5Jtdl4Ttc1nvv63PiDtkA1h4Ar59TOhNepQ0Db50-mjGblQBSlTI4DnQkmK0pZwRXQ84HfDwQJ5X8xC5blMHTRZbPYDA0G_w\",\"e\":\"AQAB\",\"x5c\":[\"MIICmzCCAYMCBgGHSDhqbTANBgkqhkiG9w0BAQsFADARMQ8wDQYDVQQDDAZtYXN0ZXIwHhcNMjMwNDAzMTc0MjQ5WhcNMzMwNDAzMTc0NDI5WjARMQ8wDQYDVQQDDAZtYXN0ZXIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCjnZD01uwILL+XkkD+8GYp/sgb7Ty2wetC1+slZ+AmuGLojYHgrZ1uwZbkhXmgVrcuNW3dkAviDJ5QlvNeX+8i9gO7yQbw4u/Qfj+BCxci2E2VOMsFeQiijQvr1F0VtOLWOdTVp6lgz7+KtB6AAULRMXkdB9MCHfhaZhh4z8LjjDGmkGfrih0uOILA238HitKD5OleVfEnW9rRcJwvC5ecjedhVZ/Qcie2z8PYXDINkykdYwkoVPd9zkm12XhO1zWe+/rc+IO2QDWHgCvn1M6E16lDQNvnT6aMZuVAFKVMjgOdCSYrSlnBFdDzgd8PBAnlfzELluUwdNFls9gMDQb/AgMBAAEwDQYJKoZIhvcNAQELBQADggEBADqWPUbYDWVqFC8Bxp899hqtepLVUrPLNho2DkYVwT8XX78GbVLPmtCE/IM9daoVpYyEps7383cSIoiipPF28hLRcVMGwGzpmeOYiaqPWBmhoMpPa0D7dqob95Gvhp4dOaIfy56SUh3OFoxBps+xMdFo6meInOOZikNpKtqxG+OigQkhXup9/4xcEcqT+jSQiSE3pHlNE05Met15DM2em/myQ13c7jo7L1nrc23pulUC23j2QHQrEZNZ1ARDaHwCcGM6ubT65NhVFpnloy3T2XTWsDdO3HWNP7QFBq365PX4inkDUqk4njulcuzqT1bUoJ4XMPHjZ6HV0CwAl3jglPo=\"],\"x5t\":\"rMBYaFft4lMl9cLWiWJ-DxprYlA\",\"x5t#S256\":\"fvEopt8EQ7SGRRnzDWICPXrGfoq6kdiqgSMx5HHc6oo\"}]}\n"
                                                 },
                                                 "payloadInMetadata": "http://localhost:30000/realms/master"
+                                            },
+                                            "origins-1": {
+                                                "issuer": "http://localhost:30000/realms/master",
+                                                "localJwks": {
+                                                    "inlineString": "{\"keys\":[{\"kid\":\"mq62g7U4fiYFMPshyxlghbQR1FVe4x2BuL4HCgnHciU\",\"kty\":\"RSA\",\"alg\":\"RSA-OAEP\",\"use\":\"enc\",\"n\":\"w0I1BzJJgkT8MtXKCgi2i7XaCdu7aiHkIub9WqY3Ti3D1PGZMsUJgI_t6_A2iwSbbHEcbpr70Hb5gRsIX6SLuk8vBX5rpuqTy5spX9Mraj0Ky1G2RWivXAzi5cLhu-Gv-Pk_Ed90iNVqPwKuUxiGLYKBcBNF_3J-cAtgLsIquUnFKZKC1qAC4au7bkBkZVUmMXlNqSf_wC5uOl7lL0-4T6mc-0BfFAr5J5TRs-EDQx5h59qd2Y8VXZjzGq3gwd7wHGJzUmHoUdwZF20l7QmOyG2KK02gZGzMiZJLXAkpSCO2X7uKNdtj9aO4-jfHASC9Y3oeu7ReAzB4vHq_S7FA6w\",\"e\":\"AQAB\",\"x5c\":[\"MIICmzCCAYMCBgGHSDhrWDANBgkqhkiG9w0BAQsFADARMQ8wDQYDVQQDDAZtYXN0ZXIwHhcNMjMwNDAzMTc0MjQ5WhcNMzMwNDAzMTc0NDI5WjARMQ8wDQYDVQQDDAZtYXN0ZXIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDDQjUHMkmCRPwy1coKCLaLtdoJ27tqIeQi5v1apjdOLcPU8ZkyxQmAj+3r8DaLBJtscRxumvvQdvmBGwhfpIu6Ty8Ffmum6pPLmylf0ytqPQrLUbZFaK9cDOLlwuG74a/4+T8R33SI1Wo/Aq5TGIYtgoFwE0X/cn5wC2Auwiq5ScUpkoLWoALhq7tuQGRlVSYxeU2pJ//ALm46XuUvT7hPqZz7QF8UCvknlNGz4QNDHmHn2p3ZjxVdmPMareDB3vAcYnNSYehR3BkXbSXtCY7IbYorTaBkbMyJkktcCSlII7Zfu4o122P1o7j6N8cBIL1jeh67tF4DMHi8er9LsUDrAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAHC0ZA47PeG38FV6qq5OMySMWGWx20z9Aw1etvmm6y9MalE8aP2SBmJIIYR3LEkCr+sdpOk7UyAWICGc71HbFaSYjaTon45ZRjVVY+6wR34VttPB5KrVSMlGBYnybRcDCGhH7EBw0LQkPIet8dmAh7lhWR5Ea+o8RfwnqTyd+RkWfwWLOPd7YXtvQLDi2AI7sO7yzRGI5JoTeM5p/P0+QkvULY4MCGgaiRyxptiGK4E+xELYawGBDBtcoHAuUi/RMgojplABHUnYyDc7cRUzbBlA3nIUL0W4N+AtV27QX9e2U1xJY65AvIlxIq/rJe9Hdm42T7raS/edkGp+FLo+Wuo=\"],\"x5t\":\"w6-0zbfu3_l7wdDiemA41cXjBvY\",\"x5t#S256\":\"P0jxvEHcb034lgeZGsaX18LG3NdoU5v8tTQvjakLbgA\"},{\"kid\":\"sl-VyAHicwZv_AJ564PBWdvy8KQ-fmxbAV6QVG2nEwA\",\"kty\":\"RSA\",\"alg\":\"RS256\",\"use\":\"sig\",\"n\":\"o52Q9NbsCCy_l5JA_vBmKf7IG-08tsHrQtfrJWfgJrhi6I2B4K2dbsGW5IV5oFa3LjVt3ZAL4gyeUJbzXl_vIvYDu8kG8OLv0H4_gQsXIthNlTjLBXkIoo0L69RdFbTi1jnU1aepYM-_irQegAFC0TF5HQfTAh34WmYYeM_C44wxppBn64odLjiCwNt_B4rSg-TpXlXxJ1va0XCcLwuXnI3nYVWf0HInts_D2FwyDZMpHWMJKFT3fc5Jtdl4Ttc1nvv63PiDtkA1h4Ar59TOhNepQ0Db50-mjGblQBSlTI4DnQkmK0pZwRXQ84HfDwQJ5X8xC5blMHTRZbPYDA0G_w\",\"e\":\"AQAB\",\"x5c\":[\"MIICmzCCAYMCBgGHSDhqbTANBgkqhkiG9w0BAQsFADARMQ8wDQYDVQQDDAZtYXN0ZXIwHhcNMjMwNDAzMTc0MjQ5WhcNMzMwNDAzMTc0NDI5WjARMQ8wDQYDVQQDDAZtYXN0ZXIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCjnZD01uwILL+XkkD+8GYp/sgb7Ty2wetC1+slZ+AmuGLojYHgrZ1uwZbkhXmgVrcuNW3dkAviDJ5QlvNeX+8i9gO7yQbw4u/Qfj+BCxci2E2VOMsFeQiijQvr1F0VtOLWOdTVp6lgz7+KtB6AAULRMXkdB9MCHfhaZhh4z8LjjDGmkGfrih0uOILA238HitKD5OleVfEnW9rRcJwvC5ecjedhVZ/Qcie2z8PYXDINkykdYwkoVPd9zkm12XhO1zWe+/rc+IO2QDWHgCvn1M6E16lDQNvnT6aMZuVAFKVMjgOdCSYrSlnBFdDzgd8PBAnlfzELluUwdNFls9gMDQb/AgMBAAEwDQYJKoZIhvcNAQELBQADggEBADqWPUbYDWVqFC8Bxp899hqtepLVUrPLNho2DkYVwT8XX78GbVLPmtCE/IM9daoVpYyEps7383cSIoiipPF28hLRcVMGwGzpmeOYiaqPWBmhoMpPa0D7dqob95Gvhp4dOaIfy56SUh3OFoxBps+xMdFo6meInOOZikNpKtqxG+OigQkhXup9/4xcEcqT+jSQiSE3pHlNE05Met15DM2em/myQ13c7jo7L1nrc23pulUC23j2QHQrEZNZ1ARDaHwCcGM6ubT65NhVFpnloy3T2XTWsDdO3HWNP7QFBq365PX4inkDUqk4njulcuzqT1bUoJ4XMPHjZ6HV0CwAl3jglPo=\"],\"x5t\":\"rMBYaFft4lMl9cLWiWJ-DxprYlA\",\"x5t#S256\":\"fvEopt8EQ7SGRRnzDWICPXrGfoq6kdiqgSMx5HHc6oo\"}]}"
+                                                },
+                                                "payloadInMetadata": "http://localhost:30000/realms/master"
                                             }
                                         },
                                         "rules": [
@@ -1711,7 +1844,37 @@
                                                                 "providerName": "origins-0"
                                                             },
                                                             {
-                                                                "allowMissing": {}
+                                                                "providerName": "origins-1"
+                                                            },
+                                                            {
+                                                                "requiresAll": {
+                                                                    "requirements": [
+                                                                        {
+                                                                            "requiresAny": {
+                                                                                "requirements": [
+                                                                                    {
+                                                                                        "providerName": "origins-0"
+                                                                                    },
+                                                                                    {
+                                                                                        "allowMissing": {}
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "requiresAny": {
+                                                                                "requirements": [
+                                                                                    {
+                                                                                        "providerName": "origins-1"
+                                                                                    },
+                                                                                    {
+                                                                                        "allowMissing": {}
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        }
+                                                                    ]
+                                                                }
                                                             }
                                                         ]
                                                     }
@@ -1727,6 +1890,11 @@
                                         "@type": "type.googleapis.com/istio.envoy.config.filter.http.authn.v2alpha1.FilterConfig",
                                         "policy": {
                                             "origins": [
+                                                {
+                                                    "jwt": {
+                                                        "issuer": "http://localhost:30000/realms/master"
+                                                    }
+                                                },
                                                 {
                                                     "jwt": {
                                                         "issuer": "http://localhost:30000/realms/master"
