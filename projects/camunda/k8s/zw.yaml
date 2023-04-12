@@ -4,13 +4,11 @@ metadata:
   name: zeebe-worker
   labels:
     app: zeebe-worker
-  annotations:
-    prometheus.io/scrape: 'true'
 spec:
   restartPolicy: Always
   containers:
   - name: zeebe-worker
-    image: josepht96/zeebe-worker:v1
+    image: josepht96/zeebe-worker:v2
     imagePullPolicy: Always
     resources: {}
     ports:
