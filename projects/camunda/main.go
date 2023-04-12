@@ -32,9 +32,30 @@ func main() {
 		plainText = true
 	}
 
+	if os.Getenv("ZEEBE_CLIENT_ID") == "" {
+		log.Fatal("ZEEBE_CLIENT_ID not set")
+	}
+	if os.Getenv("ZEEBE_CLIENT_SECRET") == "" {
+		log.Fatal("ZEEBE_CLIENT_SECRET not set")
+	}
+	if os.Getenv("ZEEBE_AUTHORIZATION_SERVER_URL") == "" {
+		log.Fatal("ZEEBE_AUTHORIZATION_SERVER_URL not set")
+	}
+
+	credsProvider, err := zbc.NewOAuthCredentialsProvider(&zbc.OAuthProviderConfig{
+		ClientID:               os.Getenv("ZEEBE_CLIENT_ID"),
+		ClientSecret:           os.Getenv("ZEEBE_CLIENT_SECRET"),
+		Audience:               gatewayAddr,
+		AuthorizationServerURL: os.Getenv("ZEEBE_AUTHORIZATION_SERVER_URL"),
+	})
+	if err != nil {
+		panic(err)
+	}
 	fmt.Println(gatewayAddr)
 	zbClient, err := zbc.NewClient(&zbc.ClientConfig{
+		GatewayAddress:         gatewayAddr,
 		UsePlaintextConnection: plainText,
+		CredentialsProvider:    credsProvider,
 	})
 
 	if err != nil {
