@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"strconv"
 	"time"
 
@@ -15,14 +16,23 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
+const ZeebeAddr = "camunda-zeebe-gateway.camunda.svc.cluster.local:26500"
+
 func main() {
 
 	http.Handle("/metrics", promhttp.Handler())
 	fmt.Println("Listening on http://localhost:8080")
 	go http.ListenAndServe(":8080", nil)
 
+	gatewayAddr := os.Getenv("ZEEBE_ADDRESS")
 	plainText := true
 
+	if gatewayAddr == "" {
+		gatewayAddr = ZeebeAddr
+		plainText = true
+	}
+
+	fmt.Println(gatewayAddr)
 	zbClient, err := zbc.NewClient(&zbc.ClientConfig{
 		UsePlaintextConnection: plainText,
 	})
