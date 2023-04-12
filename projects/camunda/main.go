@@ -21,7 +21,11 @@ func main() {
 	fmt.Println("Listening on http://localhost:8080")
 	go http.ListenAndServe(":8080", nil)
 
-	zbClient, err := zbc.NewClient(&zbc.ClientConfig{})
+	plainText := true
+
+	zbClient, err := zbc.NewClient(&zbc.ClientConfig{
+		UsePlaintextConnection: plainText,
+	})
 
 	if err != nil {
 		panic(err)

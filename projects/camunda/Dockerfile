@@ -8,7 +8,8 @@ COPY go.mod ./
 COPY go.sum ./
 RUN go mod download
 
-COPY . ./
+COPY ./main.go ./
+COPY ./order-process-4.bpmn ./
 
 RUN go build -o /zeebe-worker
 EXPOSE 8080
