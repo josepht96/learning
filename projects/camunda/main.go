@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
 	"strconv"
 	"time"
 
@@ -16,47 +15,13 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
-const ZeebeAddr = "camunda-zeebe-gateway.camunda.svc.cluster.local:26500"
-
 func main() {
 
 	http.Handle("/metrics", promhttp.Handler())
 	fmt.Println("Listening on http://localhost:8080")
 	go http.ListenAndServe(":8080", nil)
 
-	gatewayAddr := os.Getenv("ZEEBE_ADDRESS")
-	plainText := true
-
-	if gatewayAddr == "" {
-		gatewayAddr = ZeebeAddr
-		plainText = true
-	}
-
-	if os.Getenv("ZEEBE_CLIENT_ID") == "" {
-		log.Fatal("ZEEBE_CLIENT_ID not set")
-	}
-	if os.Getenv("ZEEBE_CLIENT_SECRET") == "" {
-		log.Fatal("ZEEBE_CLIENT_SECRET not set")
-	}
-	if os.Getenv("ZEEBE_AUTHORIZATION_SERVER_URL") == "" {
-		log.Fatal("ZEEBE_AUTHORIZATION_SERVER_URL not set")
-	}
-
-	credsProvider, err := zbc.NewOAuthCredentialsProvider(&zbc.OAuthProviderConfig{
-		ClientID:               os.Getenv("ZEEBE_CLIENT_ID"),
-		ClientSecret:           os.Getenv("ZEEBE_CLIENT_SECRET"),
-		Audience:               gatewayAddr,
-		AuthorizationServerURL: os.Getenv("ZEEBE_AUTHORIZATION_SERVER_URL"),
-	})
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println(gatewayAddr)
-	zbClient, err := zbc.NewClient(&zbc.ClientConfig{
-		GatewayAddress:         gatewayAddr,
-		UsePlaintextConnection: plainText,
-		CredentialsProvider:    credsProvider,
-	})
+	zbClient, err := zbc.NewClient(&zbc.ClientConfig{})
 
 	if err != nil {
 		panic(err)
@@ -91,7 +56,7 @@ func main() {
 		fmt.Println(result.String())
 		i++
 		fmt.Println("Sleeping...")
-		time.Sleep(15 * time.Second)
+		time.Sleep(30 * time.Second)
 	}
 }
 
