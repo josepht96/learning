@@ -33,7 +33,7 @@ func main() {
 
 	// deploy workflow
 	ctx := context.Background()
-	response, err := zbClient.NewDeployResourceCommand().AddResourceFile("order-process-4.bpmn").Send(ctx)
+	response, err := zbClient.NewDeployResourceCommand().AddResourceFile("order-process-5.bpmn").Send(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -49,7 +49,7 @@ func main() {
 	for {
 		fmt.Println("Creating new instance...")
 		variables["orderId"] = strconv.Itoa(i)
-		request, err := zbClient.NewCreateInstanceCommand().BPMNProcessId("order-process-4-manual").LatestVersion().VariablesFromMap(variables)
+		request, err := zbClient.NewCreateInstanceCommand().BPMNProcessId("order-process-5-manual").LatestVersion().VariablesFromMap(variables)
 		if err != nil {
 			panic(err)
 		}
