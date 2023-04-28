@@ -1,0 +1,17 @@
+{
+	"ulid": "01GYX3EPDZEG6M8952K839CRZ9",
+	"minTime": 1682445601840,
+	"maxTime": 1682452800000,
+	"stats": {
+		"numSamples": 2569956,
+		"numSeries": 2055,
+		"numChunks": 18399
+	},
+	"compaction": {
+		"level": 1,
+		"sources": [
+			"01GYX3EPDZEG6M8952K839CRZ9"
+		]
+	},
+	"version": 1
+}

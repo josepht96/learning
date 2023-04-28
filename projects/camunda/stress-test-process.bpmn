@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.10.0">
+  <bpmn:process id="stress-test-process" isExecutable="true">
+    <bpmn:serviceTask id="Stress_Test_13qupip" name="Stress Test Task 1">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="stress-test-1" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1go734r</bpmn:incoming>
+      <bpmn:outgoing>Flow_0hthg3h</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Stress_Test_0mk2hi1" name="Stress Test Task 2">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="stress-test-2" />
+        <zeebe:taskHeaders>
+          <zeebe:header key="method" value="STRESS_TEST" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0hthg3h</bpmn:incoming>
+      <bpmn:outgoing>Flow_0adsggr</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Stress_Test_0of94ja" name="Stress Test Task 3">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="stress-test-3" />
+        <zeebe:taskHeaders>
+          <zeebe:header key="method" value="STRESS_TEST" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0adsggr</bpmn:incoming>
+      <bpmn:outgoing>Flow_0bs3rwe</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Stress_Test_0hc9qmn" name="Stress Test Task 4">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="stress-test-4" />
+        <zeebe:taskHeaders>
+          <zeebe:header key="method" value="STRESS_TEST" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0bs3rwe</bpmn:incoming>
+      <bpmn:outgoing>Flow_006pj2w</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Stress_Test_1wsl52g" name="Stress Test Task 5">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="stress-test-5" />
+        <zeebe:taskHeaders>
+          <zeebe:header key="method" value="STRESS_TEST" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_006pj2w</bpmn:incoming>
+      <bpmn:outgoing>Flow_11sftgc</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Stress_Test_100zemi" name="Stress Test Task 6">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="stress-test-6" />
+        <zeebe:taskHeaders>
+          <zeebe:header key="method" value="STRESS_TEST" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_11sftgc</bpmn:incoming>
+      <bpmn:outgoing>Flow_0bhr7bl</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Stress_Test_08z2ryq" name="Stress Test Task 7">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="stress-test-7" />
+        <zeebe:taskHeaders>
+          <zeebe:header key="method" value="STRESS_TEST" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0bhr7bl</bpmn:incoming>
+      <bpmn:outgoing>Flow_15h3um7</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Stress_Test_0jvmncn" name="Stress Test Task 8">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="stress-test-8" />
+        <zeebe:taskHeaders>
+          <zeebe:header key="method" value="STRESS_TEST" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_15h3um7</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ddtzrz</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Stress_Test_18wprrx" name="Stress Test Task 9">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="stress-test-9" />
+        <zeebe:taskHeaders>
+          <zeebe:header key="method" value="STRESS_TEST" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0ddtzrz</bpmn:incoming>
+      <bpmn:outgoing>Flow_1nxubbe</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Stress_Test_0aprp7j" name="Stress Test Task 10">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="stress-test-10" />
+        <zeebe:taskHeaders>
+          <zeebe:header key="method" value="STRESS_TEST" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1nxubbe</bpmn:incoming>
+      <bpmn:outgoing>Flow_090eg1f</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_006pj2w" sourceRef="Stress_Test_0hc9qmn" targetRef="Stress_Test_1wsl52g" />
+    <bpmn:sequenceFlow id="Flow_0bhr7bl" sourceRef="Stress_Test_100zemi" targetRef="Stress_Test_08z2ryq" />
+    <bpmn:sequenceFlow id="Flow_15h3um7" sourceRef="Stress_Test_08z2ryq" targetRef="Stress_Test_0jvmncn" />
+    <bpmn:sequenceFlow id="Flow_0ddtzrz" sourceRef="Stress_Test_0jvmncn" targetRef="Stress_Test_18wprrx" />
+    <bpmn:sequenceFlow id="Flow_1nxubbe" sourceRef="Stress_Test_18wprrx" targetRef="Stress_Test_0aprp7j" />
+    <bpmn:startEvent id="Event_0wkr0zg" name="Stress Test Start">
+      <bpmn:outgoing>Flow_1go734r</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_054i0b3" name="Stress Test End">
+      <bpmn:incoming>Flow_090eg1f</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_090eg1f" sourceRef="Stress_Test_0aprp7j" targetRef="Event_054i0b3" />
+    <bpmn:sequenceFlow id="Flow_0bs3rwe" sourceRef="Stress_Test_0of94ja" targetRef="Stress_Test_0hc9qmn" />
+    <bpmn:sequenceFlow id="Flow_0adsggr" sourceRef="Stress_Test_0mk2hi1" targetRef="Stress_Test_0of94ja" />
+    <bpmn:sequenceFlow id="Flow_0hthg3h" sourceRef="Stress_Test_13qupip" targetRef="Stress_Test_0mk2hi1" />
+    <bpmn:sequenceFlow id="Flow_1go734r" sourceRef="Event_0wkr0zg" targetRef="Stress_Test_13qupip" />
+    <bpmn:sequenceFlow id="Flow_11sftgc" sourceRef="Stress_Test_1wsl52g" targetRef="Stress_Test_100zemi" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="stress-test-process">
+      <bpmndi:BPMNShape id="Stress_Test_0hc9qmn_di" bpmnElement="Stress_Test_0hc9qmn">
+        <dc:Bounds x="590" y="180" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1o0sixj" bpmnElement="Stress_Test_1wsl52g">
+        <dc:Bounds x="710" y="180" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1q38b86" bpmnElement="Stress_Test_100zemi">
+        <dc:Bounds x="230" y="310" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0tx8aew" bpmnElement="Stress_Test_08z2ryq">
+        <dc:Bounds x="350" y="310" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_14e073z" bpmnElement="Stress_Test_0jvmncn">
+        <dc:Bounds x="470" y="310" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0l07ywn" bpmnElement="Stress_Test_18wprrx">
+        <dc:Bounds x="590" y="310" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1ckpke1" bpmnElement="Stress_Test_0aprp7j">
+        <dc:Bounds x="710" y="310" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0wkr0zg_di" bpmnElement="Event_0wkr0zg">
+        <dc:Bounds x="181" y="92" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="158" y="73" width="81" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_054i0b3_di" bpmnElement="Event_054i0b3">
+        <dc:Bounds x="822" y="92" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="801" y="68" width="77" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1o02jbz" bpmnElement="Stress_Test_13qupip">
+        <dc:Bounds x="230" y="180" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0qxv7xw" bpmnElement="Stress_Test_0mk2hi1">
+        <dc:Bounds x="350" y="180" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_13oneit" bpmnElement="Stress_Test_0of94ja">
+        <dc:Bounds x="470" y="180" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_006pj2w_di" bpmnElement="Flow_006pj2w">
+        <di:waypoint x="690" y="220" />
+        <di:waypoint x="710" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0bhr7bl_di" bpmnElement="Flow_0bhr7bl">
+        <di:waypoint x="330" y="350" />
+        <di:waypoint x="350" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_15h3um7_di" bpmnElement="Flow_15h3um7">
+        <di:waypoint x="450" y="350" />
+        <di:waypoint x="470" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ddtzrz_di" bpmnElement="Flow_0ddtzrz">
+        <di:waypoint x="570" y="350" />
+        <di:waypoint x="590" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1nxubbe_di" bpmnElement="Flow_1nxubbe">
+        <di:waypoint x="690" y="350" />
+        <di:waypoint x="710" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_090eg1f_di" bpmnElement="Flow_090eg1f">
+        <di:waypoint x="810" y="350" />
+        <di:waypoint x="840" y="350" />
+        <di:waypoint x="840" y="128" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0bs3rwe_di" bpmnElement="Flow_0bs3rwe">
+        <di:waypoint x="570" y="220" />
+        <di:waypoint x="590" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0adsggr_di" bpmnElement="Flow_0adsggr">
+        <di:waypoint x="450" y="220" />
+        <di:waypoint x="470" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0hthg3h_di" bpmnElement="Flow_0hthg3h">
+        <di:waypoint x="330" y="220" />
+        <di:waypoint x="350" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1go734r_di" bpmnElement="Flow_1go734r">
+        <di:waypoint x="199" y="128" />
+        <di:waypoint x="199" y="220" />
+        <di:waypoint x="230" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11sftgc_di" bpmnElement="Flow_11sftgc">
+        <di:waypoint x="760" y="260" />
+        <di:waypoint x="760" y="280" />
+        <di:waypoint x="270" y="280" />
+        <di:waypoint x="270" y="310" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

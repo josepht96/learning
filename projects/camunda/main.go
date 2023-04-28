@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"strconv"
 	"time"
 
@@ -15,133 +16,83 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
+var TASK_INTERVAL int = 1000
+
 func main() {
+	os.Setenv("ZEEBE_ADDRESS", "192.168.86.23:26500")
+	os.Setenv("ZEEBE_HOST", "192.168.86.23")
+	os.Setenv("ZEEBE_PORT", "26500")
 
 	http.Handle("/metrics", promhttp.Handler())
-	fmt.Println("Listening on http://localhost:8080")
+	log.Println("Listening on http://localhost:8080")
 	go http.ListenAndServe(":8080", nil)
+
+	process_interval, err := strconv.Atoi(os.Getenv("PROCESS_INTERVAL"))
+	if err != nil {
+		log.Printf("error with enviroment variable 'PROCESS_INTERVAL': %s", err)
+		process_interval = 1000
+	}
+	task_interval, err := strconv.Atoi(os.Getenv("TASK_INTERVAL"))
+	if err != nil {
+		log.Printf("error with environment variable 'TASK_INTERVAL': %s", err)
+	} else {
+		TASK_INTERVAL = task_interval
+	}
 
 	zbClient, err := zbc.NewClient(&zbc.ClientConfig{
 		UsePlaintextConnection: true,
 	})
 
 	if err != nil {
-		panic(err)
+		log.Panic(err)
 	}
 
 	// deploy workflow
 	ctx := context.Background()
-	response, err := zbClient.NewDeployResourceCommand().AddResourceFile("order-process-4.bpmn").Send(ctx)
+	response, err := zbClient.NewDeployResourceCommand().AddResourceFile("stress-test-process.bpmn").Send(ctx)
 	if err != nil {
 		panic(err)
 	}
 
 	fmt.Println(response.String())
 
-	zbClient.NewJobWorker().JobType("payment-service").Handler(handleJobPayment).Open()
-	zbClient.NewJobWorker().JobType("shipment-service").Handler(handleJobShipment).Open()
+	zbClient.NewJobWorker().JobType("stress-test-1").Handler(handleStressTestJobFast).Open()
+	zbClient.NewJobWorker().JobType("stress-test-2").Handler(handleStressTestJobSlow).Open()
+	zbClient.NewJobWorker().JobType("stress-test-3").Handler(handleStressTestJobFast).Open()
+	zbClient.NewJobWorker().JobType("stress-test-4").Handler(handleStressTestJobSlow).Open()
+	zbClient.NewJobWorker().JobType("stress-test-5").Handler(handleStressTestJobFast).Open()
+	zbClient.NewJobWorker().JobType("stress-test-6").Handler(handleStressTestJobSlow).Open()
+	zbClient.NewJobWorker().JobType("stress-test-7").Handler(handleStressTestJobFast).Open()
+	zbClient.NewJobWorker().JobType("stress-test-8").Handler(handleStressTestJobSlow).Open()
+	zbClient.NewJobWorker().JobType("stress-test-9").Handler(handleStressTestJobFast).Open()
+	zbClient.NewJobWorker().JobType("stress-test-10").Handler(handleStressTestJobSlow).Open()
 
 	// create a new workflow instance
 	variables := make(map[string]interface{})
 	i := 0
 	for {
-		fmt.Println("Creating new instance...")
-		variables["orderId"] = strconv.Itoa(i)
-		request, err := zbClient.NewCreateInstanceCommand().BPMNProcessId("order-process-4-manual").LatestVersion().VariablesFromMap(variables)
+		log.Println("Creating new stress test instance...")
+		variables["testId"] = strconv.Itoa(i)
+		request, err := zbClient.NewCreateInstanceCommand().BPMNProcessId("stress-test-process").LatestVersion().VariablesFromMap(variables)
 		if err != nil {
-			panic(err)
+			log.Println(err)
 		}
 		result, err := request.Send(ctx)
 		if err != nil {
-			panic(err)
+			log.Println(err)
 		}
-		fmt.Println(result.String())
+		log.Println(result.String())
 		i++
-		fmt.Println("Sleeping...")
-		time.Sleep(30 * time.Second)
+		time.Sleep(time.Duration(process_interval) * time.Millisecond)
 	}
 }
 
-func handleJobPayment(client worker.JobClient, job entities.Job) {
-	jobKey := job.GetKey()
-
-	headers, err := job.GetCustomHeadersAsMap()
-	if err != nil {
-		// failed to handle job as we require the custom job headers
-		failJob(client, job)
-		return
-	}
-
-	variables, err := job.GetVariablesAsMap()
-	if err != nil {
-		// failed to handle job as we require the variables
-		failJob(client, job)
-		return
-	}
-
-	variables["totalPrice"] = 46.50
-	request, err := client.NewCompleteJobCommand().JobKey(jobKey).VariablesFromMap(variables)
-	if err != nil {
-		// failed to set the updated variables
-		failJob(client, job)
-		return
-	}
-
-	log.Println("Complete job", jobKey, "of type", job.Type)
-	log.Println("Payment processed:", headers["method"])
-
-	ctx := context.Background()
-	_, err = request.Send(ctx)
-	if err != nil {
-		panic(err)
-	}
-
-	log.Println("Successfully completed job")
-}
-
-func handleJobShipment(client worker.JobClient, job entities.Job) {
-	time.Sleep(15 * time.Second)
-	jobKey := job.GetKey()
-
-	headers, err := job.GetCustomHeadersAsMap()
-	if err != nil {
-		// failed to handle job as we require the custom job headers
-		failJob(client, job)
-		return
-	}
-
-	variables, err := job.GetVariablesAsMap()
-	if err != nil {
-		// failed to handle job as we require the variables
-		failJob(client, job)
-		return
-	}
-
-	variables["totalPrice"] = 46.50
-	request, err := client.NewCompleteJobCommand().JobKey(jobKey).VariablesFromMap(variables)
-	if err != nil {
-		// failed to set the updated variables
-		failJob(client, job)
-		return
-	}
-
-	log.Println("Complete job", jobKey, "of type", job.Type)
-	log.Println("Shipment processed:", headers["method"])
-
-	ctx := context.Background()
-	_, err = request.Send(ctx)
-	if err != nil {
-		panic(err)
-	}
-
-	log.Println("Successfully completed job")
-}
 func failJob(client worker.JobClient, job entities.Job) {
 	log.Println("Failed to complete job", job.GetKey())
 
 	ctx := context.Background()
 	_, err := client.NewFailJobCommand().JobKey(job.GetKey()).Retries(job.Retries - 1).Send(ctx)
 	if err != nil {
-		panic(err)
+		log.Panic(err)
 	}
 }

@@ -1,0 +1,29 @@
+root@test1-pod-78d9cdf7f7-fxgzg:/# df -h
+Filesystem      Size  Used Avail Use% Mounted on
+overlay          59G   41G   16G  73% /
+tmpfs            64M     0   64M   0% /dev
+/dev/vda1        59G   41G   16G  73% /test
+shm              64M     0   64M   0% /dev/shm
+tmpfs           7.7G   12K  7.7G   1% /run/secrets/kubernetes.io/serviceaccount
+tmpfs           3.9G     0  3.9G   0% /sys/firmware
+
+bash-5.1$ ls
+afs  bin  boot	dev  etc  home	lib  lib64  media  mnt	opt  proc  product_uuid  root  run  sbin  srv  sys  tmp  usr  var
+bash-5.1$ df  -h
+Filesystem      Size  Used Avail Use% Mounted on
+overlay          59G   41G   16G  73% /
+tmpfs            64M     0   64M   0% /dev
+/dev/vda1        59G   41G   16G  73% /etc/hosts
+shm              64M     0   64M   0% /dev/shm
+tmpfs           7.7G   12K  7.7G   1% /run/secrets/kubernetes.io/serviceaccount
+tmpfs           3.9G     0  3.9G   0% /sys/firmware
+
+
+root@nginx:/# df -h
+Filesystem      Size  Used Avail Use% Mounted on
+overlay          59G   41G   16G  73% /
+tmpfs            64M     0   64M   0% /dev
+/dev/vda1        59G   41G   16G  73% /etc/hosts
+shm              64M     0   64M   0% /dev/shm
+tmpfs           7.7G   12K  7.7G   1% /run/secrets/kubernetes.io/serviceaccount
+tmpfs           3.9G     0  3.9G   0% /sys/firmware

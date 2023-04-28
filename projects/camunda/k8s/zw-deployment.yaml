@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: zw-stress-test
+  name: zw-stress-test
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: zw-stress-test
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: zw-stress-tests
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: zeebe-worker
+        image: josepht96/zeebe-worker-stress-test:v1
+        imagePullPolicy: Always
+        resources: {}
+        env:
+        - name: ZEEBE_ADDRESS
+          value: "camunda-zeebe-gateway.camunda.svc.cluster.local:26500"
+        - name: ZEEBE_HOST
+          value: "camunda-zeebe-gateway.camunda.svc.cluster.local"
+        - name: ZEEBE_PORT
+          value: "26500"
+        - name: ZEEBE_CLIENT_ID
+          value: "zw"
+        - name: ZEEBE_CLIENT_SECRET
+          value: "HNKuixezoxJHLH1KaBsOkQ7hbzeP0hb8"
+        - name: ZEEBE_AUTHORIZATION_SERVER_URL
+          value: "http://camunda-keycloak.camunda.svc.cluster.local/auth/realms/camunda-platform/protocol/openid-connect/token"

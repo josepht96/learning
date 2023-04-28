@@ -26,3 +26,4 @@ spec:
       value: "HNKuixezoxJHLH1KaBsOkQ7hbzeP0hb8"
     - name: ZEEBE_AUTHORIZATION_SERVER_URL
       value: "http://camunda-keycloak.camunda.svc.cluster.local/auth/realms/camunda-platform/protocol/openid-connect/token"
+
