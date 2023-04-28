@@ -19,9 +19,9 @@ import (
 var TASK_INTERVAL int = 1000
 
 func main() {
-	os.Setenv("ZEEBE_ADDRESS", "192.168.86.23:26500")
-	os.Setenv("ZEEBE_HOST", "192.168.86.23")
-	os.Setenv("ZEEBE_PORT", "26500")
+	// os.Setenv("ZEEBE_ADDRESS", "192.168.86.23:26500")
+	// os.Setenv("ZEEBE_HOST", "192.168.86.23")
+	// os.Setenv("ZEEBE_PORT", "26500")
 
 	http.Handle("/metrics", promhttp.Handler())
 	log.Println("Listening on http://localhost:8080")
