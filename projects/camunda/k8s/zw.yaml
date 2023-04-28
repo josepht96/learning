@@ -8,7 +8,7 @@ spec:
   restartPolicy: Always
   containers:
   - name: zeebe-worker
-    image: josepht96/zeebe-worker:v2
+    image: josepht96/zeebe-worker-stress-test:v1
     imagePullPolicy: Always
     resources: {}
     ports:
