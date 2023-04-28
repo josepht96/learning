@@ -13,7 +13,7 @@ spec:
   template:
     metadata:
       labels:
-        app: zw-stress-tests
+        app: zw-stress-test
     spec:
       restartPolicy: Always
       containers:
