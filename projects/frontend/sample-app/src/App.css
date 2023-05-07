@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #151516;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -32,7 +32,28 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+p {
+  margin: 0;
+}
+
+.Scroll-pane {
+  margin: auto;
+  min-height: 30vh;
+  min-width: 50%;
+  top: 0;
+}
+
+.Info-block {
+  width: 100%;
+  min-height: 25vh;
+}
+
+.Button-bar {
+  width: 100%;
+  min-height: 5vh;
 }

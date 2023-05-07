@@ -3,52 +3,66 @@ import { useState, useEffect } from "react";
 import logo from './logo.svg';
 import './App.css';
 import internal from 'stream';
+import styled from "@emotion/styled";
+import { config } from "react-spring";
+import { Spring, animated } from "react-spring";
+
 
 function App() {
-  const [count, setCount] = useState({counter: 3, countNum: 0});
-  
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCount((prevCount) => ({
-        counter: prevCount.counter - 1,
-        countNum: prevCount.countNum
-      }));
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    if (count.counter === 0) {
-      setCount(() => ({
-        counter: 3,
-        countNum: count.countNum + 1
-      }));
+  let data: Message[] = [
+    {
+      text: "Hello"
+    },
+    {
+      text: "My name is Joe Thomas"
+    },
+    {
+      text: "I work at Deloitte"
+    },
+    {
+      text: "My email is joebthomas4@gmail.com"
     }
-  }, [count]);
+  ]
 
-  const sayHello = (): string => {
-    return "Hello, from some function";
-  };
+  interface Message {
+    text: string;
+  }
+
+  const [active, setActive] = useState(0);
+
+  const Dot = styled(animated.button)`
+  outline: none;
+  border: none;
+  width: 15px;
+  height: 15px;
+  background: #fff;
+  border-radius: 50%;
+  margin: 0 16px;
+  cursor: pointer;
+`;
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <div>{count.counter}</div>
-        <div>{count.countNum}</div>
-        <div>{sayHello()}</div>
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div className='Scroll-pane'>
+          <div className='Info-block'>
+            <p>{data[active].text}</p>
+          </div>
+          <div className='Button-bar'>
+              {data.map((message: Message, i: number) => (
+                <Spring
+                  config={config.wobbly}
+                  from={{ transform: `scale(1)` }}
+                  to={{ transform: active === i ? `scale(1.25)` : `scale(1)` }}
+                  key={message.text}
+                >
+                  {({ transform }: { transform: any }) => (
+                    <Dot style={{ transform }} onClick={() => setActive(i)} />
+                  )}
+                </Spring>
+              ))}
+          </div>
+        </div>
       </header>
     </div>
   );
