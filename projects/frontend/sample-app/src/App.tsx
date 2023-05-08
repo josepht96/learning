@@ -1,12 +1,6 @@
-import React from 'react';
-import { useState, useEffect } from "react";
-import logo from './logo.svg';
+import { useState } from "react";
 import './App.css';
-import internal from 'stream';
-import styled from "@emotion/styled";
-import { config } from "react-spring";
-import { Spring, animated } from "react-spring";
-
+import { CSSTransition } from 'react-transition-group';
 
 function App() {
   let data: Message[] = [
@@ -29,38 +23,38 @@ function App() {
   }
 
   const [active, setActive] = useState(0);
+  const [tick, setTick] = useState(true)
 
-  const Dot = styled(animated.button)`
-  outline: none;
-  border: none;
-  width: 15px;
-  height: 15px;
-  background: #fff;
-  border-radius: 50%;
-  margin: 0 16px;
-  cursor: pointer;
-`;
+  function mouserOver(i: number) {
+    if (i !== active) {
+      setTick(!tick)
+    }
+    setActive(i)
+  }
 
   return (
     <div className="App">
       <header className="App-header">
-        <div className='Scroll-pane'>
-          <div className='Info-block'>
-            <p>{data[active].text}</p>
-          </div>
+        <div>
+          <CSSTransition
+            in={tick}
+            appear={true}
+            timeout={2000}
+            classNames="fadein"
+            unmountOnExit={false}
+          >
+            <div id="text-body" className='Info-block' >
+              {data[active].text}
+            </div>
+          </CSSTransition>
           <div className='Button-bar'>
+            <div className='Dot-bar'>
               {data.map((message: Message, i: number) => (
-                <Spring
-                  config={config.wobbly}
-                  from={{ transform: `scale(1)` }}
-                  to={{ transform: active === i ? `scale(1.25)` : `scale(1)` }}
-                  key={message.text}
-                >
-                  {({ transform }: { transform: any }) => (
-                    <Dot style={{ transform }} onClick={() => setActive(i)} />
-                  )}
-                </Spring>
+                <div className='Dot-box' key={i}>
+                  <div className={i == active ? 'Dot-selected' : 'Dot'} onMouseOver={() => mouserOver(i)}></div>
+                </div>
               ))}
+            </div>
           </div>
         </div>
       </header>

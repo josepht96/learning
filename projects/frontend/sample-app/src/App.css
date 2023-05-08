@@ -51,9 +51,82 @@ p {
 .Info-block {
   width: 100%;
   min-height: 25vh;
+  animation: fadeIn 3s;
+  -webkit-animation: fadeIn 3s;
+  -moz-animation: fadeIn 3s;
+  -o-animation: fadeIn 3s;
+  -ms-animation: fadeIn 3s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fadein-appear,
+.fadein-enter,
+.fadein-exit {
+    opacity: 0;
+}
+
+.fadein-appear-active,
+.fadein-enter-active,
+.fadein-exit-active {
+    opacity: 1;
+    transition: all 2s;
+}
+
+.fadein-appear-done,
+.fadein-enter-done,
+.fadein-exit-done {
+    opacity: 1;
 }
 
 .Button-bar {
   width: 100%;
   min-height: 5vh;
+  margin: auto;
+}
+
+.Dot-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Dot-box {
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  margin: 6px;
+}
+
+.Dot {
+  padding: 1px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: #491b27;
+  transition: 1s;
+  margin: auto;
+}
+
+.Dot:hover {
+  padding: 0px;
+  width: 24px;
+  height: 24px;
+  background-color: #bf395d;
+}
+
+.Dot-selected {
+  padding: 0px;
+  width: 24px;
+  height: 24px;
+  background-color: #bf395d;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 1s;
+  margin: auto;
 }
