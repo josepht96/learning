@@ -3,7 +3,6 @@
 }
 
 .App-logo {
-  height: 40vmin;
   pointer-events: none;
 }
 
@@ -37,25 +36,34 @@
     transform: rotate(360deg);
   }
 }
-p {
+.Scroll-pane p {
   margin: 0;
 }
 
 .Scroll-pane {
   margin: auto;
   min-height: 30vh;
-  min-width: 50%;
-  top: 0;
+  width: 30%;
+  opacity: 0;
+  animation: fadeIn 1s;
+  animation-delay: 1s;
+  -webkit-animation: fadeIn 1s;
+  -webkit-animation-delay: 1s;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation: fadeIn 1s;
+  -o-animation: fadeIn 1s;
+  -ms-animation: fadeIn 1s;
 }
 
 .Info-block {
   width: 100%;
   min-height: 25vh;
-  animation: fadeIn 3s;
-  -webkit-animation: fadeIn 3s;
-  -moz-animation: fadeIn 3s;
-  -o-animation: fadeIn 3s;
-  -ms-animation: fadeIn 3s;
+  opacity: 0;
+  animation: fadeIn 1.5s;
+  -webkit-animation: fadeIn 1.5s;
+  -moz-animation: fadeIn 1.5s;
+  -o-animation: fadeIn 1.5s;
+  -ms-animation: fadeIn 1.5s;
 }
 
 @keyframes fadeIn {
@@ -73,7 +81,7 @@ p {
 .fadein-enter-active,
 .fadein-exit-active {
     opacity: 1;
-    transition: all 2s;
+    transition: all 2.3s;
 }
 
 .fadein-appear-done,
@@ -86,6 +94,15 @@ p {
   width: 100%;
   min-height: 5vh;
   margin: auto;
+  opacity: 0;
+  animation: fadeIn 1.5s;
+  animation-delay: 2.3s;
+  -webkit-animation: fadeIn 1.5s;
+  -webkit-animation-delay: 2.3s;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation: fadeIn 1.5s;
+  -o-animation: fadeIn 1.5s;
+  -ms-animation: fadeIn 1.5s;
 }
 
 .Dot-bar {
@@ -109,7 +126,7 @@ p {
   border-radius: 50%;
   cursor: pointer;
   background-color: #491b27;
-  transition: 1s;
+  transition: 1.5s;
   margin: auto;
 }
 
@@ -127,6 +144,27 @@ p {
   background-color: #bf395d;
   border-radius: 50%;
   cursor: pointer;
-  transition: 1s;
+  transition: 1.5s;
   margin: auto;
+}
+
+
+.Dot-small div {
+  padding: 1px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: #491b27;
+  margin: auto;
+  margin-top: 10px;
+  opacity: 0;
+  animation: fadeIn 1.5s;
+  animation-delay: 1.5s;
+  -webkit-animation: fadeIn 1.5s;
+  -webkit-animation-delay: 1.5s;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation: fadeIn 1.5s;
+  -o-animation: fadeIn 1.5s;
+  -ms-animation: fadeIn 1.5s;
 }
