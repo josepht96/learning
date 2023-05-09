@@ -2,27 +2,9 @@ import { useState, useEffect } from "react";
 import './App.css';
 import { CSSTransition } from 'react-transition-group';
 import { motion } from 'framer-motion'
+import { data, Message } from './Data'
 
 function App() {
-  let data: Message[] = [
-    {
-      text: "Hello"
-    },
-    {
-      text: "My name is Joe Thomas"
-    },
-    {
-      text: "I work at Deloitte. This is a bunch of text that might run off the screen"
-    },
-    {
-      text: "My email is joebthomas4@gmail.com"
-    }
-  ]
-
-  interface Message {
-    text: string;
-  }
-
   const [active, setActive] = useState(0);
   const [tick, setTick] = useState(true)
 
@@ -46,14 +28,7 @@ function App() {
             unmountOnExit={false}
           >
             <div className='Info-block' >
-              {data[active].text}
-              {/* <div className="Dot-small">
-                <motion.div
-                  animate={{x: [-50, 50, -50] }}
-                  transition={{ repeat: Infinity, type: "tween", duration: 3 }}
-                >
-                </motion.div>
-              </div> */}
+              <p>{data[active].text}</p>
             </div>
           </CSSTransition>
           <div className='Button-bar'>
@@ -73,6 +48,13 @@ function App() {
                 </div>
               ))}
             </div>
+            {/* <div className="Dot-small">
+                <motion.div
+                  animate={{x: [-50, 50, -50] }}
+                  transition={{ repeat: Infinity, type: "tween", duration: 3 }}
+                >
+                </motion.div>
+              </div> */}
           </div>
         </div>
       </header>
