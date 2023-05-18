@@ -1,64 +1,35 @@
-import { useState, useEffect } from "react";
 import './App.css';
-import { CSSTransition } from 'react-transition-group';
-import { motion } from 'framer-motion'
-import { data, Message } from './Data'
+import { useState, useEffect } from "react";
+import Home from './pages/Home';
+import About from './pages/About'
+import { Link, Route, Routes, BrowserRouter } from 'react-router-dom'
 
 function App() {
-  const [active, setActive] = useState(0);
-  const [tick, setTick] = useState(true)
+  const [isDesktop, setDesktop] = useState(window.innerWidth > 1200);
 
-  function mouserOver(i: number) {
-    if (i !== active) {
-      setTick(!tick)
-    }
-    setActive(i)
-  }
-  const [rotate, setRotate] = useState(true)
+  const updateMedia = () => {
+    setDesktop(window.innerWidth > 1200);
+  };
 
+  useEffect(() => {
+    window.addEventListener("resize", updateMedia);
+    return () => window.removeEventListener("resize", updateMedia);
+  });
   return (
     <div className="App">
       <header className="App-header">
-        <div className="Scroll-pane">
-          <CSSTransition
-            in={tick}
-            appear={true}
-            timeout={2000}
-            classNames="fadein"
-            unmountOnExit={false}
-          >
-            <div className='Info-block' >
-              <p>{data[active].text}</p>
-            </div>
-          </CSSTransition>
-          <div className='Button-bar'>
-            <div className='Dot-bar'>
-              {data.map((message: Message, i: number) => (
-                <div className='Dot-box' key={i}>
-                  <div className={i == active ? 'Dot-selected' : 'Dot'} onMouseOver={() => mouserOver(i)}>
-                    <motion.div
-                      animate={{ scale: i == active ? 1.2 : 1 }}
-                      transition={{ type: "spring " }}
-                      onMouseOver={() => {
-                        setRotate(!rotate);
-                      }}
-                    >
-                    </motion.div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            {/* <div className="Dot-small">
-                <motion.div
-                  animate={{x: [-50, 50, -50] }}
-                  transition={{ repeat: Infinity, type: "tween", duration: 3 }}
-                >
-                </motion.div>
-              </div> */}
+      <div className={isDesktop ? "Nav-bar" : "Nav-bar-mobile"}>
+          <div className="Nav-bar-box">
+            <Link to="/" className="Link">Home</Link>
+            <Link to="/about" className="Link">About</Link>
           </div>
         </div>
-      </header>
-    </div>
+        <Routes>
+          <Route path='/' element={<Home isDesktop={isDesktop}/>} />
+          <Route path='/about' element={<About />} />
+        </Routes>
+      </header >
+    </div >
   );
 };
 

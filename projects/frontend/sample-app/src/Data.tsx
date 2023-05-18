@@ -14,8 +14,5 @@ export const data: Message[] = [
     },
     {
         text: "I am interested primarily in SRE and full-stack development work"
-    },
-    {
-        text: "My email is joebthomas4@gmail.com"
     }
 ]

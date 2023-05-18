@@ -13,14 +13,18 @@
 }
 
 .App-header {
-  background-color: #151516;
+  background-color: #19191b;
+  width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(207, 205, 205);
+}
+
+.Page {
+  width: 100%;
 }
 
 .App-link {
@@ -36,24 +40,72 @@
     transform: rotate(360deg);
   }
 }
-.Scroll-pane p {
-  margin: 0;
+
+.Nav-bar {
+  height: 10vh;
+  width: 60%;
+  position: relative;
 }
 
+.Nav-bar-mobile {
+  height: 10vh;
+  width: 80%;
+  position: relative;
+}
+
+.Nav-bar-box {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 50%;
+  border-bottom: rgb(90, 90, 90);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+
+.Link {
+  font-size: medium;
+  color: rgb(207, 205, 205);
+  text-decoration: none;
+  margin: auto 10px;
+}
+
+.Link:hover {
+  color: rgb(123, 122, 122);
+  transition: 0.5s;
+}
+
+
 .Scroll-pane {
-  margin: auto;
+  margin: 6% auto;
   min-height: 30vh;
   width: 40%;
   opacity: 0;
   animation: fadeIn 1s;
-  animation-delay: 1s;
+  animation-delay: 0s;
   -webkit-animation: fadeIn 1s;
-  -webkit-animation-delay: 1s;
+  -webkit-animation-delay: 0s;
   -webkit-animation-fill-mode: forwards;
   -moz-animation: fadeIn 1s;
   -o-animation: fadeIn 1s;
   -ms-animation: fadeIn 1s;
 }
+
+.Scroll-pane-mobile {
+  margin: 6% auto;
+  min-height: 30vh;
+  width: 85%;
+  opacity: 0;
+  animation: fadeIn 1s;
+  animation-delay: 0s;
+  -webkit-animation: fadeIn 1s;
+  -webkit-animation-delay: 0s;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation: fadeIn 1s;
+  -o-animation: fadeIn 1s;
+  -ms-animation: fadeIn 1s;
+}
+
 
 .Info-block {
   width: 100%;
@@ -66,28 +118,37 @@
   -ms-animation: fadeIn 1.5s;
 }
 
+.Info-block p {
+  text-align: center;
+}
+
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .fadein-appear,
 .fadein-enter,
 .fadein-exit {
-    opacity: 0;
+  opacity: 0;
 }
 
 .fadein-appear-active,
 .fadein-enter-active,
 .fadein-exit-active {
-    opacity: 1;
-    transition: all 2.3s;
+  opacity: 1;
+  transition: all 2.3s;
 }
 
 .fadein-appear-done,
 .fadein-enter-done,
 .fadein-exit-done {
-    opacity: 1;
+  opacity: 1;
 }
 
 .Button-bar {
@@ -96,9 +157,9 @@
   margin: auto;
   opacity: 0;
   animation: fadeIn 1.5s;
-  animation-delay: 2.3s;
+  animation-delay: 0.75;
   -webkit-animation: fadeIn 1.5s;
-  -webkit-animation-delay: 2.3s;
+  -webkit-animation-delay: 0.75s;
   -webkit-animation-fill-mode: forwards;
   -moz-animation: fadeIn 1.5s;
   -o-animation: fadeIn 1.5s;
@@ -112,8 +173,8 @@
 }
 
 .Dot-box {
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   align-items: center;
   justify-content: center;
   margin: 6px;
@@ -121,8 +182,8 @@
 
 .Dot {
   padding: 1px;
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   cursor: pointer;
   background-color: #491b27;
@@ -132,15 +193,15 @@
 
 .Dot:hover {
   padding: 0px;
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   background-color: #bf395d;
 }
 
 .Dot-selected {
   padding: 0px;
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   background-color: #bf395d;
   border-radius: 50%;
   cursor: pointer;
@@ -167,4 +228,17 @@
   -moz-animation: fadeIn 1.5s;
   -o-animation: fadeIn 1.5s;
   -ms-animation: fadeIn 1.5s;
+}
+
+.Icon-box {
+  display: flex;
+  justify-content: center;
+}
+.Icon {
+  height: 35px;
+  width: 35px;
+  margin: 0 20px;
+  border-radius: 10%;
+  color: #bf395d;
+  
 }
