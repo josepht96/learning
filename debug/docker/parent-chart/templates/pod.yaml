@@ -1,0 +1,33 @@
+{{ range $v := .Values.pods }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $v.name }}-pod
+  labels: 
+    app: {{ $v.name }}
+    {{ toYaml $.Values.labels | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ $v.name }}
+  template:
+    metadata:
+      name: {{ $v.name }}
+      labels:
+        app: {{ $v.name }}
+      annotations: {{ toYaml $.Values.podAnnotations | nindent 9}}
+    spec:
+      volumes:
+      - name: test-volume
+        configMap:
+          name: test
+      containers:
+      - name: nginx
+        image: nginx:1.23.1
+        resources: {}
+        volumeMounts:
+        - name: test-volume
+          mountPath: /test
+---
+{{ end }}

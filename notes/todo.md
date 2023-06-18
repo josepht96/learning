@@ -71,3 +71,7 @@ go repos
 lc
 system design
 projects
+
+check logs
+check recent changes
+Skim all documentation

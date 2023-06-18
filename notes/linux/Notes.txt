@@ -9,3 +9,15 @@ cat: used to type out a file (or combine files)
 head: used to show the first few lines of a file
 tail: used to show the last few lines of a file
 man: used to view documentation.
+
+netstat -an - know what is listening on what port for inbound connections. That's for starters. After that know where your sockets are listening (loopback, all interfaces with addresses, just IPv4, just IPv6, both, etc, etc, etc.. know what it means when you see the ip address 0.0.0.0 listening (or it's IPv6 equivalent). Know the differences between reserved ports, ephemeral ports, and all the other ports. Know how to identify when a system is out of ports it can use to bind processes to.
+
+Know the differences between UDP and TCP sockets, how they connect, what are required, etc. Conversely learn how to open a process that listens on a socket for inbound traffic and then do something with that traffic.
+
+dig - you would be amazed when people tell you they can't connect from server "X" they give you an IP range that belongs to someone else entirely. Thankfully with RFC1918 that's uncommon but you'll still have to know if an address is yours or not, oh know what RFC1918 addresses are).
+
+KNOW HOW TO TUNNEL PORTS WITH SSH - I can't stress how many times this will save you over the course of your career. Know it. Live it. Learn how to tar a directory from one machine across the network encrypted and compressed and untar the same into a directory on the far end all in one single command.
+
+nc - North Carolin... no, netcat. Know netcat.
+
+nmap - but go stealth man.. write a some Python3 that does the 60% of what nmap does. A lot of companies have security people that don't know much about security so they'll ban nmap. Learn to write your equivalent stuff with Python3. For those scripts learn how to encrypt files with Python3 and run those scripts quietly via a master script that decrypts said scripts in memory only when necessary to run them. Don't name those files with a .py extension.
