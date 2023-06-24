@@ -13,9 +13,9 @@
 }
 
 .App-header {
-  /* background-color: #19191b; */
+  background-color: #19191b;
   /* background-image: linear-gradient(to top right, #111112, rgb(40, 37, 42)); */
-  background-image: url("assets/background.png");
+  /* background-image: url("assets/background.png"); */
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

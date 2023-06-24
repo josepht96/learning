@@ -17,6 +17,7 @@ metadata:
   name: mypvc
 spec:
   storageClassName: standard
+  reclaimPolicy: Retain
   accessModes:
     - ReadWriteOnce
   resources:

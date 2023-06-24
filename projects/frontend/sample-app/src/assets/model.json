@@ -1,0 +1,51 @@
+{
+	"metadata": {
+		"version": 4.6,
+		"type": "Object",
+		"generator": "Object3D.toJSON"
+	},
+	"geometries": [
+		{
+			"uuid": "808854d1-f2b2-48a7-958d-949cb945cde6",
+			"type": "SphereGeometry",
+			"radius": 1,
+			"widthSegments": 32,
+			"heightSegments": 16,
+			"phiStart": 0,
+			"phiLength": 6.283185307179586,
+			"thetaStart": 0,
+			"thetaLength": 3.141592653589793
+		}],
+	"materials": [
+		{
+			"uuid": "5e05f723-8d8e-444e-86c3-68eef9e9ae5c",
+			"type": "MeshStandardMaterial",
+			"color": 16746496,
+			"roughness": 1,
+			"metalness": 0,
+			"emissive": 3873026,
+			"envMapIntensity": 1,
+			"depthFunc": 3,
+			"depthTest": true,
+			"depthWrite": true,
+			"colorWrite": true,
+			"stencilWrite": false,
+			"stencilWriteMask": 255,
+			"stencilFunc": 519,
+			"stencilRef": 0,
+			"stencilFuncMask": 255,
+			"stencilFail": 7680,
+			"stencilZFail": 7680,
+			"stencilZPass": 7680
+		}],
+	"object": {
+		"uuid": "8d884174-7270-4683-a8f1-28631787ee6b",
+		"type": "Mesh",
+		"name": "Sphere",
+		"layers": 1,
+		"matrix": [-0.4844794914516944,0,0,0,0,-0.4844794914516944,0,0,0,0,-0.4844794914516944,0,0,0,0,1],
+		"up": [0,1,0],
+		"geometry": "808854d1-f2b2-48a7-958d-949cb945cde6",
+		"material": "5e05f723-8d8e-444e-86c3-68eef9e9ae5c"
+	}
+}
