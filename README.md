@@ -1,3 +1,3 @@
-# learning
+# stuff
 
-Repository for learning
+Repository for stuff

@@ -1,11 +1,17 @@
+const temp = document.getElementById("animate");
+let initialContent = temp.outerHTML
+console.log(initialContent)
+
 function myMove() {
-    // clearInterval(id);
     let id = null;
     const elem = document.getElementById("animate");
+    elem.outerHTML = initialContent
+    console.log(elem)
     let posX = 0;
     let posY = 0;
     let stop = 0;
     clearInterval(id);
+    console.log(initialContent)
     id = setInterval(frame, 1);
     function frame() {
         if (stop == 0) {
