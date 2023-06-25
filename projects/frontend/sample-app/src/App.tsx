@@ -30,7 +30,7 @@ function App() {
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth / 2.5, window.innerHeight / 2.5);
 
-    camera.position.set(0, 30, 40)
+    camera.position.set(0, 50, 50)
     camera.lookAt(0,0,0)
     renderer.render(scene, camera);
 
@@ -40,8 +40,8 @@ function App() {
     //   wireframe: true
     // });
     // const torus = new THREE.Mesh(geometry, material);
-    const light = new THREE.PointLight(0xFFFFFF, 0.25);
-    light.position.set(200, 10, 200);
+    const light = new THREE.PointLight(0xEBFF52, 1);
+    light.position.set(200, 75, 100);
     light.lookAt(0, 0, 0)
     scene.add(light);
 
@@ -53,7 +53,7 @@ function App() {
     function animate() {
       requestAnimationFrame(animate);
       object.rotation.x += 0.000;
-      object.rotation.y += 0.001;
+      object.rotation.y += 0.0005;
       object.rotation.z += 0.00;
       renderer.render(scene, camera)
     }
@@ -73,14 +73,14 @@ function App() {
             <Link to="/about" className="Link">About</Link>
           </div>
         </div>
-        <div className='Three-canvas'>
-          <canvas id='bg'></canvas>
-
-        </div>
         <Routes>
           <Route path='/' element={<Home isDesktop={isDesktop} />} />
           <Route path='/about' element={<About />} />
         </Routes>
+        <div className='Three-canvas'>
+          <canvas id='bg'></canvas>
+
+        </div>
       </header >
     </div >
   );
