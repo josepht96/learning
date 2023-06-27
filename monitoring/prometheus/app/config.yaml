@@ -1,0 +1,10 @@
+endpoints:
+  gitlab:
+    url: https://google.com
+    auth: oauth
+  nexus:
+    url: https://yahoo.com
+    auth: oauth
+  sonarqube:
+    url: https://yahoo.com
+    auth: oauth
