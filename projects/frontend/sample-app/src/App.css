@@ -30,13 +30,10 @@
 }
 
 canvas {
-  float: left;
-  height: 100vh;
+  margin-top: 0px;
 }
 
 .Page {
-  width: 50%;
-  float: left;
   margin: auto;
 }
 
@@ -90,8 +87,7 @@ canvas {
 
 
 .Scroll-pane {
-  margin: 6% auto;
-  margin-left: 10px;
+  margin: 4% auto;
   min-height: 30vh;
   width: 40%;
   opacity: 0;
