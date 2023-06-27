@@ -13,6 +13,8 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
+var port = 8080
+
 type Response struct {
 	Status     string `json:"status"`
 	StatusCode int    `json:"statusCode"`
@@ -29,8 +31,6 @@ type Endpoint struct {
 }
 
 type rootHandler struct{}
-
-var port = 8080
 
 // getData parses filename for endpoints
 func getData(filename string) (*Endpoints, error) {
