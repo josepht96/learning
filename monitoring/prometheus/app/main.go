@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"sync"
+	"time"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
@@ -53,26 +54,24 @@ func (root *rootHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case http.MethodGet:
 		(w).Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("Content-Type", "application/json")
 		data := Response{
 			Status:     "OK",
 			StatusCode: 200,
 			Message:    "Navigate to /metrics",
 		}
 		json.NewEncoder(w).Encode(data)
-		w.WriteHeader(http.StatusOK)
 	default:
 		w.WriteHeader(http.StatusNotImplemented)
 	}
 }
 
-func createMetrics(data *Endpoints) *prometheus.CounterVec {
+func createMetrics() *prometheus.CounterVec {
 	counter := prometheus.NewCounterVec(
 		prometheus.CounterOpts{
 			Name: "endpoint_requests",
 			Help: "A counter that tracks requests to endpoints",
 		},
-		[]string{"endpoint"},
+		[]string{"endpoint", "code"},
 	)
 	prometheus.MustRegister(counter)
 
@@ -81,18 +80,20 @@ func createMetrics(data *Endpoints) *prometheus.CounterVec {
 
 // calls executes endpoint requests
 func calls(data *Endpoints, counter prometheus.CounterVec) {
-	for key, value := range data.Endpoints {
-		fmt.Printf("Request: %s\n", key)
-		resp, err := http.Get(value.Url)
-		if err != nil {
-			log.Println(err)
+	for {
+		for key, value := range data.Endpoints {
+			resp, err := http.Get(value.Url)
+			if err != nil {
+				log.Println(err)
+			}
+			fmt.Printf("request: %s, code: %v\n", key, resp.StatusCode)
+			counter.With(prometheus.Labels{"endpoint": key, "code": "200"}).Inc()
 		}
-		fmt.Println(resp.StatusCode)
-		counter.With(prometheus.Labels{"endpoint": fmt.Sprintf("%s", key)}).Inc()
+		time.Sleep(5 * time.Second)
 	}
 }
 
-// main runs the program
+// Register handlers, run server
 func main() {
 	http.Handle("/metrics", promhttp.Handler())
 	http.Handle("/", &rootHandler{})
@@ -106,7 +107,7 @@ func main() {
 	if err != nil {
 		log.Fatal("Error getting yaml data")
 	}
-	counter := createMetrics(data)
+	counter := createMetrics()
 	go calls(data, *counter)
 	wg.Wait()
 }
