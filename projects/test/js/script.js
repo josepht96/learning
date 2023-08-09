@@ -1,5 +1,6 @@
 const temp = document.getElementById("animate");
 let initialContent = temp.outerHTML
+console.log("hello!")
 console.log(initialContent)
 
 function myMove() {
