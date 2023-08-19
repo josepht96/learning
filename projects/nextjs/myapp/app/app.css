@@ -1,0 +1,251 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #19191b;
+  /* background-image: linear-gradient(to top right, #111112, rgb(40, 37, 42)); */
+  /* background-image: url("assets/background.png"); */
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  color: rgb(207, 205, 205);
+  margin: auto;
+}
+
+canvas {
+  margin-top: 0px;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.Nav-bar {
+  height: 10vh;
+  width: 70%;
+  position: relative;
+}
+
+.Nav-bar-mobile {
+  height: 10vh;
+  width: 80%;
+  position: relative;
+}
+
+.Nav-bar-box {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 50%;
+  border-bottom: rgb(90, 90, 90);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+
+.Link {
+  font-size: medium;
+  color: rgb(207, 205, 205);
+  text-decoration: none;
+  margin: auto 10px;
+}
+
+.Link:hover {
+  color: rgb(123, 122, 122);
+  transition: 0.5s;
+}
+
+
+.Scroll-pane {
+  margin: 4% auto;
+  min-height: 30vh;
+  width: 40%;
+  opacity: 0;
+  animation: fadeIn 1s;
+  animation-delay: 0s;
+  -webkit-animation: fadeIn 1s;
+  -webkit-animation-delay: 0s;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation: fadeIn 1s;
+  -o-animation: fadeIn 1s;
+  -ms-animation: fadeIn 1s;
+}
+@media screen and (max-width: 750px) {
+  .Scroll-pane {
+    margin: 4% auto;
+    min-height: 30vh;
+    width: 80%;
+    opacity: 0;
+    animation: fadeIn 1s;
+    animation-delay: 0s;
+    -webkit-animation: fadeIn 1s;
+    -webkit-animation-delay: 0s;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation: fadeIn 1s;
+    -o-animation: fadeIn 1s;
+    -ms-animation: fadeIn 1s;
+  }
+}
+
+
+.Info-block {
+  width: 100%;
+  min-height: 25vh;
+  opacity: 0;
+  animation: fadeIn 1.5s;
+  -webkit-animation: fadeIn 1.5s;
+  -moz-animation: fadeIn 1.5s;
+  -o-animation: fadeIn 1.5s;
+  -ms-animation: fadeIn 1.5s;
+}
+
+.Info-block p {
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadein-appear,
+.fadein-enter,
+.fadein-exit {
+  opacity: 0;
+}
+
+.fadein-appear-active,
+.fadein-enter-active,
+.fadein-exit-active {
+  opacity: 1;
+  transition: all 2.3s;
+}
+
+.fadein-appear-done,
+.fadein-enter-done,
+.fadein-exit-done {
+  opacity: 1;
+}
+
+.Button-bar {
+  width: 100%;
+  min-height: 5vh;
+  margin: auto;
+  opacity: 0;
+  animation: fadeIn 1.5s;
+  animation-delay: 0.75;
+  -webkit-animation: fadeIn 1.5s;
+  -webkit-animation-delay: 0.75s;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation: fadeIn 1.5s;
+  -o-animation: fadeIn 1.5s;
+  -ms-animation: fadeIn 1.5s;
+}
+
+.Dot-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Dot-box {
+  width: 26px;
+  height: 26px;
+  align-items: center;
+  justify-content: center;
+  margin: 6px;
+}
+
+.Dot {
+  padding: 1px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: #491b27;
+  transition: 1.5s;
+  margin: auto;
+}
+
+.Dot:hover {
+  padding: 0px;
+  width: 26px;
+  height: 26px;
+  background-color: #bf395d;
+}
+
+.Dot-selected {
+  padding: 0px;
+  width: 26px;
+  height: 26px;
+  background-color: #bf395d;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 1.5s;
+  margin: auto;
+}
+
+
+.Dot-small div {
+  padding: 1px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: #491b27;
+  margin: auto;
+  margin-top: 10px;
+  opacity: 0;
+  animation: fadeIn 1.5s;
+  animation-delay: 1.5s;
+  -webkit-animation: fadeIn 1.5s;
+  -webkit-animation-delay: 1.5s;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation: fadeIn 1.5s;
+  -o-animation: fadeIn 1.5s;
+  -ms-animation: fadeIn 1.5s;
+}
+
+.Icon-box {
+  display: flex;
+  justify-content: center;
+}
+
+.Icon {
+  height: 35px;
+  width: 35px;
+  margin: 0 20px;
+  border-radius: 10%;
+  color: #bf395d;
+}

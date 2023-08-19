@@ -22,7 +22,9 @@ export default function RootLayout({
               About
             </Link>
           </nav>
-          {children}
+          <div className="page">
+            {children}
+          </div>
         </main>
       </body>
     </html>

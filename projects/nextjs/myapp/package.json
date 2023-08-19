@@ -9,17 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "13.0.0",
+    "framer-motion": "^10.16.0",
+    "next": "^13.4.19",
     "pocketbase": "^0.16.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-transition-group": "^4.4.5"
   },
   "devDependencies": {
     "@types/node": "18.11.7",
     "@types/react": "18.0.24",
     "@types/react-dom": "18.0.8",
+    "@types/react-transition-group": "^4.4.6",
     "eslint": "8.26.0",
-    "eslint-config-next": "13.0.0",
+    "eslint-config-next": "^13.4.19",
     "typescript": "4.8.4"
   }
 }

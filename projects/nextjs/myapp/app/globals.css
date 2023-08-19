@@ -8,7 +8,9 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
     Helvetica Neue, sans-serif;
-    padding: 0 2rem;
+  padding: 0 2rem;
+  background-color: #25282c;
+  color: rgb(255, 255, 255);
 }
 
 a {
@@ -19,15 +21,18 @@ a {
 }
 
 main {
+  width: 60%;
   min-height: 100vh;
   padding: 1rem 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  margin: auto;
 }
 
-input, textarea { 
+input,
+textarea {
   display: block;
   max-width: 300px;
   margin: 0.5rem 0;
@@ -44,8 +49,53 @@ button {
   cursor: pointer;
 }
 
+nav {
+  width: 200px;
+  margin: 0 10px 40px auto;
+  display: flex;
+  justify-content: space-between;
+}
+
 nav a {
-  font-weight: bold;
-  margin: 0 0.5rem;
-  text-decoration: underline;
+  width: 33%;
+}
+
+nav a:hover {
+  color: rgb(150, 150, 150);
+  transition: 0.5s;
+}
+
+.page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+@media screen and (max-width: 750px) {
+  main {
+    width: 100%;
+    min-height: 100vh;
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 0;
+  }
+  .page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 0;
+  }
+  nav {
+    width: 200px;
+    margin: 0 auto 0 0;
+    display: flex;
+    justify-content: space-between;
+  }
 }

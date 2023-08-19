@@ -33,7 +33,6 @@ export default async function NotesPage() {
 
   return (
     <div>
-      <h1>Notes</h1>
       <p>Hello!</p>
       <div className={styles.grid}>
         {notes?.map((note) => {
