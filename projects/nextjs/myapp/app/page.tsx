@@ -3,8 +3,26 @@
 import { useState, useEffect, useRef } from "react";
 import './app.css';
 import { CSSTransition } from 'react-transition-group';
-import { motion } from 'framer-motion'
-import { data, Message } from './data'
+import { motion } from 'framer-motion';
+
+interface Message {
+  text: string;
+}
+
+const data: Message[] = [
+  {
+      text: "Hello"
+  },
+  {
+      text: 'My name is Joe Thomas'
+  },
+  {
+      text: "I am currently an engineer at Deloitte, in the federal government space. I work on devOps, SRE, and infrastructure related issues"
+  },
+  {
+      text: "I am interested primarily in SRE and full-stack development work"
+  }
+]
 
 export default function HomePage(props: any) {
   const [active, setActive] = useState(0);

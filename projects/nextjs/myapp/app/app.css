@@ -85,10 +85,11 @@ canvas {
 .Scroll-pane {
   margin: 4% auto;
   min-height: 30vh;
-  width: 40%;
+  width: 50%;
   opacity: 0;
   animation: fadeIn 1s;
   animation-delay: 0s;
+  text-align: center;
   -webkit-animation: fadeIn 1s;
   -webkit-animation-delay: 0s;
   -webkit-animation-fill-mode: forwards;
@@ -193,7 +194,7 @@ canvas {
   height: 22px;
   border-radius: 50%;
   cursor: pointer;
-  background-color: #491b27;
+  background-color: #682637;
   transition: 1.5s;
   margin: auto;
 }
@@ -202,17 +203,17 @@ canvas {
   padding: 0px;
   width: 26px;
   height: 26px;
-  background-color: #bf395d;
+  background-color: #dc406a;
 }
 
 .Dot-selected {
   padding: 0px;
   width: 26px;
   height: 26px;
-  background-color: #bf395d;
+  background-color: #d53e66;
   border-radius: 50%;
   cursor: pointer;
-  transition: 1.5s;
+  transition: 1.2s;
   margin: auto;
 }
 
@@ -248,4 +249,13 @@ canvas {
   margin: 0 20px;
   border-radius: 10%;
   color: #bf395d;
+}
+
+.image-small {
+  height: 20px;
+  width: 20px;
+  margin: auto 0 auto 10px;
+}
+.image-small:hover {
+  cursor: copy;
 }
