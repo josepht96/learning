@@ -4,6 +4,13 @@ import './style.css';
 export default function ResumePage() {
   return (
     <div className="Scroll-pane">
+      <h2 className='education'>Education & Technical Skills</h2>
+      <p>Tufts University: Medford, MA. Quantitative Economics (BS) – 2019</p>
+      <p>Technologies: AWS, Azure, Kubernetes, Linux, Docker, Terraform, Ansible, Istio, Prometheus, Grafana</p>
+      <p>Languages: Go, Python, Bash, SQL, TypeScript/JS, HTML, CSS</p>
+      <p>Certifications: CKAD, AZ104</p>
+      <p>Interests: Distributed systems, Kubernetes, Linux, networking, security, cloud, full-stack development</p>
+      <h2 className='education'>Experience</h2>
       <h3>Deloitte</h3>
       <div className="details">
         Solution Specialist - Kansas City, MO – Nov 2021 - present
@@ -64,6 +71,17 @@ export default function ResumePage() {
       <p>
         • Used databases and legal records to create Excel spreadsheets for potential properties
       </p>
+      <h2 className='education'>Volunteer</h2>
+      <h3>
+        Big Brothers Big Sisters of Massachusetts Bay
+      </h3>
+      <h4>Somerville, MA, 2015 - 2019</h4>
+      <p>• Met with 'little' every Friday for mentorship</p>
+      <h3>
+        Care Beyond the Boulevard
+      </h3>
+      <h4>Kansas City, MO, 2018</h4>
+      <p>• Worked with doctors and nurses to provide healthcare to people in KC area</p>  
       <div className="buffer">&nbsp;</div>
     </div>
 

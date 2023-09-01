@@ -35,7 +35,7 @@ main {
   -moz-background-size: cover;
   -o-background-size: cover;
   width: 98%;
-  height: 91vh;
+  height: 92vh;
   padding: 0px;
   display: flex;
   flex-direction: column;
@@ -117,7 +117,7 @@ nav a:hover {
 }
 
 .nav-link-box {
-  border-right: #b88fb9;
+  border-right: #9b949c;
   border-right-style: solid;
   border-right-width: 1px;
   padding: 15px;

@@ -7,6 +7,9 @@
 p {
     text-align: left;
 }
+h2 {
+    text-align: left;
+}
 h3 {
   padding-bottom: 10px;
   border-bottom: rgb(195, 204, 218);
@@ -26,4 +29,7 @@ p2 {
 }
 .details {
     font-style: italic;
+}
+.education {
+    color: rgb(39, 36, 78);
 }

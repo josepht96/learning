@@ -13,3 +13,8 @@ h3 {
   border-bottom-style: solid;
   border-bottom-width: 1px; 
 }
+.img-box {
+    height: 250px;
+    width: 290px;
+    border-radius: 5%;
+}
