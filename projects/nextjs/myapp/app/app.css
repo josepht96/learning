@@ -83,7 +83,8 @@ canvas {
 
 
 .Scroll-pane {
-  margin: 4% auto;
+  margin: 2% auto;
+  padding-bottom: 50px;
   min-height: 30vh;
   width: 50%;
   opacity: 0;
@@ -194,8 +195,8 @@ canvas {
   height: 22px;
   border-radius: 50%;
   cursor: pointer;
-  background-color: #682637;
-  transition: 1.5s;
+  background-color: #474e90;;
+  transition: 0.4s;
   margin: auto;
 }
 
@@ -203,17 +204,16 @@ canvas {
   padding: 0px;
   width: 26px;
   height: 26px;
-  background-color: #dc406a;
 }
 
 .Dot-selected {
   padding: 0px;
   width: 26px;
   height: 26px;
-  background-color: #d53e66;
+  background-color: #186ee6;
   border-radius: 50%;
   cursor: pointer;
-  transition: 1.2s;
+  transition: 0.4s;
   margin: auto;
 }
 
@@ -236,26 +236,4 @@ canvas {
   -moz-animation: fadeIn 1.5s;
   -o-animation: fadeIn 1.5s;
   -ms-animation: fadeIn 1.5s;
-}
-
-.Icon-box {
-  display: flex;
-  justify-content: center;
-}
-
-.Icon {
-  height: 35px;
-  width: 35px;
-  margin: 0 20px;
-  border-radius: 10%;
-  color: #bf395d;
-}
-
-.image-small {
-  height: 20px;
-  width: 20px;
-  margin: auto 0 auto 10px;
-}
-.image-small:hover {
-  cursor: copy;
 }

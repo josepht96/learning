@@ -58,7 +58,7 @@ export default function HomePage(props: any) {
               <div className='Dot-box' key={i}>
                 <div className={i == active ? 'Dot-selected' : 'Dot'} onMouseOver={() => mouserOver(i)}>
                   {/* <motion.div
-                    animate={{ scale: i == active ? 1.2 : 1 }}
+                    animate={{ scale: i == active ? 6 : 1 }}
                     transition={{ type: "spring " }}
                     onMouseOver={() => {
                       setRotate(!rotate);
