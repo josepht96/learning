@@ -29,7 +29,8 @@ a {
 main {
   border-radius: 0.5%;
   /* background-color: #6884CA; */
-  background-image: url("/background.jpg");
+  background-image: url("/background.jpeg");
+  background-position: bottom;
   background-attachment: fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -184,7 +185,7 @@ nav a:hover {
   }
 
   nav {
-    margin: 0 auto 20px 0;
+    margin: 0 auto 10px 0;
     display: flex;
     justify-content: space-between;
   }

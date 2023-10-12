@@ -1,11 +1,9 @@
-variable "example_variable" {
-  description = "some desc"
-  type        = string
-  default     = "hello"
-}
+variable "project" {
+  type = string
+  default = "josepht96"
 
-variable "list_example" {
-  description = "blah"
-  type        = list(any)
-    default = [1, 2, 3]
+}
+variable "location" {
+    type = string
+    default = "us-east-1"
 }
