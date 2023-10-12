@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: hello-cmd
+  name: hello-cmd
+spec:
+  containers:
+  - image: josepht96/hello-cmd:v1
+    name: hello-cmd
+    resources: {}
+    # command: ["echo"]
+    # args: ["hello-from-pod-cmd"]

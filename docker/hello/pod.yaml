@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: hello-ep
+  name: hello-ep
+spec:
+  containers:
+  - image: josepht96/hello:v1
+    name: hello-ep
+    resources: {}
+    imagePullPolicy: Always
+    args: ["hello-from-pod"]

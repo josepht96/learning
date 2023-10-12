@@ -7,29 +7,40 @@
 p {
     text-align: left;
 }
+
 h2 {
-    text-align: left;
+    text-align: center;
+    padding-bottom: 10px;
+    /* border-bottom: rgb(195, 204, 218);
+    border-bottom-style: dotted;
+    border-bottom-width: 3px; */
 }
+
 h3 {
-  padding-bottom: 10px;
-  border-bottom: rgb(195, 204, 218);
-  border-bottom-style: solid;
-  border-bottom-width: 1px; 
+    text-align: left;
+    border-bottom: rgb(120, 132, 157);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
 }
+
 h4 {
     font-style: italic;
     text-align: left;
 }
+
 p2 {
     text-align: left;
-    text-decoration: underline;
 }
+
 .buffer {
-    height: 50px;
+    height: 300px;
 }
+
 .details {
     font-style: italic;
+    text-align: left;
 }
+
 .education {
-    color: rgb(39, 36, 78);
+    color: rgb(255, 170, 195);
 }

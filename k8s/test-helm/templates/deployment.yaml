@@ -33,6 +33,18 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          - name: IDENTITY_AUTH_PROVIDER_ISSUER_URL
+            value: {{ tpl .Values.someUrl $ | quote }}
+          # {{- with .Values.someContext }}
+          # {{- tpl (toYaml .env ) $ | nindent 10 }}
+          # - name: test2
+          #   value: {{ .someKey }}
+          # {{- end }}
+          {{- range .Values.someContext.env }}
+          - name: {{ .name }}
+          - value: {{ printf "%s-%s-reee" (title .name) .value}}
+          {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
