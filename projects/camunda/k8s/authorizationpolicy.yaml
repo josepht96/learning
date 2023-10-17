@@ -1,0 +1,27 @@
+apiVersion: security.istio.io/v1beta1
+kind: RequestAuthentication
+metadata:
+  name: zeebe-ra
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: zeebe-gateway
+  jwtRules:
+  - issuer: "http://camunda-keycloak.icamunda.svc.cluster.local/auth/realms/camunda-platform"
+    jwksUri: http://camunda-keycloak.icamunda.svc.cluster.local/auth/realms/camunda-platform/protocol/openid-connect/certs
+    forwardOriginalToken: true
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: zeebe-ap
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: zeebe-gateway
+  rules:
+  - from:
+    - source:
+        requestPrincipals: ["*"]
+    - source:
+        namespaces: ["icamunda"]
