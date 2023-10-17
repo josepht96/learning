@@ -20,3 +20,20 @@ iostat
 
 strace
 tcpdump
+
+for i in $(docker container ls --format "{{.ID}}"); do docker inspect -f '{{.State.Pid}} {{.Name}}' $i; done
+
+vmstat
+iostat
+top -o %MEM
+ps
+lsof
+
+ps aux | grep 14573
+ps aux
+
+find . -name "test*"
+lsof ~/work/test.swp
+sudo lsof returns more results
+sudo lsof +D
+
