@@ -13,11 +13,7 @@ provider "aws" {
   region  = var.location
 }
 
-resource "aws_s3_bucket" "primary" {
-  bucket = "primary-${var.project}"
-
-  tags = {
-    Name        = "Primary bucket"
-    Environment = "Dev"
-  }
+module "my_s3_bucket" {
+  source = "./modules/s3"
+  project = "josepht96"
 }

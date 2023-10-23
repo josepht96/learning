@@ -11,19 +11,22 @@ p {
 h2 {
     text-align: center;
     padding-bottom: 10px;
+    color: rgb(0, 0, 0);
     /* border-bottom: rgb(195, 204, 218);
     border-bottom-style: dotted;
     border-bottom-width: 3px; */
 }
 
 h3 {
+    color: rgb(0, 0, 0);
     text-align: left;
-    border-bottom: rgb(120, 132, 157);
+    border-bottom: rgb(155, 141, 124);
     border-bottom-style: solid;
     border-bottom-width: 1px;
 }
 
 h4 {
+    color: rgb(0, 0, 0);
     font-style: italic;
     text-align: left;
 }
@@ -42,5 +45,5 @@ p2 {
 }
 
 .education {
-    color: rgb(255, 170, 195);
+    color: rgb(0, 0, 0);
 }

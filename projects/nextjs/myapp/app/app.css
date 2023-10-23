@@ -195,7 +195,7 @@ canvas {
   height: 22px;
   border-radius: 50%;
   cursor: pointer;
-  background-color: #474e90;;
+  background-color: #6d6d6d;;
   transition: 0.4s;
   margin: auto;
 }
@@ -210,7 +210,7 @@ canvas {
   padding: 0px;
   width: 26px;
   height: 26px;
-  background-color: #186ee6;
+  background-color: #303030;
   border-radius: 50%;
   cursor: pointer;
   transition: 0.4s;
@@ -224,7 +224,7 @@ canvas {
   height: 4px;
   border-radius: 50%;
   cursor: pointer;
-  background-color: #491b27;
+  background-color: #6c6155;
   margin: auto;
   margin-top: 10px;
   opacity: 0;

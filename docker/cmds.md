@@ -14,3 +14,14 @@ then access the pod via the node (minikube ip) and the 30000 port
 
 docker exec -it ubuntu_bash bash
 docker run -d --name somecontainername --mount somevolumename,target=/sometargetinsidethecontainer nginx:latest
+
+
+docker images -a
+docker history --no-trunc 
+
+docker run --rm -it \
+      -v /var/run/docker.sock:/var/run/docker.sock \
+      -v  "$(pwd)":"$(pwd)" \
+      -w "$(pwd)" \
+      -v "$HOME/.dive.yaml":"$HOME/.dive.yaml" \
+      wagoodman/dive:latest build -t l1 .

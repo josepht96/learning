@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: debug
+  name: debug
+spec:
+  containers:
+  - image: quay.io/giantswarm/debug
+    name: debug
+    resources: {}
+    imagePullPolicy: IfNotPresent
