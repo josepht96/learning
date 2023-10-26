@@ -1,0 +1,2 @@
+export KUBERNETES_SERVICE_HOST=http://localhost
+export KUBERNETES_SERVICE_HOST=8081
