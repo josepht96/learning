@@ -33,9 +33,7 @@ type Message struct {
 	Time    string `json:"time"`
 }
 
-var port = 8080
-
-// handlers handles the / endpoint for remote scout instances
+// handlers handles the endpoint for remote scout instances
 func handlers() {
 	// http.Handle("/metrics", promhttp.Handler())
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
@@ -70,6 +68,7 @@ func handlers() {
 	})
 }
 
+//getClientsetInternal creates a clientset config when inside in the cluster
 func getClientsetInternal() *kubernetes.Clientset {
 	// creates the in-cluster config
 	config, err := rest.InClusterConfig()
@@ -84,10 +83,12 @@ func getClientsetInternal() *kubernetes.Clientset {
 	return clientset
 }
 
+//getClientsetInternal creates a clientset config when outside in the cluster
 func getClientsetExternal() *kubernetes.Clientset {
 	var kubeconfig *string
 	if home := homedir.HomeDir(); home != "" {
-		kubeconfig = flag.String("kubeconfig", filepath.Join(home, ".kube", "config"), "(optional) absolute path to the kubeconfig file")
+		kubeconfig = flag.String("kubeconfig", filepath.Join(home, ".kube", "config"),
+			"(optional) absolute path to the kubeconfig file")
 	} else {
 		kubeconfig = flag.String("kubeconfig", "", "absolute path to the kubeconfig file")
 	}
@@ -107,6 +108,7 @@ func getClientsetExternal() *kubernetes.Clientset {
 	return clientset
 }
 
+//getPods returns a list of pods that match the scout label
 func getPods(clientset *kubernetes.Clientset) *v1.PodList {
 	pods, err := clientset.CoreV1().Pods("").List(context.TODO(), metav1.ListOptions{
 		LabelSelector: "app=scout",
@@ -118,37 +120,37 @@ func getPods(clientset *kubernetes.Clientset) *v1.PodList {
 	return pods
 }
 
+//make request executes the get request to arg pod and prints output to stdout
 func makeRequest(pod v1.Pod) {
 	log.Printf("probing: %s.%s.%s @ node: %s", pod.Name,
 		pod.Namespace,
 		pod.Status.PodIP,
 		pod.Spec.NodeName,
 	)
-	req, _ := http.NewRequest("GET", "http://localhost:8081", nil)
-	var c1, c2 time.Time
+	req, _ := http.NewRequest("GET", fmt.Sprintf("http://%s:8080", pod.Status.PodIP), nil)
+	var c1, c2, fb time.Time
 	trace := &httptrace.ClientTrace{
 		ConnectStart: func(_, _ string) {
 			if c1.IsZero() {
 				// connecting to IP
 				c1 = time.Now()
 			}
-			log.Printf("\tConnectStart: %s", c1)
+			log.Printf("\tconnection start: %s", c1)
 		},
 		ConnectDone: func(net, addr string, err error) {
 			if err != nil {
 				log.Fatalf("unable to connect to host %v: %v", addr, err)
 			}
 			c2 = time.Now()
-			log.Printf("\tConnectDone: %s", c2)
-			log.Printf("\tlatency: %s", c2.Sub(c1))
+			log.Printf("\tconnection establish: %s", c2)
+			log.Printf("\tlatency connection: %s", c2.Sub(c1))
 		},
-		// GotConn: func(connInfo httptrace.GotConnInfo) {
-		// 	log.Printf("\tconnection reused: %v\n", connInfo.Reused)
-		// 	log.Printf("\tconnection idle: %v\n", connInfo.WasIdle)
-		// },
+		GotFirstResponseByte: func() {
+			fb = time.Now()
+			log.Printf("\tlatency firstByte: %s", fb.Sub(c1))
+		},
 	}
 	req = req.WithContext(httptrace.WithClientTrace(req.Context(), trace))
-	// takes a request, returns response
 	// resp, err := http.DefaultTransport.RoundTrip(req)
 	// create new transport, based on default transport
 	// clone, modify, create new client using modified transport
@@ -162,6 +164,9 @@ func makeRequest(pod v1.Pod) {
 		log.Fatal(err)
 	}
 	defer resp.Body.Close()
+	now := time.Now()
+
+	log.Printf("\tlatency total: %s", now.Sub(c1))
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
@@ -169,8 +174,11 @@ func makeRequest(pod v1.Pod) {
 	}
 	log.Printf("\tresponse: %s", string(body))
 }
+
+//probe executes the sequences of steps needed to probe an associated scout pod
 func probe() {
-	pods := getPods(getClientsetExternal())
+	// pods := getPods(getClientsetExternal())
+	pods := getPods(getClientsetInternal())
 	log.Println("scout pods:")
 	for _, pod := range pods.Items {
 		log.Printf("\tnode: %s", pod.Spec.NodeName)
@@ -183,12 +191,15 @@ func probe() {
 		for _, pod := range pods.Items {
 			makeRequest(pod)
 		}
-		time.Sleep(5 * time.Second)
+		time.Sleep(10 * time.Second)
 	}
 }
+
+// main initializes handlers, invokes the probe mechanism, and starts a server
 func main() {
 	go handlers()
 	go probe()
+	var port = 8080
 	var wg sync.WaitGroup
 	wg.Add(1)
 	go func() {
