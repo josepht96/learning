@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"flag"
 	"fmt"
 	"io/ioutil"
@@ -13,7 +14,6 @@ import (
 	"sync"
 	"time"
 
-	"github.com/fatih/color"
 	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
@@ -33,28 +33,44 @@ type Message struct {
 	Time    string `json:"time"`
 }
 
-const (
-	httpTemplate = `` +
-		"\t" + `printing table...` + "\n" +
-		`   DNS Lookup   TCP Connection   Server Processing   Content Transfer` + "\n" +
-		`[ %-9s  |     %-9s  |        %-9s  |       %-9s  ]` + "\n" +
-		`             |                |                   |                  |` + "\n" +
-		`    namelookup:%-9s      |                   |                  |` + "\n" +
-		`                        connect:%-9s         |                  |` + "\n" +
-		`                                      starttransfer:%-9s        |` + "\n" +
-		`                                                                 total:%-9s` + "\n"
-)
+var port = 8080
 
-func printf(format string, a ...interface{}) (n int, err error) {
-	fmt.Println("In printf")
-	return fmt.Fprintf(color.Output, format, a...)
+// handlers handles the endpoint for remote scout instances
+func handlers() {
+	// http.Handle("/metrics", promhttp.Handler())
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+
+		dt := time.Now()
+		data := Response{
+			Status:     "OK",
+			StatusCode: 200,
+			Body: Message{
+				Message: "connected to scout",
+				Time:    dt.String(),
+			},
+		}
+		json.NewEncoder(w).Encode(data)
+
+		// log.Printf("host: %s", r.Host)
+		// log.Printf("requestURI: %s", r.RequestURI)
+		// log.Printf("contentLength: %d", r.ContentLength)
+		// log.Printf("method: %s", r.Method)
+		// log.Printf("protocol: %s", r.Proto)
+		// log.Printf("remoteAddr: %s", r.RemoteAddr)
+
+		// log.Println("request headers:")
+		// for key, values := range r.Header {
+		// 	for _, value := range values {
+		// 		log.Printf("\t%s: %s", key, value)
+		// 	}
+		// }
+		// log.Println("---------------------------------------------------------")
+	})
 }
 
-func grayscale(code color.Attribute) func(string, ...interface{}) string {
-	return color.New(code + 232).SprintfFunc()
-}
-
-//getClientsetInternal creates a clientset config when inside in the cluster
+//getClientsetInternal creates a clientset config when inside the cluster
 func getClientsetInternal() *kubernetes.Clientset {
 	// creates the in-cluster config
 	config, err := rest.InClusterConfig()
@@ -69,7 +85,7 @@ func getClientsetInternal() *kubernetes.Clientset {
 	return clientset
 }
 
-//getClientsetInternal creates a clientset config when outside in the cluster
+//getClientsetInternal creates a clientset config when outside the cluster
 func getClientsetExternal() *kubernetes.Clientset {
 	var kubeconfig *string
 	if home := homedir.HomeDir(); home != "" {
@@ -91,6 +107,8 @@ func getClientsetExternal() *kubernetes.Clientset {
 	if err != nil {
 		panic(err.Error())
 	}
+
+	os.Setenv("HOSTNAME", "localhost")
 	return clientset
 }
 
@@ -113,15 +131,18 @@ func makeRequest(pod v1.Pod) {
 		pod.Status.PodIP,
 		pod.Spec.NodeName,
 	)
-	req, _ := http.NewRequest("GET", fmt.Sprintf("http://%s:8080", "localhost"), nil)
-	var d1, d2, c1, c2, fb time.Time
+	req, _ := http.NewRequest("GET", fmt.Sprintf("http://%s:%d", "localhost", port), nil)
+	var r1, d1, d2, c1, c2, c3, fb time.Time
 	trace := &httptrace.ClientTrace{
 		DNSStart: func(_ httptrace.DNSStartInfo) {
 			d1 = time.Now()
 		},
-		DNSDone: func(_ httptrace.DNSDoneInfo) {
+		DNSDone: func(dnsInfo httptrace.DNSDoneInfo) {
 			d2 = time.Now()
 			log.Printf("\tlatency dns: %s", d2.Sub(d1))
+			if dnsInfo.Err != nil {
+				log.Println("An error occured while handling DNS")
+			}
 		},
 		ConnectStart: func(_, _ string) {
 			if c1.IsZero() {
@@ -138,9 +159,16 @@ func makeRequest(pod v1.Pod) {
 			// log.Printf("\tconnection establish: %s", c2)
 			log.Printf("\tlatency connection: %s", c2.Sub(c1))
 		},
+		GotConn: func(connInfo httptrace.GotConnInfo) {
+			c3 = time.Now()
+		},
+		WroteRequest: func(_ httptrace.WroteRequestInfo) {
+			r1 = time.Now()
+			log.Printf("\tlatency write request: %s", r1.Sub(c3))
+		},
 		GotFirstResponseByte: func() {
 			fb = time.Now()
-			log.Printf("\tlatency firstByte: %s", fb.Sub(c2))
+			log.Printf("\tlatency server processing: %s", fb.Sub(c3))
 		},
 	}
 	req = req.WithContext(httptrace.WithClientTrace(req.Context(), trace))
@@ -155,19 +183,18 @@ func makeRequest(pod v1.Pod) {
 
 	if err != nil {
 		log.Println(err)
+		return
 	}
 	defer resp.Body.Close()
-	now := time.Now()
-
-	log.Printf("\tlatency total: %s", now.Sub(d1))
+	endTime := time.Now()
+	log.Printf("\tlatency content transfer: %s", endTime.Sub(fb))
+	log.Printf("\tlatency total: %s", endTime.Sub(d1))
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		log.Println(err)
 	}
 	log.Printf("\tresponse: %s", string(body))
-
-	log.Printf(httpTemplate, d2.Sub(d1), c2.Sub(c1), fb.Sub(c2), now.Sub(fb), d2.Sub(d1), c2.Sub(d1), fb.Sub(d1), now.Sub(d1))
 }
 
 //probe executes the sequences of steps needed to probe an associated scout pod
@@ -193,8 +220,13 @@ func probe() {
 
 // main initializes handlers, invokes the probe mechanism, and starts a server
 func main() {
+	handlers()
+	go probe()
 	var wg sync.WaitGroup
 	wg.Add(1)
-	go probe()
+	go func() {
+		log.Printf("server is listening at http://localhost:%d", port)
+		http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
+	}()
 	wg.Wait()
 }
