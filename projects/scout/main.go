@@ -34,6 +34,7 @@ type Message struct {
 }
 
 var port = 8080
+var insideCluster = true
 
 // handlers handles the endpoint for remote scout instances
 func handlers() {
@@ -126,24 +127,30 @@ func getPods(clientset *kubernetes.Clientset) *v1.PodList {
 
 //make request executes the get request to arg pod and prints output to stdout
 func makeRequest(pod v1.Pod) {
+	var req *http.Request
 	log.Printf("probing: %s -> %s.%s.%s @ node: %s", os.Getenv("HOSTNAME"), pod.Name,
 		pod.Namespace,
 		pod.Status.PodIP,
 		pod.Spec.NodeName,
 	)
-	req, _ := http.NewRequest("GET", fmt.Sprintf("http://%s:%d", "localhost", port), nil)
-	var r1, d1, d2, c1, c2, c3, fb time.Time
+	if insideCluster {
+		req, _ = http.NewRequest("GET", fmt.Sprintf("http://%s:%d", pod.Status.PodIP, port), nil)
+	} else {
+		req, _ = http.NewRequest("GET", fmt.Sprintf("http://%s:%d", "localhost", port), nil)
+	}
+
+	var r1, c1, c2, c3, fb time.Time
 	trace := &httptrace.ClientTrace{
-		DNSStart: func(_ httptrace.DNSStartInfo) {
-			d1 = time.Now()
-		},
-		DNSDone: func(dnsInfo httptrace.DNSDoneInfo) {
-			d2 = time.Now()
-			log.Printf("\tlatency dns: %s", d2.Sub(d1))
-			if dnsInfo.Err != nil {
-				log.Println("An error occured while handling DNS")
-			}
-		},
+		// DNSStart: func(_ httptrace.DNSStartInfo) {
+		// 	d1 = time.Now()
+		// },
+		// DNSDone: func(dnsInfo httptrace.DNSDoneInfo) {
+		// 	d2 = time.Now()
+		// 	log.Printf("\tlatency dns: %s", d2.Sub(d1))
+		// 	if dnsInfo.Err != nil {
+		// 		log.Println("An error occured while handling DNS")
+		// 	}
+		// },
 		ConnectStart: func(_, _ string) {
 			if c1.IsZero() {
 				// connecting to IP
@@ -188,7 +195,7 @@ func makeRequest(pod v1.Pod) {
 	defer resp.Body.Close()
 	endTime := time.Now()
 	log.Printf("\tlatency content transfer: %s", endTime.Sub(fb))
-	log.Printf("\tlatency total: %s", endTime.Sub(d1))
+	log.Printf("\ttime: %s", endTime)
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
@@ -199,9 +206,14 @@ func makeRequest(pod v1.Pod) {
 
 //probe executes the sequences of steps needed to probe an associated scout pod
 func probe() {
+	var pods *v1.PodList
 	// time.Sleep(5 * time.Second)
-	pods := getPods(getClientsetExternal())
-	// pods := getPods(getClientsetInternal())
+	if os.Getenv("HOSTNAME") != "" {
+		pods = getPods(getClientsetInternal())
+	} else {
+		insideCluster = false
+		pods = getPods(getClientsetExternal())
+	}
 	log.Println("scout pods:")
 	for _, pod := range pods.Items {
 		log.Printf("\tnode: %s", pod.Spec.NodeName)
