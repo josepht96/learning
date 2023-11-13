@@ -2,13 +2,16 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"net/http/httptest"
 	"reflect"
 	"testing"
 
 	v1 "k8s.io/api/core/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 )
 
@@ -78,9 +81,77 @@ func TestCreateRequestObjInsideCluster(t *testing.T) {
 }
 
 func TestCreateRequestObjOutsideCluster(t *testing.T) {
-	pod := v1.Pod{}
-	req := createRequestObj(false, pod)
+	pod := &v1.Pod{}
+	req := createRequestObj(false, *pod)
 	if req.Host != "localhost:8080" {
 		t.Errorf("Host error: %v\n", req.Host)
+	}
+}
+
+func TestCreateRequestObject(t *testing.T) {
+	pod := &v1.Pod{
+		TypeMeta: metav1.TypeMeta{
+			Kind:       "Pod",
+			APIVersion: "v1",
+		},
+		ObjectMeta: metav1.ObjectMeta{
+			Name:      "test-pod",
+			Namespace: "default",
+			Labels:    map[string]string{"foo": "bar"},
+		},
+		Spec: v1.PodSpec{
+			Containers: []v1.Container{{
+				Name:  "nginx",
+				Image: "nginx",
+			},
+			},
+		},
+		Status: v1.PodStatus{
+			PodIP: "1.2.3.4",
+		},
+	}
+	req := createRequestObj(false, *pod)
+	if req.Host != "localhost:8080" {
+		t.Errorf("Host error: %v\n", req.Host)
+	}
+}
+
+func TestMakeRequest(t *testing.T) {
+	handlers()
+	go func() {
+		err := http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}()
+
+	pod := &v1.Pod{
+		TypeMeta: metav1.TypeMeta{
+			Kind:       "Pod",
+			APIVersion: "v1",
+		},
+		ObjectMeta: metav1.ObjectMeta{
+			Name:      "test-pod",
+			Namespace: "default",
+			Labels:    map[string]string{"foo": "bar"},
+		},
+		Spec: v1.PodSpec{
+			Containers: []v1.Container{{
+				Name:  "nginx",
+				Image: "nginx",
+			},
+			},
+		},
+		Status: v1.PodStatus{
+			PodIP: "1.2.3.4",
+		},
+	}
+	req := createRequestObj(false, *pod)
+	if req.Host != "localhost:8080" {
+		t.Errorf("Host error: %v\n", req.Host)
+	}
+	err := makeRequest(false, *pod)
+	if err != nil {
+		t.Errorf("Error in makeRequest: %s\n", err)
 	}
 }

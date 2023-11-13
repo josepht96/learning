@@ -262,7 +262,10 @@ func main() {
 	wg.Add(1)
 	go func() {
 		log.Printf("server is listening at http://localhost:%d", port)
-		http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
+		err := http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}()
 	wg.Wait()
 }
