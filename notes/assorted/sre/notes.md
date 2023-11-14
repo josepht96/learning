@@ -14,3 +14,5 @@ umount /var/lib/mount-target
 fuser -v /var/lib/mount-target
 ## Kill process
 kill <process id>
+
+sudo blkid
