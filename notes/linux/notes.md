@@ -31,15 +31,83 @@ top - active view into cpu usage, memory, etc... by process
 
    PID    COMMAND      %CPU TIME     #TH    #WQ  #PORT MEM    PURG  CMPRS  PGRP  PPID  STATE    BOOSTS            %CPU_ME %CPU_OTHRS UID  FAULTS     COW     MSGSENT
    159    WindowServer 15.9 65:54:42 24     7    4991- 572M-  27M+  144M   159   1     stuck    *0[1]             0.69216 0.63982    88   200312686+ 128644  2147483647
-   78001  Google Chrom 0.9  08:07:12 19     1    358   473M   131M  44M    77990 77990 sleeping *1[590]           0.00000 0.00000    501  45925800   7458    604168618
+   78001  Google Chrom 0.9  08:07:12 19     1    358   473M   131M  44M    77990 77990 sleeping*1[590]           0.00000 0.00000    501  45925800   7458    604168618
    77990  Google Chrom 1.4  05:59:35 45     1    6421  348M+  1216K 93M    77990 1     sleeping *0[28208]         0.00000 0.00000    501  54638525+  125046  210814428+
-   11799  Google Chrom 0.0  18:42.08 24     1    309   261M   0B    29M    77990 77990 sleeping *0[7]             0.00000 0.00000    501  2968758    6185    4703841
-   14099  Google Chrom 0.0  00:52.43 22     1    396   247M   0B    139M   77990 77990 sleeping *0[7]             
-
+   11799  Google Chrom 0.0  18:42.08 24     1    309   261M   0B    29M    77990 77990 sleeping*0[7]             0.00000 0.00000    501  2968758    6185    4703841
+   14099  Google Chrom 0.0  00:52.43 22     1    396   247M   0B    139M   77990 77990 sleeping *0[7]
 vmstat - list memory usage by process
-iostat
+      procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+
+   r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+
+   1  0      0 396528  38816 384036    0    0     4     2   38   79  0  0 99  0  0
+
+   The fields are as follows:
+
+   procs
+
+   r - Number of processes for run time
+   b - Number of processes in uninterruptible sleep
+   memory
+
+   swpd - Amount of virtual memory used
+   free - Amount of free memory
+   buff - Amount of memory used as buffers
+   cache - Amount of memory used as cache
+   swap
+
+   si - Amount of memory swapped in from disk
+   so - Amount of memory swapped out to disk
+   io
+
+   bi - Amount of blocks received in from a block device
+   bo - Amount of blocks sent out to a block device
+   system
+
+   in - Number of interrupts per second
+   cs - Number of context switches per second
+   cpu
+
+   us - Time spent in user time
+   sy - Time spent in kernel time
+   id - Time spent idle
+   wa - Time spent waiting for IO
+
+   30 08 ** * /home/pete/scripts/change_wallpaper
+   The fields are as follows from left to right:
+
+   Minute - (0-59)
+   Hour - (0-23)
+   Day of the month - (1-31)
+   Month - (1-12)
+   Day of the week - (0-7). 0 and 7 are denoted as Sunday
+iostat - disk and cpu usage
+   joe@joes-mbp: learning $ iostat
+              disk0               disk5       cpu    load average
+    KB/t  tps  MB/s     KB/t  tps  MB/s  us sy id   1m   5m   15m
+   16.82   48  0.79    72.11    0  0.00   7 20 73  4.61 3.07 2.61
 uptime
+   1 5 15min intervals
+   joe@joes-mbp: ~ $ uptime
+   uptime: /dev/ttys002: No such file or directory
+   13:33  up 118 days,  7:03, 3 users, load averages: 1.63 2.23 2.71
 lsof
+   joe@joes-mbp: learning $ lsof .
+   COMMAND     PID USER   FD   TYPE DEVICE SIZE/OFF   NODE NAME
+   Code\x20H 14607  joe  cwd    DIR   1,15      576 541547 .
+   terraform 14633  joe  cwd    DIR   1,15      576 541547 .
+   gopls     14661  joe  cwd    DIR   1,15      576 541547 .
+   Code\x20H 14740  joe  cwd    DIR   1,15      576 541547 .
+   bash      17957  joe  cwd    DIR   1,15      576 541547 .
+   screen    31367  joe  cwd    DIR   1,15      576 541547 .
+   bash      31369  joe  cwd    DIR   1,15      576 541547 .
+   tmux      34889  joe  cwd    DIR   1,15      576 541547 .
+   bash      34890  joe  cwd    DIR   1,15      576 541547 .
+   tmux      34989  joe  cwd    DIR   1,15      576 541547 .
+   bash      34990  joe  cwd    DIR   1,15      576 541547 .
+   bash      35046  joe  cwd    DIR   1,15      576 541547 .
+   lsof      78625  joe  cwd    DIR   1,15      576 541547 .
+   lsof      78626  joe  cwd    DIR   1,15      576 541547 .
 lsblk
 df - list disk devices
    joe@joes-mbp: learning $ df
@@ -56,9 +124,58 @@ df - list disk devices
    map auto_home           0         0         0   100%       0          0  100%   /System/Volumes/Data/home
    /dev/disk5s2        44408     44408         0   100%      31 4294967248    0%   /private/tmp/KSInstallAction.sY
 du
+   joe@joes-mbp: learning $ du -ah | sort -rh
+   1.1G    .
+   475M    ./projects
+   410M    ./projects/nextjs/myapp
+   410M    ./projects/nextjs
+   392M    ./projects/nextjs/myapp/.next
+   389M    ./terraform/aws/.terraform/providers/registry.terraform.io/hashicorp/aws/4.67.0/darwin_arm64/terraform-provider-aws_v4.67.0_x5
+   389M    ./terraform/aws/.terraform/providers/registry.terraform.io/hashicorp/aws/4.67.0/darwin_arm64
+   389M    ./terraform/aws/.terraform/providers/registry.terraform.io/hashicorp/aws/4.67.0
+   389M    ./terraform/aws/.terraform/providers/registry.terraform.io/hashicorp/aws
+   389M    ./terraform/aws/.terraform/providers/registry.terraform.io/hashicorp
+   389M    ./terraform/aws/.terraform/providers/registry.terraform.io
+   389M    ./terraform/aws/.terraform/providers
+   389M    ./terraform/aws/.terraform
 find
-strace
+   find . -name 'node_modules' -type d
+strace - trace the syscalls of a specific command
 fg/bg/jobs
+   kubectl port-forward...
+   send to background: ctrl z -> bg -> query with jobs
+   or run with &
+   fg %1
+
+chmod - set permissions on a file
+   sudo chmod 777 myfile - (4 - read, 2 - write, 1 execute)
+chown - set ownership of file
+   sudo chown myuser:mygroup myfile
+ssh
+   ssh-keygen
+   ssh-copy-id user@host
+   ssh -i ~/.ssh/id_rsa user@server
+   ssh user@server
+scp
+   scp myfile.txt username@remotehost.com:/remote/directory
+rsync
+   copy from local to remote
+   rsync /local/directory username@remotehost.com:/remote/directory
+   copy to remote from local
+   rsync username@remotehost.com:/remote/directory /local/directory
+simple http server
+   python -m SimpleHTTPServer
+start nfs
+   sudo service nfsclient start
+   sudo mount server:/directory /mount_directory
+samba -  share files between linux, mac, windows
+   sudo apt update
+   sudo apt install samba
+   sudo smbpasswd -a [username]
+   mkdir /my/directory/to/share
+   sudo service smbd restart
+   smbclient //HOST/directory -U user
+   sudo mount -t cifs servername:directory mountpount -o user=username,pass=password
 
 Orphan Processes
 
@@ -84,23 +201,34 @@ differenet types of filesystems
 df -T
 
 ## Create partition
+
 parted > select /dev/sdc/ > mkpart
+
 ## Format partition
+
 mkfs.ext4 (or whatever fs type) /dev/sdc2
+
 ## Mount
+
 mkdir /var/lib/mount-target
 mount /dev/sdc2 /var/lib/mount-target
+
 ## Umount
+
 umount /var/lib/mount-target
 
 ## Get processes using system
+
 fuser -v /var/lib/mount-target
+
 ## Kill process
+
 kill <process id>
 
 sudo blkid
 
 ## swap space
+
 First make sure we don't have anything on the partition
 Run: mkswap /dev/sdb2 to initialize swap areas
 Run: swapon /dev/sdb2 this will enable the swap device
@@ -142,7 +270,6 @@ Disks: 180791313/2719G read, 119287278/2115G written.
 
 ps
 
-
 iostat
               disk0       cpu    load average
     KB/t  tps  MB/s  us sy id   1m   5m   15m
@@ -172,54 +299,85 @@ joe@joes-mbp: ~ $ uptime
 uptime: /dev/ttys002: No such file or directory
 13:33  up 118 days,  7:03, 3 users, load averages: 1.63 2.23 2.71
 
-In addition to CPU monitoring and I/O monitoring you can monitor your memory usage with vmstat
+ISP - Your internet service provider, the company you pay to get Internet at your house.
+Router - The router allows each machine on your network to connect to the Internet. In most modern routers, you can connect via wireless or an Ethernet cable.
+WAN - Wide Area Network, this is what we call the network that encompasses everything between your router and a wider network such the Internet.
+WLAN - Wireless Local Area Network, this is the network between your router and any wireless devices you may have such as laptops.
+LAN - Local Area Network, this is the network between your router and any wired devices such as Desktop PCs.
+Hosts - Each machine on a network is known as a host.
 
+Application Layer
 
-pete@icebox:~$ vmstat
+The top layer of the TCP/IP model. It determines how your computer's programs (such as your web browser) interface with the transport layer services to view the data that gets sent or received.
 
-procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+This layer uses:
 
- r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+HTTP (Hypertext Transfer Protocol) - used for the webpages on the Internet.
+SMTP (Simple Mail Transfer Protocol) - electronic mail (email) transmission
+Transport Layer
 
- 1  0      0 396528  38816 384036    0    0     4     2   38   79  0  0 99  0  0
+How data will be transmitted, includes checking the correct ports, the integrity of the data, and basically delivering our packets.
 
-The fields are as follows:
+This layer uses:
 
-procs
+TCP (Transmission Control Protocol) - reliable data delivery
+UDP (User Datagram Protocol) - unreliable data delivery
+Network Layer
 
-r - Number of processes for run time
-b - Number of processes in uninterruptible sleep
-memory
+This layers specifies how to move packets between hosts and across networks.
 
-swpd - Amount of virtual memory used
-free - Amount of free memory
-buff - Amount of memory used as buffers
-cache - Amount of memory used as cache
-swap
+This layer uses:
 
-si - Amount of memory swapped in from disk
-so - Amount of memory swapped out to disk
-io
+IP (Internet Protocol) - Helps route packets from one machine to another.
+ICMP (Internet Control Message Protocol) - Helps tell us what is going on, such as error messages and debugging information.
+Link Layer
 
-bi - Amount of blocks received in from a block device
-bo - Amount of blocks sent out to a block device
-system
+This layer specifies how to send data across a physical piece of hardware. Such as data travelling through Ethernet, fiber, etc.
 
-in - Number of interrupts per second
-cs - Number of context switches per second
-cpu
+The lists above of protocols each layer uses is not extensive and you'll encounter many other protocols that come into play.
 
-us - Time spent in user time
-sy - Time spent in kernel time
-id - Time spent idle
-wa - Time spent waiting for IO
+In the following lessons, we will dive through each of these layers and discuss how our packet traverses through the network in the eyes of the TCP/IP model (there are many perspectives on how a packet travels across networks, we won't look at them all, but be aware that they exist).
 
+Pete sends Patty an email: this data gets sent to the transport layer.
+The transport layer encapsulates the data into a TCP or UDP header to form a segment, the segment attaches the destination and source TCP or UDP port, then the segment is sent to the network layer.
+The network layer encapsulates the TCP segment inside an IP packet, it attaches the source and destination IP address. Then routes the packet to the link layer.
+The packet then reaches Pete's physical hardware and gets encapsulated in a frame. The source and destination MAC address get added to the frame.
+Patty's receives this data frame through her physical layer and checks each frame for data integrity, then de-encapsulates the frame contents and sends the IP packet to the network layer.
+The network layer reads the packet to find the source and destination IP that was previously attached. It checks if its IP is the same as the destination IP, which it is! It de-encapsulates the packet and sends the segment to the transport layer.
+The transport layer de-encapsulates the segments, checks the TCP or UDP port numbers and makes a connection to the application layer based on those port numbers.
+The application layer receives the data from the transport layer on the port that was specified and presents it to Patty in the form of the final email message
 
-30 08 * * * /home/pete/scripts/change_wallpaper
-The fields are as follows from left to right:
+CIDR
+   CIDR (classless inter-domain routing) is used to represent a subnet mask in a more compact way. You may see subnets notated in CIDR notation, where a subnet such as the 10.42.3.0/255.255.255.0 is written as 10.42.3.0/24 which just means it includes both the subnet prefix and the subnet mask.
 
-Minute - (0-59)
-Hour - (0-23)
-Day of the month - (1-31)
-Month - (1-12)
-Day of the week - (0-7). 0 and 7 are denoted as Sunday
+   Remember an IP address consists of 4 bytes or 32 bits, CIDR indicates the amount of bits used as the network prefix. So 123.12.24.0/23 means that the first 23 bits are used. Well what does that mean? How many hosts is that?
+
+   A simple trick is to subtract the total of bits an IP address can have (32) from the CIDR address (23), so that leaves 9 bits, 2^9 = 512, but we have to remove 2 addresses (subnet address and broadcast address) so we have 510 usable hosts.
+
+To show interface information for all interfaces
+
+$ ip link show
+To show the statistics of an interface
+$ ip -s link show eth0
+To show ip addresses allocated to interfaces
+$ ip address show
+To bring interfaces up and down
+$ ip link set eth0 up
+$ ip link set eth0 down
+To add an IP address to an interface
+$ ip address add 192.168.1.1/24 dev eth0
+
+## Review route tables
+
+joe@joes-mbp: learning $ route get google.com
+   route to: yyz08s10-in-f174.1e100.net
+destination: default
+       mask: default
+    gateway: 192.168.5.1
+  interface: en0
+      flags: <UP,GATEWAY,DONE,STATIC,PRCLONING,GLOBAL>
+ recvpipe  sendpipe  ssthresh  rtt,msec    rttvar  hopcount      mtu     expire
+       0         0         0         0         0         0      1500         0 
+
+dhcp - dynamically provisions ip address on a network. 
+   sudo dhclient
