@@ -203,6 +203,9 @@ df -T
 ## Create partition
 
 parted > select /dev/sdc/ > mkpart
+name, type, start, finish (type is just an indicator of what type of filesystem can be created on
+the partition, it does not actually create the filesystem, use mkfs.ext4 for that)
+rm to delete. Make sure correct disk is select
 
 ## Format partition
 
@@ -381,3 +384,7 @@ destination: default
 
 dhcp - dynamically provisions ip address on a network. 
    sudo dhclient
+
+## partitions
+
+sudo parted -l

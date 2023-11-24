@@ -15,6 +15,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -35,11 +36,17 @@ type Message struct {
 }
 
 type Tracer struct {
-	ClientTrace                    *httptrace.ClientTrace
-	r1, d1, d2, c0, c1, c2, c3, fb time.Time
+	ClientTrace                                 *httptrace.ClientTrace
+	r1, d1, d2, c0, c1, c2, c3, fb              time.Time
+	dnsDur, connDur, totalDur, serverprocessDur time.Duration
 }
 
 var port = 8080
+var promTotalReq = createMetricTotalRequests()
+var promTotalReqLatency = createMetricTotalLatency()
+var promTotalDNSDur = createMetricDNSDur()
+var promTotalConnDur = createMetricConnDur()
+var promTotalServerProcessingDur = createMetricServerProcessingDur()
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
@@ -99,6 +106,7 @@ func getClientsetExternal() *kubernetes.Clientset {
 	}
 
 	os.Setenv("HOSTNAME", "localhost")
+	os.Setenv("NODE_NAME", "localhost")
 	return clientset
 }
 
@@ -135,7 +143,6 @@ func createTransportObj() *http.Transport {
 
 func createTraceObj(insideCluster bool) *Tracer {
 	t := &Tracer{}
-	// var r1, d1, d2, c0, c1, c2, c3, fb *time.Time
 	t.ClientTrace = &httptrace.ClientTrace{
 		GetConn: func(hostPort string) {
 			t.c0 = time.Now()
@@ -149,7 +156,8 @@ func createTraceObj(insideCluster bool) *Tracer {
 				return
 			}
 			t.d2 = time.Now()
-			log.Printf("\tlatency dns: %s", t.d2.Sub(t.d1))
+			t.dnsDur = t.d2.Sub(t.d1)
+			log.Printf("\tlatency dns: %s", t.dnsDur)
 			if dnsInfo.Err != nil {
 				log.Println("An error occured while handling DNS")
 			}
@@ -166,8 +174,8 @@ func createTraceObj(insideCluster bool) *Tracer {
 				log.Printf("unable to connect to host %v: %v\n", addr, err)
 			}
 			t.c2 = time.Now()
-			// log.Printf("\tconnection establish: %s", c2)
-			log.Printf("\tlatency connection: %s", t.c2.Sub(t.c1))
+			t.connDur = t.c2.Sub(t.c1)
+			log.Printf("\tlatency connection: %s", t.connDur)
 		},
 		GotConn: func(connInfo httptrace.GotConnInfo) {
 			t.c3 = time.Now()
@@ -178,7 +186,8 @@ func createTraceObj(insideCluster bool) *Tracer {
 		},
 		GotFirstResponseByte: func() {
 			t.fb = time.Now()
-			log.Printf("\tlatency server processing: %s", t.fb.Sub(t.c3))
+			t.serverprocessDur = t.fb.Sub(t.c3)
+			log.Printf("\tlatency server processing: %s", t.serverprocessDur)
 		},
 	}
 	return t
@@ -210,7 +219,23 @@ func makeRequest(insideCluster bool, pod v1.Pod) error {
 	defer resp.Body.Close()
 	endTime := time.Now()
 	log.Printf("\tlatency content transfer: %s", endTime.Sub(tracer.fb))
-	log.Printf("\tlatency total: %s", endTime.Sub(tracer.c0))
+	tracer.totalDur = endTime.Sub(tracer.c0)
+	log.Printf("\tlatency total: %v", tracer.totalDur)
+
+	labels := prometheus.Labels{
+		"src_node":  os.Getenv("NODE_NAME"),
+		"src_pod":   os.Getenv("HOSTNAME"),
+		"dest_node": pod.Spec.NodeName,
+		"dest_pod":  pod.Name,
+	}
+	promTotalReq.With(labels).Inc()
+	// these are done in nanonseconds, number will get large very quickly
+	// rounding will cause problems
+	// really short durations will potentially never leave 0 as theyll be rounded down
+	promTotalReqLatency.With(labels).Add(float64(tracer.totalDur.Milliseconds()))
+	promTotalDNSDur.With(labels).Add(float64(tracer.dnsDur.Milliseconds()))
+	promTotalConnDur.With(labels).Add(float64(tracer.connDur.Milliseconds()))
+	promTotalServerProcessingDur.With(labels).Add(float64(tracer.serverprocessDur.Milliseconds()))
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
@@ -250,14 +275,13 @@ func probe() {
 			}
 
 		}
-		time.Sleep(15 * time.Second)
+		time.Sleep(1 * time.Second)
 	}
 }
 
 // main initializes handlers, invokes the probe mechanism, and starts a server
 func main() {
 	handlers()
-	go probe()
 	var wg sync.WaitGroup
 	wg.Add(1)
 	go func() {
@@ -267,5 +291,7 @@ func main() {
 			log.Fatal(err)
 		}
 	}()
+
+	go probe()
 	wg.Wait()
 }
