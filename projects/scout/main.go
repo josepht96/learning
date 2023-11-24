@@ -48,6 +48,9 @@ var promTotalDNSDur = createMetricDNSDur()
 var promTotalConnDur = createMetricConnDur()
 var promTotalServerProcessingDur = createMetricServerProcessingDur()
 
+// if storing/rounding time becomes a problem, may need temporary storage to store previous values
+var timeStore = make(map[string]time.Duration)
+
 func rootHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
@@ -233,9 +236,9 @@ func makeRequest(insideCluster bool, pod v1.Pod) error {
 	// rounding will cause problems
 	// really short durations will potentially never leave 0 as theyll be rounded down
 	promTotalReqLatency.With(labels).Add(float64(tracer.totalDur.Milliseconds()))
-	promTotalDNSDur.With(labels).Add(float64(tracer.dnsDur.Milliseconds()))
-	promTotalConnDur.With(labels).Add(float64(tracer.connDur.Milliseconds()))
-	promTotalServerProcessingDur.With(labels).Add(float64(tracer.serverprocessDur.Milliseconds()))
+	promTotalDNSDur.With(labels).Add(float64(tracer.dnsDur.Microseconds()))
+	promTotalConnDur.With(labels).Add(float64(tracer.connDur.Microseconds()))
+	promTotalServerProcessingDur.With(labels).Add(float64(tracer.serverprocessDur.Microseconds()))
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
@@ -272,10 +275,11 @@ func probe() {
 			err := makeRequest(insideCluster, pod)
 			if err != nil {
 				log.Println(err)
+				continue
 			}
 
 		}
-		time.Sleep(1 * time.Second)
+		time.Sleep(15 * time.Second)
 	}
 }
 

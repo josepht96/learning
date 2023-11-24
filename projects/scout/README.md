@@ -2,52 +2,78 @@
 
 ## Purpose
 
-The purpose of this project is to create a service that continuously probes kubernetes nodes to provide insight into network reliability, restrictions, latency, and reliability.
-
-I have observed situations where applications running on k8s behave in unexpected ways, with my suspicion being there are network anomolies occuring. These sorts of issues are very hard to detect, especially working in unfamiliar environments. Scout should provide insight into network performance regardless of the kubernetes or CNI implementation.
+Scout continuously probes pods on separate kubernetes nodes to provide insight into network latency, restrictions, and reliability.
 
 ## Components
 
-Scout will be deployed via a daemonset. Each pod should listen for requests from remote containers, while continously probing the same remote containers. Scout must determine the IPs/pod names of its associated containers.
+Scout can be deployed via a daemonset or deployment. Each pod should listen for requests from remote containers, while continously probing the same remote containers. Scout must determine the IPs/pod names of its associated containers. Metrics are available at localhost:8080/metrics.
+
+Scout containers need access to kube apiserver to retrieve details about other scout pods.
 
 kubectl proxy --port=8081
 
 ## Example output
 
 ```
-2023/10/30 17:09:49 server is listening at http://localhost:8080
-2023/10/30 17:09:49 scout pods:
-2023/10/30 17:09:49     node: kind-worker
-2023/10/30 17:09:49             scout-66dd96cbb4-rf6z9.default.10.244.1.30
-2023/10/30 17:09:49     node: kind-worker
-2023/10/30 17:09:49             scout-66dd96cbb4-rg8d8.default.10.244.1.31
-2023/10/30 17:09:49     node: kind-worker
-2023/10/30 17:09:49             scout-66dd96cbb4-wwc5z.default.10.244.1.32
-2023/10/30 17:09:49 probing: localhost -> scout-66dd96cbb4-rf6z9.default.10.244.1.30 @ node: kind-worker
-2023/10/30 17:09:49     connection start: 2023-10-30 17:09:49.89942 -0500 CDT m=+0.046433751
-2023/10/30 17:09:49     latency dns: 866.5µs
-2023/10/30 17:09:49     latency connection: 289.542µs
-2023/10/30 17:09:49     latency write request: 43.959µs
-2023/10/30 17:09:49     latency server processing: 264.25µs
-2023/10/30 17:09:49     latency content transfer: 21.75µs
-2023/10/30 17:09:49     latency total: 1.548375ms
-2023/10/30 17:09:49     response: {"status":"OK","statusCode":200,"body":{"message":"connected to scout","time":"2023-10-30 17:09:49.900801 -0500 CDT m=+0.047814418"}}
-2023/10/30 17:09:49 probing: localhost -> scout-66dd96cbb4-rg8d8.default.10.244.1.31 @ node: kind-worker
-2023/10/30 17:09:49     connection start: 2023-10-30 17:09:49.901013 -0500 CDT m=+0.048026251
-2023/10/30 17:09:49     latency dns: 212.25µs
-2023/10/30 17:09:49     latency connection: 148.625µs
-2023/10/30 17:09:49     latency write request: 12.75µs
-2023/10/30 17:09:49     latency server processing: 127.792µs
-2023/10/30 17:09:49     latency content transfer: 13.291µs
-2023/10/30 17:09:49     latency total: 554.25µs
-2023/10/30 17:09:49     response: {"status":"OK","statusCode":200,"body":{"message":"connected to scout","time":"2023-10-30 17:09:49.901505 -0500 CDT m=+0.048519168"}}
-2023/10/30 17:09:49 probing: localhost -> scout-66dd96cbb4-wwc5z.default.10.244.1.32 @ node: kind-worker
-2023/10/30 17:09:49     connection start: 2023-10-30 17:09:49.901598 -0500 CDT m=+0.048611918
-2023/10/30 17:09:49     latency dns: 210.916µs
-2023/10/30 17:09:49     latency connection: 154.542µs
-2023/10/30 17:09:49     latency write request: 15.709µs
-2023/10/30 17:09:49     latency server processing: 156µs
-2023/10/30 17:09:49     latency content transfer: 15µs
-2023/10/30 17:09:49     latency total: 593.208µs
-2023/10/30 17:09:49     response: {"status":"OK","statusCode":200,"body":{"message":"connected to scout","time":"2023-10-30 17:09:49.902103 -0500 CDT m=+0.049116751"}}
+2023/11/24 21:27:11 scout pods:
+2023/11/24 21:27:11 	node: kind-worker
+2023/11/24 21:27:11 		scout-c64f88c47-b8ll2.default.10.244.1.34
+2023/11/24 21:27:11 	node: kind-worker
+2023/11/24 21:27:11 		scout-c64f88c47-cndfr.default.10.244.1.35
+2023/11/24 21:27:11 	node: kind-worker
+2023/11/24 21:27:11 		scout-c64f88c47-z6xcx.default.10.244.1.33
+2023/11/24 21:27:11 probing: scout-c64f88c47-b8ll2 -> scout-c64f88c47-b8ll2.default.10.244.1.34 @ node: kind-worker
+2023/11/24 21:27:11 	connection start: 2023-11-24 21:27:11.884794208 +0000 UTC m=+15.035662049
+2023/11/24 21:27:11 	latency connection: 235µs
+2023/11/24 21:27:11 	latency write request: 82.083µs
+2023/11/24 21:27:11 	latency server processing: 413.708µs
+2023/11/24 21:27:11 	latency content transfer: 170.584µs
+2023/11/24 21:27:11 	latency total: 1.388959ms
+2023/11/24 21:27:11 	response: {"status":"OK","statusCode":200,"body":{"message":"connected to scout"}}
+2023/11/24 21:27:11 probing: scout-c64f88c47-b8ll2 -> scout-c64f88c47-cndfr.default.10.244.1.35 @ node: kind-worker
+2023/11/24 21:27:11 	connection start: 2023-11-24 21:27:11.886367542 +0000 UTC m=+15.037235341
+2023/11/24 21:27:11 	latency connection: 275.167µs
+2023/11/24 21:27:11 	latency write request: 46.041µs
+2023/11/24 21:27:11 	latency server processing: 315.25µs
+2023/11/24 21:27:11 	latency content transfer: 68.541µs
+2023/11/24 21:27:11 	latency total: 809.458µs
+2023/11/24 21:27:11 	response: {"status":"OK","statusCode":200,"body":{"message":"connected to scout"}}
+2023/11/24 21:27:11 probing: scout-c64f88c47-b8ll2 -> scout-c64f88c47-z6xcx.default.10.244.1.33 @ node: kind-worker
+2023/11/24 21:27:11 	connection start: 2023-11-24 21:27:11.887332708 +0000 UTC m=+15.038200466
+2023/11/24 21:27:11 	latency connection: 284.709µs
+2023/11/24 21:27:11 	latency write request: 36.042µs
+2023/11/24 21:27:11 	latency server processing: 501.042µs
+2023/11/24 21:27:11 	latency content transfer: 109.958µs
+2023/11/24 21:27:11 	latency total: 1.059958ms
+2023/11/24 21:27:11 	response: {"status":"OK","statusCode":200,"body":{"message":"connected to scout"}}
+```
+
+## Promql metrics
+
+```
+# HELP scout_total_conn_duration gauge for total connection creation duration
+# TYPE scout_total_conn_duration gauge
+scout_total_conn_duration{dest_node="kind-worker",dest_pod="scout-c64f88c47-b8ll2",src_node="kind-worker",src_pod="scout-c64f88c47-b8ll2"} 1288
+scout_total_conn_duration{dest_node="kind-worker",dest_pod="scout-c64f88c47-cndfr",src_node="kind-worker",src_pod="scout-c64f88c47-b8ll2"} 1540
+scout_total_conn_duration{dest_node="kind-worker",dest_pod="scout-c64f88c47-z6xcx",src_node="kind-worker",src_pod="scout-c64f88c47-b8ll2"} 1682
+# HELP scout_total_dns_duration gauge for total dns duration
+# TYPE scout_total_dns_duration gauge
+scout_total_dns_duration{dest_node="kind-worker",dest_pod="scout-c64f88c47-b8ll2",src_node="kind-worker",src_pod="scout-c64f88c47-b8ll2"} 0
+scout_total_dns_duration{dest_node="kind-worker",dest_pod="scout-c64f88c47-cndfr",src_node="kind-worker",src_pod="scout-c64f88c47-b8ll2"} 0
+scout_total_dns_duration{dest_node="kind-worker",dest_pod="scout-c64f88c47-z6xcx",src_node="kind-worker",src_pod="scout-c64f88c47-b8ll2"} 0
+# HELP scout_total_latency gauge for total latency ms
+# TYPE scout_total_latency gauge
+scout_total_latency{dest_node="kind-worker",dest_pod="scout-c64f88c47-b8ll2",src_node="kind-worker",src_pod="scout-c64f88c47-b8ll2"} 5
+scout_total_latency{dest_node="kind-worker",dest_pod="scout-c64f88c47-cndfr",src_node="kind-worker",src_pod="scout-c64f88c47-b8ll2"} 3
+scout_total_latency{dest_node="kind-worker",dest_pod="scout-c64f88c47-z6xcx",src_node="kind-worker",src_pod="scout-c64f88c47-b8ll2"} 3
+# HELP scout_total_requests counts the number of requests
+# TYPE scout_total_requests counter
+scout_total_requests{dest_node="kind-worker",dest_pod="scout-c64f88c47-b8ll2",src_node="kind-worker",src_pod="scout-c64f88c47-b8ll2"} 5
+scout_total_requests{dest_node="kind-worker",dest_pod="scout-c64f88c47-cndfr",src_node="kind-worker",src_pod="scout-c64f88c47-b8ll2"} 6
+scout_total_requests{dest_node="kind-worker",dest_pod="scout-c64f88c47-z6xcx",src_node="kind-worker",src_pod="scout-c64f88c47-b8ll2"} 5
+# HELP scout_total_server_processing_duration gauge for total server processing duration
+# TYPE scout_total_server_processing_duration gauge
+scout_total_server_processing_duration{dest_node="kind-worker",dest_pod="scout-c64f88c47-b8ll2",src_node="kind-worker",src_pod="scout-c64f88c47-b8ll2"} 2782
+scout_total_server_processing_duration{dest_node="kind-worker",dest_pod="scout-c64f88c47-cndfr",src_node="kind-worker",src_pod="scout-c64f88c47-b8ll2"} 2862
+scout_total_server_processing_duration{dest_node="kind-worker",dest_pod="scout-c64f88c47-z6xcx",src_node="kind-worker",src_pod="scout-c64f88c47-b8ll2"} 2562
 ```
