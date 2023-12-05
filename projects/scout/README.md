@@ -10,8 +10,6 @@ Scout can be deployed via a daemonset or deployment. Each pod should listen for 
 
 Scout containers need access to kube apiserver to retrieve details about other scout pods.
 
-kubectl proxy --port=8081
-
 ## Example output
 
 ```
@@ -77,3 +75,7 @@ scout_total_server_processing_duration{dest_node="kind-worker",dest_pod="scout-c
 scout_total_server_processing_duration{dest_node="kind-worker",dest_pod="scout-c64f88c47-cndfr",src_node="kind-worker",src_pod="scout-c64f88c47-b8ll2"} 2862
 scout_total_server_processing_duration{dest_node="kind-worker",dest_pod="scout-c64f88c47-z6xcx",src_node="kind-worker",src_pod="scout-c64f88c47-b8ll2"} 2562
 ```
+
+## Future additions
+
+There is a basic client/server UDP setup under the /udp dir. Potentially include this alongside tcp probes

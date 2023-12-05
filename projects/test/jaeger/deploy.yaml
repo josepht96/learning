@@ -1,0 +1,115 @@
+########################################### test 1
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: jaeger-hop1
+  name: jaeger-hop1
+spec:
+  containers:
+  - image: josepht96/jaeger-test:latest
+    imagePullPolicy: Always
+    name: jaeger-test
+    resources: {}
+    ports:
+    - containerPort: 8080
+    env:
+    - name: TARGET_SERVICE
+      value: jaeger-hop2:80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: jaeger-hop1
+  name: jaeger-hop1
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: jaeger-hop1
+  type: ClusterIP
+---
+########################################### test 2
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: jaeger-hop2
+  name: jaeger-hop2
+spec:
+  containers:
+  - image: josepht96/jaeger-test:latest
+    imagePullPolicy: Always
+    name: jaeger-test
+    resources: {}
+    ports:
+    - containerPort: 8080
+    env:
+    - name: TARGET_SERVICE
+      value: dest:80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: jaeger-hop2
+  name: jaeger-hop2
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: jaeger-hop2
+  type: ClusterIP
+---
+########################################### dest
+apiVersion: v1
+kind: Pod
+metadata:
+  generation: 1
+  labels:
+    app: dest
+  name: dest
+spec:
+  containers:
+  - image: nginx
+    imagePullPolicy: Always
+    name: nginx
+    ports:
+    - containerPort: 80
+      protocol: TCP
+    resources: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: dest
+  name: dest
+  
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: dest
+  type: ClusterIP
+---
+########################################### src
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: src
+  name: src
+spec:
+  containers:
+  - image: nginx
+    imagePullPolicy: Always
+    name: nginx
+    resources: {}

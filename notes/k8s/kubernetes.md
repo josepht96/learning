@@ -28,6 +28,7 @@ minikube -
  service <name> --url
 
 kubectl -
+ kubectl proxy --port=8081
  get pods
  get pods -n kube-system
  get pods --selector tagname=tagvalue,tag2name=tag2value,...
