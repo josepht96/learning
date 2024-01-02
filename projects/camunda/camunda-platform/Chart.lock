@@ -1,0 +1,30 @@
+dependencies:
+- name: identity
+  repository: ""
+  version: 8.2.19
+- name: operate
+  repository: ""
+  version: 8.2.19
+- name: optimize
+  repository: ""
+  version: 8.2.19
+- name: tasklist
+  repository: ""
+  version: 8.2.19
+- name: zeebe
+  repository: ""
+  version: 8.2.19
+- name: zeebe-gateway
+  repository: ""
+  version: 8.2.19
+- name: elasticsearch
+  repository: https://helm.elastic.co
+  version: 7.17.3
+- name: postgresql
+  repository: https://charts.bitnami.com/bitnami
+  version: 11.9.13
+- name: common
+  repository: https://charts.bitnami.com/bitnami
+  version: 2.13.3
+digest: sha256:1bf06f12769e1612ee1cc107e34411725b078e61348306b20bce676cc7781047
+generated: "2023-12-12T17:19:24.274861878Z"

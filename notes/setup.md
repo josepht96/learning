@@ -35,3 +35,7 @@ kind create cluster --config='./config.yaml'
 ## kubectl 
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 
+## istio
+curl -L https://istio.io/downloadIstio | sh -
+export PATH=$PWD/bin:$PATH
+istioctl install -y
