@@ -1,4 +1,7 @@
-FROM golang:1.21-alpine as build
+#!/bin/bash
+# Build for AMD64
+# Builder
+FROM --platform=linux/amd64 golang:1.21-alpine as build
 
 WORKDIR /app
 
@@ -12,7 +15,7 @@ RUN chmod +x /jaeger-test
 
 CMD [ "/jaeger-test" ]
 
-FROM golang:1.21-alpine
+FROM --platform=linux/amd64 golang:1.21-alpine
 RUN apk add curl
 COPY --from=build /jaeger-test /bin/jaeger-test
 EXPOSE 8080
