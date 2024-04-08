@@ -36,6 +36,7 @@ top - active view into cpu usage, memory, etc... by process
    11799  Google Chrom 0.0  18:42.08 24     1    309   261M   0B    29M    77990 77990 sleeping*0[7]             0.00000 0.00000    501  2968758    6185    4703841
    14099  Google Chrom 0.0  00:52.43 22     1    396   247M   0B    139M   77990 77990 sleeping *0[7]
 vmstat - list memory usage by process
+   vmstat 
       procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
 
    r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
