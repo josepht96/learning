@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: newman
+spec:
+  schedule: "* * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          volumes:
+            - name: postmanContent
+              configMap:
+                name: postmanContent
+          containers:
+          - name: newman
+            image: newman:latest
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/bash
+            - /execute.sh
+            env:
+             - name: POSTMAN_PASSWORD
+               value: test123
+            volumeMounts:
+            - name: postmanContent
+              mountPath: /etc/config/
+          restartPolicy: OnFailure
