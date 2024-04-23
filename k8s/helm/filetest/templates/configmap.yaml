@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: postmanContent
+  name: {{ .Chart.Name }}-postman-content
 data:
   exec.sh: |
 {{ .Files.Get .Values.execFilePath | indent 4 }}

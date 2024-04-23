@@ -1,4 +1,4 @@
 execFilePath: files/exec.sh
 envFilePath: files/env.postman_environment.json
 readOnlyTestsFilePath: files/filetest.postman_collection.json
-writeTestsFilePath: files/test2.json
+writeTestsFilePath: files/filetest-write.postman_collection.json

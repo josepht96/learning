@@ -9,20 +9,20 @@ spec:
       template:
         spec:
           volumes:
-            - name: postmanContent
+            - name: postman-content
               configMap:
-                name: postmanContent
+                name: {{ .Chart.Name }}-postman-content
           containers:
-          - name: newman
-            image: newman:latest
+          - name: nginx
+            image: nginx:latest
             imagePullPolicy: IfNotPresent
             command:
             - /bin/bash
-            - /execute.sh
+            - /etc/config/exec.sh
             env:
              - name: POSTMAN_PASSWORD
                value: test123
             volumeMounts:
-            - name: postmanContent
+            - name: postman-content
               mountPath: /etc/config/
           restartPolicy: OnFailure
