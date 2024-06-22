@@ -178,7 +178,7 @@ func createTraceObj(insideCluster bool) *Tracer {
 			}
 			t.c2 = time.Now()
 			t.connDur = t.c2.Sub(t.c1)
-			log.Printf("\tlatency connection: %s", t.connDur)
+			log.Printf("\tlatency connection established: %s", t.connDur)
 		},
 		GotConn: func(connInfo httptrace.GotConnInfo) {
 			t.c3 = time.Now()
