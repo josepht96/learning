@@ -52,7 +52,7 @@ func DeployModel(client zbc.Client) {
 	ctx, cancelFn := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancelFn()
 
-	response, err := client.NewDeployResourceCommand().AddResourceFile("test-process-manual.bpmn").Send(ctx)
+	response, err := client.NewDeployResourceCommand().AddResourceFile("test-workflow-manual.bpmn").Send(ctx)
 	if err != nil {
 		panic(err)
 	}
