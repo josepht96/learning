@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: zeebe-worker
+  labels:
+    app: zeebe-worker
+spec:
+  restartPolicy: Always
+  containers:
+  - name: zeebe-worker
+    image: josepht96/zeebe-worker-incident:v1
+    imagePullPolicy: Always
+    resources: {}
+    ports:
+    - containerPort: 8080
+    env:
+    - name: ZEEBE_ADDRESS
+      value: "camunda-zeebe-gateway.camunda.svc.cluster.local:26500"
+    - name: ZEEBE_HOST
+      value: "camunda-zeebe-gateway.camunda.svc.cluster.local"
+    - name: ZEEBE_PORT
+      value: "26500"
+    - name: ZEEBE_CLIENT_ID
+      value: "zeebe-worker"
+    - name: ZEEBE_CLIENT_SECRET
+      value: "mVSsgWqmN7YcWoCkGQohFI7nAqPnvPPj"
+    - name: ZEEBE_AUTHORIZATION_SERVER_URL
+      value: "http://camunda-keycloak.camunda.svc.cluster.local/auth/realms/camunda-platform/protocol/openid-connect/token"
+

@@ -1,2 +1,0 @@
-helm repo add minio https://charts.min.io/
-helm install minio -n minio --set resources.requests.memory=512Mi --set replicas=1 --set persistence.existingClaim=k8s-pvc --set mode=standalone --set rootUser=admin,rootPassword=admin123 minio/minio

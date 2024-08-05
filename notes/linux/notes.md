@@ -402,3 +402,8 @@ ping <broadcast ip>
 arp -a
 
 Pinging a broadcast IP address sends ICMP Echo Request packets to all devices within the specified subnet
+
+
+## ls
+ls -ltr
+ls -lt
