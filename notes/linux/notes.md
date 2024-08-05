@@ -153,6 +153,7 @@ chmod - set permissions on a file
 chown - set ownership of file
    sudo chown myuser:mygroup myfile
 ssh
+   sudo apt install openssh-client
    ssh-keygen
    ssh-copy-id user@host
    ssh -i ~/.ssh/id_rsa user@server
@@ -389,3 +390,15 @@ dhcp - dynamically provisions ip address on a network.
 ## partitions
 
 sudo parted -l
+
+
+## View lan devices
+The broadcast IP address is a special address used to send data to all possible destinations in a network segment, also known as a broadcast domain. In IPv4 networks, it is the last address in the IP address range of a given subnet and is used to communicate with all devices in that subnet simultaneously.
+ifconfig | grep broadcast
+	inet 192.168.86.28 netmask 0xffffff00 broadcast 192.168.86.255
+
+ifconfig | grep broadcast
+ping <broadcast ip>
+arp -a
+
+Pinging a broadcast IP address sends ICMP Echo Request packets to all devices within the specified subnet
