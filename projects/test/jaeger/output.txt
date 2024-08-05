@@ -1,0 +1,27 @@
+2024-06-27T19:05:55.117309Z	debug	envoy http	[C109] new stream
+2024-06-27T19:05:55.117402Z	debug	envoy http	[C109][S5452613989595613503] request headers complete (end_stream=true):
+':authority', 'nginx:8080'
+':path', '/test'
+':method', 'GET'
+'user-agent', 'curl/7.88.1'
+'accept', '*/*'
+'x-forwarded-proto', 'http'
+'x-request-id', '18e9817d-ac61-4522-b90b-117ca450e7e4'
+'x-envoy-decorator-operation', 'nginx.test.svc.cluster.local:8080/*'
+'x-envoy-peer-metadata', 'ChkKDkFQUF9DT05UQUlORVJTEgcaBW5naW54ChoKCkNMVVNURVJfSUQSDBoKS3ViZXJuZXRlcwodCgxJTlNUQU5DRV9JUFMSDRoLMTAuMjQ0LjEuMTQKGQoNSVNUSU9fVkVSU0lPThIIGgYxLjE2LjIKowEKBkxBQkVMUxKYASqVAQoPCgNhcHASCBoGbmdpbngyCiQKGXNlY3VyaXR5LmlzdGlvLmlvL3Rsc01vZGUSBxoFaXN0aW8KKwofc2VydmljZS5pc3Rpby5pby9jYW5vbmljYWwtbmFtZRIIGgZuZ2lueDIKLwojc2VydmljZS5pc3Rpby5pby9jYW5vbmljYWwtcmV2aXNpb24SCBoGbGF0ZXN0ChoKB01FU0hfSUQSDxoNY2x1c3Rlci5sb2NhbAoQCgROQU1FEggaBm5naW54MgoTCglOQU1FU1BBQ0USBhoEdGVzdAo7CgVPV05FUhIyGjBrdWJlcm5ldGVzOi8vYXBpcy92MS9uYW1lc3BhY2VzL3Rlc3QvcG9kcy9uZ2lueDIKFwoRUExBVEZPUk1fTUVUQURBVEESAioAChkKDVdPUktMT0FEX05BTUUSCBoGbmdpbngy'
+'x-envoy-peer-metadata-id', 'sidecar~10.244.1.14~nginx2.test~test.svc.cluster.local'
+'x-envoy-attempt-count', '1'
+'x-b3-traceid', '65e998ad2ec72baa106e00a9b37d1a32'
+'x-b3-spanid', '106e00a9b37d1a32'
+'x-b3-sampled', '0'
+
+2024-06-27T19:05:55.117415Z	debug	envoy http	[C109][S5452613989595613503] request end stream
+2024-06-27T19:05:55.117944Z	debug	envoy http	[C109][S5452613989595613503] encoding headers via codec (end_stream=false):
+':status', '404'
+'server', 'istio-envoy'
+'date', 'Thu, 27 Jun 2024 19:05:55 GMT'
+'content-type', 'text/html'
+'content-length', '153'
+'x-envoy-upstream-service-time', '0'
+'x-envoy-peer-metadata', 'ChkKDkFQUF9DT05UQUlORVJTEgcaBW5naW54ChoKCkNMVVNURVJfSUQSDBoKS3ViZXJuZXRlcwodCgxJTlNUQU5DRV9JUFMSDRoLMTAuMjQ0LjEuMTMKGQoNSVNUSU9fVkVSU0lPThIIGgYxLjE2LjIKoQEKBkxBQkVMUxKWASqTAQoOCgNhcHASBxoFbmdpbngKJAoZc2VjdXJpdHkuaXN0aW8uaW8vdGxzTW9kZRIHGgVpc3RpbwoqCh9zZXJ2aWNlLmlzdGlvLmlvL2Nhbm9uaWNhbC1uYW1lEgcaBW5naW54Ci8KI3NlcnZpY2UuaXN0aW8uaW8vY2Fub25pY2FsLXJldmlzaW9uEggaBmxhdGVzdAoaCgdNRVNIX0lEEg8aDWNsdXN0ZXIubG9jYWwKDwoETkFNRRIHGgVuZ2lueAoTCglOQU1FU1BBQ0USBhoEdGVzdAo6CgVPV05FUhIxGi9rdWJlcm5ldGVzOi8vYXBpcy92MS9uYW1lc3BhY2VzL3Rlc3QvcG9kcy9uZ2lueAoXChFQTEFURk9STV9NRVRBREFUQRICKgAKGAoNV09SS0xPQURfTkFNRRIHGgVuZ2lueA=='
+'x-envoy-peer-metadata-id', 'sidecar~10.244.1.13~nginx.test~test.svc.cluster.local'
