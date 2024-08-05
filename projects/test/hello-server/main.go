@@ -22,7 +22,7 @@ type Message struct {
 	Time    string `json:"time"`
 }
 
-var port = 8081
+var port = 8080
 
 func main() {
 	http.Handle("/metrics", promhttp.Handler())
@@ -41,7 +41,7 @@ func main() {
 			Status:     "OK",
 			StatusCode: 200,
 			Body: Message{
-				Message: "hello from hello-server",
+				Message: "Hey Laura, good 2 see you",
 				Time:    dt.String(),
 			},
 		}
