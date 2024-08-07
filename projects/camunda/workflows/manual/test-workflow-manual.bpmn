@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1pqm7eo" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.25.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.5.0">
-  <bpmn:process id="Process_0qft27a" isExecutable="true">
-    <bpmn:startEvent id="Event_1op5di6" name="test-workflow-1">
+  <bpmn:process id="test-workflow" isExecutable="true">
+    <bpmn:startEvent id="Event_1op5di6" name="test-workflow-start">
       <bpmn:documentation>Test Workflow Start Node</bpmn:documentation>
       <bpmn:outgoing>Flow_1essg7u</bpmn:outgoing>
     </bpmn:startEvent>
@@ -64,11 +64,11 @@
     </bpmn:serviceTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0qft27a">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="test-workflow">
       <bpmndi:BPMNShape id="Event_1op5di6_di" bpmnElement="Event_1op5di6">
         <dc:Bounds x="142" y="72" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="123" y="48" width="74" height="14" />
+          <dc:Bounds x="115" y="48" width="90" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1lvjtwu_di" bpmnElement="Event_1lvjtwu">

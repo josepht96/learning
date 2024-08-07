@@ -23,7 +23,7 @@ func main() {
 
 	// deploy workflow
 	ctx := context.Background()
-	response, err := zbClient.NewDeployResourceCommand().AddResourceFile("sample-workflow-manual.bpmn").Send(ctx)
+	response, err := zbClient.NewDeployResourceCommand().AddResourceFile("test-workflow.bpmn").Send(ctx)
 	if err != nil {
 		panic(err)
 	}
