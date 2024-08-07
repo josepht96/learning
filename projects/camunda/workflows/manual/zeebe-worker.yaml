@@ -8,7 +8,7 @@ spec:
   restartPolicy: Always
   containers:
   - name: zeebe-worker
-    image: josepht96/zeebe-worker:v2
+    image: josepht96/test-workflow-manual:v1
     imagePullPolicy: Always
     resources: {}
     ports:
@@ -26,4 +26,7 @@ spec:
       value: "mVSsgWqmN7YcWoCkGQohFI7nAqPnvPPj"
     - name: ZEEBE_AUTHORIZATION_SERVER_URL
       value: "http://camunda-keycloak.camunda.svc.cluster.local/auth/realms/camunda-platform/protocol/openid-connect/token"
+
+
+      
 
