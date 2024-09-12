@@ -32,19 +32,6 @@ func main() {
 	go activateAndProcessJob(client, "test-workflow-service-task-3")
 
 	wg.Wait()
-
-	// client.NewJobWorker().
-	// 	JobType("test-workflow-service-task-1").
-	// 	Handler(handleServiceTask).
-	// 	Open()
-	// client.NewJobWorker().
-	// 	JobType("test-workflow-service-task-2").
-	// 	Handler(handleServiceTask).Open()
-	// client.NewJobWorker().
-	// 	JobType("test-workflow-service-task-3").
-	// 	Handler(handleServiceTask).
-	// 	Open()
-
 }
 
 func createClient() zbc.Client {
@@ -139,46 +126,8 @@ func activateAndProcessJob(client zbc.Client, jobType string) {
 		}
 
 		log.Printf("Job %d completed successfully", job.Key)
-		time.Sleep(2 * time.Second)
+		time.Sleep(5 * time.Second)
 	}
-}
-
-func handleServiceTask(client worker.JobClient, job entities.Job) {
-	log.Println("In service task thingy")
-	log.Println(job.GetTenantId())
-
-	headers, err := job.GetCustomHeadersAsMap()
-	if err != nil {
-		// failed to handle job as we require the custom job headers
-		failJob(client, job)
-		return
-	}
-
-	variables, err := job.GetVariablesAsMap()
-	if err != nil {
-		// failed to handle job as we require the variables
-		failJob(client, job)
-		return
-	}
-
-	variables["testVar2"] = 123
-	request, err := client.NewCompleteJobCommand().JobKey(job.GetKey()).VariablesFromMap(variables)
-	if err != nil {
-		// failed to set the updated variables
-		failJob(client, job)
-		return
-	}
-
-	log.Println("Completed job", job.GetKey(), "of type", job.Type)
-	log.Println("Job headers:", headers["method"])
-
-	ctx := context.Background()
-	_, err = request.Send(ctx)
-	if err != nil {
-		panic(err)
-	}
-
-	log.Println("Successfully completed job")
 }
 
 func failJob(client worker.JobClient, job entities.Job) {
