@@ -12,17 +12,22 @@ spec:
             - name: postman-content
               configMap:
                 name: {{ .Chart.Name }}-postman-content
+            - name: glob
+              configMap:
+                name: {{ .Chart.Name }}-glob
           containers:
           - name: nginx
             image: nginx:latest
             imagePullPolicy: IfNotPresent
             command:
             - /bin/bash
-            - /etc/config/exec.sh
+            - /etc/config/sleep.sh
             env:
              - name: POSTMAN_PASSWORD
                value: test123
             volumeMounts:
             - name: postman-content
               mountPath: /etc/config/
+            - name: glob
+              mountPath: /etc/glob/
           restartPolicy: OnFailure

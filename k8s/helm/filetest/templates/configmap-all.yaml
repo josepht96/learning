@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Chart.Name }}-glob
+data:
+{{ range $path, $_ :=  .Files.Glob  "files/**.yaml" }}
+    {{ base $path }}: |
+        "test"
+{{ end }}

@@ -11,3 +11,5 @@ data:
 {{ .Files.Get .Values.readOnlyTestsFilePath | indent 4 }}
   writeTests.json: |
 {{ .Files.Get .Values.writeTestsFilePath | indent 4 }}
+  sleep.sh: |
+{{ .Files.Get .Values.sleepPath | indent 4 }}
