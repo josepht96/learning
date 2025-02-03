@@ -13,3 +13,4 @@ ls -al  /lib/systemd/system
 
 ##
 systemctl start nginx-startup
+systemctl enable nginx-startup (to enable on startup)
