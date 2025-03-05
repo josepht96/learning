@@ -1,0 +1,126 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otel-demo
+  labels:
+    app: otel-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: otel-demo
+  template:
+    metadata:
+      labels:
+        app: otel-demo
+    spec:
+      containers:
+        - name: otel-demo
+          image: docker.io/josepht96/otel-demo:latest
+          ports:
+            - containerPort: 8080
+          resources: {}
+          env:
+            - name: SERVER_PORT
+              value: '8080'
+            - name: DOWNSTREAM_SERVICE_URL
+              value: http://otel-demo-2-svc:8080/external
+            - name: EXTERNAL_SERVICE_URL
+              value: https://httpstat.us/200
+            - name: OTEL_SERVICE_NAME
+              value: "otel-demo"
+            - name: OTEL_TRACES_EXPORTER
+              value: otlp
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://tempo.default.svc.cluster.local:4318"
+            - name: OTEL_METRICS_EXPORTER
+              value: none
+            - name: OTEL_LOGS_EXPORTER
+              value: none
+            - name: OTEL_JAVAAGENT_DEBUG
+              value: 'true'
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: otel-demo-svc
+spec:
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: otel-demo
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: otel-demo-nodeport
+spec:
+  type: NodePort
+  ports:
+  - nodePort: 30003
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: otel-demo
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otel-demo-2
+  labels:
+    app: otel-demo-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: otel-demo-2
+  template:
+    metadata:
+      labels:
+        app: otel-demo-2
+    spec:
+      containers:
+        - name: otel-demo
+          image: docker.io/josepht96/otel-demo:latest
+          ports:
+            - containerPort: 8080
+          resources: {}
+          env:
+            - name: SERVER_PORT
+              value: '8080'
+            - name: DOWNSTREAM_SERVICE_URL
+              value: http://otel-demo-svc:8080/external
+            - name: EXTERNAL_SERVICE_URL
+              value: https://httpstat.us/200
+            - name: OTEL_SERVICE_NAME
+              value: "otel-demo-2"
+            - name: OTEL_TRACES_EXPORTER
+              value: otlp
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://tempo.default.svc.cluster.local:4318"
+            - name: OTEL_METRICS_EXPORTER
+              value: none
+            - name: OTEL_LOGS_EXPORTER
+              value: none
+            - name: OTEL_JAVAAGENT_DEBUG
+              value: 'true'
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: otel-demo-2-svc
+spec:
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: otel-demo-2
