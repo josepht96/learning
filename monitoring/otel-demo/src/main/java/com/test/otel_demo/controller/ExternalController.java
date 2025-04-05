@@ -28,7 +28,7 @@ public class ExternalController {
     public Map<String, Object> callExternalService() {
         logger.info("Calling external service at {}", externalServiceUrl);
         try {
-            Map response = restTemplate.getForObject(externalServiceUrl + "/", Map.class);
+            Map response = restTemplate.getForObject(externalServiceUrl, Map.class);
             logger.info("External service response: {}", response);
             return response;
         } catch (Exception e) {

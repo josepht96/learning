@@ -32,3 +32,5 @@ export OTEL_JAVAAGENT_DEBUG=true
 
 -Dotel.traces.exporter=otlp \
      -Dotel.exporter.otlp.endpoint=http://localhost:4317 \
+
+docker build -t josepht96/otel-demo:linux --platform linux/amd64 .

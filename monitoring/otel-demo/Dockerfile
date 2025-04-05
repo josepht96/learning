@@ -10,7 +10,7 @@ COPY src ./src
 COPY opentelemetry-javaagent.jar .
 
 # Build the application
-RUN mvn clean package -DskipTests
+RUN mvn clean package -X -DskipTests
 
 # Use a smaller JDK image to run the application
 FROM eclipse-temurin:17-jdk
