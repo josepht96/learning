@@ -1,0 +1,8 @@
+interval: 30
+endpoints:
+  www-google:
+    url: www.google.com:443
+    protocol: https
+  yahoo:
+    url: yahoo.com
+    protocol: https
