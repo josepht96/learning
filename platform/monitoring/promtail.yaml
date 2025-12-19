@@ -12,6 +12,10 @@ spec:
       labels:
         name: promtail
     spec:
+      tolerations:
+      - key: "node-role.kubernetes.io/control-plane"
+        operator: "Exists"
+        effect: "NoSchedule"
       serviceAccount: promtail-serviceaccount
       containers:
       - name: promtail-container
@@ -31,6 +35,10 @@ spec:
         - mountPath: /var/lib/docker/containers
           name: varlibdockercontainers
           readOnly: true
+        # Journald logs
+        - name: journal
+          mountPath: /var/log/journal
+          readOnly: true
       volumes:
       - name: logs
         hostPath:
@@ -41,6 +49,9 @@ spec:
       - name: promtail-config
         configMap:
           name: promtail-config
+      - name: journal
+        hostPath:
+          path: /var/log/journal
 --- # configmap.yaml
 apiVersion: v1
 kind: ConfigMap
@@ -53,13 +64,27 @@ data:
       grpc_listen_port: 0
 
     clients:
-    - url: http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push
+    - url: http://loki:3100/loki/api/v1/push
+      headers:
+        X-Scope-OrgID: "1"
 
     positions:
       filename: /tmp/positions.yaml
     target_config:
       sync_period: 10s
     scrape_configs:
+    # Systemd/journald logs
+    - job_name: systemd-journal
+      journal:
+        max_age: 12h
+        path: /var/log/journal
+        labels:
+          job: systemd-journal
+      relabel_configs:
+        - source_labels: ['__journal__systemd_unit']
+          target_label: 'unit'
+        - source_labels: ['__journal__hostname']
+          target_label: 'hostname'
     - job_name: pod-logs
       kubernetes_sd_configs:
         - role: pod
@@ -96,6 +121,7 @@ data:
             - __meta_kubernetes_pod_uid
             - __meta_kubernetes_pod_container_name
           target_label: __path__
+      
 
 --- # Clusterrole.yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -127,7 +153,7 @@ metadata:
 subjects:
     - kind: ServiceAccount
       name: promtail-serviceaccount
-      namespace: monitoring
+      namespace: sys
 roleRef:
     kind: ClusterRole
     name: promtail-clusterrole

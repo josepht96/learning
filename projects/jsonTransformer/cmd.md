@@ -1,0 +1,1 @@
+docker buildx build --platform linux/amd64 -t josepht96/json-field-mapper:v1 --push .

@@ -1,0 +1,16 @@
+[
+  {
+    "source": "coreId",
+    "targets": [
+      "formdata.coreId",
+      "formdata.submissionId",
+      "filename"
+    ]
+  },
+  {
+    "source": "name",
+    "targets": [
+      "formdata.userName"
+    ]
+  }
+]

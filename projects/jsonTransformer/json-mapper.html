@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSON Field Mapper</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+        padding: 20px;
+        background: #f5f5f5;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        color: #333;
+        margin-bottom: 30px;
+      }
+
+      h2 {
+        color: #555;
+        margin: 25px 0 15px 0;
+        font-size: 1.2em;
+      }
+
+      .json-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      .input-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      label {
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #555;
+      }
+
+      textarea {
+        width: 100%;
+        min-height: 200px;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-family: "Courier New", monospace;
+        font-size: 13px;
+        resize: vertical;
+      }
+
+      textarea:focus {
+        outline: none;
+        border-color: #4caf50;
+      }
+
+      .mapping-rules {
+        margin: 30px 0;
+      }
+
+      .rule {
+        display: grid;
+        grid-template-columns: 1fr auto 2fr auto;
+        gap: 15px;
+        align-items: center;
+        padding: 15px;
+        background: #f9f9f9;
+        border-radius: 4px;
+        margin-bottom: 10px;
+      }
+
+      .rule input,
+      .rule select {
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+
+      .rule input:focus,
+      .rule select:focus {
+        outline: none;
+        border-color: #4caf50;
+      }
+
+      .arrow {
+        color: #888;
+        font-weight: bold;
+      }
+
+      button {
+        padding: 10px 20px;
+        background: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        transition: background 0.2s;
+      }
+
+      button:hover {
+        background: #45a049;
+      }
+
+      button.secondary {
+        background: #2196f3;
+      }
+
+      button.secondary:hover {
+        background: #0b7dda;
+      }
+
+      button.danger {
+        background: #f44336;
+        padding: 8px 16px;
+      }
+
+      button.danger:hover {
+        background: #da190b;
+      }
+
+      .button-group {
+        display: flex;
+        gap: 10px;
+        margin: 20px 0;
+      }
+
+      .output-section {
+        margin-top: 30px;
+      }
+
+      .output-box {
+        background: #f9f9f9;
+        padding: 15px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        min-height: 200px;
+        font-family: "Courier New", monospace;
+        font-size: 13px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+      .error {
+        color: #f44336;
+        background: #ffebee;
+        padding: 10px;
+        border-radius: 4px;
+        margin: 10px 0;
+      }
+
+      .success {
+        color: #4caf50;
+        background: #e8f5e9;
+        padding: 10px;
+        border-radius: 4px;
+        margin: 10px 0;
+      }
+
+      .target-fields {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .target-field-row {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+      }
+
+      .target-field-row input {
+        flex: 1;
+      }
+
+      .add-target {
+        padding: 4px 8px;
+        font-size: 12px;
+        background: #2196f3;
+      }
+
+      .remove-target {
+        padding: 4px 8px;
+        font-size: 12px;
+      }
+
+      datalist {
+        max-height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>JSON Field Mapper</h1>
+
+      <div id="message"></div>
+
+      <div class="input-group" style="margin-bottom: 20px">
+        <label for="defaultRules"
+          >Default Rules (loaded from default-rules.json)</label
+        >
+        <textarea
+          id="defaultRules"
+          style="min-height: 120px"
+          placeholder="Default rules will load here..."
+        ></textarea>
+        <button
+          onclick="applyDefaultRules()"
+          style="margin-top: 10px; width: fit-content"
+        >
+          Apply These Rules
+        </button>
+      </div>
+
+      <div class="json-section">
+        <div class="input-group">
+          <label for="inputJson">Input JSON</label>
+          <textarea
+            id="inputJson"
+            placeholder='{"coreId": "12345", "name": "Test"}'
+          ></textarea>
+        </div>
+        <div class="input-group">
+          <label for="templateJson">Template JSON</label>
+          <textarea
+            id="templateJson"
+            placeholder='{"formdata": {"coreId": "", "submissionId": ""}, "filename": ""}'
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button onclick="parseJsons()">Load JSONs</button>
+        <button class="secondary" onclick="exportRules()">Export Rules</button>
+        <button class="secondary" onclick="importRules()">Import Rules</button>
+      </div>
+
+      <div class="mapping-rules">
+        <h2>Mapping Rules</h2>
+        <div id="rulesContainer"></div>
+        <button onclick="addRule()">+ Add Mapping Rule</button>
+      </div>
+
+      <div class="button-group">
+        <button onclick="applyMapping()">Apply Mapping</button>
+        <button class="secondary" onclick="copyOutput()">Copy Output</button>
+      </div>
+
+      <div class="output-section">
+        <h2>Output</h2>
+        <div class="output-box" id="output">Output will appear here...</div>
+      </div>
+    </div>
+
+    <script>
+      let inputData = {};
+      let templateData = {};
+      let inputFields = [];
+      let templateFields = [];
+      let rules = [];
+
+      // Helper function to get nested value using dot notation
+      function getNestedValue(obj, path) {
+        return path.split(".").reduce((current, key) => current?.[key], obj);
+      }
+
+      // Helper function to set nested value using dot notation
+      function setNestedValue(obj, path, value) {
+        const keys = path.split(".");
+        const lastKey = keys.pop();
+        const target = keys.reduce((current, key) => {
+          if (!(key in current)) current[key] = {};
+          return current[key];
+        }, obj);
+        target[lastKey] = value;
+      }
+
+      // Extract all field paths from a nested object
+      function extractFieldPaths(obj, prefix = "") {
+        const paths = [];
+        for (const key in obj) {
+          const path = prefix ? `${prefix}.${key}` : key;
+          paths.push(path);
+          if (
+            typeof obj[key] === "object" &&
+            obj[key] !== null &&
+            !Array.isArray(obj[key])
+          ) {
+            paths.push(...extractFieldPaths(obj[key], path));
+          }
+        }
+        return paths;
+      }
+
+      function showMessage(message, type = "success") {
+        const messageDiv = document.getElementById("message");
+        messageDiv.className = type;
+        messageDiv.textContent = message;
+        setTimeout(() => (messageDiv.textContent = ""), 3000);
+      }
+
+      function parseJsons() {
+        try {
+          const inputText = document.getElementById("inputJson").value;
+          const templateText = document.getElementById("templateJson").value;
+
+          if (!inputText || !templateText) {
+            showMessage("Please provide both input and template JSON", "error");
+            return;
+          }
+
+          inputData = JSON.parse(inputText);
+          templateData = JSON.parse(templateText);
+
+          inputFields = extractFieldPaths(inputData);
+          templateFields = extractFieldPaths(templateData);
+
+          showMessage("JSONs loaded successfully!");
+          renderRules();
+        } catch (e) {
+          showMessage("Error parsing JSON: " + e.message, "error");
+        }
+      }
+
+      function addRule(sourceField = "", targetFields = [""]) {
+        rules.push({ source: sourceField, targets: targetFields });
+        renderRules();
+      }
+
+      function removeRule(index) {
+        rules.splice(index, 1);
+        renderRules();
+      }
+
+      function addTargetField(ruleIndex) {
+        rules[ruleIndex].targets.push("");
+        renderRules();
+      }
+
+      function removeTargetField(ruleIndex, targetIndex) {
+        if (rules[ruleIndex].targets.length > 1) {
+          rules[ruleIndex].targets.splice(targetIndex, 1);
+          renderRules();
+        }
+      }
+
+      function updateRuleSource(index, value) {
+        rules[index].source = value;
+      }
+
+      function updateRuleTarget(ruleIndex, targetIndex, value) {
+        rules[ruleIndex].targets[targetIndex] = value;
+      }
+
+      function renderRules() {
+        const container = document.getElementById("rulesContainer");
+        container.innerHTML = "";
+
+        rules.forEach((rule, ruleIndex) => {
+          const ruleDiv = document.createElement("div");
+          ruleDiv.className = "rule";
+
+          // Source field
+          const sourceInput = document.createElement("input");
+          sourceInput.type = "text";
+          sourceInput.value = rule.source;
+          sourceInput.placeholder = "Source field (e.g., coreId)";
+          sourceInput.setAttribute("list", "inputFields");
+          sourceInput.oninput = (e) =>
+            updateRuleSource(ruleIndex, e.target.value);
+
+          // Arrow
+          const arrow = document.createElement("span");
+          arrow.className = "arrow";
+          arrow.textContent = "→";
+
+          // Target fields container
+          const targetsDiv = document.createElement("div");
+          targetsDiv.className = "target-fields";
+
+          rule.targets.forEach((target, targetIndex) => {
+            const targetRow = document.createElement("div");
+            targetRow.className = "target-field-row";
+
+            const targetInput = document.createElement("input");
+            targetInput.type = "text";
+            targetInput.value = target;
+            targetInput.placeholder = "Target field (e.g., formdata.coreId)";
+            targetInput.setAttribute("list", "templateFields");
+            targetInput.oninput = (e) =>
+              updateRuleTarget(ruleIndex, targetIndex, e.target.value);
+
+            const removeTargetBtn = document.createElement("button");
+            removeTargetBtn.className = "danger remove-target";
+            removeTargetBtn.textContent = "−";
+            removeTargetBtn.onclick = () =>
+              removeTargetField(ruleIndex, targetIndex);
+
+            targetRow.appendChild(targetInput);
+            targetRow.appendChild(removeTargetBtn);
+            targetsDiv.appendChild(targetRow);
+          });
+
+          const addTargetBtn = document.createElement("button");
+          addTargetBtn.className = "add-target";
+          addTargetBtn.textContent = "+ Target";
+          addTargetBtn.onclick = () => addTargetField(ruleIndex);
+          targetsDiv.appendChild(addTargetBtn);
+
+          // Remove rule button
+          const removeBtn = document.createElement("button");
+          removeBtn.className = "danger";
+          removeBtn.textContent = "Remove";
+          removeBtn.onclick = () => removeRule(ruleIndex);
+
+          ruleDiv.appendChild(sourceInput);
+          ruleDiv.appendChild(arrow);
+          ruleDiv.appendChild(targetsDiv);
+          ruleDiv.appendChild(removeBtn);
+
+          container.appendChild(ruleDiv);
+        });
+
+        // Update datalists
+        updateDataLists();
+      }
+
+      function updateDataLists() {
+        let inputDatalist = document.getElementById("inputFields");
+        let templateDatalist = document.getElementById("templateFields");
+
+        if (!inputDatalist) {
+          inputDatalist = document.createElement("datalist");
+          inputDatalist.id = "inputFields";
+          document.body.appendChild(inputDatalist);
+        }
+
+        if (!templateDatalist) {
+          templateDatalist = document.createElement("datalist");
+          templateDatalist.id = "templateFields";
+          document.body.appendChild(templateDatalist);
+        }
+
+        inputDatalist.innerHTML = inputFields
+          .map((field) => `<option value="${field}">`)
+          .join("");
+
+        templateDatalist.innerHTML = templateFields
+          .map((field) => `<option value="${field}">`)
+          .join("");
+      }
+
+      function applyMapping() {
+        try {
+          if (
+            Object.keys(inputData).length === 0 ||
+            Object.keys(templateData).length === 0
+          ) {
+            showMessage("Please load JSONs first", "error");
+            return;
+          }
+
+          // Create a deep copy of template
+          const result = JSON.parse(JSON.stringify(templateData));
+
+          // Apply each rule
+          rules.forEach((rule) => {
+            if (!rule.source) return;
+
+            const sourceValue = getNestedValue(inputData, rule.source);
+
+            if (sourceValue !== undefined) {
+              rule.targets.forEach((target) => {
+                if (target) {
+                  setNestedValue(result, target, sourceValue);
+                }
+              });
+            }
+          });
+
+          document.getElementById("output").textContent = JSON.stringify(
+            result,
+            null,
+            2
+          );
+          showMessage("Mapping applied successfully!");
+        } catch (e) {
+          showMessage("Error applying mapping: " + e.message, "error");
+        }
+      }
+
+      function copyOutput() {
+        const output = document.getElementById("output").textContent;
+        navigator.clipboard
+          .writeText(output)
+          .then(() => {
+            showMessage("Output copied to clipboard!");
+          })
+          .catch((err) => {
+            showMessage("Failed to copy: " + err.message, "error");
+          });
+      }
+
+      function exportRules() {
+        const rulesJson = JSON.stringify(rules, null, 2);
+        const blob = new Blob([rulesJson], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "mapping-rules.json";
+        a.click();
+        URL.revokeObjectURL(url);
+        showMessage("Rules exported!");
+      }
+
+      function importRules() {
+        const input = document.createElement("input");
+        input.type = "file";
+        input.accept = ".json";
+        input.onchange = (e) => {
+          const file = e.target.files[0];
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            try {
+              rules = JSON.parse(event.target.result);
+              renderRules();
+              showMessage("Rules imported successfully!");
+            } catch (err) {
+              showMessage("Error importing rules: " + err.message, "error");
+            }
+          };
+          reader.readAsText(file);
+        };
+        input.click();
+      }
+
+      async function loadDefaultRules() {
+        try {
+          const response = await fetch("default-rules.json");
+          if (!response.ok) {
+            console.log(
+              "No default-rules.json file found, starting with empty rules"
+            );
+            document.getElementById("defaultRules").placeholder =
+              "No default-rules.json file found";
+            return;
+          }
+          const defaultRules = await response.json();
+          if (!Array.isArray(defaultRules)) {
+            console.error("default-rules.json must contain an array");
+            return;
+          }
+
+          // Display in textarea
+          document.getElementById("defaultRules").value = JSON.stringify(
+            defaultRules,
+            null,
+            2
+          );
+
+          // Automatically apply the rules
+          rules = defaultRules;
+          renderRules();
+          showMessage("Default rules loaded from file!");
+        } catch (err) {
+          console.log("Could not load default rules:", err.message);
+          document.getElementById("defaultRules").placeholder =
+            "Error loading default rules";
+        }
+      }
+
+      function applyDefaultRules() {
+        try {
+          const defaultRulesText =
+            document.getElementById("defaultRules").value;
+          if (!defaultRulesText.trim()) {
+            showMessage("No rules to apply", "error");
+            return;
+          }
+          const parsedRules = JSON.parse(defaultRulesText);
+          if (!Array.isArray(parsedRules)) {
+            showMessage("Rules must be an array", "error");
+            return;
+          }
+          rules = parsedRules;
+          renderRules();
+          showMessage("Rules applied!");
+        } catch (err) {
+          showMessage("Error parsing rules: " + err.message, "error");
+        }
+      }
+
+      // Initialize on page load
+      window.onload = function () {
+        loadDefaultRules();
+      };
+    </script>
+  </body>
+</html>
