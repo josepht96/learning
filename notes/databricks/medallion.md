@@ -7,6 +7,7 @@ This is a **medallion architecture** pattern commonly used in Databricks (and da
 **Purpose**: Store raw data exactly as ingested from source systems
 
 **Characteristics**:
+
 - Data arrives in original format (JSON, CSV, Parquet, etc.)
 - Minimal or no transformation
 - Includes all fields, even ones you might not need
@@ -15,12 +16,14 @@ This is a **medallion architecture** pattern commonly used in Databricks (and da
 - Often includes metadata like ingestion timestamp, source system ID
 
 **Example Use Cases**:
+
 - Landing zone for API responses
 - Database CDC (change data capture) streams
 - Log files from applications
 - IoT sensor data dumps
 
 **Why Keep It**:
+
 - Audit trail - can always go back to source truth
 - Re-process data if transformation logic changes
 - Debug data quality issues
@@ -46,6 +49,7 @@ raw_events = (
 **Purpose**: Cleaned, deduplicated, validated data ready for business logic
 
 **Characteristics**:
+
 - Schema enforcement and validation
 - Data type conversions and standardization
 - Deduplication
@@ -55,6 +59,7 @@ raw_events = (
 - May join multiple bronze sources
 
 **Example Transformations**:
+
 - Parse JSON into structured columns
 - Convert string dates to timestamps
 - Standardize country codes, phone formats
@@ -63,6 +68,7 @@ raw_events = (
 - Enforce business rules (valid email format, positive quantities)
 
 **Why It Exists**:
+
 - Separates data quality concerns from business logic
 - Reusable foundation for multiple downstream use cases
 - Faster queries than bronze (better file organization, fewer nulls)
@@ -91,6 +97,7 @@ silver_events = (
 **Purpose**: Highly refined, aggregated data optimized for specific business use cases
 
 **Characteristics**:
+
 - Aggregations, calculations, and business metrics
 - Denormalized for query performance
 - Often dimensions and fact tables (star schema)
@@ -99,6 +106,7 @@ silver_events = (
 - Optimized for BI tools and dashboards
 
 **Example Transformations**:
+
 - Daily/monthly revenue rollups
 - Customer lifetime value calculations
 - Cohort analysis tables
@@ -107,6 +115,7 @@ silver_events = (
 - ML feature stores
 
 **Why It Exists**:
+
 - Fast queries for end users (pre-aggregated)
 - Business-friendly column names and structure
 - Different gold tables for different teams/use cases
@@ -149,7 +158,8 @@ Each layer is typically implemented as Delta Live Tables pipelines or scheduled 
 
 **Data Quality**: Each layer validates and improves quality progressively
 
-**Separation of Concerns**: 
+**Separation of Concerns**:
+
 - Bronze = ingestion
 - Silver = data quality and standardization  
 - Gold = business logic and optimization
@@ -159,16 +169,19 @@ Each layer is typically implemented as Delta Live Tables pipelines or scheduled 
 **E-commerce Order Pipeline**:
 
 **Bronze**: Raw JSON from order API, includes system fields, duplicates from retries
+
 ```
 {"order_id": "123", "user": "456", "items": [...], "meta": {...}}
 ```
 
 **Silver**: Parsed, validated orders with customer and product references
+
 ```
 order_id | customer_id | order_date | item_count | subtotal | tax | total
 ```
 
 **Gold**: Daily sales dashboard table
+
 ```
 date | region | category | orders | revenue | avg_order_value | returning_customers_pct
 ```

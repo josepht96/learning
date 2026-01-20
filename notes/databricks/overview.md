@@ -7,35 +7,41 @@ Databricks is a cloud-based data platform built on Apache Spark. It's designed f
 ## Core Concepts
 
 **Workspaces**
+
 - Your entire Databricks environment
 - Contains all notebooks, data, pipelines, and configurations
 - Organized into folders like a file system
 
 **Notebooks**
+
 - Interactive documents containing code (Python, SQL, Scala, R)
 - Mix code, visualizations, and markdown documentation
 - Run on clusters for distributed processing
 - Used for exploration, development, and production ETL
 
 **Clusters**
+
 - Groups of virtual machines that execute your code
 - Can be all-purpose (interactive) or job clusters (automated runs)
 - Autoscale based on workload
 - Databricks manages Spark configuration and distribution
 
 **Delta Lake**
+
 - Storage layer that brings ACID transactions to data lakes
 - Versioned data with time travel capabilities
 - Handles both batch and streaming data
 - Core to most Databricks workflows
 
 **Jobs/Workflows**
+
 - Scheduled execution of notebooks or other tasks
 - Define dependencies between tasks
 - Handle retries, monitoring, and alerting
 - Orchestrate complex data pipelines
 
 **Delta Live Tables (DLT)**
+
 - Declarative framework for building data pipelines
 - Automatically handles dependencies and data quality
 - Manages infrastructure and orchestration
@@ -44,16 +50,19 @@ Databricks is a cloud-based data platform built on Apache Spark. It's designed f
 ## Common Use Cases
 
 **Data Engineering**
+
 - ETL/ELT pipelines transforming raw data into clean, structured datasets
 - Real-time streaming data processing
 - Data quality validation and monitoring
 
 **Data Science/ML**
+
 - Model training on large datasets
 - Feature engineering and experimentation
 - MLflow integration for model tracking and deployment
 
 **Analytics**
+
 - SQL queries on massive datasets
 - Ad-hoc data exploration
 - Building dashboards and reports
