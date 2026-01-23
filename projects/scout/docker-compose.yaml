@@ -30,7 +30,7 @@ services:
       DATABASE_URL: "postgres://postgres:postgres@postgres:5432/scout?sslmode=disable"
       COLLECTIONS_DIR: /app/collections
       NEWMAN_SCRIPT_PATH: /app/newman/executor.js
-      INTERVAL: "60s"
+      INTERVAL: "30s"
       PORT: "8080"
       example_test_DELAY_TIME: "5"
       example_dev_DELAY_TIME: "1"

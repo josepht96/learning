@@ -54,7 +54,7 @@ RUN mkdir -p /app/collections
 ENV COLLECTIONS_DIR=/app/collections
 ENV NEWMAN_SCRIPT_PATH=/app/newman/executor.js
 ENV PORT=8080
-ENV INTERVAL=60s
+ENV INTERVAL=30s
 
 # Expose port
 EXPOSE 8080

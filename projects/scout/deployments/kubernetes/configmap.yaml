@@ -5,7 +5,7 @@ metadata:
   labels:
     app: scout
 data:
-  INTERVAL: "60s"
+  INTERVAL: "30s"
   PORT: "8080"
   COLLECTIONS_DIR: "/app/collections"
   NEWMAN_SCRIPT_PATH: "/app/newman/executor.js"

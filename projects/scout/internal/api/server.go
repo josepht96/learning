@@ -47,6 +47,7 @@ func (s *Server) Start() error {
 
 	// Static UI
 	mux.HandleFunc("/", s.handleIndex)
+	mux.HandleFunc("/favicon.svg", s.handleFavicon)
 
 	// API endpoints
 	mux.HandleFunc("/api/results", s.handleResults)
@@ -99,6 +100,18 @@ func (s *Server) handleIndex(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "text/html")
+	w.Write(data)
+}
+
+// handleFavicon serves the favicon
+func (s *Server) handleFavicon(w http.ResponseWriter, r *http.Request) {
+	data, err := os.ReadFile("web/favicon.svg")
+	if err != nil {
+		http.NotFound(w, r)
+		return
+	}
+
+	w.Header().Set("Content-Type", "image/svg+xml")
 	w.Write(data)
 }
 
