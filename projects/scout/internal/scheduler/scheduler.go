@@ -284,9 +284,7 @@ func (s *Scheduler) executeCollection(col watcher.CollectionFile, environmentPat
 
 	duration := time.Since(startTime)
 	status := "SUCCESS"
-	if result.Summary.Failed > 0 && result.Summary.Passed > 0 {
-		status = "PARTIAL"
-	} else if result.Summary.Failed > 0 {
+	if result.Summary.Failed > 0 {
 		status = "FAILED"
 	}
 
