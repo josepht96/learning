@@ -1,0 +1,1 @@
+curl -v --tls-max 1.2 --tlsv1.2 --ciphers ECDHE-RSA-CHACHA20-POLY1305 https://cdn.redhat.com

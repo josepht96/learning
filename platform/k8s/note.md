@@ -4,3 +4,6 @@ oc exec -n openshift-monitoring alertmanager-main-0 -c alertmanager -- \
   --author="joe" \
   --duration="2h" \
   --comment="Cluster upgrade maintenance"
+
+
+  
