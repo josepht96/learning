@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - JWT Auth Demo</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>Dashboard</h1>
+            <p class="subtitle">Protected Area</p>
+
+            <div id="loading" class="loading">
+                Loading user data...
+            </div>
+
+            <div id="content" style="display: none;">
+                <div class="user-info">
+                    <h2>User Information from JWT</h2>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <strong>Username:</strong>
+                            <span id="username"></span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Message:</strong>
+                            <span id="message"></span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Token Issued At:</strong>
+                            <span id="issuedAt"></span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Token Expires At:</strong>
+                            <span id="expiresAt"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="token-info">
+                    <h3>Your JWT Token</h3>
+                    <div class="token-display">
+                        <code id="tokenDisplay"></code>
+                    </div>
+                    <p class="info-note">
+                        This token is stored in localStorage and sent with each API request.
+                    </p>
+                </div>
+
+                <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+            </div>
+
+            <div id="error" class="error-message" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        const loadingDiv = document.getElementById('loading');
+        const contentDiv = document.getElementById('content');
+        const errorDiv = document.getElementById('error');
+
+        // Check if user is logged in (check for CSRF token as indicator)
+        const csrfToken = localStorage.getItem('csrf_token');
+
+        if (!csrfToken) {
+            // No CSRF token found, redirect to login
+            window.location.href = '/';
+        } else {
+            // Fetch protected data
+            fetchProtectedData();
+        }
+
+        // Fetch wrapper with automatic token refresh on 401
+        async function fetchWithAuth(url, options = {}) {
+            // Add CSRF token to headers
+            const headers = {
+                ...options.headers,
+                'X-CSRF-Token': localStorage.getItem('csrf_token')
+            };
+
+            let response = await fetch(url, {
+                ...options,
+                headers,
+                credentials: 'include' // Important: send cookies
+            });
+
+            // If we get a 401, try to refresh the token
+            if (response.status === 401) {
+                console.log(`[${new Date().toISOString()}] Access token expired. Attempting to refresh token...`);
+
+                const refreshSuccess = await refreshAccessToken();
+
+                if (refreshSuccess) {
+                    console.log(`[${new Date().toISOString()}] Token refreshed successfully. Retrying original request...`);
+
+                    // Retry the original request (new token is in cookie)
+                    response = await fetch(url, {
+                        ...options,
+                        headers,
+                        credentials: 'include'
+                    });
+                } else {
+                    // Refresh failed, redirect to login
+                    console.log(`[${new Date().toISOString()}] Token refresh failed. Redirecting to login...`);
+                    localStorage.removeItem('csrf_token');
+                    window.location.href = '/';
+                    return null;
+                }
+            }
+
+            return response;
+        }
+
+        // Refresh the access token using the refresh token
+        async function refreshAccessToken() {
+            try {
+                const response = await fetch('/api/refresh', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-Token': localStorage.getItem('csrf_token')
+                    },
+                    credentials: 'include' // Important: send cookies
+                });
+
+                if (response.ok) {
+                    // New access token is set as cookie automatically
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (error) {
+                console.error('Error refreshing token:', error);
+                return false;
+            }
+        }
+
+        // Helper function to get cookie value by name
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+            return null;
+        }
+
+        async function fetchProtectedData() {
+            try {
+                const response = await fetchWithAuth('/api/protected', {
+                    method: 'GET'
+                });
+
+                if (!response) {
+                    // Authentication failed and redirected to login
+                    return;
+                }
+
+                if (response.ok) {
+                    const data = await response.json();
+
+                    // Hide loading, show content
+                    loadingDiv.style.display = 'none';
+                    contentDiv.style.display = 'block';
+
+                    // Display user info
+                    document.getElementById('username').textContent = data.username;
+                    document.getElementById('message').textContent = data.message;
+                    document.getElementById('issuedAt').textContent = new Date(data.issued_at).toLocaleString();
+                    document.getElementById('expiresAt').textContent = new Date(data.expires_at).toLocaleString();
+
+                    // Display token (truncated for UI)
+                    // Note: This reads from cookie - not HttpOnly, so only for display
+                    // In production, you might want to remove this display entirely
+                    const token = getCookie('access_token');
+                    if (token) {
+                        const tokenParts = token.split('.');
+                        const displayToken = tokenParts.length === 3
+                            ? `${tokenParts[0].substring(0, 20)}...${tokenParts[2].substring(tokenParts[2].length - 20)}`
+                            : token;
+                        document.getElementById('tokenDisplay').textContent = displayToken;
+                    } else {
+                        document.getElementById('tokenDisplay').textContent = '[Token stored in HttpOnly cookie - not accessible to JavaScript]';
+                    }
+                } else {
+                    // Other error
+                    const data = await response.json();
+                    showError(data.error || 'Authentication failed. Please login again.');
+
+                    // Redirect to login after 2 seconds
+                    setTimeout(() => {
+                        localStorage.removeItem('csrf_token');
+                        window.location.href = '/';
+                    }, 2000);
+                }
+            } catch (error) {
+                showError('Network error. Please try again.');
+            }
+        }
+
+        function showError(message) {
+            loadingDiv.style.display = 'none';
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
+        // Logout functionality
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('csrf_token');
+            // Cookies will expire or can be cleared by the server
+            window.location.href = '/';
+        });
+    </script>
+</body>
+</html>
