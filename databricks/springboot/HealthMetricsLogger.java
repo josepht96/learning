@@ -1,4 +1,5 @@
 
+
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.Meter;
@@ -13,8 +14,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.slf4j.MDC;
-
-import org.w3c.dom.css.Counter;
 
 @Component
 @EnableScheduling
@@ -37,6 +36,7 @@ public class HealthMetricsLogger {
         logCpu();
     }
 
+    
     private String taskId() {
         String id = MDC.get("taskId");
         return id != null ? id : "unknown";
