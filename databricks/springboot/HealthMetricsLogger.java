@@ -1,3 +1,21 @@
+
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.Gauge;
+import io.micrometer.core.instrument.Meter;
+import io.micrometer.core.instrument.MeterRegistry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.health.HealthComponent;
+import org.springframework.boot.actuate.health.HealthEndpoint;
+import org.springframework.boot.actuate.health.SystemHealth;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+import org.slf4j.MDC;
+
+import org.w3c.dom.css.Counter;
+
 @Component
 @EnableScheduling
 public class HealthMetricsLogger {
@@ -19,6 +37,11 @@ public class HealthMetricsLogger {
         logCpu();
     }
 
+    private String taskId() {
+        String id = MDC.get("taskId");
+        return id != null ? id : "unknown";
+    }
+
     private void logHealth() {
         HealthComponent health = healthEndpoint.health();
         StringBuilder components = new StringBuilder();
@@ -26,11 +49,12 @@ public class HealthMetricsLogger {
             ((SystemHealth) health).getComponents().forEach(
                     (name, component) -> components.append(name).append("=").append(component.getStatus()).append(" "));
         }
-        log.info("HEALTH status={} components=[{}]", health.getStatus(), components.toString().trim());
+        log.info("[{}] HEALTH status={} components=[{}]", taskId(), health.getStatus(), components.toString().trim());
     }
 
     private void logMemory() {
-        log.info("MEMORY heap={}MB heap_committed={}MB heap_max={}MB non_heap={}MB",
+        log.info("[{}] MEMORY heap={}MB heap_committed={}MB heap_max={}MB non_heap={}MB",
+                taskId(),
                 mbGauge("jvm.memory.used", "area", "heap"),
                 mbGauge("jvm.memory.committed", "area", "heap"),
                 mbGauge("jvm.memory.max", "area", "heap"),
@@ -38,7 +62,8 @@ public class HealthMetricsLogger {
     }
 
     private void logThreads() {
-        log.info("THREADS live={} daemon={} peak={} blocked={} waiting={} runnable={}",
+        log.info("[{}] THREADS live={} daemon={} peak={} blocked={} waiting={} runnable={}",
+                taskId(),
                 longGauge("jvm.threads.live"),
                 longGauge("jvm.threads.daemon"),
                 longGauge("jvm.threads.peak"),
@@ -60,11 +85,12 @@ public class HealthMetricsLogger {
         } catch (Exception e) {
             sb.append("unavailable");
         }
-        log.info("HTTP {}", sb.toString().trim());
+        log.info("[{}] HTTP {}", taskId(), sb.toString().trim());
     }
 
     private void logCpu() {
-        log.info("CPU process={}% system={}% load_avg={}",
+        log.info("[{}] CPU process={}% system={}% load_avg={}",
+                taskId(),
                 pctGauge("process.cpu.usage"),
                 pctGauge("system.cpu.usage"),
                 String.format("%.2f", gaugeValue("system.load.average.1m")));
