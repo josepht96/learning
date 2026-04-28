@@ -136,3 +136,46 @@ public class HealthMetricsLogger {
         return meter.getId().getTag(tagKey) != null ? meter.getId().getTag(tagKey) : "unknown";
     }
 }
+
+
+private void logUlimits() {
+    log.info("[{}] ULIMITS {}", taskId(), parseUlimits());
+}
+
+private String parseUlimits() {
+    try {
+        List<String> lines = java.nio.file.Files.readAllLines(
+            java.nio.file.Paths.get("/proc/self/limits")
+        );
+        StringBuilder sb = new StringBuilder();
+        for (String line : lines) {
+            if (line.contains("Open files") || line.contains("Max processes")) {
+                String[] parts = line.trim().split("\\s{2,}");
+                if (parts.length >= 3) {
+                    sb.append(parts[0].trim())
+                      .append("=")
+                      .append(parts[1].trim())
+                      .append("/")
+                      .append(parts[2].trim())
+                      .append(" ");
+                }
+            }
+        }
+        return sb.toString().trim();
+    } catch (Exception e) {
+        return "unavailable";
+    }
+}
+
+
+@Scheduled(fixedRate = 30000)
+public void logMetrics() {
+    logHealth();
+    logMemory();
+    logThreads();
+    logHttpMetrics();
+    logCpu();
+    logUlimits();
+}
+
+import java.util.List;
