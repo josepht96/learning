@@ -41,31 +41,37 @@ export PATH=$PWD/bin:$PATH
 istioctl install -y
 
 Network
-  ☐ Direct Connect established and routed to GovCloud VPC
-  ☐ On-prem subnet routes to VPC CIDR via Direct Connect
+
+Direct Connect established and routed to GovCloud VPC
+On-prem subnet routes to VPC CIDR via Direct Connect
 
 S3
-  ☐ S3 Interface VPCE created in VPC
-  ☐ Security group on VPCE allows 443 from on-prem CIDR
-  ☐ DNS forwarding — on-prem resolves S3 to VPCE IP
-  ☐ IAM credentials or Roles Anywhere configured
-  ☐ Firewall rules — on-prem outbound 443 to VPCE IP
+
+S3 Interface VPCE created in VPC
+Security group on VPCE allows 443 from on-prem CIDR
+DNS forwarding — on-prem resolves S3 to VPCE IP
+Firewall rules — on-prem outbound 443 to VPCE IP
 
 SQS
-  ☐ SQS Interface VPCE created in VPC
-  ☐ Security group on VPCE allows 443 from on-prem CIDR
-  ☐ DNS forwarding — on-prem resolves SQS to VPCE IP
-  ☐ Same IAM credentials cover SQS (same policy)
-  ☐ Firewall rules — on-prem outbound 443 to VPCE IP
+
+SQS Interface VPCE created in VPC
+Security group on VPCE allows 443 from on-prem CIDR
+DNS forwarding — on-prem resolves SQS to VPCE IP
+Firewall rules — on-prem outbound 443 to VPCE IP
 
 Databricks
-  ☐ Network path from on-prem to Databricks confirmed
-  ☐ PrivateLink or proxy in place if needed
-  ☐ Service principal / PAT credentials
-  ☐ Firewall rules — outbound 443 to Databricks endpoints
-  ☐ TLS CA certs trusted on on-prem hosts
 
-Credentials
-  ☐ IAM Roles Anywhere or static creds strategy decided
-  ☐ Secret storage and rotation plan
-  ☐ Databricks credentials stored securely
+Network path from on-prem to Databricks confirmed
+PrivateLink or proxy in place if needed
+Service principal / PAT credentials
+Firewall rules — outbound 443 to Databricks endpoints
+TLS CA certs trusted on on-prem hosts
+
+AWS Credentials
+
+IAM user created per service with least-privilege policy scoped to required S3 buckets and SQS queues
+Access key and secret generated and stored in secrets manager
+Credentials delivered to each on-prem service via environment variables or AWS config file
+60-day rotation schedule configured and automated
+CloudTrail enabled to audit all API calls per credential
+Old keys disabled immediately upon rotation
