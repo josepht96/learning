@@ -4,3 +4,5 @@ thoughts.md
 **/.terraform/**
 **/.terraform.lock.hcl
 **/terraform.tfstate
+
+platform/aws/*
