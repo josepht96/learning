@@ -86,3 +86,5 @@ curl -X POST "http://127.0.0.1:4566/" \
 # Verify new URL format
 curl -X POST "http://127.0.0.1:4566/" \
   -d "Action=ListQueues"
+
+  grep -i "OutOfMemoryError\|heap space" /var/log/app/*.log
