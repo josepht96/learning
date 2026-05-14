@@ -75,3 +75,14 @@ Credentials delivered to each on-prem service via environment variables or AWS c
 60-day rotation schedule configured and automated
 CloudTrail enabled to audit all API calls per credential
 Old keys disabled immediately upon rotation
+
+
+curl -X POST "http://127.0.0.1:4566/" \
+  -d "Action=DeleteQueue&QueueUrl=http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/my-queue"
+
+curl -X POST "http://127.0.0.1:4566/" \
+  -d "Action=CreateQueue&QueueName=my-queue"
+
+# Verify new URL format
+curl -X POST "http://127.0.0.1:4566/" \
+  -d "Action=ListQueues"
