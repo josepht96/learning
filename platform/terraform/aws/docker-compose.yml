@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  localstack:
+    container_name: localstack-aws
+    image: localstack/localstack:4.14
+    ports:
+      - "4566:4566"            # LocalStack Gateway
+      - "4510-4559:4510-4559"  # External services port range
+    environment:
+      - SERVICES=${SERVICES:-}  # List of AWS services to emulate (empty = all)
+      - DEBUG=${DEBUG:-0}
+      - DATA_DIR=/var/lib/localstack/data
+      - LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR:-}
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - PERSISTENCE=${PERSISTENCE:-1}  # Enable persistence
+    volumes:
+      - "${LOCALSTACK_VOLUME_DIR:-./localstack-data}:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - localstack-network
+
+networks:
+  localstack-network:
+    driver: bridge
+
+volumes:
+  localstack-data:

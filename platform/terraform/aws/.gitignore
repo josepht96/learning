@@ -1,0 +1,5 @@
+# LocalStack persistent data
+localstack-data/
+
+# Environment variables (uncomment if you add sensitive data)
+# .env
