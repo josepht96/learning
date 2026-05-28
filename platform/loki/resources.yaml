@@ -1,0 +1,75 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: s3-proxy-config
+  namespace: loki
+data:
+  nginx.conf: |
+    events {}
+    http {
+      server {
+        listen 80;
+
+        location / {
+          proxy_pass https://<your-vpce-id>.s3.<region>.vpce.amazonaws.com;
+          proxy_ssl_server_name on;
+
+          # Pass Host header through for S3 virtual-hosted style routing
+          proxy_set_header Host $http_host;
+          proxy_set_header X-Real-IP $remote_addr;
+
+          # Pass AWS Sig4 auth headers through unchanged
+          proxy_pass_request_headers on;
+
+          # Increase buffer sizes for large S3 payloads (log chunks)
+          proxy_buffer_size         128k;
+          proxy_buffers             4 256k;
+          proxy_busy_buffers_size   256k;
+        }
+      }
+    }
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: s3-proxy
+  namespace: loki
+  labels:
+    app: s3-proxy
+spec:
+  containers:
+    - name: nginx
+      image: nginx:1.25-alpine
+      ports:
+        - containerPort: 80
+      volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+      resources:
+        requests:
+          cpu: 50m
+          memory: 64Mi
+        limits:
+          cpu: 200m
+          memory: 128Mi
+  volumes:
+    - name: nginx-config
+      configMap:
+        name: s3-proxy-config
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: s3-proxy
+  namespace: loki
+spec:
+  selector:
+    app: s3-proxy
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
