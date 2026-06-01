@@ -37,3 +37,9 @@ ps -eo nlwp | tail -n +2 | awk '{sum += $1} END {print "Total threads:", sum}'
 
 # Top processes by thread count
 ps -eo pid,nlwp,comm --sort=-nlwp | head -20
+
+# Download
+Invoke-WebRequest -Uri "https://dl.google.com/chrome/install/latest/chrome_installer.exe" -OutFile "$env:TEMP\chrome_installer.exe"
+
+# Install silently
+Start-Process "$env:TEMP\chrome_installer.exe" -ArgumentList "/silent /install" -Wait
