@@ -21,3 +21,10 @@ journalctl -u elasticsearch --since "30 minutes ago" | grep -iE "gc|warn|error|t
 
 # Or if running as a pod
 oc logs <elasticsearch-pod> --since=30m | grep -iE "gc|warn|heap|timeout" | tail -30
+
+for pid in $(ps aux | grep "elasticsearch-o" | grep -v grep | awk '{print $2}'); do
+  echo -n "PID $pid: "
+  cat /proc/$pid/cgroup | grep -o 'pod[a-z0-9-]*' | head -1
+done
+
+oc get pods -A -o json | jq -r '.items[] | select(.metadata.uid=="<POD_UID>") | "\(.metadata.namespace)/\(.metadata.name)"'
