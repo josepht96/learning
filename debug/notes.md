@@ -28,3 +28,12 @@ for pid in $(ps aux | grep "elasticsearch-o" | grep -v grep | awk '{print $2}');
 done
 
 oc get pods -A -o json | jq -r '.items[] | select(.metadata.uid=="<POD_UID>") | "\(.metadata.namespace)/\(.metadata.name)"'
+
+# Full picture of what's consuming the runqueue
+ps -eo pid,stat,pcpu,pmem,nlwp,comm --sort=-pcpu | head -30
+
+# Total thread count on the node
+ps -eo nlwp | tail -n +2 | awk '{sum += $1} END {print "Total threads:", sum}'
+
+# Top processes by thread count
+ps -eo pid,nlwp,comm --sort=-nlwp | head -20
