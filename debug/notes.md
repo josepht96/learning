@@ -8,3 +8,16 @@ ps -eo pid,stat,pcpu,comm --sort=-pcpu | head -20 | grep -E "kworker|overlay|cri
 
 # What processes are actually sitting in the runqueue right now
 ps -eo pid,stat,pcpu,comm --sort=-pcpu | head -30
+
+# How many elasticsearch processes and their CPU
+ps -eo pid,stat,pcpu,pmem,comm --sort=-pcpu | grep elasticsearch | head -20
+
+# Total CPU across all ES processes
+ps -eo pcpu,comm | grep elasticsearch | awk '{sum += $1} END {print sum "%"}'
+
+# Is it GC thrashing — JVM GC shows as short CPU spikes
+# Check ES logs
+journalctl -u elasticsearch --since "30 minutes ago" | grep -iE "gc|warn|error|timeout" | tail -30
+
+# Or if running as a pod
+oc logs <elasticsearch-pod> --since=30m | grep -iE "gc|warn|heap|timeout" | tail -30
