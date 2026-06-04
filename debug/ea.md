@@ -25,3 +25,8 @@ $cred = New-Object System.Management.Automation.PSCredential("admin", (ConvertTo
 
 Invoke-WebRequest -Uri "http://localhost:8090/api/license/getlicenseinfo" `
   -Credential $cred | Select-Object -ExpandProperty Content
+
+
+  # Try common OIDC token endpoints
+curl.exe -v -X POST http://localhost:8090/connect/token `
+  -d "grant_type=password&username=admin&password=yourpassword&client_id=Prolaborate-spa"
