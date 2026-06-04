@@ -30,3 +30,21 @@ Invoke-WebRequest -Uri "http://localhost:8090/api/license/getlicenseinfo" `
   # Try common OIDC token endpoints
 curl.exe -v -X POST http://localhost:8090/connect/token `
   -d "grant_type=password&username=admin&password=yourpassword&client_id=Prolaborate-spa"
+
+
+$body = @{
+    grant_type = 'password'
+    username   = 'admin'
+    password   = 'yourpassword'
+    client_id  = 'Prolaborate-spa'
+}
+
+$response = Invoke-WebRequest -Uri 'http://localhost:8090/connect/token' `
+    -Method POST `
+    -Body $body
+
+$token = ($response.Content | ConvertFrom-Json).access_token
+
+
+Invoke-WebRequest -Uri 'http://localhost:8090/api/license/getlicenseinfo' `
+    -Headers @{ Authorization = "Bearer $token" } | Select-Object -ExpandProperty Content
