@@ -48,3 +48,19 @@ $token = ($response.Content | ConvertFrom-Json).access_token
 
 Invoke-WebRequest -Uri 'http://localhost:8090/api/license/getlicenseinfo' `
     -Headers @{ Authorization = "Bearer $token" } | Select-Object -ExpandProperty Content
+
+
+# Windows Machine GUID (most common for licensing)
+Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Cryptography" -Name MachineGuid
+
+# Product ID
+Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion" -Name ProductId
+
+# BIOS/Hardware UUID
+Get-WmiObject Win32_ComputerSystemProduct | Select-Object UUID
+
+# Motherboard serial
+Get-WmiObject Win32_BaseBoard | Select-Object SerialNumber
+
+# Volume serial of C drive
+Get-WmiObject Win32_LogicalDisk -Filter "DeviceID='C:'" | Select-Object VolumeSerialNumber
