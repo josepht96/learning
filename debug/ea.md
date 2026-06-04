@@ -20,3 +20,8 @@ Invoke-WebRequest -Uri "http://localhost:8090/account/login" `
 
 Invoke-WebRequest -Uri "http://localhost:8090/api/license/getlicenseinfo" `
   -WebSession $session | Select-Object -ExpandProperty Content
+
+$cred = New-Object System.Management.Automation.PSCredential("admin", (ConvertTo-SecureString "password" -AsPlainText -Force))
+
+Invoke-WebRequest -Uri "http://localhost:8090/api/license/getlicenseinfo" `
+  -Credential $cred | Select-Object -ExpandProperty Content
