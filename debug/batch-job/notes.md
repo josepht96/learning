@@ -6,3 +6,7 @@ curl -s "http://localhost:9200/operate-migration-steps-repository/_search?size=1
 }'
 
 curl -s "http://localhost:9200/_cat/indices/*migration*?v"
+
+curl -s "http://localhost:9200/operate-migration-steps-repository-1.1.0_/_search?size=100&pretty" -H 'Content-Type: application/json' -d '{
+  "query": {"match": {"indexName": "batch-operation"}}
+}'
