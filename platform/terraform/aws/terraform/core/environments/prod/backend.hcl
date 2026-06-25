@@ -1,8 +1,0 @@
-# Backend configuration for prod environment
-# Usage: terraform init -backend-config=environments/prod/backend.hcl
-
-bucket         = "myproject-terraform-state-prod"
-key            = "prod/terraform.tfstate"
-region         = "us-east-1"
-encrypt        = true
-use_lockfile   = true

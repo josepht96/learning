@@ -16,7 +16,6 @@
 - Up to 75% discount vs. On-Demand
 - Good for: steady-state workloads
 - Types: Standard, Convertible, Scheduled
-- **Available for:** EC2, RDS, DynamoDB (Reserved Capacity), ElastiCache, Redshift, OpenSearch
 
 **Savings Plans:**
 
@@ -31,16 +30,6 @@
 - Up to 90% discount
 - Can be interrupted by AWS
 - Good for: fault-tolerant, flexible workloads
-
-> **MOST COMMON PRICING PATTERNS:**
-> - **Development/Testing:** On-Demand (flexibility to start/stop)
-> - **Production steady-state:** Reserved Instances or Savings Plans (50-70% of production workloads use commitments for cost savings)
-> - **Batch processing:** Spot Instances (data processing, rendering, CI/CD runners)
-> - **Savings Plans** are becoming more popular than Reserved Instances due to flexibility
->
-> **REAL-WORLD TIP:** A typical cost-optimized environment uses 60% Reserved/Savings Plans for baseline, 30% On-Demand for variability, and 10% Spot for batch workloads.
->
-> **RESERVED INSTANCES APPLY TO:** Not just EC2! Reserved capacity pricing is available for **EC2, RDS, DynamoDB, ElastiCache, Redshift, and OpenSearch**. RDS Reserved Instances are particularly common for production databases.
 
 **Dedicated Hosts:**
 
@@ -72,12 +61,6 @@
 - Set custom cost and usage budgets
 - Alerts when exceeding thresholds
 - Budget types: cost, usage, reservation, Savings Plans
-
-> **MOST USED COST TOOLS:**
-> - **AWS Budgets** - First tool organizations enable, typically set up monthly budget alerts at 80% and 100% thresholds
-> - **Cost Explorer** - Used daily/weekly by FinOps teams to analyze spending trends
-> - **Cost Allocation Tags** - Critical for multi-team environments to track costs by project/department/environment
-> - **AWS Cost Anomaly Detection** - Increasingly popular for automatic unusual spending detection
 
 **AWS Cost and Usage Report:**
 
@@ -141,14 +124,6 @@
 - Dedicated Technical Account Manager (TAM)
 - Infrastructure Event Management (included)
 - Operations reviews and tools
-
-> **COMMON SUPPORT PLAN USAGE:**
-> - **Startups/Individual learners:** Basic (free)
-> - **Small businesses/dev environments:** Developer Support
-> - **Production environments:** Business Support (most common for companies running production workloads)
-> - **Large enterprises:** Enterprise or Enterprise On-Ramp
->
-> **KEY DECISION FACTOR:** If you need 24/7 phone support for production issues, Business Support is the minimum. The jump from Developer to Business is significant and worth it for production workloads.
 
 **Other Resources:**
 
