@@ -1,0 +1,1 @@
+curl -s "http://localhost:9200/_cat/indices/*batch-operation*?v"
