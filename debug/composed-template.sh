@@ -1,0 +1,2 @@
+curl -s "http://<source-host>:9200/_component_template/operate_template" > operate_component_template.json
+curl -s "http://<source-host>:9200/_component_template/tasklist_template" > tasklist_component_template.json
