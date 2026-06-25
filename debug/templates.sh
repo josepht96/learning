@@ -1,70 +1,39 @@
-curl -s "http://<source-host>:9200/_index_template/*operate*" > operate_templates.json
-curl -s "http://<source-host>:9200/_index_template/*tasklist*" > tasklist_templates.json
-
-python3 -c "
-import json
-with open('operate_templates.json') as f:
-    data = json.load(f)
-for t in data['index_templates']:
-    print(t['name'])
-"
-
-curl -s "http://<source-host>:9200/_index_template/<name>" | python3 -c "
-import sys, json
-d = json.load(sys.stdin)['index_templates'][0]
-print(json.dumps(d['index_template']))
-" > template_body.json
-
-curl -X PUT "http://localhost:9200/_index_template/<name>" -H 'Content-Type: application/json' -d @template_body.json
-
-curl -s "http://localhost:9200/_index_template?filter_path=index_templates.name"
-
 #!/bin/bash
-# restore_templates.sh
-# Pulls index templates from a source environment and applies them to sandbox
+# apply_templates_from_file.sh
+# Reads operate_templates.json and tasklist_templates.json (from _index_template export format)
+# and PUTs each template individually to localhost
 
-SOURCE_HOST="http://<source-host>:9200"
 DEST_HOST="http://localhost:9200"
 
-operate_templates=(
-  "operate-template-1"
-  "operate-template-2"
-  # ...add all operate template names here
-)
-
-tasklist_templates=(
-  "tasklist-template-1"
-  "tasklist-template-2"
-  # ...add all tasklist template names here
-)
-
-apply_template() {
-  local name="$1"
-  echo "=== Applying template: $name ==="
-
-  curl -s "$SOURCE_HOST/_index_template/$name" -o "/tmp/${name}.json"
+apply_templates_from_file() {
+  local file="$1"
+  echo "### Processing $file ###"
 
   python3 -c "
 import json
-with open('/tmp/${name}.json') as f:
+with open('$file') as f:
     d = json.load(f)
-body = d['index_templates'][0]['index_template']
-with open('/tmp/${name}_body.json', 'w') as f:
-    json.dump(body, f)
-"
+for t in d['index_templates']:
+    print(t['name'])
+" | while read -r name; do
+    echo "=== Applying template: $name ==="
 
-  curl -s -X PUT "$DEST_HOST/_index_template/$name" -H 'Content-Type: application/json' -d @"/tmp/${name}_body.json"
-  echo ""
+    python3 -c "
+import json
+with open('$file') as f:
+    d = json.load(f)
+for t in d['index_templates']:
+    if t['name'] == '$name':
+        print(json.dumps(t['index_template']))
+        break
+" > "/tmp/${name}_body.json"
+
+    curl -s -X PUT "$DEST_HOST/_index_template/$name" -H 'Content-Type: application/json' -d @"/tmp/${name}_body.json"
+    echo ""
+  done
 }
 
-echo "### Restoring Operate templates ###"
-for t in "${operate_templates[@]}"; do
-  apply_template "$t"
-done
-
-echo "### Restoring Tasklist templates ###"
-for t in "${tasklist_templates[@]}"; do
-  apply_template "$t"
-done
+apply_templates_from_file "operate_templates.json"
+apply_templates_from_file "tasklist_templates.json"
 
 echo "Done."
