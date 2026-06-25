@@ -1,0 +1,60 @@
+{
+    "operate-batch-operation-1.0.0_": {
+        "mappings": {
+            "dynamic": "strict",
+            "properties": {
+                "endDate": {
+                    "type": "date",
+                    "format": "date_time || epoch_millis"
+                },
+                "errors": {
+                    "properties": {
+                        "message": {
+                            "type": "text"
+                        },
+                        "partitionId": {
+                            "type": "integer"
+                        },
+                        "type": {
+                            "type": "keyword"
+                        }
+                    }
+                },
+                "id": {
+                    "type": "keyword"
+                },
+                "instancesCount": {
+                    "type": "long"
+                },
+                "name": {
+                    "type": "keyword"
+                },
+                "operationsCompletedCount": {
+                    "type": "long"
+                },
+                "operationsFailedCount": {
+                    "type": "long"
+                },
+                "operationsFinishedCount": {
+                    "type": "long"
+                },
+                "operationsTotalCount": {
+                    "type": "long"
+                },
+                "startDate": {
+                    "type": "date",
+                    "format": "date_time || epoch_millis"
+                },
+                "state": {
+                    "type": "keyword"
+                },
+                "type": {
+                    "type": "keyword"
+                },
+                "username": {
+                    "type": "keyword"
+                }
+            }
+        }
+    }
+}

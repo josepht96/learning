@@ -1,0 +1,38 @@
+{
+    "operate-batch-operation-1.0.0_": {
+        "mappings": {
+            "dynamic": "strict",
+            "properties": {
+                "endDate": {
+                    "type": "date",
+                    "format": "date_time || epoch_millis"
+                },
+                "id": {
+                    "type": "keyword"
+                },
+                "instancesCount": {
+                    "type": "long"
+                },
+                "name": {
+                    "type": "keyword"
+                },
+                "operationsFinishedCount": {
+                    "type": "long"
+                },
+                "operationsTotalCount": {
+                    "type": "long"
+                },
+                "startDate": {
+                    "type": "date",
+                    "format": "date_time || epoch_millis"
+                },
+                "type": {
+                    "type": "keyword"
+                },
+                "username": {
+                    "type": "keyword"
+                }
+            }
+        }
+    }
+}
