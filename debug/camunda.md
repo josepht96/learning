@@ -16,3 +16,8 @@ for idx in $(curl -s "http://localhost:9200/_cat/indices/*operate-post-importer-
   echo "=== $idx ==="
   curl -s "http://localhost:9200/$idx/_mapping" | grep -A2 '"creationTime"'
 done
+
+for idx in $(curl -s "http://localhost:9200/_cat/indices/*operate-post-importer-queue*?h=index"); do
+  echo "=== $idx ==="
+  curl -s "http://localhost:9200/$idx/_mapping" | python3 -m json.tool | md5sum
+done
