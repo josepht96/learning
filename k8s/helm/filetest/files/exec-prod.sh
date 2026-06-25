@@ -1,0 +1,1 @@
+newman run filetest.postman_collection.json -e env.postman_environment.json --env-var key=value
