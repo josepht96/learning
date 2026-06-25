@@ -1,5 +1,5 @@
-curl -s "http://<source-host>:9200/_index_template/*operate*" > operate_templates.json
-curl -s "http://<source-host>:9200/_index_template/*tasklist*" > tasklist_templates.json
+curl -s "http://localhost:9200/_index_template/*operate*" > operate_templates.json
+curl -s "http://localhost:9200/_index_template/*tasklist*" > tasklist_templates.json
 
 python3 -c "
 import json
