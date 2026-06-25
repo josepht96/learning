@@ -1,0 +1,1 @@
+{"error":{"root_cause":[{"type":"resource_not_found_exception","reason":"component template matching [operate_template] not found"}],"type":"resource_not_found_exception","reason":"component template matching [operate_template] not found"},"status":404}
