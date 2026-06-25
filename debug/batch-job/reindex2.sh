@@ -1,7 +1,3 @@
-old_indices=(
-  # paste the affected index names here
-)
-
 for idx in "${old_indices[@]}"; do
   echo "=== Reindexing $idx ==="
 
