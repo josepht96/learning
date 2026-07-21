@@ -1,0 +1,16 @@
+PUT /operate-batch-operation-1.0.0_*/_mapping
+{
+  "properties": {
+    "state": { "type": "keyword" },
+    "operationsCompletedCount": { "type": "long" },
+    "operationsFailedCount": { "type": "long" },
+    "errors": {
+      "type": "object",
+      "properties": {
+        "partitionId": { "type": "integer" },
+        "type": { "type": "keyword" },
+        "message": { "type": "text" }
+      }
+    }
+  }
+}

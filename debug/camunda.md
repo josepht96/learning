@@ -60,3 +60,4 @@ for idx in "${!index_to_hash[@]}"; do
     echo "$idx"
   fi
 done
+
