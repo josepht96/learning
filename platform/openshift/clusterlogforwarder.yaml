@@ -1,0 +1,27 @@
+apiVersion: observability.openshift.io/v1
+kind: ClusterLogForwarder
+metadata:
+  name: instance
+  namespace: openshift-logging
+spec:
+  serviceAccount:
+    name: logging-admin
+  outputs:
+    - name: internal-logging
+      type: elasticsearch   # or http/syslog/kafka if your cluster ingests differently
+      elasticsearch:
+        url: 'https://your-internal-cluster:9200'
+        version: 8
+        index: '{.log_type||"nologformat"}-write'
+      tls:
+        ca:
+          key: ca-bundle.crt
+          secretName: internal-es-secret
+  pipelines:
+    - name: forward-all
+      inputRefs:
+        - application
+        - infrastructure
+        - audit
+      outputRefs:
+        - internal-logging
