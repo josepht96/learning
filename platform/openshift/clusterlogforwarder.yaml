@@ -7,16 +7,18 @@ spec:
   serviceAccount:
     name: logging-admin
   outputs:
-    - name: internal-logging
-      type: elasticsearch   # or http/syslog/kafka if your cluster ingests differently
+    - name: eck-elasticsearch
+      type: elasticsearch
       elasticsearch:
-        url: 'https://your-internal-cluster:9200'
+        url: 'https://<cluster-name>-es-http.<es-namespace>.svc:9200'
         version: 8
         index: '{.log_type||"nologformat"}-write'
       tls:
         ca:
           key: ca-bundle.crt
-          secretName: internal-es-secret
+          secretName: eck-es-ca
+      # basic auth via referenced secret with username/password keys
+      # check exact field name with: oc explain clusterlogforwarder.spec.outputs.elasticsearch --api-version=observability.openshift.io/v1
   pipelines:
     - name: forward-all
       inputRefs:
@@ -24,4 +26,4 @@ spec:
         - infrastructure
         - audit
       outputRefs:
-        - internal-logging
+        - eck-elasticsearch
