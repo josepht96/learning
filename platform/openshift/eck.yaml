@@ -1,37 +1,41 @@
-PUT _ilm/policy/ocp-logs-policy
+PUT _index_template/application-logs-template
 {
-  "policy": {
-    "phases": {
-      "hot": {
-        "actions": {
-          "rollover": {
-            "max_primary_shard_size": "30gb",
-            "max_age": "1d"
-          }
-        }
-      },
-      "delete": {
-        "min_age": "30d",
-        "actions": { "delete": {} }
-      }
-    }
-  }
-}
-
-PUT _index_template/ocp-logs-template
-{
-  "index_patterns": ["app-*", "infra-*", "audit-*"],
+  "index_patterns": ["application-*"],
   "template": {
     "settings": {
       "index.lifecycle.name": "ocp-logs-policy",
-      "index.lifecycle.rollover_alias": "app-write"
+      "index.lifecycle.rollover_alias": "application-write"
     }
   }
 }
 
-PUT app-000001
+PUT _index_template/infrastructure-logs-template
 {
-  "aliases": {
-    "app-write": { "is_write_index": true }
+  "index_patterns": ["infrastructure-*"],
+  "template": {
+    "settings": {
+      "index.lifecycle.name": "ocp-logs-policy",
+      "index.lifecycle.rollover_alias": "infrastructure-write"
+    }
   }
 }
+
+PUT _index_template/audit-logs-template
+{
+  "index_patterns": ["audit-*"],
+  "template": {
+    "settings": {
+      "index.lifecycle.name": "ocp-logs-policy",
+      "index.lifecycle.rollover_alias": "audit-write"
+    }
+  }
+}
+
+PUT application-000001
+{ "aliases": { "application-write": { "is_write_index": true } } }
+
+PUT infrastructure-000001
+{ "aliases": { "infrastructure-write": { "is_write_index": true } } }
+
+PUT audit-000001
+{ "aliases": { "audit-write": { "is_write_index": true } } }
