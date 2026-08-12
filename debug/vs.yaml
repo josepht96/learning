@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: catch-all-fallback
+  namespace: istio-system
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - istio-system/gate
+  http:
+  - match:
+    - uri:
+        prefix: /
+    redirect:
+      uri: /
+      authority: app.example.com
