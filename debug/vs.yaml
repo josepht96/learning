@@ -15,3 +15,21 @@ spec:
     redirect:
       uri: /
       authority: app.example.com
+
+
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: fallback-to-router
+  namespace: istio-system
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - istio-system/gate
+  http:
+  - route:
+    - destination:
+        host: router-internal-default.openshift-ingress.svc.cluster.local
+        port:
+          number: 443
