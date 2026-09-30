@@ -1,175 +1,190 @@
-# RDS MySQL 8.0 → 8.4 Migration Runbook (Sparx Enterprise Architect)
+# Sparx EA Database Migration: RDS MySQL 8.0 → 8.4
 
 ## Overview
 
-This runbook covers migrating the Sparx Enterprise Architect (EA) repository databases from Amazon RDS for MySQL Community 8.0 (currently 8.0.42) to 8.4.
+Migrates the Sparx Enterprise Architect (EA) repository database from the old RDS MySQL 8.0.42 instance to a new Service Catalog–provisioned RDS MySQL 8.4 instance using a logical dump and load. The old instance is not modified and remains the rollback target.
 
-| Environment | RDS instances | Consumers |
-|---|---|---|
-| Test | 2 × MySQL 8.0.42 | Sparx EA / Pro Cloud Server on Windows servers |
-| Preprod | 2 × MySQL 8.0.42 | Sparx EA / Pro Cloud Server on Windows servers |
-
-Complete the full procedure in **Test** first, record timings and issues, then repeat in **Preprod**.
-
-## Approach
-
-The RDS instances are provisioned through **AWS Service Catalog**, which offers MySQL 8.4 at launch. The migration therefore uses a side-by-side approach:
-
-1. Provision a **new 8.4 instance from the Service Catalog**.
-2. Stop Sparx, then **dump and load** the EA schema from the old instance into the new one.
-3. **Repoint** the Sparx connections to the new endpoint and validate.
-4. Keep the old 8.0 instance untouched as the rollback target until the migration is accepted.
-
-### Why this approach
-
-- The new instance stays **catalog-managed** (no CloudFormation drift).
-- Avoids in-place upgrade risks in the catalog template (`AllowMajorVersionUpgrade`, parameter groups hardcoded to the `mysql8.0` family).
-- **Rollback is a connection change only**; the old instance is never modified.
-- EA repositories are small and lightly used, so the downtime for a logical dump and load is short.
-
-### Alternatives considered
-
-| Option | Why not chosen |
+| Item | Value |
 |---|---|
-| RDS Blue/Green deployment | Green is read-only, so write testing is limited before cutover; interacts with a catalog-managed stack. |
-| In-place upgrade via RDS console | Causes drift from the Service Catalog / CloudFormation stack; rollback requires snapshot restore. |
-| Update the provisioned product to 8.4 | Depends on template support for major version upgrades; risk of instance replacement if properties change. |
-| Snapshot restore in the RDS console | Resulting instance is not catalog-managed; a restore cannot change the major version. |
+| Old instance endpoint | `<old-ea-endpoint>` |
+| New instance endpoint | `<new-ea-endpoint>` |
+| Schema(s) | `<schema>` |
+| Database user | `admin` (confirm in pre-check 2) |
+| Migration host | Windows server running Pro Cloud Server |
 
-## Key Changes in MySQL 8.4
+**Consumers:** Pro Cloud Server connects to the EA database through the MySQL ODBC driver. Prolaborate reaches the EA models through Pro Cloud Server, so it is affected while Pro Cloud Server is down.
 
-- **Authentication:** `caching_sha2_password` is the default. `mysql_native_password` is deprecated and disabled by default in community MySQL 8.4. Older MySQL ODBC drivers (5.x) do not support `caching_sha2_password`.
-- **Parameter groups:** 8.4 requires a `mysql8.4`-family parameter group. `default_authentication_plugin` is replaced by `authentication_policy`.
-- **Replication syntax:** `MASTER`/`SLAVE` statements and variables are removed in favor of `SOURCE`/`REPLICA`.
-- **InnoDB defaults:** several defaults changed (e.g. `innodb_adaptive_hash_index`, `innodb_change_buffering`). Monitor performance after cutover.
+## Background and Known Differences
 
-## Prerequisites
-
-- [ ] Confirm whether the two instances in each environment are independent databases or a primary/replica pair. If a replica exists, recreate it from the new instance after cutover.
-- [ ] Confirm the Sparx EA and Pro Cloud Server versions support MySQL 8.4 (check Sparx documentation).
-- [ ] Identify any other consumers of these databases (reporting, backup jobs, monitoring) that will also need repointing.
-- [ ] Confirm a migration host with network access to both old and new instances. MySQL Workbench on the Windows servers includes the required client tools:
+- **Authentication plugin:** the new 8.4 instance uses `caching_sha2_password`. The MySQL ODBC driver used by Pro Cloud Server must be version 8.x or newer; 5.x drivers cannot authenticate.
+- **Tools:** MySQL Workbench 8.0 may crash when connecting to MySQL 8.4. All steps below use the command-line tools bundled with Workbench:
   - `C:\Program Files\MySQL\MySQL Workbench 8.0 CE\mysqldump.exe`
   - `C:\Program Files\MySQL\MySQL Workbench 8.0 CE\mysql.exe`
-- [ ] Schedule a maintenance window and notify EA users.
+- **PowerShell redirection:** do not use `>` or `<`. Windows PowerShell writes UTF-16 with `>`, which corrupts the dump, and does not support `<`. Use `--result-file` and `source` as shown below.
 
-## Runbook
+To open an interactive SQL prompt against either instance:
 
-Repeat for each RDS instance.
+```powershell
+cd "C:\Program Files\MySQL\MySQL Workbench 8.0 CE"
+.\mysql.exe -h <endpoint> -u admin -p
+```
 
-### Phase 1: Preparation (before the window)
+## Pre-Checks (no downtime)
 
-**1. Provision the new instance.**
-Launch a new product from the Service Catalog with engine version **8.4.x**. Match the old instance's settings: instance class, storage, subnets, and security groups (the Windows servers must be able to reach it).
-
-**2. Update the ODBC driver on the Windows servers.**
-Install or upgrade MySQL Connector/ODBC to **8.x or later**, matching EA's bitness (32-bit EA requires the 32-bit driver and DSN). Confirm Sparx still connects to the current 8.0 instances with the new driver.
-
-**3. Record the schema and user grants on the old instance.**
+### 1. Identify the schema(s) (old instance)
 
 ```sql
 SHOW DATABASES;
-SHOW GRANTS FOR 'ea_user'@'%';
-SELECT user, host, plugin FROM mysql.user;
 ```
 
-**4. Create the EA user on the new instance** using the grants from step 3:
+Ignore `mysql`, `information_schema`, `performance_schema`, and `sys`. There may be more than one EA repository; note every remaining schema.
+
+### 2. Confirm how Pro Cloud Server connects
+
+In the **Pro Cloud Server Configuration Client**, open the EA repository's **Database Manager** entry and record:
+
+- Whether it uses an **ODBC DSN** or a **connection string**, and the host it points to.
+- The **username**.
+
+If the user is `admin`, no user needs to be created. If it is another user:
+
+1. On the old instance, record its grants:
+   ```sql
+   SHOW GRANTS FOR '<user>'@'<host>';
+   ```
+2. On the new instance, create it with the same password and apply the grants:
+   ```sql
+   CREATE USER '<user>'@'<host>' IDENTIFIED WITH caching_sha2_password BY '<existing password>';
+   GRANT <privileges> ON `<schema>`.* TO '<user>'@'<host>';
+   ```
+
+### 3. Check the ODBC driver version
+
+Open the ODBC Data Source Administrator:
+
+- 64-bit: `C:\Windows\System32\odbcad32.exe`
+- 32-bit: `C:\Windows\SysWOW64\odbcad32.exe`
+
+Find the DSN used by Pro Cloud Server (**System DSN** tab) and the driver it references (**Drivers** tab). It must be **MySQL ODBC 8.x or newer**. If it is 5.x, install a current MySQL Connector/ODBC matching Pro Cloud Server's bitness before the window.
+
+### 4. Check definers (old instance)
 
 ```sql
-CREATE USER 'ea_user'@'%' IDENTIFIED WITH caching_sha2_password BY '<password>';
-GRANT <privileges> ON ea_repo.* TO 'ea_user'@'%';
+SELECT 'routine' AS type, ROUTINE_NAME AS name, DEFINER FROM information_schema.ROUTINES WHERE ROUTINE_SCHEMA = '<schema>'
+UNION ALL
+SELECT 'trigger', TRIGGER_NAME, DEFINER FROM information_schema.TRIGGERS WHERE TRIGGER_SCHEMA = '<schema>'
+UNION ALL
+SELECT 'event', EVENT_NAME, DEFINER FROM information_schema.EVENTS WHERE EVENT_SCHEMA = '<schema>'
+UNION ALL
+SELECT 'view', TABLE_NAME, DEFINER FROM information_schema.VIEWS WHERE TABLE_SCHEMA = '<schema>';
 ```
 
-**5. Record baseline row counts on the old instance:**
+EA repositories usually return nothing. Any definer other than `admin` must exist on the new instance before loading.
+
+### 5. Record baseline counts (old instance)
 
 ```sql
-SELECT 't_object' AS tbl, COUNT(*) FROM ea_repo.t_object
-UNION ALL SELECT 't_package', COUNT(*) FROM ea_repo.t_package
-UNION ALL SELECT 't_diagram', COUNT(*) FROM ea_repo.t_diagram
-UNION ALL SELECT 't_connector', COUNT(*) FROM ea_repo.t_connector;
+SELECT 't_object' AS tbl, COUNT(*) FROM <schema>.t_object
+UNION ALL SELECT 't_package',   COUNT(*) FROM <schema>.t_package
+UNION ALL SELECT 't_diagram',   COUNT(*) FROM <schema>.t_diagram
+UNION ALL SELECT 't_connector', COUNT(*) FROM <schema>.t_connector
+UNION ALL SELECT 't_attribute', COUNT(*) FROM <schema>.t_attribute
+UNION ALL SELECT 't_operation', COUNT(*) FROM <schema>.t_operation;
 ```
 
-### Phase 2: Migration (during the window)
+Save the output for comparison. Use exact `COUNT(*)`, not `information_schema.TABLES.TABLE_ROWS`, which is only an estimate.
 
-**6. Stop Sparx services.**
-Stop Pro Cloud Server and any EA services. Ask users to close EA. Confirm no active sessions on the old instance:
+## Migration (maintenance window)
+
+### 1. Stop everything that touches the EA database
+
+- Stop the **Pro Cloud Server** Windows service.
+- Stop Prolaborate (IIS site and app pool) or notify users that EA models will be unavailable in Prolaborate during the window.
+- Ask anyone using EA directly to close it.
+
+Confirm nothing is still connected on the old instance:
 
 ```sql
-SHOW PROCESSLIST;
+SELECT id, user, host, db, command FROM information_schema.PROCESSLIST WHERE db = '<schema>';
 ```
 
-**7. Take a manual snapshot** of the old instance (e.g. `ea-<env>-pre-84-migration`).
+### 2. Snapshot the old instance
 
-**8. Dump the EA schema from the old instance.**
+In the RDS console, take a manual snapshot of the old EA instance (e.g. `ea-<env>-pre-84-migration`) and wait until it shows **Available**.
 
-> **Note:** Do not use `>` or `<` redirection in PowerShell. Windows PowerShell writes UTF-16 with `>`, which corrupts the dump, and does not support `<`. Use `--result-file` and `source` as shown.
+### 3. Dump from the old instance
+
+Create `C:\temp` if it does not exist. List every EA schema after `--databases` if there is more than one.
 
 ```powershell
 cd "C:\Program Files\MySQL\MySQL Workbench 8.0 CE"
 
-.\mysqldump.exe -h <old-endpoint> -u admin -p `
-  --databases ea_repo --single-transaction --routines --triggers --events `
-  --set-gtid-purged=OFF --result-file=C:\temp\ea_repo.sql
+.\mysqldump.exe -h <old-ea-endpoint> -u admin -p `
+  --databases <schema> --single-transaction --routines --triggers --events `
+  --set-gtid-purged=OFF --result-file=C:\temp\ea.sql
 ```
 
-If mysqldump reports that `--set-gtid-purged` is invalid because GTID is not enabled, remove that option.
+Confirm `C:\temp\ea.sql` exists and is not empty. If mysqldump reports that `--set-gtid-purged` is invalid because GTID is not enabled, remove that option.
 
-**9. Load the dump into the new instance.**
+### 4. Load into the new instance
 
 ```powershell
-.\mysql.exe -h <new-endpoint> -u admin -p -e "source C:\temp\ea_repo.sql"
+.\mysql.exe -h <new-ea-endpoint> -u admin -p -e "source C:\temp\ea.sql"
 ```
 
-**10. Verify row counts** on the new instance using the query from step 5 and compare with the baseline.
+No output means success. If errors appear, stop and resolve them before continuing.
 
-#### GUI alternative (MySQL Workbench)
+### 5. Verify
 
-- **Export:** connect to the old instance → *Server → Data Export* → select the EA schema → check *Dump Stored Procedures and Functions*, *Dump Events*, *Dump Triggers* → *Export to Self-Contained File* → check *Include Create Schema* → *Start Export*. If a GTID error occurs, set `set-gtid-purged` to `OFF` under *Advanced Options*.
-- **Import:** connect to the new instance → *Server → Data Import* → *Import from Self-Contained File* → select the file → *Start Import*.
+Run the baseline count query from pre-check 5 on the **new** instance. All counts must match exactly.
 
-Workbench may warn about an unsupported server version when connecting to 8.4; this can be dismissed.
+### 6. Repoint Pro Cloud Server
 
-### Phase 3: Cutover and validation
+Update the Pro Cloud Server connection to `<new-ea-endpoint>`:
 
-**11. Repoint Sparx.**
-Update the ODBC DSNs and the Pro Cloud Server connection configuration on the Windows servers to the new endpoint.
+- **ODBC DSN:** edit the DSN's server field in the ODBC Data Source Administrator (matching bitness).
+- **Connection string:** edit the host in the Database Manager entry.
 
-**12. Start services and validate.**
+Update any other EA DSNs on the Windows servers that point to the old endpoint. If a DSN is shared, check what else uses it.
 
-- [ ] Start Pro Cloud Server and EA services.
-- [ ] Open each repository in EA.
+### 7. Start and validate
+
+Start the Pro Cloud Server service, then:
+
+- [ ] The Database Manager entry shows as connected in the Pro Cloud Server Configuration Client.
+- [ ] Open the repository in EA.
 - [ ] Make and save a test edit.
-- [ ] Run *Project Integrity Check*.
+- [ ] Run **Project Integrity Check**.
+- [ ] Start Prolaborate if stopped, and confirm it can browse the EA models.
 - [ ] Test WebEA, if used.
-- [ ] Check the new instance's RDS error log for authentication or other errors.
+
+## Troubleshooting
+
+### ODBC authentication error
+
+An error mentioning `caching_sha2_password` (e.g. "authentication plugin cannot be loaded") means the ODBC driver is too old. Install a current MySQL Connector/ODBC matching Pro Cloud Server's bitness, update the DSN to use it, and retry.
 
 ## Rollback
 
-The old 8.0 instance is not modified during the migration.
+The old instance is not modified during the migration.
 
-1. Stop Pro Cloud Server and EA services.
-2. Revert the ODBC DSNs and Pro Cloud Server configuration to the old endpoint.
-3. Start services and confirm EA opens the repository.
+1. Stop the Pro Cloud Server service.
+2. Point the DSN or connection string back to `<old-ea-endpoint>`.
+3. Start Pro Cloud Server and confirm the repository opens in EA.
 
-Any changes made in EA on the new instance after cutover will not exist on the old instance.
+Any changes made in EA after cutover will not exist on the old instance.
 
-## Post-Migration Cleanup
+## Post-Migration
 
 After a soak period with no issues:
 
-- [ ] Review RDS connection metrics on the old instance to confirm no remaining clients.
+- [ ] Check the old instance for remaining connections (processlist query above, or RDS connection metrics).
 - [ ] Take a final snapshot of the old instance.
-- [ ] Terminate the old provisioned product **through Service Catalog** (not the RDS console) so the CloudFormation stack is removed.
-- [ ] Recreate any read replica from the new instance, if applicable.
-- [ ] Update documentation with the new endpoints.
-
-> The old instances continue to incur RDS Extended Support charges for MySQL 8.0 until they are deleted.
+- [ ] Terminate the old provisioned product **through Service Catalog**.
 
 ## Execution Log
 
-| Environment | Instance | Date | Downtime | Dump/load duration | Issues | Outcome |
-|---|---|---|---|---|---|---|
-| Test | | | | | | |
-| Test | | | | | | |
-| Preprod | | | | | | |
-| Preprod | | | | | | |
+| Environment | Date | Dump size | Downtime | Issues | Outcome |
+|---|---|---|---|---|---|
+| Test | | | | | |
+| Preprod | | | | | |
