@@ -1,0 +1,87 @@
+# no commands
+❯ /context
+  ⎿  Context Usage
+     ⛁ ⛁ ⛁ ⛀ ⛀ ⛀ ⛶ ⛶ ⛶ ⛶   Sonnet 5
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   claude-sonnet-5
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   34k/967k tokens (4%)
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   Estimated usage by category
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ System prompt: 9.5k tokens (1.0%)
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ System tools: 19.1k tokens (2.0%)
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ Memory files: 2.9k tokens (0.3%)
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ Skills: 2.5k tokens (0.3%)
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛝ ⛝ ⛝   ⛁ Messages: 8 tokens (0.0%)
+                           ⛶ Free space: 900k (93.1%)
+                           ⛝ Autocompact buffer: 33k tokens (3.4%)
+
+     Auto-compact window: 967k tokens
+
+     MCP tools · /mcp (loaded on-demand)
+     └ 6 tools · 0 tokens
+
+     Memory files · /memory
+     └ 1 file · 2.9k tokens
+
+     Skills · /skills
+     └ 16 skills · 2.5k tokens
+
+     /context all to expand
+
+read the README.md
+
+❯ /context
+  ⎿  Context Usage
+     ⛁ ⛁ ⛁ ⛀ ⛀ ⛁ ⛁ ⛶ ⛶ ⛶   Sonnet 5
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   claude-sonnet-5
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   52.9k/967k tokens (5%)
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   Estimated usage by category
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ System prompt: 9.5k tokens (1.0%)
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ System tools: 19.1k tokens (2.0%)
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ Memory files: 2.9k tokens (0.3%)
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ Skills: 2.5k tokens (0.3%)
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛝ ⛝ ⛝   ⛁ Messages: 19k tokens (2.0%)
+                           ⛶ Free space: 881.1k (91.1%)
+                           ⛝ Autocompact buffer: 33k tokens (3.4%)
+
+     Auto-compact window: 967k tokens
+
+     MCP tools · /mcp (loaded on-demand)
+     └ 6 tools · 0 tokens
+
+     Memory files · /memory
+     └ 1 file · 2.9k tokens
+
+     Skills · /skills
+     └ 16 skills · 2.5k tokens
+
+     /context all to expand
+
+
+❯ /context
+  ⎿  Context Usage
+     ⛁ ⛁ ⛁ ⛀ ⛀ ⛁ ⛁ ⛀ ⛶ ⛶   Sonnet 5
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   claude-sonnet-5
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   58.4k/967k tokens (6%)
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   Estimated usage by category
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ System prompt: 9.5k tokens (1.0%)
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ System tools: 19.1k tokens (2.0%)
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ Memory files: 2.9k tokens (0.3%)
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ Skills: 2.5k tokens (0.3%)
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛝ ⛝ ⛝   ⛁ Messages: 24.4k tokens (2.5%)
+                           ⛶ Free space: 875.6k (90.6%)
+                           ⛝ Autocompact buffer: 33k tokens (3.4%)
+
+     Auto-compact window: 967k tokens
+
+     MCP tools · /mcp (loaded on-demand)
+     └ 6 tools · 0 tokens
+
+     Memory files · /memory
+     └ 1 file · 2.9k tokens
+
+     Skills · /skills
+     └ 16 skills · 2.5k tokens
+
+     /context all to expand
